@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, Globe } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { TournamentKPIs } from './components/TournamentKPIs';
@@ -215,18 +216,28 @@ export default function App() {
 
       {/* ── FOOTER ── */}
       <footer className="border-t mt-8" style={{ background: 'var(--void)', borderColor: 'var(--border)' }}>
-        <div className="max-w-[1920px] mx-auto px-6 md:px-20 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
-          style={{ color: 'var(--white-ghost)' }}>
-          <div className="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
-              <path d="M14 2L24 8.5L24 19.5L14 26L4 19.5L4 8.5L14 2Z" stroke="var(--green-live)" strokeWidth="2" fill="none" />
-            </svg>
-            <span style={{ color: 'var(--green-live)', fontWeight: 700 }}>WC2026</span>
-            <span>— Every stat. Every match. Every moment.</span>
+        <div className="max-w-[1920px] mx-auto px-6 md:px-20 pt-8 pb-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
+            {/* Brand */}
+            <div className="flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2L24 8.5L24 19.5L14 26L4 19.5L4 8.5L14 2Z" stroke="var(--green-live)" strokeWidth="2" fill="none" />
+                <path d="M14 2L14 26M4 8.5L24 19.5M24 8.5L4 19.5" stroke="var(--green-live)" strokeWidth="1.5" />
+              </svg>
+              <span className="font-extrabold" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)' }}>WC<span style={{ color: 'var(--green-live)' }}>2026</span>.games</span>
+              <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>— Every stat. Every match. Every moment.</span>
+            </div>
+            {/* Links */}
+            <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
+              <Link to="/about" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>About Us</Link>
+              <Link to="/contact" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Contact</Link>
+              <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Privacy Policy</Link>
+              <Link to="/terms" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Terms of Service</Link>
+            </nav>
           </div>
-          <div className="flex gap-6">
-            <span>🇺🇸 USA · 🇨🇦 Canada · 🇲🇽 Mexico</span>
-            <span>Jun 11 – Jul 19, 2026</span>
+          <div className="border-t pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
+            <span>© 2026 WC2026.games · All rights reserved</span>
+            <span>Not affiliated with FIFA · 🇺🇸 USA · 🇨🇦 Canada · 🇲🇽 Mexico · Jun 11 – Jul 19, 2026</span>
           </div>
         </div>
       </footer>
