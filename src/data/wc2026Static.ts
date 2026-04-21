@@ -261,7 +261,7 @@ export const TEAM_INFO: Record<string, {
     bestResult:'Winner (5 titles)',
   },
   Morocco: {
-    flag:'🇲🇦', group:'C', coach:'Mohamed Ouahbi', fifaRank:14,
+    flag:'🇲🇦', group:'C', coach:'Mohamed Ouahbi', fifaRank:8,
     keyPlayers:[
       {name:'Achraf Hakimi',      pos:'RB',  club:'Paris Saint-Germain'},
       {name:'Noussair Mazraoui',  pos:'CB',  club:'Manchester United'},
@@ -386,7 +386,7 @@ Object.keys(WC2026_GROUPS).forEach((groupName) => {
 export const MOROCCO_INFO = {
   flag:'🇲🇦', name:'Morocco', group:'C',
   coach:'Mohamed Ouahbi',  // Appointed March 5, 2026 — replacing Regragui
-  confederation:'CAF', fifaRanking:14,
+  confederation:'CAF', fifaRanking:8,
   bestResult:'Semi-Finals (2022)',
   wcRecord:{ w:9, d:3, l:4, goals:19, goalsConceded:10 },
   keyPlayers: TEAM_INFO['Morocco'].keyPlayers.map(p => ({...p, flag:'🇲🇦'})),
