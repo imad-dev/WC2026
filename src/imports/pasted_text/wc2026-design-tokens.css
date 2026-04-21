@@ -1,0 +1,347 @@
+You are a world-class UI/UX designer with the precision of Dieter Rams, the visual
+boldness of Sagmeister & Walsh, and the data clarity of Edward Tufte. You are
+redesigning the World Cup 2026 stats website to win a CSS Design Award and be
+featured on Awwwards. Every pixel is intentional. No defaults. No templates.
+
+═══════════════════════════════════════════════════════════
+SECTION 0 — DESIGN PHILOSOPHY
+═══════════════════════════════════════════════════════════
+
+This is not a sports app. This is a data theater — a place where 48 nations,
+104 matches, and 1.5 billion viewers converge into a single visual experience.
+
+The design language: PRECISION BROADCAST.
+Inspired by: F1 telemetry overlays, NASA mission control dashboards, Al Jazeera
+Sports broadcast graphics, and Opta data visualization journalism.
+
+Rules that cannot be broken:
+1. Data IS the design. No decoration that doesn't carry information.
+2. Every empty space is intentional breathing room — not a gap.
+3. Color is a system, not a mood. Green = active/live/win. Gold = leader/record.
+Red = danger/loss/card. White = neutral data. Blue = historical reference.
+4. Typography creates the hierarchy before color does.
+5. Motion communicates state change — nothing animates for decoration alone.
+
+═══════════════════════════════════════════════════════════
+SECTION 1 — DESIGN TOKENS (ABSOLUTE, NON-NEGOTIABLE)
+═══════════════════════════════════════════════════════════
+
+COLOR SYSTEM:
+--void: #060810 (deepest background — page canvas)
+--surface-1: #0C1020 (primary card backgrounds)
+--surface-2: #121828 (elevated panels, modals)
+--surface-3: #1A2235 (hover states, active rows)
+--surface-glass: rgba(18, 24, 40, 0.72) + backdrop-filter: blur(20px) saturate(180%)
+--border: rgba(255,255,255,0.06) (all dividers and borders)
+--border-active: rgba(255,255,255,0.14)
+
+--green-live: #00E676 (LIVE badges, wins, active states)
+--green-dim: #00A152 (secondary green — form circles, progress)
+--gold-leader: #FFB300 (top scorer rank 1, tournament leader)
+--gold-dim: #C68400 (rank 2–3 accents)
+--red-loss: #FF3D57 (losses, red cards, elimination)
+--amber-draw: #FFB74D (draws, yellow cards)
+--blue-ref: #448AFF (historical data, xG, expected stats)
+--white-primary: #F0F5FF (all primary text)
+--white-muted: #8892A6 (secondary labels, metadata)
+--white-ghost: #3D4759 (disabled, placeholder)
+--morocco-red: #C1121F (Morocco accent, use only on Morocco-specific elements)
+
+TYPOGRAPHY (load both from Google Fonts):
+Display font: "Barlow Condensed" — weights 500, 600, 700, 800
+Used for: scores (700–800), section titles (600), match headers (500)
+All uppercase. Tight letter-spacing (-0.02em). Never below 18px.
+
+Body font: "Inter" — weights 400, 500, 600
+Used for: all data labels, table content, descriptions
+Never uppercase (except badges). Line-height 1.5. Body at 14px in tables.
+
+Numeric font feature: font-feature-settings: "tnum" 1; on ALL numbers
+This makes digits tabular — they align in columns. Mandatory everywhere.
+
+SIZE SCALE:
+Score display: 72px Barlow Condensed 800 — the most important number
+Match time: 48px Barlow Condensed 700
+Section headers: 24px Barlow Condensed 600 uppercase
+Table headers: 11px Inter 500 uppercase, letter-spacing: 0.08em
+Table body: 14px Inter 400
+Player names: 15px Inter 600
+Badges/status: 11px Inter 600 uppercase, letter-spacing: 0.06em
+KPI number: 40px Barlow Condensed 700
+KPI label: 12px Inter 400
+
+GRID:
+Desktop (1440px): 12 columns, 24px gutter, 80px side margins
+Tablet (1024px): 8 columns, 20px gutter, 40px margins
+Mobile (375px): 4 columns, 16px gutter, 16px margins
+
+═══════════════════════════════════════════════════════════
+SECTION 2 — HEADER (Sticky, 56px, surface-glass)
+═══════════════════════════════════════════════════════════
+
+Full-width glassmorphism bar:
+background: var(--surface-glass)
+border-bottom: 1px solid var(--border)
+backdrop-filter: blur(20px) saturate(180%)
+
+LEFT ZONE (240px):
+Custom inline SVG logo: an abstract geometric hexagon made of 3 interlocking
+triangles (no soccer ball — too generic). Color: --green-live. Next to it:
+"WC" in Barlow Condensed 800 white + "2026" in --green-live. Total height 28px.
+
+CENTER ZONE (nav, flex centered):
+7 tabs: OVERVIEW · FIXTURES · GROUPS · TEAMS · SCORERS · STATS · MAP
+Active tab: white text + 2px bottom line in --green-live + subtle green
+glow (box-shadow: 0 2px 12px rgba(0,230,118,0.3))
+Inactive: --white-muted, hover → --white-primary, transition 160ms
+
+RIGHT ZONE (flex, gap 16px):
+— Live Match Ticker: horizontal auto-scrolling strip of 3 live scores,
+each showing "🟢 FRA 2–1 ARG" format with a pulsing green dot for LIVE.
+Strip width 320px max, masked edges with gradient fade.
+— Search icon (Lucide: search, 18px)
+— "LIVE NOW: 3" pill badge in --green-live background, --void text, 500 weight
+
+═══════════════════════════════════════════════════════════
+SECTION 3 — HERO / ABOVE THE FOLD (100vh - 56px)
+═══════════════════════════════════════════════════════════
+
+BACKGROUND:
+A dramatic full-bleed dark image of a packed stadium at night with floodlights.
+Overlay: radial gradient from transparent at center to #060810 at all edges.
+Additional: thin scanline texture at 3% opacity for broadcast TV feel.
+
+LAYOUT: CSS Grid — 7fr | 5fr split
+
+LEFT COLUMN (7fr) — THE MATCH FOCUS:
+Eyebrow label: small green badge "● LIVE — 67'" with pulsing dot
+Match title: "SEMIFINAL" in 11px Inter uppercase muted
+Team display:
+[Morocco Flag — large 64px circle]
+"MOROCCO" in 72px Barlow Condensed 800 white
+Score: "2" in 96px Barlow Condensed 800 --green-live
+thin vertical 1px white/20% divider
+Score: "1" in 96px Barlow Condensed 800 --white-muted
+"FRANCE" in 72px Barlow Condensed 800 --white-muted
+[France Flag — 64px circle]
+Below the score: scorers strip — "Ziyech 23' · En-Nesyri 61' | Mbappé 38'"
+in 13px Inter 400 --white-muted
+
+Below the match: 3 mini stat bars side by side:
+Possession: MAR 54% — FRA 46% (horizontal bar, green left / blue right)
+Shots on target: 4 — 3
+Pass accuracy: 87% — 91%
+
+RIGHT COLUMN (5fr) — TODAY'S MATCHES (scrollable card stack):
+Header: "TODAY'S FIXTURES" in 11px Inter uppercase tracked, --white-muted
+3–4 MatchCards stacked vertically (8px gap):
+Each card:
+background: --surface-1
+border: 1px solid var(--border)
+border-radius: 6px
+padding: 12px 16px
+Layout: [Flag] Team A — SCORE — Team B [Flag]
+Score in Barlow Condensed 600 22px
+Time/Status badge aligned right (LIVE pulse / FT / "20:00")
+Stadium name in 11px --white-ghost below
+On hover: border-color shifts to --border-active, background → --surface-3
+
+═══════════════════════════════════════════════════════════
+SECTION 4 — MAIN CONTENT AREA
+═══════════════════════════════════════════════════════════
+
+Layout: 3 columns
+LEFT SIDEBAR: 220px fixed — GROUP NAVIGATOR
+CENTER: 1fr — PRIMARY DATA FEED
+RIGHT RAIL: 300px fixed — CONTEXTUAL WIDGETS
+
+────────────────────────────────────────
+LEFT SIDEBAR
+────────────────────────────────────────
+Background: --surface-1
+Border-right: 1px solid var(--border)
+Padding: 24px 0
+
+Group list — A through H (plus play-off groups for WC2026 format):
+Each group item: 40px height, 16px horizontal padding
+"GROUP A" label 11px Inter uppercase ghost + expand chevron
+Expanded state: show mini flag list of 6 teams (3 per row, 20px flags)
+Active group: left 2px green indicator + --surface-3 background
+
+Filters section (below groups):
+"FILTER BY" header 10px uppercase tracked --ghost
+Pills: All Matches · Group Stage · Knockouts · Live Now
+Pill style: 28px height, 12px padding, border 1px --border
+Active pill: --green-live background, --void text
+
+────────────────────────────────────────
+CENTER CONTENT
+────────────────────────────────────────
+Padding: 32px 24px
+Gap between sections: 40px
+
+SECTION A — TOURNAMENT KPIs (4-chip horizontal strip):
+Chips arranged in a 4-column grid, each 1fr wide:
+Goals Scored: [⚽] 147 GOALS sub: "3.1 per match avg"
+Top Scorer: [👤] VINICIUS JR sub: "7 goals · Brazil"
+Clean Sheets: [🛡] 18 sub: "across 47 matches"
+Red Cards: [🟥] 9 sub: "3 in knockout stage"
+Each chip: --surface-1 background, border 1px --border, 20px radius,
+padding 20px, KPI number in Barlow Condensed 700 40px, label 12px Inter
+--white-muted, leading icon in appropriate accent color.
+
+SECTION B — GROUP STANDINGS TABLE (full-width, tabs for each group):
+Tab strip: A B C D E F G H — 8 pill tabs, active = green fill
+Table design (for active group):
+Header row: 10px Inter 500 uppercase tracked --ghost
+Columns: # | TEAM | MP | W | D | L | GF | GA | GD | PTS | FORM
+All numbers: font-feature-settings "tnum" 1 — mandatory
+Row height: 48px
+Team cell: 20px flag circle + team name Inter 600 15px, gap 10px
+FORM cell: 5 small circles (16px each) — filled green=W, red=L, amber=D
+Top 2 rows: left border 2px --green-live, subtle --surface-3 background
+3rd–4th rows: left border 2px --red-loss for elimination zone
+Row hover: background --surface-3, transition 120ms
+
+SECTION C — MATCH RESULTS DEEP CARDS (2-column grid):
+Each card — premium treatment:
+Header bar: group label left + match date/time right (11px muted)
+Main content: team A full display | score | team B full display
+Team display: flag (32px) + name Inter 600 + country code 11px muted
+Score: Barlow Condensed 700 48px white
+Outcome indicator on score: green for winning team, muted for losing
+Scorer list: below each team, "⚽ Scorer Name 45+2'" in 12px Inter --muted
+MOTM strip at bottom: gold badge "MAN OF THE MATCH" + player name
+Match stats bar: 3 inline stats (shots / possession / corners) as thin
+horizontal progress bars in dual-color (team A color vs team B color)
+Card border on hover: 1px --border-active + shadow
+0 4px 24px rgba(0,0,0,0.5)
+
+SECTION D — TOP SCORERS LEADERBOARD:
+Full-width section header: "TOP SCORERS" + small "(Goals + Assists)" in muted
+Table rows (not cards — table for scan speed):
+Rank number: Barlow Condensed 800
+Rank 1: 48px --gold-leader + mini crown icon above
+Rank 2–3: 32px --gold-dim
+Rank 4+: 24px --white-ghost
+Player photo: 40px circle, clipped, with nationality flag as 16px overlay
+bottom-right of circle (flag overlaps the circle edge)
+Player name: Inter 600 15px white + nationality 12px muted below
+Team: flag 16px + name 13px muted
+Goals: Barlow Condensed 700 24px white (tabular nums)
+Assists: 20px muted
+Matches: 13px ghost
+Mini bar chart: inline sparkline of goals per match (5 micro bars)
+Row hover: --surface-3 + show tooltip with xG, shots, minutes played
+Top row: full gold highlight treatment + animated count-up on first load
+
+────────────────────────────────────────
+RIGHT RAIL
+────────────────────────────────────────
+Gap between widgets: 16px
+Padding: 32px 0 32px 24px
+
+WIDGET 1 — LIVE SCORES (real-time feel):
+Header: "● LIVE" pulsing green dot + "3 MATCHES" count
+3 live match cards, minimal: Flag + score + Flag, time badge, border-left
+2px --green-live
+"Refresh in 30s" micro-progress bar at bottom, cycling green
+
+WIDGET 2 — UPCOMING FIXTURES:
+Header: "NEXT MATCHES"
+5 rows: Date label as section separator (TODAY / TUE APR 21)
+Each row: time | team A flag+code | VS | team B flag+code | stadium icon
+Countdown to nearest match: large "02h 14m" Barlow Condensed display
+
+WIDGET 3 — TOURNAMENT BRACKETS MINI (Quarter-finals view):
+Compact bracket — 4 QF slots connecting to 2 SF slots connecting to Final
+Each slot: flag + team name + score (if played)
+Winner path: green line connecting. Loser: faded out.
+
+WIDGET 4 — 🇲🇦 MOROCCO FOCUS CARD:
+Slightly different treatment — subtle --morocco-red left border 2px
+Header: Morocco flag (large 32px) + "MOROCCO" + "GROUP F · 2nd"
+Stats row: P6 W4 D1 L1 | GF 9 | GA 4
+Form: W W D W W L (circles)
+Next match: highlighted upcoming fixture
+Key player: "EN-NESYRI · 5 goals" with mini portrait
+
+═══════════════════════════════════════════════════════════
+SECTION 5 — FOOTER
+═══════════════════════════════════════════════════════════
+
+Background: --void
+Border-top: 1px solid var(--border)
+4-column layout: Logo + tagline | Quick links | Data sources | Social icons
+
+Tagline under logo: "Every stat. Every match. Every moment."
+Font: Inter 400 14px --white-ghost
+
+═══════════════════════════════════════════════════════════
+SECTION 6 — MICRO-INTERACTIONS & MOTION
+═══════════════════════════════════════════════════════════
+
+ALL transitions: cubic-bezier(0.16, 1, 0.3, 1) — fast out, ease in
+Durations: hover = 120ms · tab switch = 200ms · modal open = 300ms
+
+Specific animations to design:
+— Score numbers: animate as a slot machine roll on first render (count up fast)
+— LIVE badge: pulsing scale animation (1.0 → 1.08 → 1.0) every 2s
+— Progress bars: fill from 0 with 600ms ease-out on scroll into view
+— Row hover: background color transition 120ms + left micro-shift 2px
+— Tab active indicator: sliding underline (the line slides, not snaps)
+— Form circles: staggered fade-in left to right, 60ms delay between each
+— Top scorer rank 1 row: gold shimmer sweep once on page load
+— Match card LIVE state: border glows with 4px green aura, soft pulse
+
+═══════════════════════════════════════════════════════════
+SECTION 7 — MOBILE (375px) — FULL REDESIGN, NOT COLLAPSE
+═══════════════════════════════════════════════════════════
+
+Mobile is NOT the desktop shrunk. It is a different experience entirely.
+
+BOTTOM NAV BAR (fixed, 64px, --surface-glass + backdrop blur):
+5 icons: Home | Fixtures | Groups | Scorers | Stats
+Active icon: --green-live fill + label appears below
+Inactive: --white-ghost icon, no label
+
+HERO (mobile):
+Full-width match card dominating above the fold
+Score in 80px Barlow Condensed — still huge on mobile
+Swipeable match cards (horizontal scroll with snap) below
+
+STANDINGS:
+Horizontal scroll with sticky left column (team name)
+table-layout: fixed, each stat column 36px wide
+Touch-friendly row height: 52px
+
+SCORERS LIST:
+Card layout instead of table — each player gets a card
+Large rank number background watermark (like jersey number)
+
+RIGHT RAIL WIDGETS → Horizontal scroll row of cards
+Each widget becomes a 280px-wide card in a scroll strip
+"SWIPE FOR MORE →" label in ghost text below strip
+
+═══════════════════════════════════════════════════════════
+SECTION 8 — PERFECTIONIST QUALITY GATES
+═══════════════════════════════════════════════════════════
+
+Before considering this design complete, verify:
+
+□ Every table column of numbers uses tabular-nums (digits align perfectly)
+□ No two sections have the same padding — vary for rhythm and density
+□ Flag circles: always 1px border --border so flags don't bleed into dark bg
+□ Score divider lines are exactly 1px, color rgba(255,255,255,0.1)
+□ No emoji used as UI elements — all icons are geometric SVG (Lucide style)
+□ Form circles are exactly the same size — no approximation
+□ Glassmorphism is SUBTLE — blur 20px, opacity 0.72 max (not frosted ice)
+□ No centered body text anywhere — left-aligned data, centered only scores
+□ Green (#00E676) appears MAXIMUM in 12% of the total pixel area — restraint
+□ All shadows are multi-layered (contact + ambient):
+box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4)
+□ Morocco 🇲🇦 is present and treated with pride in every section it belongs in
+□ The design would look at home on a 65" 4K broadcast monitor
+□ A non-designer looking at this says: "this looks like ESPN or beIN Sports"
+□ A designer looking at this says: "I would have been proud to make this"
+
