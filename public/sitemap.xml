@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <!-- Replace this with your actual live domain (e.g., https://my-wc2026-site.vercel.app) -->
-    <loc>https://your-domain.com/</loc>
+    <!-- Actual live domain -->
+    <loc>https://www.wc2026.games/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
