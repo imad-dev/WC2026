@@ -368,6 +368,21 @@ export const TEAM_INFO: Record<string, {
   },
 };
 
+// Auto-populate the remaining teams from the groups so all 48 are selectable
+Object.keys(WC2026_GROUPS).forEach((groupName) => {
+  WC2026_GROUPS[groupName].forEach((team) => {
+    if (!TEAM_INFO[team.name]) {
+      TEAM_INFO[team.name] = {
+        flag: team.flag,
+        group: groupName,
+        coach: 'TBD',
+        fifaRank: 0, // Placeholder
+        keyPlayers: [],
+      };
+    }
+  });
+});
+
 export const MOROCCO_INFO = {
   flag:'🇲🇦', name:'Morocco', group:'C',
   coach:'Mohamed Ouahbi',  // Appointed March 5, 2026 — replacing Regragui

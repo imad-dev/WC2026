@@ -251,34 +251,36 @@ export function WC2026Schedule({ forcedView }: WC2026ScheduleProps = {}) {
                     </h3>
                     <div className="flex gap-4 text-xs mt-1" style={{ color:'var(--white-muted)' }}>
                       <span>Group {info.group}</span>
-                      <span>FIFA #{info.fifaRank}</span>
-                      <span>🧑‍💼 {info.coach}</span>
+                      {info.fifaRank > 0 && <span>FIFA #{info.fifaRank}</span>}
+                      {info.coach !== 'TBD' && <span>🧑‍💼 {info.coach}</span>}
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {/* Key players */}
-                  <div>
-                    <div className="text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5"
-                      style={{ color:'var(--white-ghost)' }}>
-                      <Users className="w-3 h-3" /> Key Players
+                  {info.keyPlayers && info.keyPlayers.length > 0 && (
+                    <div>
+                      <div className="text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5"
+                        style={{ color:'var(--white-ghost)' }}>
+                        <Users className="w-3 h-3" /> Key Players
+                      </div>
+                      <div className="space-y-2">
+                        {info.keyPlayers.map((p, i) => (
+                          <div key={i} className="flex items-center gap-3 p-2 rounded"
+                            style={{ background:'var(--surface-2)' }}>
+                            <span className="text-xs px-1.5 py-0.5 rounded font-bold flex-shrink-0"
+                              style={{ background:'var(--surface-3)', color:'var(--white-ghost)' }}>{p.pos}</span>
+                            <span className="text-sm font-semibold flex-1" style={{ color:'var(--white-primary)' }}>{p.name}</span>
+                            <span className="text-xs" style={{ color:'var(--white-ghost)' }}>{p.club}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      {info.keyPlayers.map((p, i) => (
-                        <div key={i} className="flex items-center gap-3 p-2 rounded"
-                          style={{ background:'var(--surface-2)' }}>
-                          <span className="text-xs px-1.5 py-0.5 rounded font-bold flex-shrink-0"
-                            style={{ background:'var(--surface-3)', color:'var(--white-ghost)' }}>{p.pos}</span>
-                          <span className="text-sm font-semibold flex-1" style={{ color:'var(--white-primary)' }}>{p.name}</span>
-                          <span className="text-xs" style={{ color:'var(--white-ghost)' }}>{p.club}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  )}
 
                   {/* Group fixtures */}
-                  <div>
+                  <div className={(!info.keyPlayers || info.keyPlayers.length === 0) ? "md:col-span-2" : ""}>
                     <div className="text-xs uppercase tracking-wider mb-3" style={{ color:'var(--white-ghost)' }}>
                       Group Stage Fixtures
                     </div>
