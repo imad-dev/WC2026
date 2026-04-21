@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Globe } from 'lucide-react';
+import { Search, Newspaper } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { TournamentKPIs } from './components/TournamentKPIs';
 import { WC2026Schedule } from './components/WC2026Schedule';
 import { MoroccoFocusCard } from './components/MoroccoFocusCard';
 import { CountdownBanner } from './components/CountdownBanner';
 import { useTournamentPhase } from '../hooks/useTournamentPhase';
+import { NewsSection } from './components/NewsSection';
 
 const TABS = ['SCHEDULE', 'GROUPS', 'TEAMS', 'VENUES'] as const;
 type Tab = typeof TABS[number];
@@ -70,6 +71,14 @@ export default function App() {
                 )}
               </button>
             ))}
+            <Link to="/news"
+              id="nav-news"
+              className="flex items-center gap-1.5 text-sm font-medium transition-all duration-200 pb-1"
+              style={{ color: 'var(--white-muted)', letterSpacing: '0.02em' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--white-primary)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--white-muted)')}>
+              <Newspaper className="w-3.5 h-3.5" /> NEWS
+            </Link>
           </nav>
 
           {/* Right zone */}
@@ -168,6 +177,11 @@ export default function App() {
             </section>
           )}
         </main>
+
+        {/* ── NEWS SECTION ── */}
+        <div className="px-4 md:px-6 pb-6">
+          <NewsSection />
+        </div>
 
         {/* ── RIGHT RAIL ── */}
         <aside className="w-full lg:w-[300px] px-4 md:px-6 pb-10 space-y-4 flex-shrink-0">
