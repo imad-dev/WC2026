@@ -1,114 +1,80 @@
-import { memo, useMemo } from 'react'
-import { useLiveMatches } from '@/hooks/useLiveMatches'
-import { ErrorState } from './ui/ErrorState'
-import { MatchCardSkeleton } from './ui/skeletons'
-
-interface LiveRowProps {
-  teamA: string
-  teamB: string
-  scoreA: number
-  scoreB: number
-  time: string
-}
-
-const LiveRow = memo(function LiveRow({ teamA, teamB, scoreA, scoreB, time }: LiveRowProps) {
-  return (
-    <div className="flex items-center justify-between py-2 border-l-2 pl-3" style={{ borderColor: 'var(--green-live)' }}>
-      <div className="flex-1">
-        <div className="flex items-center justify-between text-xs mb-1">
-          <span style={{ color: 'var(--white-primary)' }}>{teamA}</span>
-          <span className="font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)', fontFeatureSettings: '"tnum" 1' }}>
-            {scoreA}
-          </span>
-        </div>
-        <div className="flex items-center justify-between text-xs">
-          <span style={{ color: 'var(--white-primary)' }}>{teamB}</span>
-          <span className="font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)', fontFeatureSettings: '"tnum" 1' }}>
-            {scoreB}
-          </span>
-        </div>
-      </div>
-      <div className="ml-3 text-xs" style={{ color: 'var(--green-live)' }}>
-        {time}
-      </div>
-    </div>
-  )
-})
+import { useTodayMatches } from '../../hooks/useFootballData';
+import { RefreshCw } from 'lucide-react';
 
 export function LiveScoresWidget() {
-  const { data, isLoading, isError, error, refetch } = useLiveMatches()
+  const { matches, loading, refetch } = useTodayMatches();
 
-  const rows = useMemo(
-    () =>
-      (data ?? []).map((match) => ({
-        id: match.id,
-        teamA: match.homeTeam.code,
-        teamB: match.awayTeam.code,
-        scoreA: match.homeScore ?? 0,
-        scoreB: match.awayScore ?? 0,
-        time: match.minute ? `${match.minute}'` : match.status,
-      })),
-    [data]
-  )
-
-  if (isLoading) {
-    return (
-      <div className="space-y-3">
-        <MatchCardSkeleton />
-      </div>
-    )
-  }
-
-  if (isError) {
-    return <ErrorState message={(error as Error | undefined)?.message} onRetry={() => void refetch()} />
-  }
+  const live = matches.filter(m => m.status === 'IN_PLAY' || m.status === 'PAUSED');
+  const finished = matches.filter(m => m.status === 'FINISHED').slice(0, 6);
+  const upcoming = matches.filter(m => ['SCHEDULED', 'TIMED'].includes(m.status)).slice(0, 4);
 
   return (
-    <div className="rounded border" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
-      <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
+    <div className="rounded-xl border p-4" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--green-live)' }} />
-          <span className="text-xs uppercase font-semibold" style={{ color: 'var(--white-primary)', letterSpacing: '0.08em' }}>
-            LIVE
-          </span>
+          {live.length > 0 && <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--green-live)' }} />}
+          <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--white-primary)', letterSpacing: '0.06em' }}>
+            {live.length > 0 ? `${live.length} Live` : "Today's Matches"}
+          </h3>
         </div>
-        <span className="text-xs" style={{ color: 'var(--white-muted)' }}>
-          {rows.length} Matches
-        </span>
+        <button onClick={refetch} className="p-1 rounded hover:opacity-70 transition-opacity" title="Refresh">
+          <RefreshCw className="w-3.5 h-3.5" style={{ color: 'var(--white-ghost)' }} />
+        </button>
       </div>
 
-      <div className="p-4 space-y-3">
-        {rows.length === 0 && (
-          <div className="text-sm" style={{ color: 'var(--white-muted)' }}>
-            No live matches
-          </div>
-        )}
-
-        {rows.map((row) => (
-          <LiveRow key={row.id} {...row} />
-        ))}
-      </div>
-
-      <div className="px-4 pb-3">
-        <div className="h-1 rounded-full overflow-hidden" style={{ background: 'var(--surface-2)' }}>
-          <div className="refresh-track h-full" style={{ background: 'var(--green-live)' }} />
+      {loading ? (
+        <div className="space-y-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-8 rounded animate-pulse" style={{ background: 'var(--surface-2)' }} />
+          ))}
         </div>
-        <div className="text-xs mt-1 text-center" style={{ color: 'var(--white-ghost)' }}>
-          Refresh in 30s
+      ) : (
+        <div className="space-y-1">
+          {live.map(match => (
+            <div key={match.id} className="flex items-center gap-2 px-2 py-1.5 rounded" style={{ background: 'rgba(0,230,118,0.06)' }}>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: 'var(--green-live)' }} />
+              <div className="flex-1 text-xs flex items-center gap-1.5">
+                <span className="font-semibold" style={{ color: 'var(--white-primary)' }}>{match.homeTeam.tla}</span>
+                <span className="font-bold" style={{ color: 'var(--green-live)', fontFamily: 'var(--font-display)' }}>
+                  {match.homeTeam.score ?? 0}–{match.awayTeam.score ?? 0}
+                </span>
+                <span className="font-semibold" style={{ color: 'var(--white-primary)' }}>{match.awayTeam.tla}</span>
+              </div>
+            </div>
+          ))}
+
+          {finished.map(match => (
+            <div key={match.id} className="flex items-center gap-2 px-2 py-1.5">
+              <div className="flex-1 text-xs flex items-center gap-1.5">
+                <span style={{ color: match.winner === 'HOME_TEAM' ? 'var(--white-primary)' : 'var(--white-ghost)' }}>{match.homeTeam.tla}</span>
+                <span className="font-semibold tabular-nums" style={{ color: 'var(--white-muted)', fontFamily: 'var(--font-display)' }}>
+                  {match.homeTeam.score}–{match.awayTeam.score}
+                </span>
+                <span style={{ color: match.winner === 'AWAY_TEAM' ? 'var(--white-primary)' : 'var(--white-ghost)' }}>{match.awayTeam.tla}</span>
+              </div>
+              {match.homeTeam.crest && (
+                <img src={match.homeTeam.crest} alt="" className="w-4 h-4 object-contain" />
+              )}
+              <span className="text-[10px]" style={{ color: 'var(--white-ghost)' }}>FT</span>
+            </div>
+          ))}
+
+          {upcoming.map(match => (
+            <div key={match.id} className="flex items-center gap-2 px-2 py-1.5">
+              <div className="flex-1 text-xs flex items-center gap-1.5">
+                <span style={{ color: 'var(--white-muted)' }}>{match.homeTeam.tla}</span>
+                <span className="font-semibold" style={{ color: 'var(--gold-leader)', fontFamily: 'var(--font-display)' }}>vs</span>
+                <span style={{ color: 'var(--white-muted)' }}>{match.awayTeam.tla}</span>
+              </div>
+              <span className="text-[10px] tabular-nums" style={{ color: 'var(--gold-leader)' }}>{match.timeFormatted}</span>
+            </div>
+          ))}
+
+          {matches.length === 0 && (
+            <div className="text-center py-4 text-xs" style={{ color: 'var(--white-ghost)' }}>No matches today</div>
+          )}
         </div>
-      </div>
-
-      <style>{`
-        .refresh-track {
-          animation: refreshProgress 30s linear infinite;
-          width: 0%;
-        }
-
-        @keyframes refreshProgress {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}</style>
+      )}
     </div>
-  )
+  );
 }

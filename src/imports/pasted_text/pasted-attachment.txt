@@ -1,0 +1,468 @@
+Le tournoi WC2026 commence le 11 juin 2026. Nous sommes ~51 jours avant.
+Les APIs ont des données réelles disponibles MAINTENANT : fixtures, équipes,
+groupes, stades, squads. Les scores/stats/classements ne seront disponibles
+qu'en juin.
+
+Mission : transformer le site en un site PRE-TOURNAMENT viable et utile
+dès aujourd'hui, avec un mode progressif qui s'activera automatiquement
+le 11 juin quand les données live arriveront.
+
+Ne supprimer aucun composant existant — adapter leur état selon la
+disponibilité des données.
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 1 — RÉCUPÉRER CE QUI EXISTE MAINTENANT via API-Football
+═══════════════════════════════════════════════════════════
+
+League ID : 1 / Season : 2026
+Base URL : https://v3.football.api-sports.io
+Header : x-apisports-key: [ta clé]
+
+Faire ces 4 appels curl en terminal pour inspecter les vraies réponses :
+
+# 1. Vérifier la couverture disponible
+curl "https://v3.football.api-sports.io/leagues?id=1&season=2026" \
+-H "x-apisports-key: c63785e482459b9f7a1d90138ca920c0"
+
+# 2. Récupérer les 48 équipes
+curl "https://v3.football.api-sports.io/teams?league=1&season=2026" \
+-H "x-apisports-key: c63785e482459b9f7a1d90138ca920c0"
+
+# 3. Récupérer tous les fixtures (104 matchs)
+curl "https://v3.football.api-sports.io/fixtures?league=1&season=2026" \
+-H "x-apisports-key: c63785e482459b9f7a1d90138ca920c0"
+
+# 4. Récupérer les rounds disponibles
+curl "https://v3.football.api-sports.io/fixtures/rounds?league=1&season=2026" \
+-H "x-apisports-key: c63785e482459b9f7a1d90138ca920c0"
+
+Pour chaque réponse :
+→ Sauvegarder dans src/api/samples/ comme fichier JSON de référence :
+leagues_coverage.json
+teams_wc2026.json
+fixtures_wc2026.json
+rounds_wc2026.json
+
+→ Ces fichiers servent à construire les normalizers exacts.
+→ NE PAS committer ces fichiers (ajouter src/api/samples/ au .gitignore)
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 2 — CRÉER UN "TOURNAMENT STATE" CENTRAL
+═══════════════════════════════════════════════════════════
+
+Créer src/utils/tournamentState.ts :
+
+const TOURNAMENT_START = new Date('2026-06-11T19:00:00Z') // Mexico vs SA, Azteca
+const TOURNAMENT_END = new Date('2026-07-19T19:00:00Z') // Final MetLife Stadium
+
+export type TournamentPhase =
+| 'PRE_TOURNAMENT' // avant le 11 juin → mode actuel
+| 'LIVE' // 11 juin → 19 juillet → données live
+| 'POST_TOURNAMENT' // après le 19 juillet → archive
+
+export function getTournamentPhase(): TournamentPhase {
+const now = new Date()
+if (now < TOURNAMENT_START) return 'PRE_TOURNAMENT'
+if (now > TOURNAMENT_END) return 'POST_TOURNAMENT'
+return 'LIVE'
+}
+
+export function getDaysUntilKickoff(): number {
+const diff = TOURNAMENT_START.getTime() - Date.now()
+return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)))
+}
+
+export function getNextMatch(fixtures: Match[]): Match | null {
+const now = new Date()
+return fixtures
+.filter(m => new Date(m.date) > now)
+.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] ?? null
+}
+
+export function getRecentMatches(fixtures: Match[], count = 5): Match[] {
+const now = new Date()
+return fixtures
+.filter(m => new Date(m.date) < now && m.status === 'FT')
+.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+.slice(0, count)
+}
+
+export const isTournamentLive = () => getTournamentPhase() === 'LIVE'
+export const isPreTournament = () => getTournamentPhase() === 'PRE_TOURNAMENT'
+
+Créer un hook src/hooks/useTournamentPhase.ts :
+export function useTournamentPhase() {
+const [phase, setPhase] = useState<TournamentPhase>(getTournamentPhase)
+
+useEffect(() => {
+// Re-check toutes les heures (pas besoin de plus fréquent)
+const interval = setInterval(() => setPhase(getTournamentPhase()), 3_600_000)
+return () => clearInterval(interval)
+}, [])
+
+return {
+phase,
+isPreTournament: phase === 'PRE_TOURNAMENT',
+isLive: phase === 'LIVE',
+isPost: phase === 'POST_TOURNAMENT',
+daysUntilKickoff: getDaysUntilKickoff(),
+}
+}
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 3 — METTRE À JOUR LES FONCTIONS API POUR LE PRÉ-TOURNOI
+═══════════════════════════════════════════════════════════
+
+Mettre à jour src/api/apiFootball.ts :
+
+// Ces endpoints fonctionnent MAINTENANT (avant le tournoi)
+
+export async function getTeams(): Promise<Team[]> {
+const res = await axiosInstance.get('/teams', {
+params: { league: 1, season: 2026 },
+headers: { 'x-apisports-key': import.meta.env.VITE_API_FOOTBALL_KEY }
+})
+return res.data.response.map(normalizeTeam)
+}
+
+export async function getAllFixtures(): Promise<Match[]> {
+const res = await axiosInstance.get('/fixtures', {
+params: { league: 1, season: 2026 },
+headers: { 'x-apisports-key': import.meta.env.VITE_API_FOOTBALL_KEY }
+})
+return res.data.response.map(normalizeFixture)
+}
+
+export async function getRounds(): Promise<string[]> {
+const res = await axiosInstance.get('/fixtures/rounds', {
+params: { league: 1, season: 2026 },
+headers: { 'x-apisports-key': import.meta.env.VITE_API_FOOTBALL_KEY }
+})
+return res.data.response // ["Group Stage - 1", "Quarter-finals", ...]
+}
+
+// Ces endpoints n'ont PAS de données avant le 11 juin
+// → retourner [] immédiatement sans appel réseau en mode PRE_TOURNAMENT
+
+export async function getLiveFixtures(phase: TournamentPhase): Promise<Match[]> {
+if (phase !== 'LIVE') return []
+// ... appel réel
+}
+
+export async function getStandings(phase: TournamentPhase): Promise<Group[]> {
+if (phase !== 'LIVE') return []
+// ... appel réel
+}
+
+export async function getTopScorers(phase: TournamentPhase): Promise<PlayerStats[]> {
+if (phase !== 'LIVE') return []
+// ... appel réel
+}
+
+Mettre à jour src/api/dataOrchestrator.ts :
+
+export async function fetchDashboardData(): Promise<DashboardData> {
+const phase = getTournamentPhase()
+
+// Données disponibles MAINTENANT
+const [teams, fixtures, rounds] = await Promise.allSettled([
+getTeams(),
+getAllFixtures(),
+getRounds(),
+])
+
+const allFixtures = fixtures.status === 'fulfilled' ? fixtures.value : []
+
+return {
+phase, // NOUVEAU champ
+teams: teams.status === 'fulfilled' ? teams.value : [],
+allFixtures,
+rounds: rounds.status === 'fulfilled' ? rounds.value : [],
+upcomingMatches: allFixtures.filter(m => new Date(m.date) > new Date()),
+nextMatch: getNextMatch(allFixtures),
+
+// Données LIVE — vides avant le 11 juin, réelles après
+liveMatches: await (phase === 'LIVE' ? getLiveFixtures(phase) : Promise.resolve([])),
+groups: await (phase === 'LIVE' ? getStandings(phase) : Promise.resolve([])),
+topScorers: await (phase === 'LIVE' ? getTopScorers(phase) : Promise.resolve([])),
+recentMatches: getRecentMatches(allFixtures),
+kpis: phase === 'LIVE' ? await fetchKPIs() : null,
+}
+}
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 4 — ADAPTER LES COMPOSANTS AU MODE PRÉ-TOURNOI
+═══════════════════════════════════════════════════════════
+
+Principe : chaque composant lit useTournamentPhase().isPreTournament
+et affiche un état adapté au lieu d'un état "vide".
+
+────────────────────────────────────────
+Hero.tsx — REMPLACER PAR UN HERO PRÉ-TOURNOI
+────────────────────────────────────────
+En mode PRE_TOURNAMENT :
+- Pas de match live → afficher le PROCHAIN match à venir
+- Grand countdown centré : "KICKS OFF IN" + DD:HH:MM:SS animé
+- Opener match affiché : "Mexico 🇲🇽 vs South Africa 🇿🇦"
+Date: June 11, 2026 · 19:00 UTC · Estadio Azteca, Mexico City
+- Bandeau: "48 TEAMS · 104 MATCHES · 16 STADIUMS · 3 COUNTRIES"
+- CTA: "VIEW FULL SCHEDULE" → section fixtures
+
+Countdown component :
+function useCountdown(targetDate: string) {
+const [timeLeft, setTimeLeft] = useState(calcTimeLeft(targetDate))
+useEffect(() => {
+const timer = setInterval(() => setTimeLeft(calcTimeLeft(targetDate)), 1000)
+return () => clearInterval(timer)
+}, [targetDate])
+return timeLeft // { days, hours, minutes, seconds }
+}
+
+Affichage : 4 blocs côte à côte en Barlow Condensed 800 72px :
+[51] [14] [32] [07]
+DAYS HOURS MINS SECS
+
+En mode LIVE : reprendre le comportement original (match live en vedette)
+
+────────────────────────────────────────
+TournamentKPIs.tsx — ADAPTER LES KPIS
+────────────────────────────────────────
+En mode PRE_TOURNAMENT — remplacer les stats de match par des stats de tournoi :
+
+KPI 1: "48 TEAMS" icon: users → équipes qualifiées
+KPI 2: "104 MATCHES" icon: calendar → matchs programmés
+KPI 3: "16 STADIUMS" icon: map-pin → stades hôtes
+KPI 4: "3 COUNTRIES" icon: globe → USA · Canada · Mexico
+
+Ces valeurs sont hardcodées (données officielles FIFA) — pas d'API needed.
+
+En mode LIVE : afficher les vraies stats (goals, top scorer, clean sheets, cards)
+
+────────────────────────────────────────
+GroupStandings.tsx — MODE PRÉ-TOURNOI
+────────────────────────────────────────
+En mode PRE_TOURNAMENT :
+Les standings sont vides (tournoi pas commencé).
+
+Afficher à la place : COMPOSITIONS DES GROUPES
+→ Table avec les 6 équipes de chaque groupe (flag + nom + confédération)
+→ Colonnes : # | ÉQUIPE | CONFÉDÉRATION | CLASSEMENT FIFA
+→ Source : données teams de l'API (disponibles maintenant)
+→ Pas de colonnes W/D/L/Pts → remplacer par "Match 1" (date du premier match)
+
+Header du groupe : "GROUP F — STARTS JUNE 12"
+Footnote sous le tableau : "Standings will update from June 11"
+
+En mode LIVE : afficher les vrais standings avec W/D/L/Pts/Form
+
+────────────────────────────────────────
+MatchResultsGrid.tsx — SCHEDULE COMPLET
+────────────────────────────────────────
+En mode PRE_TOURNAMENT :
+Pas de résultats → afficher le SCHEDULE complet avec filtres :
+
+Tabs : ALL · GROUP STAGE · ROUND OF 32 · R16 · QF · SF · FINAL
+Filtre équipe : dropdown des 48 équipes
+Filtre groupe : A B C D E F G H
+
+Chaque card fixture :
+[Flag] Team A vs Team B [Flag]
+Date + heure locale (calculée avec dayjs)
+Stadium + City
+Groupe/Round badge
+Status badge : "UPCOMING" → en gris neutre
+
+Les fixtures viennent de getAllFixtures() — données réelles de l'API
+
+En mode LIVE : afficher les vrais résultats
+
+────────────────────────────────────────
+LiveScoresWidget.tsx — PRÉ-TOURNOI
+────────────────────────────────────────
+En mode PRE_TOURNAMENT :
+Pas de scores live → transformer en "NEXT MATCHES" widget :
+
+Header : "UPCOMING FIXTURES"
+Contenu : les 5 prochains matchs avec countdown individuel
+Chaque ligne : [Flag] Team A · vs · Team B [Flag] · "in 52d 14h"
+
+Pas de polling (inutile avant le tournoi) — staleTime: 1 heure
+
+En mode LIVE : reprendre le comportement original avec polling 30s
+
+────────────────────────────────────────
+NOUVEAU COMPOSANT — MatchSchedulePage.tsx
+────────────────────────────────────────
+Page dédiée au schedule complet (onglet FIXTURES dans la nav).
+
+État : filtres (round, groupe, équipe, date range)
+Source : useDashboard().data.allFixtures
+
+Affichage groupé par DATE :
+"THURSDAY, JUNE 11" → header de section en uppercase tracked
+Match 1 : Mexico vs South Africa · 19:00 UTC · Azteca
+Match 2 : ...
+"FRIDAY, JUNE 12"
+...
+
+Chaque match card : flag + team name + score (TBD) + flag + team name
++ heure locale (dayjs avec timezone du visiteur)
++ badge round + badge groupe + badge stadium
+
+Sticky date header : quand on scroll, la date courante reste en haut
+
+────────────────────────────────────────
+NOUVEAU COMPOSANT — TeamsGallery.tsx
+────────────────────────────────────────
+Page onglet TEAMS — données disponibles maintenant.
+
+Grid 4 colonnes (desktop), 2 colonnes (mobile) :
+Chaque team card :
+- Flag (logo de l'API)
+- Nom du pays
+- Confédération (UEFA, CONMEBOL, CAF, AFC, CONCACAF, OFC)
+- Groupe assigné (badge)
+- Clic → ouvre un modal avec :
+Squad complet (si API retourne les joueurs)
+Stats historiques WC
+Prochain match
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 5 — BANNIÈRE "COUNTDOWN TO KICKOFF"
+═══════════════════════════════════════════════════════════
+
+Ajouter une bannière sticky sous le header (hauteur 40px) :
+Visible UNIQUEMENT en mode PRE_TOURNAMENT
+
+Contenu : "⚽ WORLD CUP KICKS OFF IN [51] DAYS [14] HRS [32] MIN"
+Style :
+background: var(--green-live) → vert vif
+color: var(--void) → texte très sombre
+font: Barlow Condensed 600 14px uppercase
+Les chiffres du countdown : Barlow Condensed 800 18px
+Animation : les chiffres font un flip subtil à chaque changement
+
+Disparaît automatiquement le 11 juin (phase LIVE)
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 6 — LOGIQUE "DONNÉES RÉELLES vs DONNÉES CONNUES"
+═══════════════════════════════════════════════════════════
+
+Pour les données qu'on connaît déjà officiellement (pas besoin d'API) :
+Créer src/data/wc2026Static.ts avec données officielles FIFA :
+
+export const TOURNAMENT_INFO = {
+startDate: '2026-06-11',
+endDate: '2026-07-19',
+hostCountries: ['USA', 'Canada', 'Mexico'],
+totalTeams: 48,
+totalMatches: 104,
+totalStadiums: 16,
+opener: {
+homeTeam: 'Mexico',
+awayTeam: 'South Africa',
+date: '2026-06-11T19:00:00Z',
+stadium: 'Estadio Azteca',
+city: 'Mexico City',
+},
+final: {
+date: '2026-07-19T19:00:00Z',
+stadium: 'MetLife Stadium',
+city: 'East Rutherford, NJ',
+}
+}
+
+export const STADIUMS = [
+{ name: 'MetLife Stadium', city: 'New York/NJ', country: 'USA', capacity: 82500 },
+{ name: 'AT&T Stadium', city: 'Dallas', country: 'USA', capacity: 80000 },
+{ name: 'SoFi Stadium', city: 'Los Angeles', country: 'USA', capacity: 70240 },
+{ name: 'Levi\'s Stadium', city: 'San Francisco', country: 'USA', capacity: 68500 },
+{ name: 'Arrowhead Stadium', city: 'Kansas City', country: 'USA', capacity: 76416 },
+{ name: 'Mercedes-Benz', city: 'Atlanta', country: 'USA', capacity: 71000 },
+{ name: 'Lincoln FinancialF', city: 'Philadelphia', country: 'USA', capacity: 69796 },
+{ name: 'NRG Stadium', city: 'Houston', country: 'USA', capacity: 72220 },
+{ name: 'Seahawks Stadium', city: 'Seattle', country: 'USA', capacity: 69000 },
+{ name: 'Estadio Azteca', city: 'Mexico City', country: 'Mexico', capacity: 87523 },
+{ name: 'Estadio Akron', city: 'Guadalajara', country: 'Mexico', capacity: 49850 },
+{ name: 'Estadio BBVA', city: 'Monterrey', country: 'Mexico', capacity: 53464 },
+{ name: 'BMO Field', city: 'Toronto', country: 'Canada', capacity: 30990 },
+{ name: 'BC Place', city: 'Vancouver', country: 'Canada', capacity: 54500 },
+{ name: 'Stade Olympique', city: 'Montreal', country: 'Canada', capacity: 61004 },
+{ name: 'Commonwealth', city: 'Edmonton', country: 'Canada', capacity: 56302 },
+]
+
+export const CONFEDERATIONS: Record<string, string> = {
+'Morocco': 'CAF', 'France': 'UEFA', 'Brazil': 'CONMEBOL',
+'Argentina': 'CONMEBOL', 'England': 'UEFA', 'USA': 'CONCACAF',
+// ... compléter pour les 48 équipes
+}
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 7 — SECTION "MAP" (ONGLET MAP DANS LA NAV)
+═══════════════════════════════════════════════════════════
+
+Nouvelle page : StadiumsMap.tsx
+
+Afficher les 16 stades sur une carte simple :
+Option 1 (zéro API externe) : SVG map statique de l'Amérique du Nord
+avec des markers positionnés en CSS absolute (% de la largeur/hauteur)
+Chaque marker : cercle vert pulsant + tooltip au hover avec
+nom du stade, ville, capacité, matchs joués là
+
+Option 2 (si Leaflet est acceptable) :
+import L from 'leaflet'
+Carte centrée sur l'Amérique du Nord
+16 custom markers en couleur de tournoi
+Popup sur chaque marker
+
+Données : viennent de STADIUMS dans wc2026Static.ts — pas d'API needed
+
+═══════════════════════════════════════════════════════════
+ÉTAPE 8 — TRANSITION AUTOMATIQUE VERS MODE LIVE
+═══════════════════════════════════════════════════════════
+
+Le site doit basculer AUTOMATIQUEMENT le 11 juin sans aucune intervention.
+
+Dans useTournamentPhase.ts :
+Le hook re-check toutes les heures.
+Quand getTournamentPhase() retourne 'LIVE' :
+→ TanStack Query reçoit le signal de refetch
+→ Les composants qui attendaient la phase LIVE activent leurs queries
+→ Le hero passe du countdown au match live
+→ Les KPIs passent des stats officielles aux stats de match
+→ Les standings se remplissent
+→ Le polling live s'active (30s)
+
+Pour déclencher les queries en fonction de la phase :
+
+// Dans useGroupStandings.ts
+const { isLive } = useTournamentPhase()
+
+return useQuery({
+queryKey: ['standings', group],
+queryFn: () => fetchGroupStandings(group),
+enabled: isLive, // ← ne fetch PAS avant le 11 juin
+staleTime: 300_000,
+})
+
+Même pattern pour useLiveMatches, useTopScorers.
+
+═══════════════════════════════════════════════════════════
+CHECKLIST FINALE
+═══════════════════════════════════════════════════════════
+
+□ Curl de test exécutés — 4 fichiers JSON de référence sauvegardés
+□ tournamentState.ts créé avec les 3 phases
+□ useTournamentPhase hook créé
+□ dataOrchestrator mis à jour (sépare données dispo/pas dispo)
+□ Hero affiche countdown (51 jours) en mode PRE_TOURNAMENT
+□ TournamentKPIs affiche 48/104/16/3 en mode PRE_TOURNAMENT
+□ GroupStandings affiche les compositions de groupes (pas standings vides)
+□ MatchResultsGrid affiche le schedule des 104 matchs avec filtres
+□ LiveScoresWidget affiche les 5 prochains matchs avec countdown
+□ TeamsGallery créée avec les 48 équipes réelles de l'API
+□ Bannière countdown sticky sous le header
+□ wc2026Static.ts créé (16 stades, opener, final)
+□ Transition automatique 11 juin configurée (enabled: isLive)
+□ npm run ci vert
+□ Push + Vercel deploy

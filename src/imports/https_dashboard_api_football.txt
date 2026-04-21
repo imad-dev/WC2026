@@ -1,0 +1,292 @@
+https://dashboard.api-football.com/soccer/widgets
+ generate code : 
+<api-sports-widget data-type="leagues"></api-sports-widget>
+
+<!-- Configuration -->
+<api-sports-widget data-type="config"
+  data-key="c63785e482459b9f7a1d90138ca920c0"
+  data-sport="football"
+  data-lang="en"
+  data-theme="white"
+  data-show-errors="true"
+  data-show-logos="true"
+  data-favorite="true"
+></api-sports-widget>
+
+
+v3.football.api-sports.io
+
+API : c63785e482459b9f7a1d90138ca920c0
+
+FOOTBALL
+Free	2	100	2027-04-20T00:00:00+00:00	Active	v3.football.api-sports.io
+
+
+===================================================================================
+https://api.wc2026api.com/docs
+
+Your free API key is ready
+Here is your WC2026 API key. Keep it safe — it won't be shown again.
+
+wc26_LBdWanqpvW8YW4CC2B7hFU
+Pass it as a header on every request:
+
+Authorization: Bearer wc26_LBdWanqpvW8YW4CC2B7hFU
+Rate limit: 100 requests/day. Need more? Upgrade to Pro.
+
+
+==========================================
+https://app.balldontlie.io/
+API : 1093113c-9c70-49a1-9390-750777c1dc86
+
+
+Account API
+Programmatic account management, subscriptions, and billing
+
+Overview
+The Account API lets you manage BALLDONTLIE accounts programmatically. Create accounts, view and change subscriptions, rotate API keys, and generate billing links — all through standard REST endpoints.
+
+This is especially useful for AI agents and automated workflows that need to provision access, check plan details, or handle subscription changes without visiting the dashboard.
+
+Base URL: https://api.balldontlie.io/account/v1
+
+OpenAPI spec: https://www.balldontlie.io/openapi/account.yml — hand it to your AI coding agent and it can manage accounts, check plans, and handle subscriptions autonomously.
+
+Human-in-the-loop for payments
+When a 402 response includes a payment_url, a human must visit that URL to enter payment details on Stripe. AI agents should surface this URL to the user rather than attempting to complete payment programmatically.
+
+Authentication
+Most endpoints require your API key in the Authorization header:
+
+Authorization: Bearer YOUR_API_KEY
+The /signup and /plans endpoints are public and do not require authentication.
+
+If authentication fails, the API returns 401 with error code invalid_api_key.
+
+Signup
+Create a new account and receive an API key immediately. The account starts with free-tier access to NBA, NFL, MLB, and EPL.
+
+POST/account/v1/signup
+Request
+{
+  "email": "user@example.com",
+  "password": "your_password"
+}
+Response
+{
+  "email": "user@example.com",
+  "api_key": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "tier": "free",
+  "subscriptions": [
+    { "sport": "nba", "tier": "free" },
+    { "sport": "nfl", "tier": "free" },
+    { "sport": "mlb", "tier": "free" },
+    { "sport": "epl", "tier": "free" }
+  ]
+}
+Status	Condition
+200	Account created
+400	Missing email or password
+409	Email already taken
+Profile
+Get Current User
+Returns your account details including email, API key, current tier, and subscription summary.
+
+GET/account/v1/me
+{
+  "email": "user@example.com",
+  "api_key": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "tier": "paid",
+  "subscriptions": [
+    { "sport": "nba", "tier": "paid" },
+    { "sport": "nfl", "tier": "free" }
+  ]
+}
+Rotate API Key
+Generates a new API key. The old key is invalidated immediately — all subsequent requests must use the new key returned in the response.
+
+POST/account/v1/api-key/rotate
+Returns the same response shape as GET /me with the new API key.
+
+{
+  "email": "user@example.com",
+  "api_key": "new-key-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "tier": "paid",
+  "subscriptions": [
+    { "sport": "nba", "tier": "paid" },
+    { "sport": "nfl", "tier": "free" }
+  ]
+}
+Plans
+Browse available plans and pricing. These endpoints are public — no authentication required.
+
+List All Plans
+GET/account/v1/plans
+{
+  "data": [
+    {
+      "sport": "nba",
+      "display_name": "NBA",
+      "spec_url": "https://www.balldontlie.io/openapi/nba.yml",
+      "tiers": {
+        "free": {
+          "price": 0,
+          "rate_limit": 5,
+          "rate_limit_window_seconds": 60
+        },
+        "paid": {
+          "price": 9.99,
+          "currency": "usd",
+          "billing_period": "monthly",
+          "rate_limit": 60,
+          "rate_limit_window_seconds": 60
+        },
+        "paid_plus": {
+          "price": 39.99,
+          "currency": "usd",
+          "billing_period": "monthly",
+          "rate_limit": 600,
+          "rate_limit_window_seconds": 60
+        }
+      }
+    },
+    ...
+  ]
+}
+Get Plan by Sport
+GET/account/v1/plans/:sport
+Returns plan details for a single sport, wrapped in a data object. Returns 404 for unknown sport identifiers.
+
+{
+  "data": {
+    "sport": "nba",
+    "display_name": "NBA",
+    "spec_url": "https://www.balldontlie.io/openapi/nba.yml",
+    "tiers": { ... }
+  }
+}
+Pricing
+Tier	Price	Rate Limit
+free	$0/mo	5 req/min
+paid	$9.99/mo	60 req/min
+paid_plus	$39.99/mo	600 req/min
+all_access_v3	$299.99/mo	600 req/min (all sports + Lab + Webhooks)
+Subscriptions
+List Subscriptions
+Returns all subscriptions for the authenticated user, enriched with Stripe billing status when available.
+
+GET/account/v1/subscriptions
+{
+  "data": [
+    {
+      "sport": "nba",
+      "tier": "paid",
+      "status": "active",
+      "current_period_end": "2026-05-01T00:00:00.000Z",
+      "cancel_at_period_end": false
+    },
+    {
+      "sport": "nfl",
+      "tier": "free",
+      "status": null,
+      "current_period_end": null,
+      "cancel_at_period_end": false
+    }
+  ]
+}
+Create or Change Subscription
+Subscribe to a sport, upgrade, or downgrade. If a payment method is on file, the change is processed automatically. If not, the response includes a payment_url that a human must visit to complete checkout.
+
+POST/account/v1/subscriptions
+Request
+{
+  "sport": "nba",
+  "tier": "paid"
+}
+Response (payment method on file)
+{
+  "status": "processing",
+  "message": "Subscription change is processing. Poll GET /account/v1/subscriptions for updated status."
+}
+Response (no payment method)
+HTTP 402
+
+{
+  "error": {
+    "code": "payment_method_required",
+    "message": "No payment method on file. A human must visit payment_url to complete this subscription.",
+    "payment_url": "https://checkout.stripe.com/c/pay/..."
+  }
+}
+Payment Flow
+When you receive a 402 with a payment_url, a human must visit that URL to enter payment details on Stripe. Once payment completes, the subscription activates automatically via webhooks. Poll GET /subscriptions to check when the change is reflected.
+
+Cancel Subscription
+Active subscriptions are scheduled for cancellation at the end of the billing period — access continues until then. Incomplete or unpaid subscriptions are canceled immediately.
+
+DELETE/account/v1/subscriptions/:sport
+{
+  "status": "cancel_scheduled",
+  "cancel_at": "2026-05-01T00:00:00.000Z",
+  "message": "Subscription will cancel at end of current billing period. Access continues until then."
+}
+Reactivate a Canceled Subscription
+If a subscription is scheduled for cancellation (cancel_at_period_end: true), reactivate it by posting the same sport and tier to POST /account/v1/subscriptions.
+
+Request
+{
+  "sport": "nba",
+  "tier": "paid"
+}
+Response
+{
+  "status": "reactivated"
+}
+Billing
+Generate Checkout URL
+Creates a Stripe checkout session for a specific plan. Unlike POST /subscriptions, this always returns a checkout URL regardless of whether a payment method exists. Useful for generating payment links proactively (e.g., in onboarding flows).
+
+POST/account/v1/billing/checkout
+Request
+{
+  "sport": "nba",
+  "tier": "paid"
+}
+Response
+{
+  "checkout_url": "https://checkout.stripe.com/c/pay/..."
+}
+Billing Portal
+Returns a Stripe billing portal URL where a user can update payment methods, view invoices, and manage billing details. Requires an existing Stripe customer (at least one prior payment).
+
+GET/account/v1/billing/portal
+Response
+{
+  "portal_url": "https://billing.stripe.com/p/session/..."
+}
+Error Codes
+All errors follow a consistent format with a machine-readable code and human-readable message:
+
+{
+  "error": {
+    "code": "invalid_sport",
+    "message": "Unknown sport: xyz"
+  }
+}
+Code	HTTP Status	Description
+invalid_api_key	401	Missing or invalid API key
+missing_fields	400	Required request body fields are missing
+email_taken	409	Email address already registered
+invalid_sport	400	Unknown sport identifier
+invalid_tier	400	Unknown tier for the specified sport
+legacy_plan_unavailable	400	Attempting to use all_access v1/v2/v3 (only v4 is available)
+payment_method_required	402	No payment method on file; response includes payment_url
+payment_failed	402	Payment could not be processed; response may include portal_url
+subscription_not_found	404	No subscription found for the specified sport
+Get Started
+Create an account and start building.
+
+Sign Up
+OpenAPI Spec
+© 2026 BALLDONTLIE LLC. All rights reserved.
+

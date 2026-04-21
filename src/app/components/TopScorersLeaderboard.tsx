@@ -1,162 +1,120 @@
-import { useTopScorers } from '@/hooks/useTopScorers'
-import { ErrorState } from './ui/ErrorState'
-import { ScorerRowSkeleton } from './ui/skeletons'
+import { useLeagueScorers } from '../../hooks/useFootballData';
+import { COMPETITIONS, type CompetitionCode } from '../../services/api';
+import { Trophy } from 'lucide-react';
 
-export function TopScorersLeaderboard() {
-  const { data, isLoading, isError, error, refetch } = useTopScorers()
+interface TopScorersLeaderboardProps {
+  competition: CompetitionCode;
+}
 
-  if (isLoading) {
-    return (
-      <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2
-            className="text-2xl font-semibold uppercase"
-            style={{
-              fontFamily: 'var(--font-display)',
-              letterSpacing: '-0.02em',
-              color: 'var(--white-primary)',
-            }}
-          >
-            Top Scorers
-          </h2>
-          <span className="text-xs" style={{ color: 'var(--white-muted)' }}>
-            (Goals + Assists)
-          </span>
-        </div>
-
-        <div className="rounded overflow-hidden border" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
-          {Array.from({ length: 8 }).map((_, idx) => (
-            <ScorerRowSkeleton key={idx} />
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  if (isError || !data) {
-    return <ErrorState message={(error as Error | undefined)?.message} onRetry={() => void refetch()} />
-  }
+export function TopScorersLeaderboard({ competition }: TopScorersLeaderboardProps) {
+  const { scorers, loading } = useLeagueScorers(competition, 10);
+  const comp = COMPETITIONS[competition];
 
   return (
-    <section>
-      <div className="flex items-center justify-between mb-6">
+    <section id={`scorers-${competition.toLowerCase()}`}>
+      <div className="flex items-center justify-between mb-5">
         <h2
-          className="text-2xl font-semibold uppercase"
-          style={{
-            fontFamily: 'var(--font-display)',
-            letterSpacing: '-0.02em',
-            color: 'var(--white-primary)',
-          }}
+          className="text-xl font-semibold uppercase flex items-center gap-2"
+          style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.01em', color: 'var(--white-primary)' }}
         >
+          <Trophy className="w-5 h-5" style={{ color: 'var(--gold-leader)' }} />
           Top Scorers
         </h2>
-        <span className="text-xs" style={{ color: 'var(--white-muted)' }}>
-          (Goals + Assists)
+        <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>
+          {comp?.flag} {comp?.name}
         </span>
       </div>
 
-      <div className="rounded overflow-hidden border" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
-        {data.map((scorer, index) => {
-          const isTop = index === 0
-          return (
+      {loading ? (
+        <div className="space-y-2">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="h-12 rounded-lg animate-pulse" style={{ background: 'var(--surface-2)', opacity: 1 - i * 0.1 }} />
+          ))}
+        </div>
+      ) : scorers.length > 0 ? (
+        <div
+          className="rounded-lg border overflow-hidden"
+          style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
+        >
+          {scorers.map((scorer, idx) => (
             <div
-              key={scorer.player.id}
-              className="flex items-center gap-3 md:gap-6 px-3 md:px-6 py-3 md:py-4 border-b transition-all duration-200 hover:bg-surface-3 relative overflow-hidden"
-              style={{
-                borderColor: isTop ? 'var(--gold-leader)' : 'var(--border)',
-                background: isTop
-                  ? 'linear-gradient(90deg, rgba(255, 179, 0, 0.12) 0%, rgba(255, 179, 0, 0.06) 50%, rgba(255, 179, 0, 0.12) 100%)'
-                  : 'transparent',
-                borderLeft: isTop ? '3px solid var(--gold-leader)' : 'none',
-              }}
+              key={idx}
+              className="flex items-center gap-4 px-4 py-3 border-b transition-colors duration-150 hover:bg-surface-2"
+              style={{ borderColor: 'var(--border)' }}
             >
-              <div className="w-16 flex flex-col items-center relative">
-                <div
-                  className="relative"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: isTop ? '48px' : index < 3 ? '32px' : '24px',
-                    fontWeight: 800,
-                    color: isTop ? 'var(--gold-leader)' : index < 3 ? 'var(--gold-dim)' : 'var(--white-ghost)',
-                    fontFeatureSettings: '"tnum" 1',
-                  }}
-                >
-                  {index + 1}
+              {/* Rank */}
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                style={{
+                  background: idx === 0 ? 'var(--gold-leader)' : idx === 1 ? '#C0C0C0' : idx === 2 ? '#CD7F32' : 'var(--surface-3)',
+                  color: idx < 3 ? 'var(--void)' : 'var(--white-muted)',
+                  fontFamily: 'var(--font-display)',
+                }}
+              >
+                {scorer.rank}
+              </div>
+
+              {/* Team crest */}
+              {scorer.teamCrest ? (
+                <img src={scorer.teamCrest} alt={scorer.team} className="w-6 h-6 object-contain flex-shrink-0" />
+              ) : (
+                <div className="w-6 h-6 rounded-full flex-shrink-0" style={{ background: 'var(--surface-3)' }} />
+              )}
+
+              {/* Player info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-sm truncate" style={{ color: 'var(--white-primary)' }}>
+                    {scorer.player}
+                  </span>
+                  <span className="text-base leading-none flex-shrink-0">{scorer.nationality}</span>
+                </div>
+                <div className="text-xs truncate" style={{ color: 'var(--white-ghost)' }}>
+                  {scorer.team}
                 </div>
               </div>
 
-              <div className="relative">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center border text-xs"
-                  style={{
-                    background: isTop ? 'linear-gradient(135deg, rgba(255, 179, 0, 0.2), var(--surface-2))' : 'var(--surface-2)',
-                    borderColor: isTop ? 'var(--gold-leader)' : 'var(--border)',
-                  }}
-                >
-                  {scorer.team.code}
-                </div>
-              </div>
-
-              <div className="flex-1">
-                <div
-                  className="text-sm font-semibold flex items-center gap-2"
-                  style={{
-                    color: isTop ? 'var(--gold-leader)' : 'var(--white-primary)',
-                    fontSize: isTop ? '16px' : '14px',
-                  }}
-                >
-                  {scorer.player.name}
-                </div>
-                <div className="text-xs mt-1" style={{ color: 'var(--white-muted)' }}>
-                  {scorer.team.name}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 md:gap-8 text-center">
-                <div>
+              {/* Stats */}
+              <div className="flex items-center gap-4 flex-shrink-0">
+                <div className="text-center">
                   <div
-                    className="font-bold"
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: isTop ? '32px' : '24px',
-                      color: isTop ? 'var(--gold-leader)' : 'var(--white-primary)',
-                      fontFeatureSettings: '"tnum" 1',
-                    }}
+                    className="text-xl font-extrabold tabular-nums"
+                    style={{ fontFamily: 'var(--font-display)', color: idx === 0 ? 'var(--gold-leader)' : 'var(--green-live)' }}
                   >
                     {scorer.goals}
                   </div>
-                  <div className="text-xs" style={{ color: isTop ? 'var(--gold-dim)' : 'var(--white-ghost)' }}>
-                    Goals
-                  </div>
+                  <div className="text-[10px] uppercase" style={{ color: 'var(--white-ghost)' }}>Goals</div>
                 </div>
-                <div>
+                <div className="text-center hidden sm:block">
                   <div
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: isTop ? '24px' : '20px',
-                      color: isTop ? 'var(--gold-dim)' : 'var(--white-muted)',
-                      fontFeatureSettings: '"tnum" 1',
-                    }}
+                    className="text-xl font-extrabold tabular-nums"
+                    style={{ fontFamily: 'var(--font-display)', color: 'var(--blue-ref)' }}
                   >
                     {scorer.assists}
                   </div>
-                  <div className="text-xs" style={{ color: 'var(--white-ghost)' }}>
-                    Assists
-                  </div>
+                  <div className="text-[10px] uppercase" style={{ color: 'var(--white-ghost)' }}>Ast</div>
                 </div>
-                <div>
-                  <div className="text-sm" style={{ color: 'var(--white-ghost)', fontFeatureSettings: '"tnum" 1' }}>
-                    {scorer.matchesPlayed}
+                <div className="text-center hidden md:block">
+                  <div
+                    className="text-xl font-extrabold tabular-nums"
+                    style={{ fontFamily: 'var(--font-display)', color: 'var(--white-muted)' }}
+                  >
+                    {scorer.matches}
                   </div>
-                  <div className="text-xs" style={{ color: 'var(--white-ghost)' }}>
-                    Matches
-                  </div>
+                  <div className="text-[10px] uppercase" style={{ color: 'var(--white-ghost)' }}>Apps</div>
                 </div>
               </div>
             </div>
-          )
-        })}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div
+          className="text-center py-8 rounded-lg border text-sm"
+          style={{ background: 'var(--surface-1)', borderColor: 'var(--border)', color: 'var(--white-muted)' }}
+        >
+          Top scorers data coming soon
+        </div>
+      )}
     </section>
-  )
+  );
 }

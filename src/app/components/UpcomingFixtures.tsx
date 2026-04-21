@@ -1,85 +1,56 @@
-import { MapPin } from 'lucide-react';
+import { useLeagueMatches } from '../../hooks/useFootballData';
+import { type CompetitionCode, COMPETITIONS } from '../../services/api';
+import { Calendar } from 'lucide-react';
 
-export function UpcomingFixtures() {
-  // TODO: API - replace upcoming fixtures with schedule endpoint data.
-  const fixtures = [
-    { date: 'TODAY', time: '20:00', teamA: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', codeA: 'ENG', teamB: '🇪🇸', codeB: 'ESP', stadium: 'MetLife', countdown: '02h 14m' },
-    { date: 'TODAY', time: '23:30', teamA: '🇳🇱', codeA: 'NED', teamB: '🇮🇹', codeB: 'ITA', stadium: 'SoFi' },
-    { date: 'TUE APR 21', time: '14:00', teamA: '🇯🇵', codeA: 'JPN', teamB: '🇦🇺', codeB: 'AUS', stadium: 'BC Place' },
-    { date: 'TUE APR 21', time: '18:00', teamA: '🇺🇸', codeA: 'USA', teamB: '🇨🇦', codeB: 'CAN', stadium: 'Azteca' },
-    { date: 'WED APR 22', time: '16:00', teamA: '🇸🇪', codeA: 'SWE', teamB: '🇵🇱', codeB: 'POL', stadium: 'AT&T' },
-  ];
+interface UpcomingFixturesProps {
+  competition: CompetitionCode;
+}
+
+export function UpcomingFixtures({ competition }: UpcomingFixturesProps) {
+  const { matches, loading } = useLeagueMatches(competition, 'SCHEDULED', 5);
+  const comp = COMPETITIONS[competition];
 
   return (
-    <div className="rounded border" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
-      <div className="px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
-        <span
-          className="text-xs uppercase font-semibold"
-          style={{ color: 'var(--white-primary)', letterSpacing: '0.08em' }}
-        >
-          Next Matches
+    <div className="rounded-xl border p-4" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
+      <div className="flex items-center gap-2 mb-4">
+        <Calendar className="w-4 h-4" style={{ color: 'var(--gold-leader)' }} />
+        <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--white-primary)', letterSpacing: '0.06em' }}>
+          Upcoming Fixtures
+        </h3>
+        <span className="ml-auto text-xs" style={{ color: 'var(--white-ghost)' }}>
+          {comp?.flag} {comp?.name}
         </span>
       </div>
 
-      {fixtures[0].countdown && (
-        <div className="px-4 py-4 border-b" style={{ borderColor: 'var(--border)' }}>
-          <div className="text-xs mb-2" style={{ color: 'var(--white-muted)' }}>
-            Next match in
-          </div>
-          <div
-            className="text-3xl font-bold"
-            style={{
-              fontFamily: 'var(--font-display)',
-              color: 'var(--green-live)',
-              fontFeatureSettings: '"tnum" 1',
-            }}
-          >
-            {fixtures[0].countdown}
-          </div>
+      {loading ? (
+        <div className="space-y-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-14 rounded animate-pulse" style={{ background: 'var(--surface-2)' }} />
+          ))}
         </div>
-      )}
-
-      <div className="p-4 space-y-4">
-        {fixtures.map((fixture, idx) => (
-          <div key={idx}>
-            {(idx === 0 || fixtures[idx - 1].date !== fixture.date) && (
-              <div
-                className="text-xs uppercase font-semibold mb-2"
-                style={{ color: 'var(--white-ghost)', letterSpacing: '0.08em' }}
-              >
-                {fixture.date}
-              </div>
-            )}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span style={{ color: 'var(--white-muted)', fontFeatureSettings: '"tnum" 1' }}>{fixture.time}</span>
-                <div className="flex items-center gap-1" style={{ color: 'var(--white-ghost)' }}>
-                  <MapPin className="w-3 h-3" />
-                  <span>{fixture.stadium}</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{fixture.teamA}</span>
-                  <span className="text-xs font-semibold" style={{ color: 'var(--white-primary)' }}>
-                    {fixture.codeA}
-                  </span>
-                </div>
-                <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>
-                  VS
+      ) : matches.length > 0 ? (
+        <div className="space-y-2">
+          {matches.map(match => (
+            <div key={match.id} className="p-3 rounded-lg border" style={{ background: 'var(--surface-2)', borderColor: 'var(--border)' }}>
+              <div className="flex justify-between text-[10px] mb-2" style={{ color: 'var(--white-ghost)' }}>
+                <span>{match.round}</span>
+                <span className="font-semibold tabular-nums" style={{ color: 'var(--gold-leader)' }}>
+                  {match.dateFormatted} · {match.timeFormatted}
                 </span>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold" style={{ color: 'var(--white-primary)' }}>
-                    {fixture.codeB}
-                  </span>
-                  <span className="text-lg">{fixture.teamB}</span>
-                </div>
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold truncate" style={{ color: 'var(--white-primary)' }}>{match.homeTeam.name}</span>
+                <span className="text-xs font-bold px-2" style={{ color: 'var(--white-ghost)' }}>vs</span>
+                <span className="text-xs font-semibold truncate text-right" style={{ color: 'var(--white-primary)' }}>{match.awayTeam.name}</span>
               </div>
             </div>
-            {idx < fixtures.length - 1 && <div className="h-px mt-4" style={{ background: 'var(--border)' }} />}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-6 text-xs" style={{ color: 'var(--white-ghost)' }}>
+          No upcoming fixtures available
+        </div>
+      )}
     </div>
   );
 }

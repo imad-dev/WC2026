@@ -1,145 +1,42 @@
-import { useEffect, useMemo, useState } from 'react'
-import { AlertCircle, Shield, Target, Timer } from 'lucide-react'
-import { useDashboard } from '@/hooks/useDashboard'
-import { ErrorState } from './ui/ErrorState'
-import { KPIChipSkeleton } from './ui/skeletons'
-
-const ANIMATION_DURATION_MS = 1200
-
-function easeOutCubic(t: number) {
-  return 1 - Math.pow(1 - t, 3)
-}
-
-function useAnimatedNumber(target: number) {
-  const [value, setValue] = useState(0)
-
-  useEffect(() => {
-    let frameId = 0
-    let startTime = 0
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp
-      const elapsed = timestamp - startTime
-      const progress = Math.min(elapsed / ANIMATION_DURATION_MS, 1)
-      const eased = easeOutCubic(progress)
-
-      setValue(Math.round(target * eased))
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate)
-      }
-    }
-
-    frameId = requestAnimationFrame(animate)
-
-    return () => cancelAnimationFrame(frameId)
-  }, [target])
-
-  return value
-}
-
-interface KPIValueCardProps {
-  icon: typeof Target
-  value: number
-  label: string
-  subtitle: string
-  color: string
-}
-
-function KPIValueCard({ icon: Icon, value, label, subtitle, color }: KPIValueCardProps) {
-  const animatedValue = useAnimatedNumber(value)
-
-  return (
-    <div
-      className="rounded p-5 border transition-all duration-200 hover:border-border-active"
-      style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
-    >
-      <div className="flex items-start justify-between mb-4">
-        <Icon className="w-5 h-5" style={{ color }} />
-      </div>
-      <div
-        className="text-4xl"
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 700,
-          color: 'var(--white-primary)',
-          fontFeatureSettings: '"tnum" 1',
-        }}
-      >
-        {animatedValue}
-      </div>
-      <div className="mt-2 text-xs" style={{ color: 'var(--white-muted)' }}>
-        {label}
-      </div>
-      <div className="mt-1 text-xs" style={{ color: 'var(--white-ghost)' }}>
-        {subtitle}
-      </div>
-    </div>
-  )
-}
+import { TOURNAMENT_INFO, STADIUMS } from '../../data/wc2026Static';
 
 export function TournamentKPIs() {
-  const { data, isLoading, isError, error, refetch } = useDashboard()
-
-  const kpis = useMemo(() => {
-    const values = data?.kpis
-    if (!values) return []
-
-    return [
-      {
-        icon: Target,
-        value: values.totalGoals,
-        label: 'Goals Scored',
-        subtitle: `${values.goalsPerMatch.toFixed(1)} per match avg`,
-        color: 'var(--green-live)',
-      },
-      {
-        icon: Timer,
-        value: values.matchesPlayed,
-        label: 'Matches Played',
-        subtitle: `${values.totalMatches} total scheduled`,
-        color: 'var(--gold-leader)',
-      },
-      {
-        icon: Shield,
-        value: values.cleanSheets,
-        label: 'Clean Sheets',
-        subtitle: 'Tournament defensive record',
-        color: 'var(--blue-ref)',
-      },
-      {
-        icon: AlertCircle,
-        value: values.redCards,
-        label: 'Red Cards',
-        subtitle: `${values.yellowCards} yellow cards`,
-        color: 'var(--red-loss)',
-      },
-    ]
-  }, [data])
-
-  if (isLoading) {
-    return (
-      <section>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {Array.from({ length: 4 }).map((_, idx) => (
-            <KPIChipSkeleton key={idx} />
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  if (isError || !data) {
-    return <ErrorState message={(error as Error | undefined)?.message} onRetry={() => void refetch()} />
-  }
+  const stats = [
+    { label: 'Teams', value: String(TOURNAMENT_INFO.totalTeams), sub: '6 confederations', color: 'var(--green-live)' },
+    { label: 'Matches', value: String(TOURNAMENT_INFO.totalMatches), sub: 'Group + Knockout', color: 'var(--gold-leader)' },
+    { label: 'Venues', value: String(TOURNAMENT_INFO.totalStadiums), sub: 'Across 3 countries', color: 'var(--blue-ref)' },
+    { label: 'Max Cap.', value: '87.5K', sub: 'Estadio Azteca', color: 'var(--red-loss)' },
+    { label: 'Duration', value: '39', sub: 'Days of football', color: 'var(--amber-draw)' },
+    { label: 'Prize Fund', value: '$1B', sub: 'Record FIFA prize', color: 'var(--green-live)' },
+  ];
 
   return (
-    <section>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-        {kpis.map((kpi) => (
-          <KPIValueCard key={kpi.label} {...kpi} />
+    <section id="tournament-kpis">
+      <div className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--white-ghost)', letterSpacing: '0.1em' }}>
+        Tournament Overview
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {stats.map((stat) => (
+          <div
+            key={stat.label}
+            className="rounded-lg p-4 border text-center transition-all duration-200 hover:-translate-y-0.5"
+            style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
+          >
+            <div
+              className="text-2xl font-extrabold tabular-nums"
+              style={{ fontFamily: 'var(--font-display)', color: stat.color }}
+            >
+              {stat.value}
+            </div>
+            <div className="text-xs font-semibold uppercase mt-0.5" style={{ color: 'var(--white-primary)' }}>
+              {stat.label}
+            </div>
+            <div className="text-[10px] mt-0.5" style={{ color: 'var(--white-ghost)' }}>
+              {stat.sub}
+            </div>
+          </div>
         ))}
       </div>
     </section>
-  )
+  );
 }

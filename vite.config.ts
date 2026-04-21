@@ -1,15 +1,13 @@
 import { defineConfig } from 'vite'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
-    resolveId(id: string) {
+    resolveId(id) {
       if (id.startsWith('figma:asset/')) {
         const filename = id.replace('figma:asset/', '')
         return path.resolve(__dirname, 'src/assets', filename)
@@ -30,6 +28,26 @@ export default defineConfig({
     alias: {
       // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+
+  // Proxy external APIs to avoid CORS issues in development
+  server: {
+    proxy: {
+      // openfootball GitHub raw JSON (standings + matches)
+      '/api/openfootball': {
+        target: 'https://raw.githubusercontent.com/openfootball/football.json/master/2025-26',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/openfootball/, ''),
+        secure: true,
+      },
+      // football-data.org (today's live matches — free endpoint)
+      '/api/football-data': {
+        target: 'https://api.football-data.org/v4',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/football-data/, ''),
+        secure: true,
+      },
     },
   },
 

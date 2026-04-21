@@ -1,250 +1,195 @@
-import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
-import { useDashboard } from '@/hooks/useDashboard'
-import { useLiveMatches } from '@/hooks/useLiveMatches'
-import { ErrorState } from './ui/ErrorState'
-import { HeroSkeleton } from './ui/skeletons'
-
-const ANIMATION_DURATION_MS = 1200
-
-function easeOutCubic(t: number) {
-  return 1 - Math.pow(1 - t, 3)
-}
-
-function useAnimatedScore(target: number) {
-  const [value, setValue] = useState(0)
-
-  useEffect(() => {
-    let frameId = 0
-    let startTime = 0
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp
-      const elapsed = timestamp - startTime
-      const progress = Math.min(elapsed / ANIMATION_DURATION_MS, 1)
-      setValue(Math.round(target * easeOutCubic(progress)))
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate)
-      }
-    }
-
-    frameId = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(frameId)
-  }, [target])
-
-  return value
-}
-
-function buildCountdown(date: string) {
-  const now = dayjs()
-  const target = dayjs(date)
-  const diffSeconds = Math.max(0, target.diff(now, 'second'))
-  const hours = Math.floor(diffSeconds / 3600)
-  const minutes = Math.floor((diffSeconds % 3600) / 60)
-  const seconds = diffSeconds % 60
-
-  return `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`
-}
+import { TOURNAMENT_INFO } from '../../data/wc2026Static';
+import { useCountdown } from '../../hooks/useCountdown';
+import { Calendar, MapPin, Users, Trophy, ChevronDown } from 'lucide-react';
 
 export function Hero() {
-  const liveQuery = useLiveMatches()
-  const dashboardQuery = useDashboard()
-
-  const featuredMatch =
-    liveQuery.data?.find((match) => match.status === 'LIVE')
-    ?? dashboardQuery.data?.upcomingMatches[0]
-    ?? dashboardQuery.data?.recentMatches[0]
-
-  const homeScore = useAnimatedScore(featuredMatch?.homeScore ?? 0)
-  const awayScore = useAnimatedScore(featuredMatch?.awayScore ?? 0)
-
-  if (liveQuery.isLoading || dashboardQuery.isLoading) {
-    return <HeroSkeleton />
-  }
-
-  if (liveQuery.isError && dashboardQuery.isError) {
-    const message = (liveQuery.error as Error | undefined)?.message || (dashboardQuery.error as Error | undefined)?.message
-    return <ErrorState message={message} onRetry={() => void Promise.all([liveQuery.refetch(), dashboardQuery.refetch()])} />
-  }
-
-  if (!featuredMatch) {
-    return <ErrorState message="No featured match available." onRetry={() => void dashboardQuery.refetch()} />
-  }
-
-  const isLive = featuredMatch.status === 'LIVE'
+  const countdown = useCountdown(TOURNAMENT_INFO.opener.date);
 
   return (
     <section
+      id="hero"
       className="relative overflow-hidden"
-      style={{
-        height: 'auto',
-        minHeight: '500px',
-        background: 'radial-gradient(circle at center, transparent 0%, var(--void) 100%)',
-      }}
+      style={{ minHeight: '580px' }}
     >
+      {/* Animated background */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, #0A0E1A 0%, #121828 50%, #0A0E1A 100%)',
-          opacity: 0.8,
+          background: 'linear-gradient(135deg, #060810 0%, #0d1526 45%, #060810 100%)',
+        }}
+      />
+      {/* Grid lines */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px)',
+        }}
+      />
+      {/* Green radial glow */}
+      <div
+        className="absolute"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(0,230,118,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
         }}
       />
 
-      <div className="relative h-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-20 py-8 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
-        <div className="lg:col-span-7 space-y-4 md:space-y-6">
-          <div className="flex items-center gap-2">
-            <div className="live-dot w-2 h-2 rounded-full" style={{ background: isLive ? 'var(--green-live)' : 'var(--white-muted)' }} />
-            <span
-              className="text-xs font-semibold uppercase tracking-wider"
-              style={{ color: isLive ? 'var(--green-live)' : 'var(--white-muted)', letterSpacing: '0.08em' }}
+      <div className="relative max-w-[1920px] mx-auto px-4 md:px-8 lg:px-20 py-14 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT — Countdown */}
+          <div className="space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border" style={{ borderColor: 'var(--gold-leader)', background: 'rgba(255,179,0,0.08)' }}>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--gold-leader)' }} />
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--gold-leader)' }}>
+                TOURNAMENT OPENER
+              </span>
+            </div>
+
+            {/* Title */}
+            <div>
+              <h1
+                className="text-5xl md:text-7xl font-extrabold uppercase leading-none"
+                style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', color: 'var(--white-primary)' }}
+              >
+                FIFA<br />
+                <span style={{ color: 'var(--green-live)' }}>World Cup</span><br />
+                2026
+              </h1>
+            </div>
+
+            {/* Countdown */}
+            <div>
+              <p className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--white-muted)' }}>
+                Kicks off in
+              </p>
+              <div className="flex items-end gap-3 md:gap-5">
+                {[
+                  { value: countdown.days, label: 'Days' },
+                  { value: countdown.hours, label: 'Hrs' },
+                  { value: countdown.minutes, label: 'Min' },
+                  { value: countdown.seconds, label: 'Sec' },
+                ].map((item, idx) => (
+                  <div key={idx} className="text-center">
+                    <div
+                      className="text-4xl md:text-6xl font-extrabold tabular-nums px-3 py-2 rounded-lg"
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        color: 'var(--green-live)',
+                        background: 'rgba(0,230,118,0.08)',
+                        border: '1px solid rgba(0,230,118,0.15)',
+                        minWidth: '70px',
+                      }}
+                    >
+                      {String(item.value).padStart(2, '0')}
+                    </div>
+                    <div className="text-xs uppercase tracking-widest mt-1.5" style={{ color: 'var(--white-muted)' }}>
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Opener meta */}
+            <div className="flex flex-wrap gap-4 text-sm" style={{ color: 'var(--white-muted)' }}>
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5" style={{ color: 'var(--green-live)' }} />
+                June 11, 2026
+              </span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5" style={{ color: 'var(--green-live)' }} />
+                {TOURNAMENT_INFO.opener.stadium}, {TOURNAMENT_INFO.opener.city}
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT — Opener match + stats */}
+          <div className="space-y-6">
+            {/* Opener match card */}
+            <div
+              className="rounded-xl p-6 border relative overflow-hidden"
+              style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
             >
-              {isLive ? `LIVE — ${featuredMatch.minute ?? 0}'` : featuredMatch.status}
-            </span>
-          </div>
-
-          <div
-            className="text-xs uppercase tracking-wider"
-            style={{ color: 'var(--white-muted)', letterSpacing: '0.08em' }}
-          >
-            {featuredMatch.phase}
-          </div>
-
-          <div className="space-y-4 md:space-y-6">
-            <div className="flex items-center gap-3 md:gap-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-sm border" style={{ borderColor: 'var(--border)' }}>
-                {featuredMatch.homeTeam.code}
+              <div className="text-xs uppercase tracking-widest mb-5" style={{ color: 'var(--white-ghost)', letterSpacing: '0.1em' }}>
+                Opening Match
               </div>
-              <div
-                className="text-4xl md:text-6xl lg:text-7xl font-extrabold uppercase flex-1"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'var(--white-primary)',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {featuredMatch.homeTeam.name}
-              </div>
-              <div
-                className="text-5xl md:text-7xl lg:text-8xl font-extrabold"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'var(--green-live)',
-                  fontFeatureSettings: '"tnum" 1',
-                }}
-              >
-                {homeScore}
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-center flex-1">
+                  <div className="text-5xl mb-2">{TOURNAMENT_INFO.opener.homeFlag}</div>
+                  <div className="text-xl font-extrabold uppercase" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)' }}>
+                    {TOURNAMENT_INFO.opener.homeTeam}
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div
+                    className="text-xl font-bold px-4 py-1.5 rounded"
+                    style={{ background: 'var(--surface-2)', color: 'var(--white-muted)' }}
+                  >
+                    VS
+                  </div>
+                </div>
+                <div className="text-center flex-1">
+                  <div className="text-5xl mb-2">{TOURNAMENT_INFO.opener.awayFlag}</div>
+                  <div className="text-xl font-extrabold uppercase" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)' }}>
+                    {TOURNAMENT_INFO.opener.awayTeam}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="h-px" style={{ background: 'rgba(255,255,255,0.1)' }} />
-
-            <div className="flex items-center gap-3 md:gap-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-sm border" style={{ borderColor: 'var(--border)' }}>
-                {featuredMatch.awayTeam.code}
-              </div>
-              <div
-                className="text-4xl md:text-6xl lg:text-7xl font-extrabold uppercase flex-1"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'var(--white-muted)',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {featuredMatch.awayTeam.name}
-              </div>
-              <div
-                className="text-5xl md:text-7xl lg:text-8xl font-extrabold"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'var(--white-muted)',
-                  fontFeatureSettings: '"tnum" 1',
-                }}
-              >
-                {awayScore}
-              </div>
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { icon: Users, value: '48', label: 'Teams', sub: '3 host nations' },
+                { icon: Trophy, value: '104', label: 'Matches', sub: 'Group + KO stages' },
+                { icon: MapPin, value: '16', label: 'Venues', sub: 'USA, Canada, Mexico' },
+                { icon: Calendar, value: '39', label: 'Days', sub: 'Jun 11 → Jul 19' },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="rounded-lg p-4 border"
+                  style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <stat.icon className="w-3.5 h-3.5" style={{ color: 'var(--gold-leader)' }} />
+                    <span
+                      className="text-2xl font-extrabold"
+                      style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)' }}
+                    >
+                      {stat.value}
+                    </span>
+                    <span className="text-sm font-semibold" style={{ color: 'var(--white-muted)' }}>
+                      {stat.label}
+                    </span>
+                  </div>
+                  <div className="text-xs" style={{ color: 'var(--white-ghost)' }}>{stat.sub}</div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="text-sm" style={{ color: 'var(--white-muted)' }}>
-            {featuredMatch.stats
-              ? `${featuredMatch.stats.homePossession}% possession · ${featuredMatch.stats.homeShotsOnTarget}-${featuredMatch.stats.awayShotsOnTarget} shots on target`
-              : `Kickoff: ${dayjs(featuredMatch.date).format('DD MMM YYYY HH:mm')}`}
-          </div>
-
-          {!isLive && (
-            <div className="text-xs" style={{ color: 'var(--green-live)' }}>
-              Starts in {buildCountdown(featuredMatch.date)}
-            </div>
-          )}
         </div>
 
-        <div className="lg:col-span-5 space-y-4">
-          <div className="text-xs uppercase tracking-wider mb-4" style={{ color: 'var(--white-muted)', letterSpacing: '0.08em' }}>
-            TODAY'S FIXTURES
+        {/* Meanwhile banner */}
+        <div
+          className="mt-12 flex items-center gap-4"
+        >
+          <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
+          <div className="flex items-center gap-2 text-xs uppercase tracking-widest" style={{ color: 'var(--white-ghost)' }}>
+            <ChevronDown className="w-3 h-3" />
+            Meanwhile — Europe's Top Leagues
+            <ChevronDown className="w-3 h-3" />
           </div>
-
-          <div className="space-y-2 max-h-[500px] overflow-y-auto">
-            {(dashboardQuery.data?.upcomingMatches ?? []).slice(0, 5).map((match) => (
-              <div
-                key={match.id}
-                className="rounded p-4 border transition-all duration-200 hover:border-border-active hover:bg-surface-3"
-                style={{
-                  background: 'var(--surface-1)',
-                  borderColor: 'var(--border)',
-                }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3 flex-1">
-                    <span className="text-sm" style={{ color: 'var(--white-primary)' }}>
-                      {match.homeTeam.code}
-                    </span>
-                  </div>
-                  <span className="text-sm" style={{ color: 'var(--white-muted)', fontFeatureSettings: '"tnum" 1' }}>
-                    {dayjs(match.date).format('HH:mm')}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 flex-1">
-                    <span className="text-sm" style={{ color: 'var(--white-primary)' }}>
-                      {match.awayTeam.code}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mt-3 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
-                  <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>
-                    {match.stadium}
-                  </span>
-                  <span
-                    className="text-xs px-2 py-1 rounded-full font-semibold uppercase"
-                    style={{
-                      background: 'var(--surface-3)',
-                      color: 'var(--white-muted)',
-                      letterSpacing: '0.06em',
-                    }}
-                  >
-                    {match.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
         </div>
       </div>
-
-      <style>{`
-        .live-dot {
-          animation: livePulse 1.2s ease-in-out infinite;
-        }
-
-        @keyframes livePulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.08); }
-          100% { transform: scale(1); }
-        }
-      `}</style>
     </section>
-  )
+  );
 }
