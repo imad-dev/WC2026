@@ -1,4 +1,4 @@
-// Official FIFA World Cup 2026 Static Data — Correct Official Draw
+// Official FIFA World Cup 2026 — Fully Updated April 2026
 
 export const TOURNAMENT_INFO = {
   startDate: '2026-06-11',
@@ -16,19 +16,18 @@ export const TOURNAMENT_INFO = {
   final: { date: '2026-07-19T20:00:00Z', stadium: 'MetLife Stadium', city: 'East Rutherford, NJ' },
 };
 
-// ── Official Group Draw ───────────────────────────────────────────────────────
 export const WC2026_GROUPS: Record<string, Array<{ name: string; flag: string; confederation: string }>> = {
   A: [
-    { name: 'Mexico',       flag: '🇲🇽', confederation: 'CONCACAF' },
-    { name: 'South Africa', flag: '🇿🇦', confederation: 'CAF' },
-    { name: 'South Korea',  flag: '🇰🇷', confederation: 'AFC' },
+    { name: 'Mexico',        flag: '🇲🇽', confederation: 'CONCACAF' },
+    { name: 'South Africa',  flag: '🇿🇦', confederation: 'CAF' },
+    { name: 'South Korea',   flag: '🇰🇷', confederation: 'AFC' },
     { name: 'Czech Republic',flag: '🇨🇿', confederation: 'UEFA' },
   ],
   B: [
-    { name: 'Canada',          flag: '🇨🇦', confederation: 'CONCACAF' },
-    { name: 'Bosnia-Herz.',    flag: '🇧🇦', confederation: 'UEFA' },
-    { name: 'Qatar',           flag: '🇶🇦', confederation: 'AFC' },
-    { name: 'Switzerland',     flag: '🇨🇭', confederation: 'UEFA' },
+    { name: 'Canada',       flag: '🇨🇦', confederation: 'CONCACAF' },
+    { name: 'Bosnia-Herz.', flag: '🇧🇦', confederation: 'UEFA' },
+    { name: 'Qatar',        flag: '🇶🇦', confederation: 'AFC' },
+    { name: 'Switzerland',  flag: '🇨🇭', confederation: 'UEFA' },
   ],
   C: [
     { name: 'Brazil',  flag: '🇧🇷', confederation: 'CONMEBOL' },
@@ -43,10 +42,10 @@ export const WC2026_GROUPS: Record<string, Array<{ name: string; flag: string; c
     { name: 'Turkey',    flag: '🇹🇷', confederation: 'UEFA' },
   ],
   E: [
-    { name: 'Germany',      flag: '🇩🇪', confederation: 'UEFA' },
-    { name: 'Curaçao',      flag: '🇨🇼', confederation: 'CONCACAF' },
-    { name: "Côte d'Ivoire",flag: '🇨🇮', confederation: 'CAF' },
-    { name: 'Ecuador',      flag: '🇪🇨', confederation: 'CONMEBOL' },
+    { name: 'Germany',       flag: '🇩🇪', confederation: 'UEFA' },
+    { name: 'Curaçao',       flag: '🇨🇼', confederation: 'CONCACAF' },
+    { name: "Côte d'Ivoire", flag: '🇨🇮', confederation: 'CAF' },
+    { name: 'Ecuador',       flag: '🇪🇨', confederation: 'CONMEBOL' },
   ],
   F: [
     { name: 'Netherlands', flag: '🇳🇱', confederation: 'UEFA' },
@@ -67,10 +66,10 @@ export const WC2026_GROUPS: Record<string, Array<{ name: string; flag: string; c
     { name: 'Uruguay',      flag: '🇺🇾', confederation: 'CONMEBOL' },
   ],
   I: [
-    { name: 'France',   flag: '🇫🇷', confederation: 'UEFA' },
-    { name: 'Senegal',  flag: '🇸🇳', confederation: 'CAF' },
-    { name: 'Iraq',     flag: '🇮🇶', confederation: 'AFC' },
-    { name: 'Norway',   flag: '🇳🇴', confederation: 'UEFA' },
+    { name: 'France',  flag: '🇫🇷', confederation: 'UEFA' },
+    { name: 'Senegal', flag: '🇸🇳', confederation: 'CAF' },
+    { name: 'Iraq',    flag: '🇮🇶', confederation: 'AFC' },
+    { name: 'Norway',  flag: '🇳🇴', confederation: 'UEFA' },
   ],
   J: [
     { name: 'Argentina', flag: '🇦🇷', confederation: 'CONMEBOL' },
@@ -92,7 +91,6 @@ export const WC2026_GROUPS: Record<string, Array<{ name: string; flag: string; c
   ],
 };
 
-// ── All Group Stage Fixtures ──────────────────────────────────────────────────
 export interface WCFixture {
   date: string; time: string; group: string;
   home: string; homeFlag: string;
@@ -114,110 +112,89 @@ const FLAG: Record<string, string> = {
   'Argentina':'🇦🇷','Algeria':'🇩🇿','Austria':'🇦🇹','Jordan':'🇯🇴',
   'Portugal':'🇵🇹','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Colombia':'🇨🇴',
   'England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Croatia':'🇭🇷','Ghana':'🇬🇭','Panama':'🇵🇦',
-  'TBD':'⚽',
 };
 export const getWCFlag = (name: string) => FLAG[name] || '⚽';
 
 const f = (date: string, time: string, group: string, home: string, away: string): WCFixture => ({
   date, time, group, stage: 'Group Stage',
-  home, homeFlag: FLAG[home] || '⚽',
-  away, awayFlag: FLAG[away] || '⚽',
+  home, homeFlag: FLAG[home] || '⚽', away, awayFlag: FLAG[away] || '⚽',
 });
 
 export const WC2026_FIXTURES: WCFixture[] = [
-  // Jun 11
   f('2026-06-11','20:00','A','Mexico','South Africa'),
-  // Jun 12
   f('2026-06-12','03:00','A','South Korea','Czech Republic'),
   f('2026-06-12','20:00','B','Canada','Bosnia-Herz.'),
-  // Jun 13
   f('2026-06-13','02:00','D','USA','Paraguay'),
   f('2026-06-13','20:00','B','Qatar','Switzerland'),
   f('2026-06-13','23:00','C','Brazil','Morocco'),
-  // Jun 14
   f('2026-06-14','02:00','C','Haiti','Scotland'),
   f('2026-06-14','05:00','D','Australia','Turkey'),
   f('2026-06-14','18:00','E','Germany','Curaçao'),
   f('2026-06-14','21:00','F','Netherlands','Japan'),
-  // Jun 15
   f('2026-06-15','00:00','E',"Côte d'Ivoire",'Ecuador'),
   f('2026-06-15','03:00','F','Sweden','Tunisia'),
   f('2026-06-15','17:00','H','Spain','Cape Verde'),
   f('2026-06-15','20:00','G','Belgium','Egypt'),
   f('2026-06-15','23:00','H','Saudi Arabia','Uruguay'),
-  // Jun 16
   f('2026-06-16','02:00','G','Iran','New Zealand'),
   f('2026-06-16','20:00','I','France','Senegal'),
   f('2026-06-16','23:00','I','Iraq','Norway'),
-  // Jun 17
   f('2026-06-17','02:00','J','Argentina','Algeria'),
   f('2026-06-17','05:00','J','Austria','Jordan'),
   f('2026-06-17','18:00','K','Portugal','DR Congo'),
   f('2026-06-17','21:00','L','England','Croatia'),
-  // Jun 18
   f('2026-06-18','00:00','L','Ghana','Panama'),
   f('2026-06-18','03:00','K','Uzbekistan','Colombia'),
   f('2026-06-18','17:00','A','Czech Republic','South Africa'),
   f('2026-06-18','20:00','B','Switzerland','Bosnia-Herz.'),
   f('2026-06-18','23:00','B','Canada','Qatar'),
-  // Jun 19
   f('2026-06-19','02:00','A','Mexico','South Korea'),
   f('2026-06-19','20:00','D','USA','Australia'),
   f('2026-06-19','23:00','C','Scotland','Morocco'),
-  // Jun 20
   f('2026-06-20','01:30','C','Brazil','Haiti'),
   f('2026-06-20','04:00','D','Turkey','Paraguay'),
   f('2026-06-20','18:00','F','Netherlands','Sweden'),
   f('2026-06-20','21:00','E','Germany',"Côte d'Ivoire"),
-  // Jun 21
   f('2026-06-21','01:00','E','Ecuador','Curaçao'),
   f('2026-06-21','05:00','F','Tunisia','Japan'),
   f('2026-06-21','17:00','H','Spain','Saudi Arabia'),
   f('2026-06-21','20:00','G','Belgium','Iran'),
   f('2026-06-21','23:00','H','Uruguay','Cape Verde'),
-  // Jun 22
   f('2026-06-22','02:00','G','New Zealand','Egypt'),
   f('2026-06-22','18:00','J','Argentina','Austria'),
   f('2026-06-22','22:00','I','France','Iraq'),
-  // Jun 23
   f('2026-06-23','01:00','I','Norway','Senegal'),
   f('2026-06-23','04:00','J','Jordan','Algeria'),
   f('2026-06-23','18:00','K','Portugal','Uzbekistan'),
   f('2026-06-23','21:00','L','England','Ghana'),
-  // Jun 24
   f('2026-06-24','00:00','L','Panama','Croatia'),
   f('2026-06-24','03:00','K','Colombia','DR Congo'),
   f('2026-06-24','20:00','B','Switzerland','Canada'),
   f('2026-06-24','20:00','B','Bosnia-Herz.','Qatar'),
   f('2026-06-24','23:00','C','Morocco','Haiti'),
   f('2026-06-24','23:00','C','Scotland','Brazil'),
-  // Jun 25
   f('2026-06-25','02:00','A','South Africa','South Korea'),
   f('2026-06-25','02:00','A','Czech Republic','Mexico'),
   f('2026-06-25','21:00','E','Curaçao',"Côte d'Ivoire"),
   f('2026-06-25','21:00','E','Ecuador','Germany'),
-  // Jun 26
   f('2026-06-26','00:00','F','Tunisia','Netherlands'),
   f('2026-06-26','00:00','F','Japan','Sweden'),
   f('2026-06-26','03:00','D','Turkey','USA'),
   f('2026-06-26','03:00','D','Paraguay','Australia'),
   f('2026-06-26','20:00','I','Norway','France'),
   f('2026-06-26','20:00','I','Senegal','Iraq'),
-  // Jun 27
   f('2026-06-27','01:00','H','Cape Verde','Saudi Arabia'),
   f('2026-06-27','01:00','H','Uruguay','Spain'),
   f('2026-06-27','04:00','G','New Zealand','Belgium'),
   f('2026-06-27','04:00','G','Egypt','Iran'),
   f('2026-06-27','22:00','L','Panama','England'),
   f('2026-06-27','22:00','L','Croatia','Ghana'),
-  // Jun 28
   f('2026-06-28','00:30','K','Colombia','Portugal'),
   f('2026-06-28','00:30','K','DR Congo','Uzbekistan'),
   f('2026-06-28','03:00','J','Algeria','Austria'),
   f('2026-06-28','03:00','J','Jordan','Argentina'),
 ];
 
-// ── Knockout rounds ───────────────────────────────────────────────────────────
 export interface KnockoutRound { round: string; matches: Array<{ date: string; time: string }> }
 export const WC2026_KNOCKOUT: KnockoutRound[] = [
   { round: 'Round of 32', matches: [
@@ -240,132 +217,181 @@ export const WC2026_KNOCKOUT: KnockoutRound[] = [
     {date:'2026-07-09',time:'21:00'},{date:'2026-07-10',time:'20:00'},
     {date:'2026-07-11',time:'22:00'},{date:'2026-07-12',time:'02:00'},
   ]},
-  { round: 'Semi-Finals', matches: [
-    {date:'2026-07-14',time:'20:00'},{date:'2026-07-15',time:'20:00'},
-  ]},
-  { round: '3rd Place', matches: [{date:'2026-07-18',time:'22:00'}]},
-  { round: 'Final', matches: [{date:'2026-07-19',time:'20:00'}]},
+  { round: 'Semi-Finals', matches: [{date:'2026-07-14',time:'20:00'},{date:'2026-07-15',time:'20:00'}]},
+  { round: '3rd Place',   matches: [{date:'2026-07-18',time:'22:00'}]},
+  { round: 'Final',       matches: [{date:'2026-07-19',time:'20:00'}]},
 ];
 
-// ── Key teams info ────────────────────────────────────────────────────────────
+// ── Updated Team Info — April 2026 ────────────────────────────────────────────
 export const TEAM_INFO: Record<string, {
   flag: string; group: string; coach: string; fifaRank: number;
   keyPlayers: Array<{ name: string; pos: string; club: string }>;
+  bestResult?: string;
 }> = {
-  France: {
-    flag:'🇫🇷', group:'I', coach:'Didier Deschamps', fifaRank:2,
+  // ── GROUP A ──
+  Mexico: {
+    flag:'🇲🇽', group:'A', coach:'Javier Aguirre', fifaRank:15,
     keyPlayers:[
-      {name:'Kylian Mbappé',pos:'ST',club:'Real Madrid'},
-      {name:'Antoine Griezmann',pos:'AM',club:'Atlético Madrid'},
-      {name:'Aurélien Tchouaméni',pos:'CM',club:'Real Madrid'},
-      {name:'Mike Maignan',pos:'GK',club:'AC Milan'},
+      {name:'Hirving Lozano',  pos:'RW', club:'PSV'},
+      {name:'Edson Álvarez',   pos:'CDM',club:'West Ham'},
+      {name:'Raúl Jiménez',    pos:'ST', club:'Fulham'},
+      {name:'Guillermo Ochoa', pos:'GK', club:'Salernitana'},
+    ],
+    bestResult:'Quarter-Finals (1986)',
+  },
+  // ── GROUP B ──
+  Canada: {
+    flag:'🇨🇦', group:'B', coach:'Jesse Marsch', fifaRank:38,
+    keyPlayers:[
+      {name:'Alphonso Davies', pos:'LB', club:'Bayern Munich'},
+      {name:'Jonathan David',  pos:'ST', club:'Internazionale'},
+      {name:'Tajon Buchanan',  pos:'RW', club:'Villarreal'},
+      {name:'Milan Borjan',    pos:'GK', club:'Red Star Belgrade'},
     ],
   },
+  // ── GROUP C ──
   Brazil: {
     flag:'🇧🇷', group:'C', coach:'Dorival Júnior', fifaRank:5,
     keyPlayers:[
-      {name:'Vinícius Jr.',pos:'LW',club:'Real Madrid'},
-      {name:'Rodrygo',pos:'RW',club:'Real Madrid'},
-      {name:'Raphinha',pos:'RW',club:'FC Barcelona'},
-      {name:'Alisson',pos:'GK',club:'Liverpool'},
+      {name:'Vinícius Jr.',  pos:'LW', club:'Real Madrid'},
+      {name:'Raphinha',      pos:'RW', club:'FC Barcelona'},
+      {name:'Rodrygo',       pos:'RW', club:'Real Madrid'},
+      {name:'Alisson',       pos:'GK', club:'Liverpool'},
     ],
-  },
-  Argentina: {
-    flag:'🇦🇷', group:'J', coach:'Lionel Scaloni', fifaRank:1,
-    keyPlayers:[
-      {name:'Lionel Messi',pos:'AM',club:'Inter Miami'},
-      {name:'Lautaro Martínez',pos:'ST',club:'Internazionale'},
-      {name:'Julián Álvarez',pos:'ST',club:'Atlético Madrid'},
-      {name:'Emiliano Martínez',pos:'GK',club:'Aston Villa'},
-    ],
-  },
-  England: {
-    flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', group:'L', coach:'Thomas Tuchel', fifaRank:5,
-    keyPlayers:[
-      {name:'Harry Kane',pos:'ST',club:'Bayern Munich'},
-      {name:'Jude Bellingham',pos:'CM',club:'Real Madrid'},
-      {name:'Phil Foden',pos:'AM',club:'Manchester City'},
-      {name:'Jordan Pickford',pos:'GK',club:'Everton'},
-    ],
-  },
-  Spain: {
-    flag:'🇪🇸', group:'H', coach:'Luis de la Fuente', fifaRank:3,
-    keyPlayers:[
-      {name:'Lamine Yamal',pos:'RW',club:'FC Barcelona'},
-      {name:'Pedri',pos:'CM',club:'FC Barcelona'},
-      {name:'Álvaro Morata',pos:'ST',club:'AC Milan'},
-      {name:'Unai Simón',pos:'GK',club:'Athletic Club'},
-    ],
-  },
-  Germany: {
-    flag:'🇩🇪', group:'E', coach:'Julian Nagelsmann', fifaRank:12,
-    keyPlayers:[
-      {name:'Florian Wirtz',pos:'AM',club:'Bayer Leverkusen'},
-      {name:'Jamal Musiala',pos:'AM',club:'Bayern Munich'},
-      {name:'Kai Havertz',pos:'ST',club:'Arsenal'},
-      {name:'Manuel Neuer',pos:'GK',club:'Bayern Munich'},
-    ],
-  },
-  Portugal: {
-    flag:'🇵🇹', group:'K', coach:'Roberto Martínez', fifaRank:6,
-    keyPlayers:[
-      {name:'Cristiano Ronaldo',pos:'ST',club:'Al Nassr'},
-      {name:'Bruno Fernandes',pos:'AM',club:'Manchester United'},
-      {name:'Bernardo Silva',pos:'AM',club:'Manchester City'},
-      {name:'Rui Patrício',pos:'GK',club:'AS Roma'},
-    ],
+    bestResult:'Winner (5 titles)',
   },
   Morocco: {
-    flag:'🇲🇦', group:'C', coach:'Walid Regragui', fifaRank:14,
+    flag:'🇲🇦', group:'C', coach:'Mohamed Ouahbi', fifaRank:14,
     keyPlayers:[
-      {name:'Achraf Hakimi',pos:'RB',club:'Paris Saint-Germain'},
-      {name:'Hakim Ziyech',pos:'AM',club:'Galatasaray'},
-      {name:'Youssef En-Nesyri',pos:'ST',club:'Fenerbahçe'},
-      {name:'Bono',pos:'GK',club:'Al-Qadsiah'},
+      {name:'Achraf Hakimi',      pos:'RB',  club:'Paris Saint-Germain'},
+      {name:'Noussair Mazraoui',  pos:'CB',  club:'Manchester United'},
+      {name:'Youssef En-Nesyri',  pos:'ST',  club:'Al-Ittihad'},
+      {name:'Yassine Bounou',     pos:'GK',  club:'Al-Hilal'},
+      {name:'Bilal El Khannouss', pos:'CAM', club:'Racing Club'},
+      {name:'Brahim Díaz',        pos:'AM',  club:'Real Madrid'},
     ],
+    bestResult:'Semi-Finals (2022)',
   },
-  Netherlands: {
-    flag:'🇳🇱', group:'F', coach:'Ronald Koeman', fifaRank:7,
-    keyPlayers:[
-      {name:'Virgil van Dijk',pos:'CB',club:'Liverpool'},
-      {name:'Cody Gakpo',pos:'LW',club:'Liverpool'},
-      {name:'Xavi Simons',pos:'AM',club:'RB Leipzig'},
-      {name:'Bart Verbruggen',pos:'GK',club:'Brighton'},
-    ],
-  },
+  // ── GROUP D ──
   USA: {
     flag:'🇺🇸', group:'D', coach:'Mauricio Pochettino', fifaRank:16,
     keyPlayers:[
-      {name:'Christian Pulisic',pos:'AM',club:'AC Milan'},
-      {name:'Weston McKennie',pos:'CM',club:'Juventus'},
-      {name:'Folarin Balogun',pos:'ST',club:'Monaco'},
-      {name:'Matt Turner',pos:'GK',club:'Nottm Forest'},
+      {name:'Christian Pulisic', pos:'AM', club:'AC Milan'},
+      {name:'Weston McKennie',   pos:'CM', club:'Juventus'},
+      {name:'Tyler Adams',       pos:'CM', club:'Bournemouth'},
+      {name:'Matt Turner',       pos:'GK', club:'Nottm Forest'},
+    ],
+  },
+  // ── GROUP E ──
+  Germany: {
+    flag:'🇩🇪', group:'E', coach:'Julian Nagelsmann', fifaRank:12,
+    keyPlayers:[
+      {name:'Florian Wirtz',  pos:'AM', club:'Bayer Leverkusen'},
+      {name:'Jamal Musiala',  pos:'AM', club:'Bayern Munich'},
+      {name:'Kai Havertz',    pos:'ST', club:'Arsenal'},
+      {name:'Manuel Neuer',   pos:'GK', club:'Bayern Munich'},
+    ],
+    bestResult:'Winner (4 titles)',
+  },
+  // ── GROUP F ──
+  Netherlands: {
+    flag:'🇳🇱', group:'F', coach:'Ronald Koeman', fifaRank:7,
+    keyPlayers:[
+      {name:'Virgil van Dijk', pos:'CB', club:'Liverpool'},
+      {name:'Cody Gakpo',      pos:'LW', club:'Liverpool'},
+      {name:'Xavi Simons',     pos:'AM', club:'RB Leipzig'},
+      {name:'Bart Verbruggen', pos:'GK', club:'Brighton'},
+    ],
+  },
+  // ── GROUP G ──
+  Belgium: {
+    flag:'🇧🇪', group:'G', coach:'Rudi Garcia', fifaRank:10,
+    keyPlayers:[
+      {name:'Romelu Lukaku',   pos:'ST', club:'Napoli'},
+      {name:'Kevin De Bruyne', pos:'CM', club:'Manchester City'},
+      {name:'Lois Openda',     pos:'ST', club:'RB Leipzig'},
+      {name:'Koen Casteels',   pos:'GK', club:'VfL Wolfsburg'},
+    ],
+  },
+  // ── GROUP H ──
+  Spain: {
+    flag:'🇪🇸', group:'H', coach:'Luis de la Fuente', fifaRank:3,
+    keyPlayers:[
+      {name:'Lamine Yamal',  pos:'RW', club:'FC Barcelona'},
+      {name:'Pedri',         pos:'CM', club:'FC Barcelona'},
+      {name:'Álvaro Morata', pos:'ST', club:'AC Milan'},
+      {name:'Unai Simón',    pos:'GK', club:'Athletic Club'},
+    ],
+    bestResult:'Winner (2010)',
+  },
+  // ── GROUP I ──
+  France: {
+    flag:'🇫🇷', group:'I', coach:'Didier Deschamps', fifaRank:2,
+    keyPlayers:[
+      {name:'Kylian Mbappé',       pos:'ST', club:'Real Madrid'},
+      {name:'Antoine Griezmann',   pos:'AM', club:'Atlético Madrid'},
+      {name:'Aurélien Tchouaméni', pos:'CM', club:'Real Madrid'},
+      {name:'Mike Maignan',        pos:'GK', club:'AC Milan'},
+    ],
+    bestResult:'Winner (1998, 2018)',
+  },
+  // ── GROUP J ──
+  Argentina: {
+    flag:'🇦🇷', group:'J', coach:'Lionel Scaloni', fifaRank:1,
+    keyPlayers:[
+      {name:'Lionel Messi',       pos:'AM', club:'Inter Miami'},
+      {name:'Julián Álvarez',     pos:'ST', club:'Atlético Madrid'},
+      {name:'Alexis Mac Allister',pos:'CM', club:'Liverpool'},
+      {name:'Emiliano Martínez',  pos:'GK', club:'Aston Villa'},
+    ],
+    bestResult:'Winner (1978, 1986, 2022)',
+  },
+  // ── GROUP K ──
+  Portugal: {
+    flag:'🇵🇹', group:'K', coach:'Roberto Martínez', fifaRank:6,
+    keyPlayers:[
+      {name:'Cristiano Ronaldo', pos:'ST', club:'Al Nassr'},
+      {name:'Bruno Fernandes',   pos:'AM', club:'Manchester United'},
+      {name:'Bernardo Silva',    pos:'AM', club:'Manchester City'},
+      {name:'Diogo Costa',       pos:'GK', club:'FC Porto'},
+    ],
+  },
+  // ── GROUP L ──
+  England: {
+    flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', group:'L', coach:'Thomas Tuchel', fifaRank:5,
+    keyPlayers:[
+      {name:'Harry Kane',     pos:'ST', club:'Bayern Munich'},
+      {name:'Jude Bellingham',pos:'CM', club:'Real Madrid'},
+      {name:'Phil Foden',     pos:'AM', club:'Manchester City'},
+      {name:'Jordan Pickford',pos:'GK', club:'Everton'},
     ],
   },
 };
 
 export const MOROCCO_INFO = {
-  flag:'🇲🇦', name:'Morocco', group:'C', coach:'Walid Regragui',
-  confederation:'CAF', fifaRanking:14, bestResult:'Semi-Finals (2022)',
+  flag:'🇲🇦', name:'Morocco', group:'C',
+  coach:'Mohamed Ouahbi',  // Appointed March 5, 2026 — replacing Regragui
+  confederation:'CAF', fifaRanking:14,
+  bestResult:'Semi-Finals (2022)',
   wcRecord:{ w:9, d:3, l:4, goals:19, goalsConceded:10 },
   keyPlayers: TEAM_INFO['Morocco'].keyPlayers.map(p => ({...p, flag:'🇲🇦'})),
 };
 
 export const STADIUMS = [
-  { name:'MetLife Stadium',        city:'New York/NJ',      country:'USA',    capacity:82500, flag:'🇺🇸' },
-  { name:"AT&T Stadium",           city:'Dallas',           country:'USA',    capacity:80000, flag:'🇺🇸' },
-  { name:'SoFi Stadium',           city:'Los Angeles',      country:'USA',    capacity:70240, flag:'🇺🇸' },
-  { name:"Levi's Stadium",         city:'San Francisco',    country:'USA',    capacity:68500, flag:'🇺🇸' },
-  { name:'Arrowhead Stadium',      city:'Kansas City',      country:'USA',    capacity:76416, flag:'🇺🇸' },
-  { name:'Mercedes-Benz Stadium',  city:'Atlanta',          country:'USA',    capacity:71000, flag:'🇺🇸' },
-  { name:'Lincoln Financial Field',city:'Philadelphia',     country:'USA',    capacity:69796, flag:'🇺🇸' },
-  { name:'NRG Stadium',            city:'Houston',          country:'USA',    capacity:72220, flag:'🇺🇸' },
-  { name:'Lumen Field',            city:'Seattle',          country:'USA',    capacity:69000, flag:'🇺🇸' },
-  { name:'Hard Rock Stadium',      city:'Miami',            country:'USA',    capacity:64767, flag:'🇺🇸' },
-  { name:'Gillette Stadium',       city:'Boston',           country:'USA',    capacity:65878, flag:'🇺🇸' },
-  { name:'Estadio Azteca',         city:'Mexico City',      country:'Mexico', capacity:87523, flag:'🇲🇽', isOpener:true },
-  { name:'Estadio Akron',          city:'Guadalajara',      country:'Mexico', capacity:49850, flag:'🇲🇽' },
-  { name:'Estadio BBVA',           city:'Monterrey',        country:'Mexico', capacity:53464, flag:'🇲🇽' },
-  { name:'BMO Field',              city:'Toronto',          country:'Canada', capacity:30990, flag:'🇨🇦' },
-  { name:'BC Place',               city:'Vancouver',        country:'Canada', capacity:54500, flag:'🇨🇦' },
+  { name:'MetLife Stadium',        city:'New York/NJ',   country:'USA',    capacity:82500, flag:'🇺🇸', isFinal:true },
+  { name:"AT&T Stadium",           city:'Dallas',         country:'USA',    capacity:80000, flag:'🇺🇸' },
+  { name:'SoFi Stadium',           city:'Los Angeles',    country:'USA',    capacity:70240, flag:'🇺🇸' },
+  { name:"Levi's Stadium",         city:'San Francisco',  country:'USA',    capacity:68500, flag:'🇺🇸' },
+  { name:'Arrowhead Stadium',      city:'Kansas City',    country:'USA',    capacity:76416, flag:'🇺🇸' },
+  { name:'Mercedes-Benz Stadium',  city:'Atlanta',        country:'USA',    capacity:71000, flag:'🇺🇸' },
+  { name:'Lincoln Financial Field',city:'Philadelphia',   country:'USA',    capacity:69796, flag:'🇺🇸' },
+  { name:'NRG Stadium',            city:'Houston',        country:'USA',    capacity:72220, flag:'🇺🇸' },
+  { name:'Lumen Field',            city:'Seattle',        country:'USA',    capacity:69000, flag:'🇺🇸' },
+  { name:'Hard Rock Stadium',      city:'Miami',          country:'USA',    capacity:64767, flag:'🇺🇸' },
+  { name:'Gillette Stadium',       city:'Boston',         country:'USA',    capacity:65878, flag:'🇺🇸' },
+  { name:'Estadio Azteca',         city:'Mexico City',    country:'Mexico', capacity:87523, flag:'🇲🇽', isOpener:true },
+  { name:'Estadio Akron',          city:'Guadalajara',    country:'Mexico', capacity:49850, flag:'🇲🇽' },
+  { name:'Estadio BBVA',           city:'Monterrey',      country:'Mexico', capacity:53464, flag:'🇲🇽' },
+  { name:'BMO Field',              city:'Toronto',        country:'Canada', capacity:30990, flag:'🇨🇦' },
+  { name:'BC Place',               city:'Vancouver',      country:'Canada', capacity:54500, flag:'🇨🇦' },
 ];

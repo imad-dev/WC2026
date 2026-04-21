@@ -4,6 +4,10 @@ import { ChevronDown, ChevronUp, Users } from 'lucide-react';
 
 type View = 'schedule' | 'groups' | 'teams';
 
+interface WC2026ScheduleProps {
+  forcedView?: View;
+}
+
 // Group fixtures by date
 function groupByDate(fixtures: typeof WC2026_FIXTURES) {
   const map: Record<string, typeof WC2026_FIXTURES> = {};
@@ -26,8 +30,9 @@ const GROUP_COLORS: Record<string, string> = {
   I:'#FFA726',J:'#EC407A',K:'#26A69A',L:'#5C6BC0',
 };
 
-export function WC2026Schedule() {
-  const [view, setView] = useState<View>('schedule');
+export function WC2026Schedule({ forcedView }: WC2026ScheduleProps = {}) {
+  const [internalView, setInternalView] = useState<View>('schedule');
+  const view = forcedView ?? internalView;
   const [filterGroup, setFilterGroup] = useState<string>('ALL');
   const [expandedDate, setExpandedDate] = useState<string | null>(null);
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
@@ -50,27 +55,29 @@ export function WC2026Schedule() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-        <h2 className="text-2xl font-semibold uppercase"
-          style={{ fontFamily:'var(--font-display)', letterSpacing:'-0.02em', color:'var(--white-primary)' }}>
-          WC 2026
-        </h2>
-        <div className="flex gap-2">
-          {(['schedule','groups','teams'] as View[]).map(v => (
-            <button key={v} onClick={() => setView(v)}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold uppercase transition-all"
-              style={{
-                background: view === v ? 'var(--green-live)' : 'var(--surface-2)',
-                color: view === v ? 'var(--void)' : 'var(--white-muted)',
-                border: view === v ? 'none' : '1px solid var(--border)',
-                letterSpacing:'0.05em',
-              }}>
-              {v}
-            </button>
-          ))}
+      {/* Header + view switcher — only shown when not driven by parent nav */}
+      {!forcedView && (
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
+          <h2 className="text-2xl font-semibold uppercase"
+            style={{ fontFamily:'var(--font-display)', letterSpacing:'-0.02em', color:'var(--white-primary)' }}>
+            WC 2026
+          </h2>
+          <div className="flex gap-2">
+            {(['schedule','groups','teams'] as View[]).map(v => (
+              <button key={v} onClick={() => setInternalView(v)}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold uppercase transition-all"
+                style={{
+                  background: internalView === v ? 'var(--green-live)' : 'var(--surface-2)',
+                  color: internalView === v ? 'var(--void)' : 'var(--white-muted)',
+                  border: internalView === v ? 'none' : '1px solid var(--border)',
+                  letterSpacing:'0.05em',
+                }}>
+                {v}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── SCHEDULE VIEW ── */}
       {view === 'schedule' && (

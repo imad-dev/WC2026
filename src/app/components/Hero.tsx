@@ -177,18 +177,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Meanwhile banner */}
-        <div
-          className="mt-12 flex items-center gap-4"
-        >
-          <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
-          <div className="flex items-center gap-2 text-xs uppercase tracking-widest" style={{ color: 'var(--white-ghost)' }}>
-            <ChevronDown className="w-3 h-3" />
-            Meanwhile — Europe's Top Leagues
-            <ChevronDown className="w-3 h-3" />
-          </div>
-          <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
-        </div>
+
       </div>
     </section>
   );
