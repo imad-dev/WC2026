@@ -223,45 +223,60 @@ export const WC2026_KNOCKOUT: KnockoutRound[] = [
 ];
 
 // ── Updated Team Info — April 2026 ────────────────────────────────────────────
-export const TEAM_INFO: Record<string, {
-  flag: string; group: string; coach: string; fifaRank: number;
+export interface TeamInfo {
+  flag: string;
+  group: string;
+  coach: string;
+  fifaRank: number;
+  confederation: string;
   keyPlayers: Array<{ name: string; pos: string; club: string }>;
   bestResult?: string;
-}> = {
+  wcRecord?: { w: number; d: number; l: number; goals?: number; goalsConceded?: number };
+  titles?: number;
+}
+export const TEAM_INFO: Record<string, TeamInfo> = {
   // ── GROUP A ──
   Mexico: {
-    flag:'🇲🇽', group:'A', coach:'Javier Aguirre', fifaRank:15,
+    flag:'🇲🇽', group:'A', confederation:'CONCACAF', coach:'Javier Aguirre', fifaRank:15,
     keyPlayers:[
-      {name:'Hirving Lozano',  pos:'RW', club:'PSV'},
-      {name:'Edson Álvarez',   pos:'CDM',club:'West Ham'},
-      {name:'Raúl Jiménez',    pos:'ST', club:'Fulham'},
-      {name:'Guillermo Ochoa', pos:'GK', club:'Salernitana'},
+      {name:'Hirving Lozano',  pos:'RW',  club:'PSV Eindhoven'},
+      {name:'Edson Álvarez',   pos:'CDM', club:'West Ham United'},
+      {name:'Raúl Jiménez',    pos:'ST',  club:'Fulham'},
+      {name:'Santiago Giménez',pos:'ST',  club:'AC Milan'},
+      {name:'Guillermo Ochoa', pos:'GK',  club:'Salernitana'},
     ],
     bestResult:'Quarter-Finals (1986)',
+    wcRecord:{ w:14, d:14, l:16, goals:58, goalsConceded:65 },
   },
   // ── GROUP B ──
   Canada: {
-    flag:'🇨🇦', group:'B', coach:'Jesse Marsch', fifaRank:38,
+    flag:'🇨🇦', group:'B', confederation:'CONCACAF', coach:'Jesse Marsch', fifaRank:38,
     keyPlayers:[
-      {name:'Alphonso Davies', pos:'LB', club:'Bayern Munich'},
-      {name:'Jonathan David',  pos:'ST', club:'Internazionale'},
-      {name:'Tajon Buchanan',  pos:'RW', club:'Villarreal'},
-      {name:'Milan Borjan',    pos:'GK', club:'Red Star Belgrade'},
+      {name:'Alphonso Davies',   pos:'LB',  club:'Bayern Munich'},
+      {name:'Jonathan David',    pos:'ST',  club:'Internazionale'},
+      {name:'Tajon Buchanan',    pos:'RW',  club:'Villarreal'},
+      {name:'Stephen Eustáquio', pos:'CM',  club:'FC Porto'},
+      {name:'Milan Borjan',      pos:'GK',  club:'Red Star Belgrade'},
     ],
+    bestResult:'Group Stage (1986)',
+    wcRecord:{ w:0, d:0, l:3, goals:0, goalsConceded:5 },
   },
   // ── GROUP C ──
   Brazil: {
-    flag:'🇧🇷', group:'C', coach:'Dorival Júnior', fifaRank:5,
+    flag:'🇧🇷', group:'C', confederation:'CONMEBOL', coach:'Dorival Júnior', fifaRank:5,
     keyPlayers:[
       {name:'Vinícius Jr.',  pos:'LW', club:'Real Madrid'},
       {name:'Raphinha',      pos:'RW', club:'FC Barcelona'},
       {name:'Rodrygo',       pos:'RW', club:'Real Madrid'},
+      {name:'Endrick',       pos:'ST', club:'Real Madrid'},
       {name:'Alisson',       pos:'GK', club:'Liverpool'},
     ],
-    bestResult:'Winner (5 titles)',
+    bestResult:'Winner (2002)',
+    wcRecord:{ w:76, d:19, l:20, goals:237, goalsConceded:105 },
+    titles: 5,
   },
   Morocco: {
-    flag:'🇲🇦', group:'C', coach:'Mohamed Ouahbi', fifaRank:8,
+    flag:'🇲🇦', group:'C', confederation:'CAF', coach:'Mohamed Ouahbi', fifaRank:8,
     keyPlayers:[
       {name:'Achraf Hakimi',      pos:'RB',  club:'Paris Saint-Germain'},
       {name:'Noussair Mazraoui',  pos:'CB',  club:'Manchester United'},
@@ -271,117 +286,151 @@ export const TEAM_INFO: Record<string, {
       {name:'Brahim Díaz',        pos:'AM',  club:'Real Madrid'},
     ],
     bestResult:'Semi-Finals (2022)',
+    wcRecord:{ w:9, d:3, l:4, goals:19, goalsConceded:10 },
   },
   // ── GROUP D ──
   USA: {
-    flag:'🇺🇸', group:'D', coach:'Mauricio Pochettino', fifaRank:16,
+    flag:'🇺🇸', group:'D', confederation:'CONCACAF', coach:'Mauricio Pochettino', fifaRank:16,
     keyPlayers:[
-      {name:'Christian Pulisic', pos:'AM', club:'AC Milan'},
-      {name:'Weston McKennie',   pos:'CM', club:'Juventus'},
-      {name:'Tyler Adams',       pos:'CM', club:'Bournemouth'},
-      {name:'Matt Turner',       pos:'GK', club:'Nottm Forest'},
+      {name:'Christian Pulisic', pos:'AM',  club:'AC Milan'},
+      {name:'Weston McKennie',   pos:'CM',  club:'Juventus'},
+      {name:'Tyler Adams',       pos:'CDM', club:'Bournemouth'},
+      {name:'Folarin Balogun',   pos:'ST',  club:'Monaco'},
+      {name:'Matt Turner',       pos:'GK',  club:'Nottm Forest'},
     ],
+    bestResult:'Semi-Finals (1930)',
+    wcRecord:{ w:12, d:7, l:17, goals:50, goalsConceded:67 },
   },
   // ── GROUP E ──
   Germany: {
-    flag:'🇩🇪', group:'E', coach:'Julian Nagelsmann', fifaRank:12,
+    flag:'🇩🇪', group:'E', confederation:'UEFA', coach:'Julian Nagelsmann', fifaRank:12,
     keyPlayers:[
-      {name:'Florian Wirtz',  pos:'AM', club:'Bayer Leverkusen'},
-      {name:'Jamal Musiala',  pos:'AM', club:'Bayern Munich'},
-      {name:'Kai Havertz',    pos:'ST', club:'Arsenal'},
-      {name:'Manuel Neuer',   pos:'GK', club:'Bayern Munich'},
+      {name:'Florian Wirtz',    pos:'AM',  club:'Bayer Leverkusen'},
+      {name:'Jamal Musiala',   pos:'AM',  club:'Bayern Munich'},
+      {name:'Kai Havertz',     pos:'ST',  club:'Arsenal'},
+      {name:'Leroy Sané',      pos:'LW',  club:'Bayern Munich'},
+      {name:'Manuel Neuer',    pos:'GK',  club:'Bayern Munich'},
     ],
-    bestResult:'Winner (4 titles)',
+    bestResult:'Winner (2014)',
+    wcRecord:{ w:67, d:21, l:20, goals:232, goalsConceded:130 },
+    titles: 4,
   },
   // ── GROUP F ──
   Netherlands: {
-    flag:'🇳🇱', group:'F', coach:'Ronald Koeman', fifaRank:7,
+    flag:'🇳🇱', group:'F', confederation:'UEFA', coach:'Ronald Koeman', fifaRank:7,
     keyPlayers:[
-      {name:'Virgil van Dijk', pos:'CB', club:'Liverpool'},
-      {name:'Cody Gakpo',      pos:'LW', club:'Liverpool'},
-      {name:'Xavi Simons',     pos:'AM', club:'RB Leipzig'},
-      {name:'Bart Verbruggen', pos:'GK', club:'Brighton'},
+      {name:'Virgil van Dijk',   pos:'CB',  club:'Liverpool'},
+      {name:'Cody Gakpo',        pos:'LW',  club:'Liverpool'},
+      {name:'Xavi Simons',       pos:'AM',  club:'RB Leipzig'},
+      {name:'Donyell Malen',     pos:'RW',  club:'Aston Villa'},
+      {name:'Bart Verbruggen',   pos:'GK',  club:'Brighton'},
     ],
+    bestResult:'Runner-Up (1974, 1978, 2010)',
+    wcRecord:{ w:32, d:13, l:14, goals:118, goalsConceded:68 },
   },
   // ── GROUP G ──
   Belgium: {
-    flag:'🇧🇪', group:'G', coach:'Rudi Garcia', fifaRank:10,
+    flag:'🇧🇪', group:'G', confederation:'UEFA', coach:'Rudi Garcia', fifaRank:10,
     keyPlayers:[
-      {name:'Romelu Lukaku',   pos:'ST', club:'Napoli'},
-      {name:'Kevin De Bruyne', pos:'CM', club:'Manchester City'},
-      {name:'Lois Openda',     pos:'ST', club:'RB Leipzig'},
-      {name:'Koen Casteels',   pos:'GK', club:'VfL Wolfsburg'},
+      {name:'Romelu Lukaku',      pos:'ST',  club:'Napoli'},
+      {name:'Kevin De Bruyne',    pos:'CM',  club:'Manchester City'},
+      {name:'Lois Openda',        pos:'ST',  club:'RB Leipzig'},
+      {name:'Arthur Theate',      pos:'CB',  club:'Rennes'},
+      {name:'Koen Casteels',      pos:'GK',  club:'VfL Wolfsburg'},
     ],
+    bestResult:'3rd Place (1986)',
+    wcRecord:{ w:21, d:12, l:18, goals:81, goalsConceded:80 },
   },
   // ── GROUP H ──
   Spain: {
-    flag:'🇪🇸', group:'H', coach:'Luis de la Fuente', fifaRank:3,
+    flag:'🇪🇸', group:'H', confederation:'UEFA', coach:'Luis de la Fuente', fifaRank:3,
     keyPlayers:[
-      {name:'Lamine Yamal',  pos:'RW', club:'FC Barcelona'},
-      {name:'Pedri',         pos:'CM', club:'FC Barcelona'},
-      {name:'Álvaro Morata', pos:'ST', club:'AC Milan'},
-      {name:'Unai Simón',    pos:'GK', club:'Athletic Club'},
+      {name:'Lamine Yamal',   pos:'RW',  club:'FC Barcelona'},
+      {name:'Pedri',          pos:'CM',  club:'FC Barcelona'},
+      {name:'Nico Williams',  pos:'LW',  club:'Athletic Club'},
+      {name:'Álvaro Morata',  pos:'ST',  club:'AC Milan'},
+      {name:'Unai Simón',     pos:'GK',  club:'Athletic Club'},
     ],
     bestResult:'Winner (2010)',
+    wcRecord:{ w:31, d:13, l:17, goals:108, goalsConceded:76 },
+    titles: 1,
   },
   // ── GROUP I ──
   France: {
-    flag:'🇫🇷', group:'I', coach:'Didier Deschamps', fifaRank:2,
+    flag:'🇫🇷', group:'I', confederation:'UEFA', coach:'Didier Deschamps', fifaRank:2,
     keyPlayers:[
-      {name:'Kylian Mbappé',       pos:'ST', club:'Real Madrid'},
-      {name:'Antoine Griezmann',   pos:'AM', club:'Atlético Madrid'},
-      {name:'Aurélien Tchouaméni', pos:'CM', club:'Real Madrid'},
-      {name:'Mike Maignan',        pos:'GK', club:'AC Milan'},
+      {name:'Kylian Mbappé',        pos:'ST',  club:'Real Madrid'},
+      {name:'Antoine Griezmann',    pos:'AM',  club:'Atlético Madrid'},
+      {name:'Aurélien Tchouaméni',  pos:'CM',  club:'Real Madrid'},
+      {name:'Ousmane Dembélé',      pos:'RW',  club:'Paris Saint-Germain'},
+      {name:'Mike Maignan',         pos:'GK',  club:'AC Milan'},
     ],
-    bestResult:'Winner (1998, 2018)',
+    bestResult:'Winner (2018)',
+    wcRecord:{ w:34, d:13, l:16, goals:120, goalsConceded:73 },
+    titles: 2,
   },
   // ── GROUP J ──
   Argentina: {
-    flag:'🇦🇷', group:'J', coach:'Lionel Scaloni', fifaRank:1,
+    flag:'🇦🇷', group:'J', confederation:'CONMEBOL', coach:'Lionel Scaloni', fifaRank:1,
     keyPlayers:[
-      {name:'Lionel Messi',       pos:'AM', club:'Inter Miami'},
-      {name:'Julián Álvarez',     pos:'ST', club:'Atlético Madrid'},
-      {name:'Alexis Mac Allister',pos:'CM', club:'Liverpool'},
-      {name:'Emiliano Martínez',  pos:'GK', club:'Aston Villa'},
+      {name:'Lionel Messi',         pos:'AM',  club:'Inter Miami'},
+      {name:'Julián Álvarez',       pos:'ST',  club:'Atlético Madrid'},
+      {name:'Alexis Mac Allister',  pos:'CM',  club:'Liverpool'},
+      {name:'Lautaro Martínez',     pos:'ST',  club:'Internazionale'},
+      {name:'Emiliano Martínez',    pos:'GK',  club:'Aston Villa'},
     ],
-    bestResult:'Winner (1978, 1986, 2022)',
+    bestResult:'Winner (2022)',
+    wcRecord:{ w:47, d:15, l:20, goals:155, goalsConceded:93 },
+    titles: 3,
   },
   // ── GROUP K ──
   Portugal: {
-    flag:'🇵🇹', group:'K', coach:'Roberto Martínez', fifaRank:6,
+    flag:'🇵🇹', group:'K', confederation:'UEFA', coach:'Roberto Martínez', fifaRank:6,
     keyPlayers:[
-      {name:'Cristiano Ronaldo', pos:'ST', club:'Al Nassr'},
-      {name:'Bruno Fernandes',   pos:'AM', club:'Manchester United'},
-      {name:'Bernardo Silva',    pos:'AM', club:'Manchester City'},
-      {name:'Diogo Costa',       pos:'GK', club:'FC Porto'},
+      {name:'Cristiano Ronaldo',  pos:'ST',  club:'Al Nassr'},
+      {name:'Bruno Fernandes',    pos:'AM',  club:'Manchester United'},
+      {name:'Bernardo Silva',     pos:'AM',  club:'Manchester City'},
+      {name:'Rafael Leão',        pos:'LW',  club:'AC Milan'},
+      {name:'Diogo Costa',        pos:'GK',  club:'FC Porto'},
     ],
+    bestResult:'3rd Place (1966)',
+    wcRecord:{ w:17, d:9, l:12, goals:59, goalsConceded:44 },
   },
   // ── GROUP L ──
   England: {
-    flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', group:'L', coach:'Thomas Tuchel', fifaRank:5,
+    flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', group:'L', confederation:'UEFA', coach:'Thomas Tuchel', fifaRank:5,
     keyPlayers:[
-      {name:'Harry Kane',     pos:'ST', club:'Bayern Munich'},
-      {name:'Jude Bellingham',pos:'CM', club:'Real Madrid'},
-      {name:'Phil Foden',     pos:'AM', club:'Manchester City'},
-      {name:'Jordan Pickford',pos:'GK', club:'Everton'},
+      {name:'Harry Kane',      pos:'ST',  club:'Bayern Munich'},
+      {name:'Jude Bellingham', pos:'CM',  club:'Real Madrid'},
+      {name:'Phil Foden',      pos:'AM',  club:'Manchester City'},
+      {name:'Bukayo Saka',     pos:'RW',  club:'Arsenal'},
+      {name:'Jordan Pickford', pos:'GK',  club:'Everton'},
     ],
+    bestResult:'Winner (1966)',
+    wcRecord:{ w:32, d:19, l:22, goals:89, goalsConceded:74 },
+    titles: 1,
   },
 };
 
-// Auto-populate the remaining teams from the groups so all 48 are selectable
+// Auto-populate all 48 teams from group draw (fills in teams without detailed data)
 Object.keys(WC2026_GROUPS).forEach((groupName) => {
   WC2026_GROUPS[groupName].forEach((team) => {
     if (!TEAM_INFO[team.name]) {
       TEAM_INFO[team.name] = {
         flag: team.flag,
         group: groupName,
+        confederation: team.confederation,
         coach: 'TBD',
-        fifaRank: 0, // Placeholder
+        fifaRank: 0,
         keyPlayers: [],
       };
+    } else if (!TEAM_INFO[team.name].confederation) {
+      // Fill in confederation if missing from manually-defined teams
+      TEAM_INFO[team.name].confederation = team.confederation;
     }
   });
 });
+
 
 export const MOROCCO_INFO = {
   flag:'🇲🇦', name:'Morocco', group:'C',

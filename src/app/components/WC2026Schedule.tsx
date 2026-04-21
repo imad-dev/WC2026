@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { WC2026_FIXTURES, WC2026_KNOCKOUT, WC2026_GROUPS, TEAM_INFO } from '../../data/wc2026Static';
-import { ChevronDown, ChevronUp, Users } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import { TeamProfileCard } from './TeamProfileCard';
 
 type View = 'schedule' | 'groups' | 'teams';
 
@@ -224,93 +225,52 @@ export function WC2026Schedule({ forcedView }: WC2026ScheduleProps = {}) {
       {/* ── TEAMS VIEW ── */}
       {view === 'teams' && (
         <div>
-          <div className="flex flex-wrap gap-2 mb-5">
-            {teamKeys.map(t => (
-              <button key={t} onClick={() => setSelectedTeam(selectedTeam === t ? null : t)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-                style={{
-                  background: selectedTeam === t ? 'var(--surface-3)' : 'var(--surface-2)',
-                  color: 'var(--white-primary)',
-                  border: selectedTeam === t ? '1px solid var(--green-live)' : '1px solid var(--border)',
-                }}>
-                <span>{TEAM_INFO[t].flag}</span> {t}
-              </button>
+          {/* Team selector — grouped by group */}
+          <div className="space-y-4 mb-6">
+            {Object.keys(WC2026_GROUPS).map(g => (
+              <div key={g}>
+                <div className="text-[10px] uppercase tracking-wider mb-2 flex items-center gap-2"
+                  style={{ color: GROUP_COLORS[g] }}>
+                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: GROUP_COLORS[g] }} />
+                  Group {g}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {WC2026_GROUPS[g].map(team => (
+                    <button key={team.name}
+                      id={`team-btn-${team.name.replace(/\s+/g,'-').toLowerCase()}`}
+                      onClick={() => setSelectedTeam(selectedTeam === team.name ? null : team.name)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all hover:-translate-y-px"
+                      style={{
+                        background: selectedTeam === team.name ? `${GROUP_COLORS[g]}22` : 'var(--surface-2)',
+                        color: selectedTeam === team.name ? 'var(--white-primary)' : 'var(--white-muted)',
+                        border: selectedTeam === team.name ? `1px solid ${GROUP_COLORS[g]}` : '1px solid var(--border)',
+                        boxShadow: selectedTeam === team.name ? `0 0 8px ${GROUP_COLORS[g]}33` : 'none',
+                      }}>
+                      <span className="text-base leading-none">{team.flag}</span>
+                      <span>{team.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
-          {selectedTeam && TEAM_INFO[selectedTeam] && (() => {
-            const info = TEAM_INFO[selectedTeam];
-            const teamFixtures = WC2026_FIXTURES.filter(f => f.home === selectedTeam || f.away === selectedTeam);
-            return (
-              <div className="rounded-xl border p-5" style={{ background:'var(--surface-1)', borderColor:'var(--border)' }}>
-                <div className="flex items-center gap-4 mb-5">
-                  <span className="text-5xl">{info.flag}</span>
-                  <div>
-                    <h3 className="text-2xl font-extrabold uppercase" style={{ fontFamily:'var(--font-display)', color:'var(--white-primary)' }}>
-                      {selectedTeam}
-                    </h3>
-                    <div className="flex gap-4 text-xs mt-1" style={{ color:'var(--white-muted)' }}>
-                      <span>Group {info.group}</span>
-                      {info.fifaRank > 0 && <span>FIFA #{info.fifaRank}</span>}
-                      {info.coach !== 'TBD' && <span>🧑‍💼 {info.coach}</span>}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Key players */}
-                  {info.keyPlayers && info.keyPlayers.length > 0 && (
-                    <div>
-                      <div className="text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5"
-                        style={{ color:'var(--white-ghost)' }}>
-                        <Users className="w-3 h-3" /> Key Players
-                      </div>
-                      <div className="space-y-2">
-                        {info.keyPlayers.map((p, i) => (
-                          <div key={i} className="flex items-center gap-3 p-2 rounded"
-                            style={{ background:'var(--surface-2)' }}>
-                            <span className="text-xs px-1.5 py-0.5 rounded font-bold flex-shrink-0"
-                              style={{ background:'var(--surface-3)', color:'var(--white-ghost)' }}>{p.pos}</span>
-                            <span className="text-sm font-semibold flex-1" style={{ color:'var(--white-primary)' }}>{p.name}</span>
-                            <span className="text-xs" style={{ color:'var(--white-ghost)' }}>{p.club}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Group fixtures */}
-                  <div className={(!info.keyPlayers || info.keyPlayers.length === 0) ? "md:col-span-2" : ""}>
-                    <div className="text-xs uppercase tracking-wider mb-3" style={{ color:'var(--white-ghost)' }}>
-                      Group Stage Fixtures
-                    </div>
-                    <div className="space-y-2">
-                      {teamFixtures.map((m, i) => {
-                        const isHome = m.home === selectedTeam;
-                        const opp = isHome ? m.away : m.home;
-                        const oppFlag = isHome ? m.awayFlag : m.homeFlag;
-                        return (
-                          <div key={i} className="flex items-center gap-3 p-2 rounded"
-                            style={{ background:'var(--surface-2)' }}>
-                            <span className="text-xs tabular-nums" style={{ color:'var(--gold-leader)' }}>
-                              {new Date(m.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})}
-                            </span>
-                            <span className="text-xs" style={{ color:'var(--white-muted)' }}>{isHome ? 'vs' : '@'}</span>
-                            <span className="text-lg">{oppFlag}</span>
-                            <span className="text-sm font-semibold" style={{ color:'var(--white-primary)' }}>{opp}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
+          {/* Team profile card */}
+          {selectedTeam && TEAM_INFO[selectedTeam] && (
+            <TeamProfileCard
+              teamName={selectedTeam}
+              info={TEAM_INFO[selectedTeam]}
+              groupColor={GROUP_COLORS[TEAM_INFO[selectedTeam].group] || 'var(--green-live)'}
+              onClose={() => setSelectedTeam(null)}
+            />
+          )}
 
           {!selectedTeam && (
-            <div className="text-center py-10 text-sm" style={{ color:'var(--white-ghost)' }}>
-              ↑ Select a team to see coach, players &amp; fixtures
+            <div className="text-center py-14 rounded-xl border"
+              style={{ background: 'var(--surface-1)', borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
+              <div className="text-4xl mb-3">⚽</div>
+              <div className="text-sm font-semibold mb-1" style={{ color: 'var(--white-muted)' }}>Select any team above</div>
+              <div className="text-xs">View coach, players, WC record, goals &amp; fixtures</div>
             </div>
           )}
         </div>
