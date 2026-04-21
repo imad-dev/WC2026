@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Newspaper } from 'lucide-react';
+import { Search, Newspaper, Globe } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { TournamentKPIs } from './components/TournamentKPIs';
 import { WC2026Schedule } from './components/WC2026Schedule';
