@@ -26,7 +26,8 @@ export const NEWS_TABS = [
 export type NewsTabKey = typeof NEWS_TABS[number]['key'];
 
 const RSS_URL = 'https://feeds.bbci.co.uk/sport/football/rss.xml';
-const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&count=50`;
+// We use allorigins to bypass CORS, since rss2json API often throws 422 errors for BBC feeds
+const API = `https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`;
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
@@ -63,20 +64,46 @@ export function useFootballNews(tabKey: NewsTabKey = 'all') {
     fetch(API)
       .then(r => r.json())
       .then(data => {
-        if (data.status !== 'ok') throw new Error('Feed error');
-        const items: NewsItem[] = (data.items || []).map((it: NewsItem) => ({
-          ...it,
-          description: stripHtml(it.description || ''),
-          thumbnail: it.thumbnail || '',
-          source: 'BBC Sport',
-        }));
+        if (!data.contents) throw new Error('Empty feed');
+        
+        // Parse the raw XML string directly in the browser
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+        const itemNodes = xmlDoc.querySelectorAll("item");
+        
+        const items: NewsItem[] = Array.from(itemNodes).map(node => {
+          const title = node.querySelector("title")?.textContent || '';
+          const link = node.querySelector("link")?.textContent || '';
+          const pubDate = node.querySelector("pubDate")?.textContent || '';
+          const description = node.querySelector("description")?.textContent || '';
+          
+          // BBC uses <media:thumbnail>
+          let thumbnail = '';
+          const mediaThumb = node.getElementsByTagNameNS("*", "thumbnail")[0];
+          if (mediaThumb) {
+            thumbnail = mediaThumb.getAttribute("url") || '';
+          }
+
+          return {
+            title,
+            link,
+            pubDate,
+            description: stripHtml(description),
+            thumbnail: thumbnail.replace('/240/', '/480/'), // Get higher res image from BBC if possible
+            author: 'BBC Sport',
+            categories: [],
+            source: 'BBC Sport'
+          };
+        });
+
         cachedItems = items;
         cacheTime = Date.now();
         setAllItems(items);
         setLoading(false);
         setError(null);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('RSS Fetch error:', err);
         setError('Could not load news. Check your connection.');
         setLoading(false);
       });
