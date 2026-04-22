@@ -176,12 +176,12 @@ export default function App() {
               </div>
             </section>
           )}
-        </main>
 
-        {/* ── NEWS SECTION ── */}
-        <div className="px-4 md:px-6 pb-6">
-          <NewsSection />
-        </div>
+          {/* ── NEWS SECTION ── */}
+          <div className="mt-12 mb-6">
+            <NewsSection />
+          </div>
+        </main>
 
         {/* ── RIGHT RAIL ── */}
         <aside className="w-full lg:w-[300px] px-4 md:px-6 pb-10 space-y-4 flex-shrink-0">
