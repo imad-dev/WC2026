@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import App from "./app/App.tsx";
 import AboutUs from "./app/pages/AboutUs.tsx";
 import PrivacyPolicy from "./app/pages/PrivacyPolicy.tsx";
@@ -20,5 +21,6 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/news" element={<NewsPage />} />
     </Routes>
     <Analytics />
+    <SpeedInsights />
   </BrowserRouter>
 );
