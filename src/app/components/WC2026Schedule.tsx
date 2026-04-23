@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { WC2026_FIXTURES, WC2026_KNOCKOUT, WC2026_GROUPS, TEAM_INFO } from '../../data/wc2026Static';
+import { useTranslation } from 'react-i18next';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { TeamProfileCard } from './TeamProfileCard';
 
@@ -32,6 +33,7 @@ const GROUP_COLORS: Record<string, string> = {
 };
 
 export function WC2026Schedule({ forcedView }: WC2026ScheduleProps = {}) {
+  const { t } = useTranslation();
   const [internalView, setInternalView] = useState<View>('schedule');
   const view = forcedView ?? internalView;
   const [filterGroup, setFilterGroup] = useState<string>('ALL');
@@ -269,8 +271,8 @@ export function WC2026Schedule({ forcedView }: WC2026ScheduleProps = {}) {
             <div className="text-center py-14 rounded-xl border"
               style={{ background: 'var(--surface-1)', borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
               <div className="text-4xl mb-3">⚽</div>
-              <div className="text-sm font-semibold mb-1" style={{ color: 'var(--white-muted)' }}>Select any team above</div>
-              <div className="text-xs">View coach, players, WC record, goals &amp; fixtures</div>
+              <div className="text-sm font-semibold mb-1" style={{ color: 'var(--white-muted)' }}>{t('teams.select')}</div>
+              <div className="text-xs">{t('teams.selectDesc')}</div>
             </div>
           )}
         </div>

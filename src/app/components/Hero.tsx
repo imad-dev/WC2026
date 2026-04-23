@@ -1,9 +1,11 @@
 import { TOURNAMENT_INFO } from '../../data/wc2026Static';
 import { useCountdown } from '../../hooks/useCountdown';
 import { Calendar, MapPin, Users, Trophy, ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function Hero() {
   const countdown = useCountdown(TOURNAMENT_INFO.opener.date);
+  const { t } = useTranslation();
 
   return (
     <section
@@ -59,20 +61,20 @@ export function Hero() {
                 className="text-5xl md:text-7xl font-extrabold uppercase leading-none"
                 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', color: 'var(--white-primary)' }}
               >
-                FIFA<br />
-                <span style={{ color: 'var(--green-live)' }}>World Cup</span><br />
-                2026
+                {t('hero.title1')}<br />
+                <span style={{ color: 'var(--green-live)' }}>{t('hero.title2')}</span><br />
+                {t('hero.title3')}
               </h1>
             </div>
 
             {/* Countdown */}
             <div>
               <p className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--white-muted)' }}>
-                Kicks off in
+                {t('hero.kickoff', { days: '' }).replace('  ', ' ')}
               </p>
               <div className="flex items-end gap-3 md:gap-5">
                 {[
-                  { value: countdown.days, label: 'Days' },
+                  { value: countdown.days, label: t('kpi.days') },
                   { value: countdown.hours, label: 'Hrs' },
                   { value: countdown.minutes, label: 'Min' },
                   { value: countdown.seconds, label: 'Sec' },
@@ -148,10 +150,10 @@ export function Hero() {
             {/* Stats grid */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { icon: Users, value: '48', label: 'Teams', sub: '3 host nations' },
-                { icon: Trophy, value: '104', label: 'Matches', sub: 'Group + KO stages' },
-                { icon: MapPin, value: '16', label: 'Venues', sub: 'USA, Canada, Mexico' },
-                { icon: Calendar, value: '39', label: 'Days', sub: 'Jun 11 → Jul 19' },
+                { icon: Users, value: '48', label: t('kpi.teams'), sub: '3 host nations' },
+                { icon: Trophy, value: '104', label: t('kpi.matches'), sub: 'Group + KO stages' },
+                { icon: MapPin, value: '16', label: t('kpi.venues'), sub: 'USA, Canada, Mexico' },
+                { icon: Calendar, value: '39', label: t('kpi.days'), sub: 'Jun 11 → Jul 19' },
               ].map((stat, i) => (
                 <div
                   key={i}

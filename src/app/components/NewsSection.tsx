@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { Newspaper, ChevronRight, RefreshCw } from 'lucide-react';
 import { useFootballNews, NEWS_TABS, type NewsTabKey } from '../../hooks/useFootballNews';
 import { NewsCard, NewsCardSkeleton } from './NewsCard';
+import { useTranslation } from 'react-i18next';
 
 export function NewsSection() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<NewsTabKey>('all');
   const { items, loading, error } = useFootballNews(activeTab);
 
@@ -18,14 +20,14 @@ export function NewsSection() {
           <Newspaper className="w-5 h-5" style={{ color: 'var(--green-live)' }} />
           <h2 className="text-xl font-extrabold uppercase"
             style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)', letterSpacing: '-0.02em' }}>
-            Latest Football News
+            {t('news.latest')}
           </h2>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--green-live)' }} />
         </div>
         <Link to="/news"
           className="flex items-center gap-1 text-xs font-semibold transition-colors hover:opacity-80"
           style={{ color: 'var(--green-live)' }}>
-          View All <ChevronRight className="w-3.5 h-3.5" />
+          {t('news.viewAll')} <ChevronRight className="w-3.5 h-3.5" />
         </Link>
       </div>
 
@@ -42,10 +44,10 @@ export function NewsSection() {
             <span>{tab.flag}</span> {tab.label}
           </button>
         ))}
-        <Link to="/news"
+          <Link to="/news"
           className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border transition-all hover:border-green-500"
           style={{ border: '1px solid var(--border)', color: 'var(--white-ghost)' }}>
-          More →
+          {t('news.more')}
         </Link>
       </div>
 
@@ -85,9 +87,9 @@ export function NewsSection() {
         <div className="text-center py-10 rounded-xl border"
           style={{ background: 'var(--surface-1)', borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
           <div className="text-3xl mb-2">📰</div>
-          <div className="text-sm">No articles found for this team right now.</div>
+          <div className="text-sm">{t('news.noArticles')}</div>
           <button onClick={() => setActiveTab('all')} className="mt-3 text-xs underline" style={{ color: 'var(--green-live)' }}>
-            Show all news
+            {t('news.showAll')}
           </button>
         </div>
       )}

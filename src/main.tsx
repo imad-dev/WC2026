@@ -8,6 +8,7 @@ import TermsOfService from "./app/pages/TermsOfService.tsx";
 import ContactUs from "./app/pages/ContactUs.tsx";
 import NewsPage from "./app/pages/NewsPage.tsx";
 import "./styles/index.css";
+import "./i18n"; // Import i18n configuration
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>

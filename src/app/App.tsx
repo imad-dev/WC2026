@@ -8,6 +8,8 @@ import { MoroccoFocusCard } from './components/MoroccoFocusCard';
 import { CountdownBanner } from './components/CountdownBanner';
 import { useTournamentPhase } from '../hooks/useTournamentPhase';
 import { NewsSection } from './components/NewsSection';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 const TABS = ['SCHEDULE', 'GROUPS', 'TEAMS', 'VENUES'] as const;
 type Tab = typeof TABS[number];
@@ -23,6 +25,7 @@ const TICKER = [
 ];
 
 export default function App() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<Tab>('SCHEDULE');
   const { isPreTournament, daysUntilKickoff } = useTournamentPhase();
 
@@ -64,7 +67,7 @@ export default function App() {
                 className="text-sm font-medium transition-all duration-200 pb-1 relative"
                 style={{ color: activeTab === tab ? 'var(--white-primary)' : 'var(--white-muted)', letterSpacing: '0.02em' }}
               >
-                {tab}
+                {t(`nav.${tab.toLowerCase()}`)}
                 {activeTab === tab && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
                     style={{ background: 'var(--green-live)', boxShadow: '0 2px 8px rgba(0,230,118,0.4)' }} />
@@ -77,7 +80,7 @@ export default function App() {
               style={{ color: 'var(--white-muted)', letterSpacing: '0.02em' }}
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--white-primary)')}
               onMouseLeave={e => (e.currentTarget.style.color = 'var(--white-muted)')}>
-              <Newspaper className="w-3.5 h-3.5" /> NEWS
+              <Newspaper className="w-3.5 h-3.5" /> {t('nav.news')}
             </Link>
           </nav>
 
@@ -99,11 +102,13 @@ export default function App() {
             <button className="p-2 rounded hover:bg-muted transition-colors" aria-label="Search">
               <Search className="w-4 h-4" style={{ color: 'var(--white-muted)' }} />
             </button>
+            
+            <LanguageSwitcher />
 
             <div className="hidden sm:flex px-3 py-1.5 rounded-full text-xs font-bold items-center gap-1.5"
               style={{ background: 'rgba(0,230,118,0.1)', border: '1px solid rgba(0,230,118,0.2)', color: 'var(--green-live)' }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--green-live)' }} />
-              {daysUntilKickoff}d to KO
+              {t('nav.daysToKO', { days: daysUntilKickoff })}
             </div>
           </div>
         </div>
@@ -222,7 +227,7 @@ export default function App() {
             onClick={() => setActiveTab(tab)}
             className="flex flex-col items-center justify-center gap-1"
             style={{ color: activeTab === tab ? 'var(--green-live)' : 'var(--white-ghost)' }}>
-            <span className="text-xs font-semibold">{tab}</span>
+            <span className="text-xs font-semibold">{t(`nav.${tab.toLowerCase()}`)}</span>
           </button>
         ))}
       </nav>
@@ -239,19 +244,19 @@ export default function App() {
                 <path d="M14 2L14 26M4 8.5L24 19.5M24 8.5L4 19.5" stroke="var(--green-live)" strokeWidth="1.5" />
               </svg>
               <span className="font-extrabold" style={{ fontFamily: 'var(--font-display)', color: 'var(--white-primary)' }}>WC<span style={{ color: 'var(--green-live)' }}>2026</span>.games</span>
-              <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>— Every stat. Every match. Every moment.</span>
+              <span className="text-xs" style={{ color: 'var(--white-ghost)' }}>— {t('footer.tagline')}</span>
             </div>
             {/* Links */}
             <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
-              <Link to="/about" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>About Us</Link>
-              <Link to="/contact" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Contact</Link>
-              <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Privacy Policy</Link>
-              <Link to="/terms" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>Terms of Service</Link>
+              <Link to="/about" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.about')}</Link>
+              <Link to="/contact" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.contact')}</Link>
+              <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.privacy')}</Link>
+              <Link to="/terms" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.terms')}</Link>
             </nav>
           </div>
           <div className="border-t pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
-            <span>© 2026 WC2026.games · All rights reserved</span>
-            <span>Not affiliated with FIFA · 🇺🇸 USA · 🇨🇦 Canada · 🇲🇽 Mexico · Jun 11 – Jul 19, 2026</span>
+            <span>{t('footer.rights')}</span>
+            <span>{t('footer.disclaimer')}</span>
           </div>
         </div>
       </footer>

@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "schedule": "SCHEDULE",
+    "groups": "GROUPS",
+    "teams": "TEAMS",
+    "venues": "VENUES",
+    "news": "NEWS",
+    "daysToKO": "{{days}}d to KO"
+  },
+  "hero": {
+    "subtitle": "CANADA · MEXICO · USA",
+    "title1": "THE WORLD'S",
+    "title2": "GREATEST",
+    "title3": "STAGE",
+    "kickoff": "Kickoff in {{days}} days",
+    "cta": "Explore the Tournament"
+  },
+  "kpi": {
+    "teams": "Teams",
+    "teams_sub": "6 confederations",
+    "matches": "Matches",
+    "matches_sub": "Group + Knockout",
+    "venues": "Venues",
+    "venues_sub": "Across 3 countries",
+    "max_cap": "Max Cap.",
+    "max_cap_sub": "Estadio Azteca",
+    "duration": "Duration",
+    "duration_sub": "Days of football",
+    "prize_fund": "Prize Fund",
+    "prize_fund_sub": "Record FIFA prize",
+    "days": "Days",
+    "overview": "Tournament Overview"
+  },
+  "footer": {
+    "tagline": "Every stat. Every match. Every moment.",
+    "about": "About Us",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "© 2026 WC2026.games · All rights reserved",
+    "disclaimer": "Not affiliated with FIFA · 🇺🇸 USA · 🇨🇦 Canada · 🇲🇽 Mexico · Jun 11 – Jul 19, 2026"
+  },
+  "teams": {
+    "select": "Select any team above",
+    "selectDesc": "View coach, players, WC record, goals & fixtures"
+  },
+  "news": {
+    "latest": "Latest Football News",
+    "viewAll": "View All",
+    "more": "More →",
+    "allNews": "All News",
+    "noArticles": "No articles found for this team right now.",
+    "showAll": "Show all news"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "schedule": "CALENDARIO",
+    "groups": "GRUPOS",
+    "teams": "EQUIPOS",
+    "venues": "SEDES",
+    "news": "NOTICIAS",
+    "daysToKO": "Faltan {{days}}d"
+  },
+  "hero": {
+    "subtitle": "CANADÁ · MÉXICO · EE.UU.",
+    "title1": "EL MAYOR",
+    "title2": "ESCENARIO",
+    "title3": "DEL MUNDO",
+    "kickoff": "Comienza en {{days}} días",
+    "cta": "Explorar el Torneo"
+  },
+  "kpi": {
+    "teams": "Equipos",
+    "teams_sub": "6 confederaciones",
+    "matches": "Partidos",
+    "matches_sub": "Grupos + Eliminatorias",
+    "venues": "Sedes",
+    "venues_sub": "En 3 países",
+    "max_cap": "Cap. Máx",
+    "max_cap_sub": "Estadio Azteca",
+    "duration": "Duración",
+    "duration_sub": "Días de fútbol",
+    "prize_fund": "Premios",
+    "prize_fund_sub": "Récord FIFA",
+    "days": "Días",
+    "overview": "Resumen del Torneo"
+  },
+  "footer": {
+    "tagline": "Cada estadística. Cada partido. Cada momento.",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos de Servicio",
+    "rights": "© 2026 WC2026.games · Todos los derechos reservados",
+    "disclaimer": "No afiliado a la FIFA · 🇺🇸 EE.UU. · 🇨🇦 Canadá · 🇲🇽 México · 11 Jun – 19 Jul 2026"
+  },
+  "teams": {
+    "select": "Selecciona un equipo arriba",
+    "selectDesc": "Ver entrenador, jugadores, récord mundial, goles y partidos"
+  },
+  "news": {
+    "latest": "Últimas Noticias",
+    "viewAll": "Ver Todo",
+    "more": "Más →",
+    "allNews": "Todas",
+    "noArticles": "No se encontraron artículos para este equipo en este momento.",
+    "showAll": "Mostrar todas las noticias"
+  }
+}

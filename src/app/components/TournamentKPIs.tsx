@@ -1,19 +1,21 @@
-import { TOURNAMENT_INFO, STADIUMS } from '../../data/wc2026Static';
+import { useTranslation } from 'react-i18next';
+import { TOURNAMENT_INFO } from '../../data/wc2026Static';
 
 export function TournamentKPIs() {
+  const { t } = useTranslation();
   const stats = [
-    { label: 'Teams', value: String(TOURNAMENT_INFO.totalTeams), sub: '6 confederations', color: 'var(--green-live)' },
-    { label: 'Matches', value: String(TOURNAMENT_INFO.totalMatches), sub: 'Group + Knockout', color: 'var(--gold-leader)' },
-    { label: 'Venues', value: String(TOURNAMENT_INFO.totalStadiums), sub: 'Across 3 countries', color: 'var(--blue-ref)' },
-    { label: 'Max Cap.', value: '87.5K', sub: 'Estadio Azteca', color: 'var(--red-loss)' },
-    { label: 'Duration', value: '39', sub: 'Days of football', color: 'var(--amber-draw)' },
-    { label: 'Prize Fund', value: '$1B', sub: 'Record FIFA prize', color: 'var(--green-live)' },
+    { label: t('kpi.teams'), value: String(TOURNAMENT_INFO.totalTeams), sub: t('kpi.teams_sub'), color: 'var(--green-live)' },
+    { label: t('kpi.matches'), value: String(TOURNAMENT_INFO.totalMatches), sub: t('kpi.matches_sub'), color: 'var(--gold-leader)' },
+    { label: t('kpi.venues'), value: String(TOURNAMENT_INFO.totalStadiums), sub: t('kpi.venues_sub'), color: 'var(--blue-ref)' },
+    { label: t('kpi.max_cap'), value: '87.5K', sub: t('kpi.max_cap_sub'), color: 'var(--red-loss)' },
+    { label: t('kpi.duration'), value: '39', sub: t('kpi.duration_sub'), color: 'var(--amber-draw)' },
+    { label: t('kpi.prize_fund'), value: '$1B', sub: t('kpi.prize_fund_sub'), color: 'var(--green-live)' },
   ];
 
   return (
     <section id="tournament-kpis">
       <div className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--white-ghost)', letterSpacing: '0.1em' }}>
-        Tournament Overview
+        {t('kpi.overview')}
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {stats.map((stat) => (
