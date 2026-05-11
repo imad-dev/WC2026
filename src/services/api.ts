@@ -321,15 +321,101 @@ export async function fetchTodayMatches(): Promise<TodayMatch[]> {
   }));
 }
 
-// WorldCup API — stubs ready for June 2026
-const WC2026_KEY = 'RQ4KAz8bg2i7xraM';
-const WC2026_BASE = 'https://worldcupapi.com';
+// ═══════════════════════════════════════════════════════════
+// WorldCup API 2026 — all documented endpoints
+// Routed via /api/wc2026 Vite proxy → https://worldcupapi.com/api
+// ═══════════════════════════════════════════════════════════
 
-export async function fetchWC2026Fixtures() {
-  try {
-    const res = await fetch(`${WC2026_BASE}/api/fixtures?key=${WC2026_KEY}`, { signal: AbortSignal.timeout(3000) });
-    if (!res.ok) return null;
-    const d = await res.json();
-    return d.success ? d.data : null;
-  } catch { return null; }
+const WC2026_KEY = 'RQ4KAz8bg2i7xraM';
+const WC_BASE = '/api/wc2026'; // proxied in vite.config.ts
+
+async function wcFetch<T>(endpoint: string, params: Record<string, string> = {}, cacheDuration = 30000): Promise<T | null> {
+  const sp = new URLSearchParams({ key: WC2026_KEY, ...params });
+  const url = `${WC_BASE}/${endpoint}?${sp.toString()}`;
+  const cacheKey = `wc2026_${endpoint}_${sp.toString()}`;
+  return apiFetch<T>(url, cacheKey, cacheDuration);
+}
+
+/** Live scores for all ongoing matches */
+export async function fetchWC2026LiveScores(lang?: string) {
+  return wcFetch<any>('livescores', lang ? { lang } : {}, 15000);
+}
+
+/** All scheduled fixtures, optionally filtered */
+export async function fetchWC2026Fixtures(opts: { date?: string; group?: string; page?: string; team_id?: string; lang?: string } = {}) {
+  const params: Record<string, string> = {};
+  if (opts.date)    params.date    = opts.date;
+  if (opts.group)   params.group   = opts.group;
+  if (opts.page)    params.page    = opts.page;
+  if (opts.team_id) params.team_id = opts.team_id;
+  if (opts.lang)    params.lang    = opts.lang;
+  return wcFetch<any>('fixtures', params, 60000);
+}
+
+/** Match commentary */
+export async function fetchWC2026Commentary(match_id: string, opts: { from?: string; to?: string; lang?: string } = {}) {
+  const params: Record<string, string> = { match_id };
+  if (opts.from) params.from = opts.from;
+  if (opts.to)   params.to   = opts.to;
+  if (opts.lang) params.lang = opts.lang;
+  return wcFetch<any>('commentary', params, 20000);
+}
+
+/** Match events (goals, cards, subs) */
+export async function fetchWC2026Events(match_id: string, lang?: string) {
+  return wcFetch<any>('events', { match_id, ...(lang ? { lang } : {}) }, 20000);
+}
+
+/** Match statistics */
+export async function fetchWC2026Statistics(match_id: string) {
+  return wcFetch<any>('statistics', { match_id }, 20000);
+}
+
+/** Match lineups */
+export async function fetchWC2026Lineups(match_id: string, lang?: string) {
+  return wcFetch<any>('lineups', { match_id, ...(lang ? { lang } : {}) }, 30000);
+}
+
+/** Team squad */
+export async function fetchWC2026Squads(team_id: string, lang?: string) {
+  return wcFetch<any>('squads', { team_id, ...(lang ? { lang } : {}) }, 3600000);
+}
+
+/** Historical match data */
+export async function fetchWC2026History(opts: { date_from?: string; date_to?: string; page?: string; team_id?: string; lang?: string } = {}) {
+  const params: Record<string, string> = {};
+  if (opts.date_from) params.date_from = opts.date_from;
+  if (opts.date_to)   params.date_to   = opts.date_to;
+  if (opts.page)      params.page      = opts.page;
+  if (opts.team_id)   params.team_id   = opts.team_id;
+  if (opts.lang)      params.lang      = opts.lang;
+  return wcFetch<any>('history', params, 300000);
+}
+
+/** Head-to-head between two teams */
+export async function fetchWC2026Head2Head(team1_id: string, team2_id: string, lang?: string) {
+  return wcFetch<any>('head2head', { team1_id, team2_id, ...(lang ? { lang } : {}) }, 3600000);
+}
+
+/** Live standings for a group */
+export async function fetchWC2026LiveStandings(group: string, lang?: string) {
+  return wcFetch<any>('livestandings', { group, ...(lang ? { lang } : {}) }, 30000);
+}
+
+/** Group standings */
+export async function fetchWC2026Standings(group: string, opts: { form?: string; lang?: string } = {}) {
+  const params: Record<string, string> = { group };
+  if (opts.form) params.form = opts.form;
+  if (opts.lang) params.lang = opts.lang;
+  return wcFetch<any>('standings', params, 60000);
+}
+
+/** Top goalscorers */
+export async function fetchWC2026GoalScorers(lang?: string) {
+  return wcFetch<any>('goalscorers', lang ? { lang } : {}, 300000);
+}
+
+/** Top disciplinary (cards) */
+export async function fetchWC2026Cards(lang?: string) {
+  return wcFetch<any>('cards', lang ? { lang } : {}, 300000);
 }

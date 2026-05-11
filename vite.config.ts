@@ -48,6 +48,13 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/football-data/, ''),
         secure: true,
       },
+      // WorldCup API 2026 — all endpoints
+      '/api/wc2026': {
+        target: 'https://worldcupapi.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/wc2026/, '/api'),
+        secure: true,
+      },
     },
   },
 

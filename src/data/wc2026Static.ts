@@ -410,26 +410,124 @@ export const TEAM_INFO: Record<string, TeamInfo> = {
     wcRecord:{ w:32, d:19, l:22, goals:89, goalsConceded:74 },
     titles: 1,
   },
+  // ── GROUP A ──
+  'South Africa': { flag:'🇿🇦', group:'A', confederation:'CAF', coach:'Hugo Broos', fifaRank:57,
+    keyPlayers:[{name:'Percy Tau',pos:'LW',club:'Al Ahly'},{name:'Themba Zwane',pos:'AM',club:'Mamelodi Sundowns'},{name:'Ronwen Williams',pos:'GK',club:'Mamelodi Sundowns'},{name:'Bongani Zungu',pos:'CM',club:'Amiens SC'},{name:'Evidence Makgopa',pos:'ST',club:'Pirates'}],
+    bestResult:'Group Stage (2010)', wcRecord:{w:1,d:3,l:2,goals:9,goalsConceded:12} },
+  'South Korea': { flag:'🇰🇷', group:'A', confederation:'AFC', coach:'Hong Myung-bo', fifaRank:22,
+    keyPlayers:[{name:'Son Heung-min',pos:'LW',club:'Tottenham'},{name:'Lee Kang-in',pos:'AM',club:'PSG'},{name:'Kim Min-jae',pos:'CB',club:'Bayern Munich'},{name:'Hwang Hee-chan',pos:'ST',club:'Wolves'},{name:'Jo Hyeon-woo',pos:'GK',club:'Ulsan HD'}],
+    bestResult:'Semi-Finals (2002)', wcRecord:{w:10,d:5,l:19,goals:37,goalsConceded:66} },
+  'Czech Republic': { flag:'🇨🇿', group:'A', confederation:'UEFA', coach:'Ivan Hašek', fifaRank:36,
+    keyPlayers:[{name:'Tomáš Souček',pos:'CM',club:'West Ham'},{name:'Patrik Schick',pos:'ST',club:'Bayer Leverkusen'},{name:'Vladimír Coufal',pos:'RB',club:'West Ham'},{name:'Lukáš Provod',pos:'CM',club:'Slavia Prague'},{name:'Jindřich Staněk',pos:'GK',club:'Slavia Prague'}],
+    bestResult:'Runner-Up (2023 — as Czechoslovakia)', wcRecord:{w:4,d:3,l:5,goals:19,goalsConceded:21} },
+  // ── GROUP B ──
+  'Bosnia-Herz.': { flag:'🇧🇦', group:'B', confederation:'UEFA', coach:'Sergej Barbarez', fifaRank:61,
+    keyPlayers:[{name:'Edin Džeko',pos:'ST',club:'Fenerbahçe'},{name:'Miralem Pjanić',pos:'CM',club:'Sharjah FC'},{name:'Sead Kolašinac',pos:'LB',club:'Atalanta'},{name:'Ermedin Demirović',pos:'ST',club:'Augsburg'},{name:'Ibrahim Šehić',pos:'GK',club:'FK Tuzla City'}],
+    bestResult:'Group Stage (2014)', wcRecord:{w:0,d:0,l:3,goals:4,goalsConceded:7} },
+  Qatar: { flag:'🇶🇦', group:'B', confederation:'AFC', coach:'Márquez López', fifaRank:37,
+    keyPlayers:[{name:'Akram Afif',pos:'LW',club:'Al Sadd'},{name:'Almoez Ali',pos:'ST',club:'Al Duhail'},{name:'Hassan Al-Haydos',pos:'AM',club:'Al Sadd'},{name:'Boualem Khoukhi',pos:'CB',club:'Al Sadd'},{name:'Meshaal Barsham',pos:'GK',club:'Al Sadd'}],
+    bestResult:'Group Stage (2022)', wcRecord:{w:0,d:0,l:3,goals:1,goalsConceded:7} },
+  Switzerland: { flag:'🇨🇭', group:'B', confederation:'UEFA', coach:'Murat Yakin', fifaRank:18,
+    keyPlayers:[{name:'Granit Xhaka',pos:'CM',club:'Bayer Leverkusen'},{name:'Xherdan Shaqiri',pos:'RW',club:'Chicago Fire'},{name:'Manuel Akanji',pos:'CB',club:'Man City'},{name:'Breel Embolo',pos:'ST',club:'Monaco'},{name:'Yann Sommer',pos:'GK',club:'Internazionale'}],
+    bestResult:'Quarter-Finals (1954)', wcRecord:{w:14,d:10,l:18,goals:60,goalsConceded:72} },
+  // ── GROUP C ──
+  Haiti: { flag:'🇭🇹', group:'C', confederation:'CONCACAF', coach:'Marc Collat', fifaRank:83,
+    keyPlayers:[{name:'Duckens Nazon',pos:'ST',club:'Metz'},{name:'Frantzdy Pierrot',pos:'ST',club:'Troyes'},{name:'Steeven Saba',pos:'CM',club:'Le Havre'},{name:'Jonathan Rémy',pos:'RB',club:'Sportif Mahajanga'},{name:'Josué Duverger',pos:'GK',club:'Clermont'}],
+    bestResult:'Round of 16 (1974)', wcRecord:{w:0,d:0,l:3,goals:2,goalsConceded:14} },
+  Scotland: { flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', group:'C', confederation:'UEFA', coach:'Steve Clarke', fifaRank:32,
+    keyPlayers:[{name:'Andrew Robertson',pos:'LB',club:'Liverpool'},{name:'Scott McTominay',pos:'CM',club:'Napoli'},{name:'Che Adams',pos:'ST',club:'Torino'},{name:'Ryan Christie',pos:'AM',club:'Bournemouth'},{name:'Angus Gunn',pos:'GK',club:'Norwich'}],
+    bestResult:'Group Stage (1974, 1978, 1982, 1990, 1998)', wcRecord:{w:1,d:4,l:8,goals:25,goalsConceded:41} },
+  // ── GROUP D ──
+  Paraguay: { flag:'🇵🇾', group:'D', confederation:'CONMEBOL', coach:'Gustavo Alfaro', fifaRank:45,
+    keyPlayers:[{name:'Miguel Almirón',pos:'AM',club:'Atlanta United'},{name:'Julio Enciso',pos:'AM',club:'Brighton'},{name:'Gustavo Gómez',pos:'CB',club:'Palmeiras'},{name:'Ángel Romero',pos:'ST',club:'Club Olimpia'},{name:'Antony Silva',pos:'GK',club:'Club Olimpia'}],
+    bestResult:'Quarter-Finals (1962)', wcRecord:{w:11,d:11,l:15,goals:44,goalsConceded:55} },
+  Australia: { flag:'🇦🇺', group:'D', confederation:'AFC', coach:'Tony Popovic', fifaRank:23,
+    keyPlayers:[{name:'Mathew Leckie',pos:'RW',club:'Melbourne City'},{name:'Mitchell Duke',pos:'ST',club:'Fagiano Okayama'},{name:'Aaron Mooy',pos:'CM',club:'Celtic'},{name:'Harry Souttar',pos:'CB',club:'Leicester'},{name:'Mat Ryan',pos:'GK',club:'AZ Alkmaar'}],
+    bestResult:'Round of 16 (2006)', wcRecord:{w:4,d:4,l:13,goals:24,goalsConceded:55} },
+  Turkey: { flag:'🇹🇷', group:'D', confederation:'UEFA', coach:'Vincenzo Montella', fifaRank:28,
+    keyPlayers:[{name:'Hakan Çalhanoğlu',pos:'CM',club:'Internazionale'},{name:'Arda Güler',pos:'AM',club:'Real Madrid'},{name:'Merih Demiral',pos:'CB',club:'Al-Qadsiah'},{name:'Kerem Aktürkoğlu',pos:'LW',club:'Galatasaray'},{name:'Mert Günok',pos:'GK',club:'Galatasaray'}],
+    bestResult:'3rd Place (2002)', wcRecord:{w:10,d:3,l:7,goals:40,goalsConceded:34} },
+  // ── GROUP E ──
+  'Curaçao': { flag:'🇨🇼', group:'E', confederation:'CONCACAF', coach:'Wilfried Ulrich', fifaRank:72,
+    keyPlayers:[{name:'Cuco Martina',pos:'RB',club:'Retired'},{name:'Leandro Bacuna',pos:'CM',club:'Cardiff City'},{name:'Juriën Gaari',pos:'CB',club:'NEC Nijmegen'},{name:'Rangelo Janga',pos:'ST',club:'KAS Eupen'},{name:'Eloy Room',pos:'GK',club:'Colorado Rapids'}],
+    bestResult:'First World Cup', wcRecord:{w:0,d:0,l:0} },
+  "Côte d'Ivoire": { flag:'🇨🇮', group:'E', confederation:'CAF', coach:'Emerse Faé', fifaRank:48,
+    keyPlayers:[{name:'Sébastien Haller',pos:'ST',club:'Dortmund'},{name:'Franck Kessié',pos:'CM',club:'Al Ahli'},{name:'Nicolas Pépé',pos:'RW',club:'Trabzonspor'},{name:'Wilfried Zaha',pos:'LW',club:'Galatasaray'},{name:'Yahia Fofana',pos:'GK',club:'Chelsea'}],
+    bestResult:'Group Stage (2006, 2010, 2014)', wcRecord:{w:1,d:2,l:6,goals:9,goalsConceded:18} },
+  Ecuador: { flag:'🇪🇨', group:'E', confederation:'CONMEBOL', coach:'Sebastián Beccacece', fifaRank:40,
+    keyPlayers:[{name:'Enner Valencia',pos:'ST',club:'Independiente del Valle'},{name:'Moisés Caicedo',pos:'CDM',club:'Chelsea'},{name:'Gonzalo Plata',pos:'RW',club:'Al-Qadsiah'},{name:'Piero Hincapié',pos:'LB',club:'Bayer Leverkusen'},{name:'Hernán Galíndez',pos:'GK',club:'Aucas'}],
+    bestResult:'Round of 16 (2006)', wcRecord:{w:3,d:2,l:5,goals:11,goalsConceded:19} },
+  // ── GROUP F ──
+  Japan: { flag:'🇯🇵', group:'F', confederation:'AFC', coach:'Hajime Moriyasu', fifaRank:17,
+    keyPlayers:[{name:'Takumi Minamino',pos:'AM',club:'Monaco'},{name:'Ritsu Doan',pos:'RW',club:'Freiburg'},{name:'Takehiro Tomiyasu',pos:'RB',club:'Arsenal'},{name:'Wataru Endō',pos:'CDM',club:'Liverpool'},{name:'Shuichi Gonda',pos:'GK',club:'Shimizu S-Pulse'}],
+    bestResult:'Round of 16 (2002, 2010, 2018, 2022)', wcRecord:{w:10,d:5,l:11,goals:33,goalsConceded:38} },
+  Sweden: { flag:'🇸🇪', group:'F', confederation:'UEFA', coach:'Jon Dahl Tomasson', fifaRank:25,
+    keyPlayers:[{name:'Alexander Isak',pos:'ST',club:'Newcastle'},{name:'Dejan Kulusevski',pos:'RW',club:'Tottenham'},{name:'Victor Nilsson Lindelöf',pos:'CB',club:'Man Utd'},{name:'Emil Forsberg',pos:'AM',club:'RB Leipzig'},{name:'Robin Olsen',pos:'GK',club:'Aston Villa'}],
+    bestResult:'3rd Place (1950, 1994)', wcRecord:{w:18,d:13,l:18,goals:87,goalsConceded:74} },
+  Tunisia: { flag:'🇹🇳', group:'F', confederation:'CAF', coach:'Faouzi Benzarti', fifaRank:30,
+    keyPlayers:[{name:'Youssef Msakni',pos:'AM',club:'Espérance'},{name:'Wahbi Khazri',pos:'AM',club:'Montpellier'},{name:'Ellyes Skhiri',pos:'CM',club:'Eintracht Frankfurt'},{name:'Dylan Bronn',pos:'CB',club:'Salernitana'},{name:'Bechir Ben Said',pos:'GK',club:'Espérance'}],
+    bestResult:'Group Stage (×6)', wcRecord:{w:1,d:5,l:10,goals:11,goalsConceded:29} },
+  // ── GROUP G ──
+  Egypt: { flag:'🇪🇬', group:'G', confederation:'CAF', coach:'Hossam Hassan', fifaRank:34,
+    keyPlayers:[{name:'Mohamed Salah',pos:'RW',club:'Liverpool'},{name:'Omar Marmoush',pos:'ST',club:'Man City'},{name:'Ahmed Hegazi',pos:'CB',club:'Ittihad Alexandria'},{name:'Mostafa Mohamed',pos:'ST',club:'Nantes'},{name:'Mohamed El-Shenawy',pos:'GK',club:'Al Ahly'}],
+    bestResult:'Group Stage (1934, 1990)', wcRecord:{w:0,d:1,l:3,goals:3,goalsConceded:11} },
+  Iran: { flag:'🇮🇷', group:'G', confederation:'AFC', coach:'Amir Ghalenoei', fifaRank:20,
+    keyPlayers:[{name:'Sardar Azmoun',pos:'ST',club:'Bayer Leverkusen'},{name:'Mehdi Taremi',pos:'ST',club:'Internazionale'},{name:'Alireza Jahanbakhsh',pos:'RW',club:'Feyenoord'},{name:'Morteza Pouraliganji',pos:'CB',club:'Al-Sail'},{name:'Alireza Beiranvand',pos:'GK',club:'Antwerp'}],
+    bestResult:'Group Stage (×6)', wcRecord:{w:3,d:2,l:10,goals:14,goalsConceded:31} },
+  'New Zealand': { flag:'🇳🇿', group:'G', confederation:'OFC', coach:'Darren Bazeley', fifaRank:90,
+    keyPlayers:[{name:'Chris Wood',pos:'ST',club:'Nottm Forest'},{name:'Clayton Lewis',pos:'CM',club:'Vitesse'},{name:'Winston Reid',pos:'CB',club:'Brentford'},{name:'Matthew Garbett',pos:'CM',club:'Nottm Forest'},{name:'Oliver Sail',pos:'GK',club:'SD Huesca'}],
+    bestResult:'Group Stage (1982, 2010)', wcRecord:{w:1,d:0,l:5,goals:5,goalsConceded:22} },
+  // ── GROUP H ──
+  'Cape Verde': { flag:'🇨🇻', group:'H', confederation:'CAF', coach:'Pedro Leitão', fifaRank:66,
+    keyPlayers:[{name:'Garry Rodrigues',pos:'RW',club:'Galatasaray'},{name:'Ryan Mendes',pos:'LW',club:'Desportivo de Chaves'},{name:'Stopira',pos:'CB',club:'FK Ural'},{name:'Lisandro',pos:'ST',club:'Omonia'},{name:'Josimar Dias',pos:'GK',club:'Farense'}],
+    bestResult:'First World Cup', wcRecord:{w:0,d:0,l:0} },
+  'Saudi Arabia': { flag:'🇸🇦', group:'H', confederation:'AFC', coach:'Roberto Mancini', fifaRank:55,
+    keyPlayers:[{name:'Salem Al-Dawsari',pos:'LW',club:'Al-Hilal'},{name:'Mohammed Al-Owais',pos:'GK',club:'Al-Hilal'},{name:'Ali Al-Bulayhi',pos:'LB',club:'Al-Hilal'},{name:'Firas Al-Buraikan',pos:'ST',club:'Al-Fateh'},{name:'Sami Al-Najei',pos:'CM',club:'Al-Ahli'}],
+    bestResult:'Round of 16 (1994)', wcRecord:{w:4,d:3,l:10,goals:19,goalsConceded:42} },
+  Uruguay: { flag:'🇺🇾', group:'H', confederation:'CONMEBOL', coach:'Marcelo Bielsa', fifaRank:14,
+    keyPlayers:[{name:'Darwin Núñez',pos:'ST',club:'Liverpool'},{name:'Federico Valverde',pos:'CM',club:'Real Madrid'},{name:'Rodrigo Bentancur',pos:'CM',club:'Tottenham'},{name:'Ronald Araújo',pos:'CB',club:'Juventus'},{name:'Sergio Rochet',pos:'GK',club:'Nacional'}],
+    bestResult:'Winner (1930, 1950)', wcRecord:{w:27,d:13,l:19,goals:94,goalsConceded:77}, titles:2 },
+  // ── GROUP I ──
+  Senegal: { flag:'🇸🇳', group:'I', confederation:'CAF', coach:'Aliou Cissé', fifaRank:19,
+    keyPlayers:[{name:'Sadio Mané',pos:'LW',club:'Al-Nassr'},{name:'Kalidou Koulibaly',pos:'CB',club:'Al-Hilal'},{name:'Ismaïla Sarr',pos:'RW',club:'Marseille'},{name:'Idrissa Gana Gueye',pos:'CM',club:'Everton'},{name:'Édouard Mendy',pos:'GK',club:'Al-Ahli'}],
+    bestResult:'Quarter-Finals (2002)', wcRecord:{w:4,d:3,l:4,goals:14,goalsConceded:13} },
+  Iraq: { flag:'🇮🇶', group:'I', confederation:'AFC', coach:'Jesús Casas', fifaRank:52,
+    keyPlayers:[{name:'Aymen Hussein',pos:'ST',club:'Al-Zawraa'},{name:'Ali Adnan',pos:'LB',club:'Shabab Al-Ahli'},{name:'Mohanad Ali',pos:'AM',club:'Al-Zawraa'},{name:'Amjed Attwan',pos:'CM',club:'Al-Quwa Al-Jawiya'},{name:'Jalal Hassan',pos:'GK',club:'Al-Zawraa'}],
+    bestResult:'Group Stage (1986)', wcRecord:{w:0,d:0,l:3,goals:1,goalsConceded:11} },
+  Norway: { flag:'🇳🇴', group:'I', confederation:'UEFA', coach:'Ståle Solbakken', fifaRank:29,
+    keyPlayers:[{name:'Erling Haaland',pos:'ST',club:'Man City'},{name:'Martin Ødegaard',pos:'AM',club:'Arsenal'},{name:'Alexander Sørloth',pos:'ST',club:'Atlético Madrid'},{name:'Sander Berge',pos:'CM',club:'Burnley'},{name:'Ørjan Nyland',pos:'GK',club:'Brentford'}],
+    bestResult:'Quarter-Finals (1938)', wcRecord:{w:2,d:2,l:4,goals:9,goalsConceded:16} },
+  // ── GROUP J ──
+  Algeria: { flag:'🇩🇿', group:'J', confederation:'CAF', coach:'Vladimir Petković', fifaRank:43,
+    keyPlayers:[{name:'Riyad Mahrez',pos:'RW',club:'Al-Ahli'},{name:'Islam Slimani',pos:'ST',club:'Monaco'},{name:'Sofiane Feghouli',pos:'AM',club:'Valencia'},{name:'Ramy Bensebaini',pos:'LB',club:'Dortmund'},{name:'Raïs M\'Bolhi',pos:'GK',club:'USMA'}],
+    bestResult:'Winner (1990 AFCON)', wcRecord:{w:5,d:3,l:8,goals:20,goalsConceded:28} },
+  Austria: { flag:'🇦🇹', group:'J', confederation:'UEFA', coach:'Ralf Rangnick', fifaRank:24,
+    keyPlayers:[{name:'David Alaba',pos:'CB',club:'Real Madrid'},{name:'Marcel Sabitzer',pos:'CM',club:'Dortmund'},{name:'Marko Arnautović',pos:'ST',club:'Internazionale'},{name:'Konrad Laimer',pos:'CM',club:'Bayern Munich'},{name:'Patrick Pentz',pos:'GK',club:'Real Betis'}],
+    bestResult:'3rd Place (1954)', wcRecord:{w:17,d:8,l:18,goals:86,goalsConceded:88} },
+  Jordan: { flag:'🇯🇴', group:'J', confederation:'AFC', coach:'Hussein Ammouta', fifaRank:64,
+    keyPlayers:[{name:'Baha\' Faisal',pos:'ST',club:'Al-Ramtha'},{name:'Musa Al-Taamari',pos:'LW',club:'Montpellier'},{name:'Yazan Al-Naimat',pos:'CM',club:'Al-Jazeera'},{name:'Omar Al-Sayed',pos:'RB',club:'Al-Ramtha'},{name:'Yazeed Abdeelal',pos:'GK',club:'Al-Faisaly'}],
+    bestResult:'First World Cup', wcRecord:{w:0,d:0,l:0} },
+  // ── GROUP K ──
+  'DR Congo': { flag:'🇨🇩', group:'K', confederation:'CAF', coach:'Sébastien Desabre', fifaRank:31,
+    keyPlayers:[{name:'Yoane Wissa',pos:'ST',club:'Brentford'},{name:'Chancel Mbemba',pos:'CB',club:'Porto'},{name:'Arthur Masuaku',pos:'LB',club:'Besiktas'},{name:'Cédric Bakambu',pos:'ST',club:'Marseille'},{name:'Lionel Mpasi',pos:'GK',club:'TP Mazembe'}],
+    bestResult:'Winner (1974 AFCON)', wcRecord:{w:0,d:0,l:3,goals:4,goalsConceded:14} },
+  Uzbekistan: { flag:'🇺🇿', group:'K', confederation:'AFC', coach:'Srecko Katanec', fifaRank:69,
+    keyPlayers:[{name:'Eldor Shomurodov',pos:'ST',club:'Roma'},{name:'Otabek Shukurov',pos:'CM',club:'Pakhtakor'},{name:'Dostonbek Khamdamov',pos:'RW',club:'Pakhtakor'},{name:'Sanjar Tursunov',pos:'CB',club:'Pakhtakor'},{name:'Eldorbek Sobirov',pos:'GK',club:'Pakhtakor'}],
+    bestResult:'First World Cup', wcRecord:{w:0,d:0,l:0} },
+  Colombia: { flag:'🇨🇴', group:'K', confederation:'CONMEBOL', coach:'Néstor Lorenzo', fifaRank:9,
+    keyPlayers:[{name:'James Rodríguez',pos:'AM',club:'Rayo Vallecano'},{name:'Luis Díaz',pos:'LW',club:'Liverpool'},{name:'Falcao',pos:'ST',club:'Rionegro Águilas'},{name:'Davinson Sánchez',pos:'CB',club:'Galatasaray'},{name:'Camilo Vargas',pos:'GK',club:'Atlas'}],
+    bestResult:'Quarter-Finals (2014)', wcRecord:{w:8,d:4,l:8,goals:29,goalsConceded:27} },
+  // ── GROUP L ──
+  Croatia: { flag:'🇭🇷', group:'L', confederation:'UEFA', coach:'Zlatko Dalić', fifaRank:11,
+    keyPlayers:[{name:'Luka Modrić',pos:'CM',club:'Real Madrid'},{name:'Ivan Perišić',pos:'LW',club:'Hajduk Split'},{name:'Mateo Kovačić',pos:'CM',club:'Man City'},{name:'Joško Gvardiol',pos:'LB',club:'Man City'},{name:'Dominik Livaković',pos:'GK',club:'Fenerbahçe'}],
+    bestResult:'Runner-Up (2018)', wcRecord:{w:15,d:7,l:7,goals:50,goalsConceded:32} },
+  Ghana: { flag:'🇬🇭', group:'L', confederation:'CAF', coach:'Otto Addo', fifaRank:53,
+    keyPlayers:[{name:'Jordan Ayew',pos:'ST',club:'Leicester'},{name:'Thomas Partey',pos:'CDM',club:'Arsenal'},{name:'Mohammed Kudus',pos:'AM',club:'West Ham'},{name:'Andy Yiadom',pos:'RB',club:'Reading'},{name:'Lawrence Ati-Zigi',pos:'GK',club:'FC Sion'}],
+    bestResult:'Quarter-Finals (2010)', wcRecord:{w:4,d:4,l:5,goals:13,goalsConceded:18} },
+  Panama: { flag:'🇵🇦', group:'L', confederation:'CONCACAF', coach:'Thomas Christiansen', fifaRank:74,
+    keyPlayers:[{name:'Ismael Díaz',pos:'ST',club:'Olympiacos'},{name:'Andrés Andrade',pos:'CM',club:'Toluca'},{name:'Roderick Miller',pos:'CB',club:'Club Deportivo Árabe Unido'},{name:'Cecilio Waterman',pos:'ST',club:'Club Deportivo Plaza Amador'},{name:'Luis Mejía',pos:'GK',club:'Independiente'}],
+    bestResult:'Group Stage (2018)', wcRecord:{w:0,d:0,l:3,goals:2,goalsConceded:11} },
 };
-
-// Auto-populate all 48 teams from group draw (fills in teams without detailed data)
-Object.keys(WC2026_GROUPS).forEach((groupName) => {
-  WC2026_GROUPS[groupName].forEach((team) => {
-    if (!TEAM_INFO[team.name]) {
-      TEAM_INFO[team.name] = {
-        flag: team.flag,
-        group: groupName,
-        confederation: team.confederation,
-        coach: 'TBD',
-        fifaRank: 0,
-        keyPlayers: [],
-      };
-    } else if (!TEAM_INFO[team.name].confederation) {
-      // Fill in confederation if missing from manually-defined teams
-      TEAM_INFO[team.name].confederation = team.confederation;
-    }
-  });
-});
 
 
 export const MOROCCO_INFO = {

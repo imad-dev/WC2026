@@ -4,7 +4,7 @@ import { Search, Newspaper, Globe } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { TournamentKPIs } from './components/TournamentKPIs';
 import { WC2026Schedule } from './components/WC2026Schedule';
-import { MoroccoFocusCard } from './components/MoroccoFocusCard';
+import { LiveScoresWidget } from './components/LiveScoresWidget';
 import { CountdownBanner } from './components/CountdownBanner';
 import { useTournamentPhase } from '../hooks/useTournamentPhase';
 import { NewsSection } from './components/NewsSection';
@@ -190,7 +190,7 @@ export default function App() {
 
         {/* ── RIGHT RAIL ── */}
         <aside className="w-full lg:w-[300px] px-4 md:px-6 pb-10 space-y-4 flex-shrink-0">
-          <MoroccoFocusCard />
+          <LiveScoresWidget />
 
           {/* Quick facts */}
           <div className="rounded-xl border p-4" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
