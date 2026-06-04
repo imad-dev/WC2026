@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Newspaper, Globe } from 'lucide-react';
+import { Search, Newspaper, Globe, Tv } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { TournamentKPIs } from './components/TournamentKPIs';
 import { WC2026Schedule } from './components/WC2026Schedule';
@@ -59,6 +59,12 @@ export default function App() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
+            <Link to="/world-cup-2026"
+              id="nav-live"
+              className="flex items-center gap-1.5 text-sm font-extrabold transition-all duration-200 pb-1"
+              style={{ color: 'var(--green-live)', letterSpacing: '0.02em' }}>
+              <Tv className="w-4 h-4 animate-pulse" /> LIVE HUB
+            </Link>
             {TABS.map((tab) => (
               <button
                 key={tab}
@@ -220,14 +226,20 @@ export default function App() {
       </div>
 
       {/* ── MOBILE BOTTOM NAV ── */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t grid grid-cols-4 h-16"
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t grid grid-cols-5 h-16"
         style={{ background: 'var(--surface-glass)', backdropFilter: 'blur(20px)', borderColor: 'var(--border)' }}>
+        <Link to="/world-cup-2026" id="mobile-nav-live"
+            className="flex flex-col items-center justify-center gap-1"
+            style={{ color: 'var(--green-live)' }}>
+            <Tv className="w-5 h-5 animate-pulse" />
+            <span className="text-[10px] font-extrabold uppercase">LIVE</span>
+        </Link>
         {TABS.map((tab) => (
           <button key={tab} id={`mobile-nav-${tab.toLowerCase()}`}
             onClick={() => setActiveTab(tab)}
             className="flex flex-col items-center justify-center gap-1"
-            style={{ color: activeTab === tab ? 'var(--green-live)' : 'var(--white-ghost)' }}>
-            <span className="text-xs font-semibold">{t(`nav.${tab.toLowerCase()}`)}</span>
+            style={{ color: activeTab === tab ? 'var(--white-primary)' : 'var(--white-ghost)' }}>
+            <span className="text-[10px] font-semibold">{t(`nav.${tab.toLowerCase()}`)}</span>
           </button>
         ))}
       </nav>
