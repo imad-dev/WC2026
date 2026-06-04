@@ -7,6 +7,7 @@ import PrivacyPolicy from "./app/pages/PrivacyPolicy.tsx";
 import TermsOfService from "./app/pages/TermsOfService.tsx";
 import ContactUs from "./app/pages/ContactUs.tsx";
 import NewsPage from "./app/pages/NewsPage.tsx";
+import WorldCup2026Hub from "./app/pages/WorldCup2026Hub.tsx";
 import "./styles/index.css";
 import "./i18n"; // Import i18n configuration
 
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/world-cup-2026" element={<WorldCup2026Hub />} />
       <Route path="/about" element={<AboutUs />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<TermsOfService />} />
