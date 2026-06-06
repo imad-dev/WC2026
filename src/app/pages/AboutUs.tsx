@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import { Globe, Trophy, Users, Zap, Target, Heart, ArrowLeft } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 export default function AboutUs() {
+  useSEO({
+    title: 'About Us | World Cup 2026 | wc2026.games',
+    description: 'Learn about WC2026.games — the ultimate FIFA World Cup 2026 hub. Built by football fans, for football fans. Real-time scores, free streams, and complete coverage.',
+    canonical: 'https://wc2026.games/about',
+    ogTitle: 'About WC2026.games — FIFA World Cup 2026 Hub',
+    ogDescription: 'The ultimate World Cup 2026 destination. Accurate data, live scores, free streams.',
+  });
+
   return (
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>
       {/* Header */}

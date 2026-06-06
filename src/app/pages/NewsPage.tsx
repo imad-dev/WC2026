@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Newspaper, RefreshCw } from 'lucide-react';
 import { useFootballNews, NEWS_TABS, type NewsTabKey } from '../../hooks/useFootballNews';
 import { NewsCard, NewsCardSkeleton } from '../components/NewsCard';
+import { useSEO } from '../../hooks/useSEO';
 
 export default function NewsPage() {
   const [activeTab, setActiveTab] = useState<NewsTabKey>('all');
   const { items, loading, error } = useFootballNews(activeTab);
+
+  useSEO({
+    title: 'World Cup 2026 News & Updates | wc2026.games',
+    description: 'Latest FIFA World Cup 2026 news, team updates, transfer rumours, and match previews. Follow all 48 teams on their road to the 2026 World Cup.',
+    canonical: 'https://wc2026.games/news',
+    ogTitle: 'World Cup 2026 News — Latest Updates & Previews',
+    ogDescription: 'Latest news and updates for FIFA World Cup 2026. All 48 teams covered.',
+  });
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>

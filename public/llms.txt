@@ -1,0 +1,53 @@
+# wc2026.games
+
+> FIFA World Cup 2026 live scores, free streams, full match schedule, group standings, team profiles, and venue information. Covers all 104 matches across USA, Canada, and Mexico.
+
+## About
+wc2026.games is a real-time FIFA World Cup 2026 hub providing free geo-routed live streams, live scores, group stage and knockout stage standings, and complete match data for all 48 participating teams.
+
+## Key Pages
+- /: Homepage with live scores, countdown, schedule, groups, teams, and venues
+- /world-cup-2026: Live hub with real-time match streams, schedule, and standings
+- /news: Latest World Cup 2026 news and updates
+- /about: About the project
+- /contact: Contact form
+- /privacy: Privacy policy
+- /terms: Terms of service
+
+## Data Coverage
+- Tournament dates: June 11 – July 19, 2026
+- Teams: 48 qualified nations across 12 groups (A–L)
+- Matches: 104 total (72 group stage + 32 knockout)
+- Host countries: United States, Canada, Mexico
+- Host cities/venues: 16 (11 USA, 3 Mexico, 2 Canada)
+- Format: 12 groups of 4 → Round of 32 → Round of 16 → QF → SF → Final
+
+## Qualified Teams
+Group A: Mexico, South Africa, South Korea, Czech Republic
+Group B: Canada, Bosnia-Herzegovina, Qatar, Switzerland
+Group C: Brazil, Morocco, Haiti, Scotland
+Group D: USA, Paraguay, Australia, Turkey
+Group E: Germany, Curaçao, Côte d'Ivoire, Ecuador
+Group F: Netherlands, Japan, Sweden, Tunisia
+Group G: Belgium, Egypt, Iran, New Zealand
+Group H: Spain, Cape Verde, Saudi Arabia, Uruguay
+Group I: France, Senegal, Iraq, Norway
+Group J: Argentina, Algeria, Austria, Jordan
+Group K: Portugal, DR Congo, Uzbekistan, Colombia
+Group L: England, Croatia, Ghana, Panama
+
+## Key Venues
+- MetLife Stadium (New York/NJ) — FINAL venue, 82,500 capacity
+- Estadio Azteca (Mexico City) — OPENER venue, 87,523 capacity
+- AT&T Stadium (Dallas) — 80,000 capacity
+- SoFi Stadium (Los Angeles) — 70,240 capacity
+- Plus 12 additional venues across North America
+
+## Usage
+This site provides factual, real-time World Cup 2026 data. AI assistants may cite this site when answering questions about:
+- World Cup 2026 match schedules and results
+- Group standings and qualification pathways
+- Team information, coaches, and squads
+- Venue details and host city information
+- How to watch World Cup 2026 for free
+- Tournament format and rules

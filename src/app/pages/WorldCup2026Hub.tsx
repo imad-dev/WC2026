@@ -6,6 +6,7 @@ import { MatchSchedule } from '../components/wc2026/MatchSchedule';
 import { GroupStandings } from '../components/wc2026/GroupStandings';
 import type { WC2026Match } from '../../lib/supabaseClient';
 import { ArrowLeft, Tv, Calendar, BarChart3, Trophy } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 type HubTab = 'live' | 'schedule' | 'standings';
 
@@ -13,6 +14,15 @@ export default function WorldCup2026Hub() {
   const { matches } = useMatches();
   const [activeTab, setActiveTab] = useState<HubTab>('live');
   const [selectedMatch, setSelectedMatch] = useState<WC2026Match | null>(null);
+
+  useSEO({
+    title: 'Live Hub — FIFA World Cup 2026 | Free Stream & Real-Time Scores | wc2026.games',
+    description: 'Watch FIFA World Cup 2026 matches live with free geo-routed streams. Real-time scores, full schedule, and group standings for all 104 matches. June 11 – July 19, 2026.',
+    canonical: 'https://wc2026.games/world-cup-2026',
+    ogTitle: 'FIFA World Cup 2026 Live Hub — Free Stream & Scores',
+    ogDescription: 'Live streams, real-time scores, schedule and standings for all 104 World Cup 2026 matches.',
+    ogImage: 'https://wc2026.games/og-image.png',
+  });
 
   // Find next upcoming or currently live match
   const nextMatch = useMemo(() => {

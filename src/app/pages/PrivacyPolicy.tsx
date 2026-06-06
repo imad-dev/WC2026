@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import { Shield, ArrowLeft } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 export default function PrivacyPolicy() {
+  useSEO({
+    title: 'Privacy Policy | World Cup 2026 | wc2026.games',
+    description: 'WC2026.games Privacy Policy — learn how we collect, use, and protect your data. Covers analytics, cookies, AdSense, GDPR and CCPA rights.',
+    canonical: 'https://wc2026.games/privacy',
+    ogTitle: 'Privacy Policy — WC2026.games',
+    ogDescription: 'How WC2026.games handles your data. Analytics, cookies, and your rights.',
+  });
+
   const sections = [
     {
       title: '1. Information We Collect',
@@ -10,7 +19,7 @@ export default function PrivacyPolicy() {
 • **Usage data**: Pages visited, time spent, buttons clicked, and general navigation patterns — collected automatically via Vercel Analytics. This data is anonymous and aggregated.
 • **Device & Browser information**: Browser type, operating system, screen resolution, and general geographic location (country/region level only) for analytics purposes.
 • **Contact information**: If you submit our Contact form, we collect your name, email address, and the message content solely to respond to your inquiry.
-• **Cookies**: We use session cookies necessary for the website to function and analytics cookies. We do not use advertising or tracking cookies.`,
+• **Cookies**: We use session cookies necessary for the website to function, analytics cookies, and third-party advertising cookies (such as Google AdSense).`,
     },
     {
       title: '2. How We Use Your Information',
@@ -18,24 +27,27 @@ export default function PrivacyPolicy() {
 
 • Provide and maintain the WC2026.games service
 • Understand how visitors use our site so we can improve it
+• Serve relevant advertisements to support the free operation of this site
 • Respond to your inquiries and support requests
 • Monitor and analyze usage trends
 • Ensure the technical security and proper functioning of our website
 
-We do not sell, trade, rent, or share your personal information with third parties for marketing purposes.`,
+We do not sell, trade, or rent your personal information to third parties, except as described in the third-party advertising section below.`,
     },
     {
       title: '3. Analytics (Vercel Analytics)',
       content: `We use Vercel Analytics to understand site traffic and usage. This service collects anonymized, aggregated data. It does not use cookies or fingerprinting. No personally identifiable information is associated with analytics data. You can learn more at vercel.com/analytics.`,
     },
     {
-      title: '4. Cookies',
-      content: `WC2026.games uses the following types of cookies:
+      title: '4. Advertising & Cookies (Google AdSense)',
+      content: `We use Google AdSense to serve advertisements. Google and its partners use cookies to serve ads based on your prior visits to our website and other sites on the internet.
 
-• **Essential cookies**: Required for the website to function (e.g., session management, UI state). You cannot opt out of these without disabling our site.
-• **Analytics cookies**: Used anonymously by Vercel Analytics to track aggregate page views. These do not identify you personally.
+• Third-party vendors, including Google, use cookies (such as the DoubleClick cookie) to serve ads based on a user's prior visits to your website or other websites.
+• Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.
+• You may opt out of personalized advertising by visiting **Google Ads Settings** (https://www.google.com/settings/ads).
+• Alternatively, you can opt out of some third-party vendors' uses of cookies for personalized advertising by visiting www.aboutads.info.
 
-We do not use advertising, behavioral tracking, or third-party marketing cookies. You may disable cookies in your browser settings; however, this may impact certain features of our site.`,
+You may also disable cookies entirely in your browser settings; however, this may impact certain features of our site.`,
     },
     {
       title: '5. Third-Party Links & Data',

@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import { FileText, ArrowLeft } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 export default function TermsOfService() {
+  useSEO({
+    title: 'Terms of Service | World Cup 2026 | wc2026.games',
+    description: 'WC2026.games Terms of Service — user conduct, intellectual property, disclaimer of affiliation with FIFA, and limitation of liability.',
+    canonical: 'https://wc2026.games/terms',
+    ogTitle: 'Terms of Service — WC2026.games',
+    ogDescription: 'Terms and conditions for using WC2026.games.',
+  });
+
   const sections = [
     {
       title: '1. Acceptance of Terms',

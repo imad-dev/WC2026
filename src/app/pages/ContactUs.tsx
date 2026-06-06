@@ -1,10 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MessageSquare, Send, CheckCircle, ArrowLeft } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
 export default function ContactUs() {
+  useSEO({
+    title: 'Contact Us | World Cup 2026 | wc2026.games',
+    description: 'Contact the WC2026.games team for general enquiries, data corrections, feature requests, or partnership opportunities. We respond within 48 hours.',
+    canonical: 'https://wc2026.games/contact',
+    ogTitle: 'Contact WC2026.games',
+    ogDescription: 'Get in touch with the WC2026.games team. We respond within 48 hours.',
+  });
+
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});

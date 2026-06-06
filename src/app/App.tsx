@@ -10,6 +10,8 @@ import { useTournamentPhase } from '../hooks/useTournamentPhase';
 import { NewsSection } from './components/NewsSection';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
+import { useSEO } from '../hooks/useSEO';
+import { StructuredData } from './components/StructuredData';
 
 const TABS = ['SCHEDULE', 'GROUPS', 'TEAMS', 'VENUES'] as const;
 type Tab = typeof TABS[number];
@@ -28,6 +30,15 @@ export default function App() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<Tab>('SCHEDULE');
   const { isPreTournament, daysUntilKickoff } = useTournamentPhase();
+
+  useSEO({
+    title: 'WC2026 — FIFA World Cup 2026 Live | Free Stream & Scores',
+    description: 'Watch all 104 FIFA World Cup 2026 matches live. Free geo-routed streams, real-time scores, group standings, and full schedule. June 11 – July 19, 2026.',
+    canonical: 'https://wc2026.games/',
+    ogTitle: 'Watch FIFA World Cup 2026 Live | Free Stream & Scores',
+    ogDescription: 'All 104 matches live. Free stream, real-time scores, group standings for all 48 teams.',
+    ogImage: 'https://wc2026.games/og-image.png',
+  });
 
   // Map tab to WC2026Schedule sub-view
   const scheduleView = activeTab === 'SCHEDULE' ? 'schedule'
