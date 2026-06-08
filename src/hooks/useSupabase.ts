@@ -25,7 +25,7 @@ export function useMatches() {
 
     // Realtime subscription
     const channel: RealtimeChannel = supabase
-      .channel('wc2026_matches_changes')
+      .channel(`wc2026_matches_changes_${Math.random().toString(36).slice(2)}`)
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'wc2026_matches' },
@@ -77,7 +77,7 @@ export function useConfig(key: string) {
 
     // Realtime subscription
     const channel: RealtimeChannel = supabase
-      .channel(`wc2026_config_${key}`)
+      .channel(`wc2026_config_${key}_${Math.random().toString(36).slice(2)}`)
       .on(
         'postgres_changes',
         {
@@ -167,7 +167,7 @@ export function useWCStandings(group?: string) {
     fetchStandings();
 
     const channel: RealtimeChannel = supabase
-      .channel('wc_standings_changes')
+      .channel(`wc_standings_changes_${Math.random().toString(36).slice(2)}`)
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'wc_standings' },
@@ -202,7 +202,7 @@ export function useWCScorers(limit = 20) {
     fetchScorers();
 
     const channel: RealtimeChannel = supabase
-      .channel('wc_scorers_changes')
+      .channel(`wc_scorers_changes_${Math.random().toString(36).slice(2)}`)
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'wc_scorers' },
