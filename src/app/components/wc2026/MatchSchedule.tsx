@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useMatches } from '../../../hooks/useSupabase';
 import type { WC2026Match } from '../../../lib/supabaseClient';
 import { Calendar, Trophy, Users, Loader2 } from 'lucide-react';
+import { PredictionWidget } from './PredictionWidget';
 
 interface MatchScheduleProps {
   onMatchClick?: (match: WC2026Match) => void;
@@ -217,19 +218,21 @@ function MatchCard({ match, onClick }: { match: WC2026Match; onClick: () => void
   const isUpcoming = match.status === 'upcoming';
 
   return (
-    <button
-      onClick={onClick}
+    <div
       className="w-full text-left rounded-xl p-3 border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg group"
       style={{
         background: isLive
           ? 'linear-gradient(135deg, rgba(0,230,118,0.08) 0%, var(--surface-1) 100%)'
           : 'var(--surface-1)',
         borderColor: isLive ? 'rgba(0,230,118,0.3)' : 'var(--border)',
-        cursor: match.youtube_video_id ? 'pointer' : 'default',
       }}
       id={`match-${match.match_number}`}
     >
-      {/* Top row: group/round + time + status */}
+      <div 
+        onClick={onClick} 
+        className="cursor-pointer"
+      >
+        {/* Top row: group/round + time + status */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           {match.group_name ? (
@@ -334,6 +337,16 @@ function MatchCard({ match, onClick }: { match: WC2026Match; onClick: () => void
       <div className="mt-2 text-[10px] truncate" style={{ color: 'var(--white-ghost)' }}>
         📍 {match.venue}
       </div>
-    </button>
+      </div>
+
+      {/* Interactive Predictor */}
+      <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
+        <PredictionWidget 
+          matchId={match.id} 
+          teamA={match.home_team} 
+          teamB={match.away_team} 
+        />
+      </div>
+    </div>
   );
 }

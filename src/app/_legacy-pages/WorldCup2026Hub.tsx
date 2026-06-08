@@ -5,6 +5,7 @@ import { useMatches } from '../../hooks/useSupabase';
 import { LivePlayer } from '../components/wc2026/LivePlayer';
 import { MatchSchedule } from '../components/wc2026/MatchSchedule';
 import { GroupStandings } from '../components/wc2026/GroupStandings';
+import { HeroCountdown } from '../components/wc2026/HeroCountdown';
 import type { WC2026Match } from '../../lib/supabaseClient';
 import { ArrowLeft, Tv, Calendar, BarChart3, Trophy } from 'lucide-react';
 
@@ -121,56 +122,7 @@ export default function WorldCup2026Hub() {
       </header>
 
       {/* ── Hero Banner ── */}
-      <div className="relative overflow-hidden" style={{
-        background: `
-          linear-gradient(180deg,
-            rgba(0,230,118,0.06) 0%,
-            transparent 40%
-          ),
-          radial-gradient(ellipse at 70% 0%, rgba(255,179,0,0.04) 0%, transparent 50%),
-          var(--void)
-        `,
-      }}>
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-8 md:py-12">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-[11px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" style={{
-                  background: 'rgba(0,230,118,0.12)',
-                  color: 'var(--green-live)',
-                  border: '1px solid rgba(0,230,118,0.2)',
-                }}>
-                  Live Hub
-                </span>
-                <span className="text-[11px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" style={{
-                  background: 'rgba(255,179,0,0.12)',
-                  color: 'var(--gold-leader)',
-                  border: '1px solid rgba(255,179,0,0.2)',
-                }}>
-                  🇺🇸 🇲🇽 🇨🇦
-                </span>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-extrabold mb-1" style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--white-primary)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.1,
-              }}>
-                Watch Every Match <span style={{ color: 'var(--green-live)' }}>Live</span>
-              </h1>
-              <p className="text-sm md:text-base" style={{ color: 'var(--white-muted)' }}>
-                All 104 matches · Real-time scores · Free streams · Group standings
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--white-ghost)' }}>
-              <span>June 11 – July 19, 2026</span>
-              <span>·</span>
-              <span>48 teams · 16 venues</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeroCountdown />
 
       {/* ── Tab Navigation ── */}
       <div className="sticky top-14 z-40 border-b" style={{
