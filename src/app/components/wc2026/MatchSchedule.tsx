@@ -342,7 +342,7 @@ function MatchCard({ match, onClick }: { match: WC2026Match; onClick: () => void
       {/* Interactive Predictor */}
       <div className="mt-4 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
         <PredictionWidget 
-          matchId={match.id} 
+          matchId={String(match.id)} 
           teamA={match.home_team} 
           teamB={match.away_team} 
         />
