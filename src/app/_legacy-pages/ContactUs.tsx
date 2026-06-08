@@ -1,18 +1,11 @@
+"use client";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Mail, MessageSquare, Send, CheckCircle, ArrowLeft } from 'lucide-react';
-import { useSEO } from '../../hooks/useSEO';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
 export default function ContactUs() {
-  useSEO({
-    title: 'Contact Us | World Cup 2026 | wc2026.games',
-    description: 'Contact the WC2026.games team for general enquiries, data corrections, feature requests, or partnership opportunities. We respond within 48 hours.',
-    canonical: 'https://wc2026.games/contact',
-    ogTitle: 'Contact WC2026.games',
-    ogDescription: 'Get in touch with the WC2026.games team. We respond within 48 hours.',
-  });
 
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState<Status>('idle');
@@ -82,7 +75,7 @@ export default function ContactUs() {
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>
       {/* Header */}
       <div className="border-b px-6 md:px-20 py-4 flex items-center gap-4" style={{ borderColor: 'var(--border)', background: 'var(--surface-glass)', backdropFilter: 'blur(20px)' }}>
-        <Link to="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
+        <Link href="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
           <ArrowLeft className="w-4 h-4" /> Back to Dashboard
         </Link>
         <span style={{ color: 'var(--border)' }}>|</span>
@@ -200,7 +193,7 @@ export default function ContactUs() {
                   </button>
                   <p className="text-xs text-center" style={{ color: 'var(--white-ghost)' }}>
                     By submitting, you agree to our{' '}
-                    <Link to="/privacy" className="underline hover:text-white">Privacy Policy</Link>
+                    <Link href="/privacy" className="underline hover:text-white">Privacy Policy</Link>
                   </p>
                 </form>
               )}
@@ -217,10 +210,10 @@ function PageFooter() {
   return (
     <footer className="border-t mt-16 py-8 px-6 md:px-20 text-center text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
       <div className="flex flex-wrap justify-center gap-6 mb-3">
-        <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
-        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-        <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-        <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
       </div>
       <p>© 2026 WC2026.games · All rights reserved · Not affiliated with FIFA</p>
     </footer>

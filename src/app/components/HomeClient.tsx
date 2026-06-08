@@ -1,17 +1,17 @@
+"use client";
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Search, Newspaper, Globe, Tv } from 'lucide-react';
-import { Hero } from './components/Hero';
-import { TournamentKPIs } from './components/TournamentKPIs';
-import { WC2026Schedule } from './components/WC2026Schedule';
-import { LiveScoresWidget } from './components/LiveScoresWidget';
-import { CountdownBanner } from './components/CountdownBanner';
-import { useTournamentPhase } from '../hooks/useTournamentPhase';
-import { NewsSection } from './components/NewsSection';
+import { Hero } from './Hero';
+import { TournamentKPIs } from './TournamentKPIs';
+import { WC2026Schedule } from './WC2026Schedule';
+import { LiveScoresWidget } from './LiveScoresWidget';
+import { CountdownBanner } from './CountdownBanner';
+import { useTournamentPhase } from '../../hooks/useTournamentPhase';
+import { NewsSection } from './NewsSection';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher } from './components/LanguageSwitcher';
-import { useSEO } from '../hooks/useSEO';
-import { StructuredData } from './components/StructuredData';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 const TABS = ['SCHEDULE', 'GROUPS', 'TEAMS', 'VENUES'] as const;
 type Tab = typeof TABS[number];
@@ -31,14 +31,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('SCHEDULE');
   const { isPreTournament, daysUntilKickoff } = useTournamentPhase();
 
-  useSEO({
-    title: 'WC2026 — FIFA World Cup 2026 Live | Free Stream & Scores',
-    description: 'Watch all 104 FIFA World Cup 2026 matches live. Free geo-routed streams, real-time scores, group standings, and full schedule. June 11 – July 19, 2026.',
-    canonical: 'https://wc2026.games/',
-    ogTitle: 'Watch FIFA World Cup 2026 Live | Free Stream & Scores',
-    ogDescription: 'All 104 matches live. Free stream, real-time scores, group standings for all 48 teams.',
-    ogImage: 'https://wc2026.games/og-image.png',
-  });
+  // SEO metadata is now handled by Next.js Metadata API in src/app/layout.tsx
 
   // Map tab to WC2026Schedule sub-view
   const scheduleView = activeTab === 'SCHEDULE' ? 'schedule'
@@ -70,7 +63,7 @@ export default function App() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link to="/world-cup-2026"
+            <Link href="/world-cup-2026"
               id="nav-live"
               className="flex items-center gap-1.5 text-sm font-extrabold transition-all duration-200 pb-1"
               style={{ color: 'var(--green-live)', letterSpacing: '0.02em' }}>
@@ -91,7 +84,7 @@ export default function App() {
                 )}
               </button>
             ))}
-            <Link to="/news"
+            <Link href="/news"
               id="nav-news"
               className="flex items-center gap-1.5 text-sm font-medium transition-all duration-200 pb-1"
               style={{ color: 'var(--white-muted)', letterSpacing: '0.02em' }}
@@ -239,7 +232,7 @@ export default function App() {
       {/* ── MOBILE BOTTOM NAV ── */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t grid grid-cols-5 h-16"
         style={{ background: 'var(--surface-glass)', backdropFilter: 'blur(20px)', borderColor: 'var(--border)' }}>
-        <Link to="/world-cup-2026" id="mobile-nav-live"
+        <Link href="/world-cup-2026" id="mobile-nav-live"
             className="flex flex-col items-center justify-center gap-1"
             style={{ color: 'var(--green-live)' }}>
             <Tv className="w-5 h-5 animate-pulse" />
@@ -271,10 +264,10 @@ export default function App() {
             </div>
             {/* Links */}
             <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
-              <Link to="/about" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.about')}</Link>
-              <Link to="/contact" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.contact')}</Link>
-              <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.privacy')}</Link>
-              <Link to="/terms" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.terms')}</Link>
+              <Link href="/about" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.about')}</Link>
+              <Link href="/contact" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.contact')}</Link>
+              <Link href="/privacy" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.privacy')}</Link>
+              <Link href="/terms" className="transition-colors hover:text-white" style={{ color: 'var(--white-ghost)' }}>{t('footer.terms')}</Link>
             </nav>
           </div>
           <div className="border-t pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>

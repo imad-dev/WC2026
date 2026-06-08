@@ -1,15 +1,8 @@
-import { Link } from 'react-router-dom';
+"use client";
+import Link from 'next/link';
 import { Shield, ArrowLeft } from 'lucide-react';
-import { useSEO } from '../../hooks/useSEO';
 
 export default function PrivacyPolicy() {
-  useSEO({
-    title: 'Privacy Policy | World Cup 2026 | wc2026.games',
-    description: 'WC2026.games Privacy Policy — learn how we collect, use, and protect your data. Covers analytics, cookies, AdSense, GDPR and CCPA rights.',
-    canonical: 'https://wc2026.games/privacy',
-    ogTitle: 'Privacy Policy — WC2026.games',
-    ogDescription: 'How WC2026.games handles your data. Analytics, cookies, and your rights.',
-  });
 
   const sections = [
     {
@@ -91,7 +84,7 @@ To exercise any of these rights, please contact us at legal@wc2026.games. We wil
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>
       {/* Header */}
       <div className="border-b px-6 md:px-20 py-4 flex items-center gap-4" style={{ borderColor: 'var(--border)', background: 'var(--surface-glass)', backdropFilter: 'blur(20px)' }}>
-        <Link to="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
+        <Link href="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
           <ArrowLeft className="w-4 h-4" /> Back to Dashboard
         </Link>
         <span style={{ color: 'var(--border)' }}>|</span>
@@ -150,10 +143,10 @@ function PageFooter() {
   return (
     <footer className="border-t mt-16 py-8 px-6 md:px-20 text-center text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
       <div className="flex flex-wrap justify-center gap-6 mb-3">
-        <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
-        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-        <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-        <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
       </div>
       <p>© 2026 WC2026.games · All rights reserved · Not affiliated with FIFA</p>
     </footer>

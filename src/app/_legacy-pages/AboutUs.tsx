@@ -1,21 +1,14 @@
-import { Link } from 'react-router-dom';
+"use client";
+import Link from 'next/link';
 import { Globe, Trophy, Users, Zap, Target, Heart, ArrowLeft } from 'lucide-react';
-import { useSEO } from '../../hooks/useSEO';
 
 export default function AboutUs() {
-  useSEO({
-    title: 'About Us | World Cup 2026 | wc2026.games',
-    description: 'Learn about WC2026.games — the ultimate FIFA World Cup 2026 hub. Built by football fans, for football fans. Real-time scores, free streams, and complete coverage.',
-    canonical: 'https://wc2026.games/about',
-    ogTitle: 'About WC2026.games — FIFA World Cup 2026 Hub',
-    ogDescription: 'The ultimate World Cup 2026 destination. Accurate data, live scores, free streams.',
-  });
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>
       {/* Header */}
       <div className="border-b px-6 md:px-20 py-4 flex items-center gap-4" style={{ borderColor: 'var(--border)', background: 'var(--surface-glass)', backdropFilter: 'blur(20px)' }}>
-        <Link to="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
+        <Link href="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
           <ArrowLeft className="w-4 h-4" /> Back to Dashboard
         </Link>
         <span style={{ color: 'var(--border)' }}>|</span>
@@ -123,7 +116,7 @@ export default function AboutUs() {
         {/* Contact CTA */}
         <div className="text-center">
           <p className="text-sm mb-4" style={{ color: 'var(--white-ghost)' }}>Have questions or suggestions?</p>
-          <Link to="/contact"
+          <Link href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all hover:opacity-90"
             style={{ background: 'var(--green-live)', color: 'var(--void)' }}>
             Get in Touch →
@@ -140,10 +133,10 @@ function PageFooter() {
   return (
     <footer className="border-t mt-16 py-8 px-6 md:px-20 text-center text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
       <div className="flex flex-wrap justify-center gap-6 mb-3">
-        <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
-        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-        <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-        <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
       </div>
       <p>© 2026 WC2026.games · All rights reserved · Not affiliated with FIFA</p>
     </footer>

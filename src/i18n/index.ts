@@ -32,12 +32,16 @@ i18n
 
 // Setup document direction based on language
 i18n.on('languageChanged', (lng) => {
-  document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
-  document.documentElement.lang = lng;
+  if (typeof document !== 'undefined') {
+    document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lng;
+  }
 });
 
-// Run once on init
-document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
-document.documentElement.lang = i18n.language || 'en';
+// Run once on init (browser only)
+if (typeof document !== 'undefined') {
+  document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = i18n.language || 'en';
+}
 
 export default i18n;

@@ -1,28 +1,21 @@
+"use client";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowLeft, Newspaper, RefreshCw } from 'lucide-react';
 import { useFootballNews, NEWS_TABS, type NewsTabKey } from '../../hooks/useFootballNews';
 import { NewsCard, NewsCardSkeleton } from '../components/NewsCard';
-import { useSEO } from '../../hooks/useSEO';
 
 export default function NewsPage() {
   const [activeTab, setActiveTab] = useState<NewsTabKey>('all');
   const { items, loading, error } = useFootballNews(activeTab);
 
-  useSEO({
-    title: 'World Cup 2026 News & Updates | wc2026.games',
-    description: 'Latest FIFA World Cup 2026 news, team updates, transfer rumours, and match previews. Follow all 48 teams on their road to the 2026 World Cup.',
-    canonical: 'https://wc2026.games/news',
-    ogTitle: 'World Cup 2026 News — Latest Updates & Previews',
-    ogDescription: 'Latest news and updates for FIFA World Cup 2026. All 48 teams covered.',
-  });
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--void)', fontFamily: 'var(--font-body)' }}>
       {/* Top bar */}
       <div className="sticky top-0 z-50 border-b px-4 md:px-8 lg:px-20 py-3 flex items-center gap-4"
         style={{ borderColor: 'var(--border)', background: 'var(--surface-glass)', backdropFilter: 'blur(20px)' }}>
-        <Link to="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
+        <Link href="/" className="flex items-center gap-2 text-sm transition-colors hover:opacity-80" style={{ color: 'var(--green-live)' }}>
           <ArrowLeft className="w-4 h-4" /> Home
         </Link>
         <span style={{ color: 'var(--border)' }}>|</span>
@@ -158,11 +151,11 @@ function PageFooter() {
   return (
     <footer className="border-t mt-16 py-8 px-6 md:px-20 text-center text-xs" style={{ borderColor: 'var(--border)', color: 'var(--white-ghost)' }}>
       <div className="flex flex-wrap justify-center gap-6 mb-3">
-        <Link to="/" className="hover:text-white transition-colors">Home</Link>
-        <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
-        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-        <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-        <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
+        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
       </div>
       <p>© 2026 WC2026.games · News sourced from BBC Sport · Not affiliated with FIFA</p>
     </footer>

@@ -1,18 +1,11 @@
 /**
- * Vercel Serverless Cron — /api/cron/sync-streams
+ * Next.js Route Handler — /api/cron/sync-streams
  *
- * Runs every 15 minutes.
  * Searches YouTube Data API v3 for a current live stream
  * on the beIN MENA channel → upserts into wc2026_config.
- *
- * Env vars required:
- *   - YOUTUBE_DATA_API_KEY
- *   - CRON_SECRET
- *   - SUPABASE_URL
- *   - SUPABASE_SERVICE_ROLE_KEY
  */
 
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 const BEIN_CHANNEL_ID = 'UCnMBNOyoFGLGHRlMSHjLSEg';
@@ -25,11 +18,13 @@ interface YouTubeSearchItem {
   };
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function GET(request: NextRequest) {
   // ── Auth ──
-  const secret = req.headers['authorization']?.replace('Bearer ', '') || req.headers['x-cron-secret'];
+  const secret =
+    request.headers.get('authorization')?.replace('Bearer ', '') ||
+    request.headers.get('x-cron-secret');
   if (secret !== process.env.CRON_SECRET) {
-    return res.status(401).json({ error: 'Unauthorized' });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const supabase = createClient(
@@ -38,7 +33,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   );
 
   try {
-    // Search for live videos on beIN MENA channel
     const searchUrl = new URL('https://www.googleapis.com/youtube/v3/search');
     searchUrl.searchParams.set('part', 'snippet');
     searchUrl.searchParams.set('channelId', BEIN_CHANNEL_ID);
@@ -62,7 +56,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       videoId = items[0].id.videoId;
     }
 
-    // Upsert into wc2026_config
     const { error } = await supabase
       .from('wc2026_config')
       .upsert(
@@ -76,13 +69,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (error) throw error;
 
-    return res.status(200).json({
+    return NextResponse.json({
       success: true,
       bein_live_video_id: videoId,
       found: items.length > 0,
     });
   } catch (err: any) {
     console.error('sync-streams error:', err);
-    return res.status(500).json({ error: err.message });
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

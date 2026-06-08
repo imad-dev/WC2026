@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Newspaper, ChevronRight, RefreshCw } from 'lucide-react';
 import { useFootballNews, NEWS_TABS, type NewsTabKey } from '../../hooks/useFootballNews';
 import { NewsCard, NewsCardSkeleton } from './NewsCard';
@@ -24,7 +26,7 @@ export function NewsSection() {
           </h2>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--green-live)' }} />
         </div>
-        <Link to="/news"
+        <Link href="/news"
           className="flex items-center gap-1 text-xs font-semibold transition-colors hover:opacity-80"
           style={{ color: 'var(--green-live)' }}>
           {t('news.viewAll')} <ChevronRight className="w-3.5 h-3.5" />
@@ -44,7 +46,7 @@ export function NewsSection() {
             <span>{tab.flag}</span> {tab.label}
           </button>
         ))}
-          <Link to="/news"
+          <Link href="/news"
           className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border transition-all hover:border-green-500"
           style={{ border: '1px solid var(--border)', color: 'var(--white-ghost)' }}>
           {t('news.more')}
@@ -57,7 +59,7 @@ export function NewsSection() {
           style={{ background: 'rgba(255,61,87,0.08)', borderColor: 'rgba(255,61,87,0.3)', color: 'var(--white-muted)' }}>
           <RefreshCw className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--red-loss)' }} />
           {error}
-          <Link to="/news" className="ml-auto text-xs underline" style={{ color: 'var(--green-live)' }}>Try full page</Link>
+          <Link href="/news" className="ml-auto text-xs underline" style={{ color: 'var(--green-live)' }}>Try full page</Link>
         </div>
       )}
 
