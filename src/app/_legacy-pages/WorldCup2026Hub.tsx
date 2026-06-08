@@ -304,6 +304,19 @@ export default function WorldCup2026Hub() {
             sport: 'Football/Soccer',
             competitor: '48 national teams',
             url: 'https://wc2026.games/world-cup-2026',
+            performer: [
+              {
+                '@type': 'SportsTeam',
+                name: '48 National Teams',
+              }
+            ],
+            offers: {
+              '@type': 'Offer',
+              url: 'https://wc2026.games/world-cup-2026',
+              price: '0',
+              priceCurrency: 'USD',
+              availability: 'https://schema.org/InStock',
+            },
           }),
         }}
       />

@@ -69,6 +69,19 @@ const jsonLdSportsEvent = {
   sport: 'Football/Soccer',
   url: 'https://wc2026.games',
   image: 'https://wc2026.games/og-image.png',
+  performer: [
+    {
+      '@type': 'SportsTeam',
+      name: '48 National Teams',
+    }
+  ],
+  offers: {
+    '@type': 'Offer',
+    url: 'https://wc2026.games',
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
 };
 
 const jsonLdOrganization = {
