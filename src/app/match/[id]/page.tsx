@@ -12,10 +12,9 @@ interface Props {
 
 // 1. Static Params Generation for Build-Time Statically Generated Pages
 export async function generateStaticParams() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder';
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { data: matches } = await supabase
     .from('wc2026_matches')
@@ -33,10 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const matchId = resolvedParams.id;
   
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder';
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { data: match } = await supabase
     .from('wc2026_matches')
@@ -78,10 +76,9 @@ export default async function MatchPage({ params }: Props) {
   const resolvedParams = await params;
   const matchId = resolvedParams.id;
   
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder';
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { data: match } = await supabase
     .from('wc2026_matches')
