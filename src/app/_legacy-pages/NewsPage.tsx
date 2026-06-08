@@ -41,7 +41,7 @@ export default function NewsPage() {
           </h1>
         </div>
         <p className="text-sm mb-8" style={{ color: 'var(--white-muted)' }}>
-          Latest football news from BBC Sport — filter by team to follow your favourite nations to WC2026.
+          Latest football news from FIFA — filter by team to follow your favourite nations to WC2026.
         </p>
 
         {/* Tab bar — all teams */}
@@ -157,7 +157,7 @@ function PageFooter() {
         <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
         <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
       </div>
-      <p>© 2026 WC2026.games · News sourced from BBC Sport · Not affiliated with FIFA</p>
+      <p>© 2026 WC2026.games · News sourced from FIFA · Not affiliated with FIFA</p>
     </footer>
   );
 }
