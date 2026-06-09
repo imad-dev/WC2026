@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
-import I18nProvider from './components/I18nProvider';
+import { NavBar } from './components/NavBar';
+import { PageWrapper } from '../components/layout/PageWrapper';
+import { Footer } from '../components/layout/Footer';
 import '../styles/index.css';
+import { Bebas_Neue, Inter, Roboto_Mono } from 'next/font/google';
+
+const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--font-display' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
+const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
   title: 'WC2026 — FIFA World Cup 2026 Live | Free Stream & Scores',
@@ -32,7 +40,7 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   robots: 'index, follow',
-  other: { 'theme-color': '#060810' },
+  other: { 'theme-color': '#0a0e1a' },
 };
 
 // JSON-LD structured data
@@ -96,35 +104,37 @@ const jsonLdOrganization = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${bebasNeue.variable} ${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <script
+        <Script
+          id="jsonld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
         />
-        <script
+        <Script
+          id="jsonld-sportsevent"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSportsEvent) }}
         />
-        <script
+        <Script
+          id="jsonld-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
         />
         {/* Google AdSense */}
-        <script
+        <Script
+          id="adsense"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1999755644541481"
           crossOrigin="anonymous"
         />
       </head>
-      <body style={{ height: '100%', margin: 0 }}>
-        <I18nProvider>{children}</I18nProvider>
+      <body style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }} suppressHydrationWarning>
+        <NavBar />
+        <PageWrapper>
+          {children}
+        </PageWrapper>
+        <Footer />
         <Analytics />
       </body>
     </html>

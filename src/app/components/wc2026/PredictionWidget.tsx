@@ -71,7 +71,6 @@ export function PredictionWidget({ matchId, teamA, teamB }: PredictionWidgetProp
     setStats(prev => {
       if (!prev) return { team_a_pct: selectedChoice === 'team_a' ? 100 : 0, draw_pct: selectedChoice === 'draw' ? 100 : 0, team_b_pct: selectedChoice === 'team_b' ? 100 : 0, total_votes: 1 };
       
-      // Rough optimistic update (not perfectly math-accurate but good for instant feedback)
       const newTotal = prev.total_votes + 1;
       return {
         ...prev,
@@ -96,61 +95,77 @@ export function PredictionWidget({ matchId, teamA, teamB }: PredictionWidgetProp
   };
 
   if (loading) {
-    return <div className="h-8 animate-pulse rounded bg-[var(--surface-3)] w-full max-w-md mx-auto mt-4"></div>;
+    return <div className="h-14 animate-pulse rounded bg-[var(--wc-surface-2)] w-full"></div>;
   }
 
   if (hasVoted && stats) {
     return (
-      <div className="w-full max-w-md mx-auto mt-4 transition-all duration-500">
-        <div className="flex justify-between text-xs mb-1 font-semibold" style={{ color: 'var(--white-muted)' }}>
-          <span className={choice === 'team_a' ? 'text-[var(--green-live)]' : ''}>{stats.team_a_pct}% {teamA}</span>
-          <span className={choice === 'draw' ? 'text-[var(--green-live)]' : ''}>{stats.draw_pct}% Draw</span>
-          <span className={choice === 'team_b' ? 'text-[var(--green-live)]' : ''}>{stats.team_b_pct}% {teamB}</span>
+      <div className="w-full transition-all duration-500">
+        <div className="flex justify-between items-end mb-2">
+           <span className="text-[9px] sm:text-[10px] font-bold tracking-widest text-[var(--wc-text-muted)] uppercase">Poll Results</span>
+           <span className="text-[9px] sm:text-[10px] font-mono text-[var(--wc-text-muted)]">
+             <span className={choice === 'team_a' ? 'text-[var(--wc-green)]' : 'text-white'}>{stats.team_a_pct}%</span> / <span className={choice === 'draw' ? 'text-[var(--wc-gold)]' : 'text-white'}>{stats.draw_pct}%</span> / <span className={choice === 'team_b' ? 'text-[var(--wc-red)]' : 'text-white'}>{stats.team_b_pct}%</span>
+           </span>
         </div>
-        <div className="flex h-2 w-full rounded-full overflow-hidden bg-[var(--surface-3)]">
+        <div className="flex h-2.5 w-full rounded-full overflow-hidden bg-[var(--wc-surface-2)] shadow-inner">
           <div 
-            style={{ width: `${stats.team_a_pct}%`, backgroundColor: choice === 'team_a' ? 'var(--green-live)' : 'var(--blue-ref)' }} 
-            className="h-full transition-all duration-1000 ease-out"
+            style={{ 
+              width: `${stats.team_a_pct}%`, 
+              backgroundColor: choice === 'team_a' ? 'var(--wc-green)' : 'var(--wc-border)',
+              transition: 'width 400ms cubic-bezier(0.16, 1, 0.3, 1), background-color 400ms'
+            }} 
+            className="h-full"
           />
           <div 
-            style={{ width: `${stats.draw_pct}%`, backgroundColor: choice === 'draw' ? 'var(--green-live)' : 'var(--white-muted)' }} 
-            className="h-full transition-all duration-1000 ease-out border-x border-[var(--void)]"
+            style={{ 
+              width: `${stats.draw_pct}%`, 
+              backgroundColor: choice === 'draw' ? 'var(--wc-gold)' : 'var(--wc-border)',
+              transition: 'width 400ms cubic-bezier(0.16, 1, 0.3, 1), background-color 400ms'
+            }} 
+            className="h-full border-x border-[var(--wc-dark)]"
           />
           <div 
-            style={{ width: `${stats.team_b_pct}%`, backgroundColor: choice === 'team_b' ? 'var(--green-live)' : 'var(--morocco-red)' }} 
-            className="h-full transition-all duration-1000 ease-out"
+            style={{ 
+              width: `${stats.team_b_pct}%`, 
+              backgroundColor: choice === 'team_b' ? 'var(--wc-red)' : 'var(--wc-border)',
+              transition: 'width 400ms cubic-bezier(0.16, 1, 0.3, 1), background-color 400ms'
+            }} 
+            className="h-full"
           />
         </div>
-        <div className="text-center text-[10px] mt-1" style={{ color: 'var(--white-ghost)' }}>
-          {stats.total_votes} predictions
+        <div className="text-right text-[9px] mt-1 text-[var(--wc-text-muted)] tracking-wider">
+          {stats.total_votes} votes
         </div>
       </div>
     );
   }
 
+  // Truncate long team names for button labels
+  const shortenName = (name: string) => name.length > 8 ? name.slice(0, 7) + '.' : name;
+
   return (
-    <div className="flex justify-center gap-2 mt-4">
-      <button 
-        onClick={() => handleVote('team_a')}
-        className="flex-1 py-1.5 px-3 text-xs font-semibold rounded border border-[var(--border)] transition-colors hover:bg-[var(--surface-3)] hover:text-white"
-        style={{ color: 'var(--white-muted)' }}
-      >
-        {teamA} Win
-      </button>
-      <button 
-        onClick={() => handleVote('draw')}
-        className="flex-1 py-1.5 px-3 text-xs font-semibold rounded border border-[var(--border)] transition-colors hover:bg-[var(--surface-3)] hover:text-white"
-        style={{ color: 'var(--white-muted)' }}
-      >
-        Draw
-      </button>
-      <button 
-        onClick={() => handleVote('team_b')}
-        className="flex-1 py-1.5 px-3 text-xs font-semibold rounded border border-[var(--border)] transition-colors hover:bg-[var(--surface-3)] hover:text-white"
-        style={{ color: 'var(--white-muted)' }}
-      >
-        {teamB} Win
-      </button>
+    <div>
+      <div className="text-[9px] sm:text-[10px] font-bold tracking-widest text-[var(--wc-text-muted)] uppercase mb-2">Who wins?</div>
+      <div className="flex gap-1.5 sm:gap-2">
+        <button 
+          onClick={(e) => { e.stopPropagation(); handleVote('team_a'); }}
+          className="flex-1 py-2 px-1.5 sm:px-2 text-[9px] sm:text-[10px] font-bold rounded-lg border border-[var(--wc-border)] bg-[rgba(255,255,255,0.04)] text-[var(--wc-text-muted)] transition-all hover:border-[var(--wc-green)] hover:text-white hover:bg-[rgba(0,166,81,0.1)] active:scale-95 truncate"
+        >
+          {shortenName(teamA)}
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); handleVote('draw'); }}
+          className="shrink-0 py-2 px-3 sm:px-4 text-[9px] sm:text-[10px] font-bold rounded-lg border border-[var(--wc-border)] bg-[rgba(255,255,255,0.04)] text-[var(--wc-text-muted)] transition-all hover:border-[var(--wc-gold)] hover:text-white hover:bg-[rgba(245,166,35,0.1)] active:scale-95"
+        >
+          DRAW
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); handleVote('team_b'); }}
+          className="flex-1 py-2 px-1.5 sm:px-2 text-[9px] sm:text-[10px] font-bold rounded-lg border border-[var(--wc-border)] bg-[rgba(255,255,255,0.04)] text-[var(--wc-text-muted)] transition-all hover:border-[var(--wc-red)] hover:text-white hover:bg-[rgba(232,0,29,0.1)] active:scale-95 truncate"
+        >
+          {shortenName(teamB)}
+        </button>
+      </div>
     </div>
   );
 }

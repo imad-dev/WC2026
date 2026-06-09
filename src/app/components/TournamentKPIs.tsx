@@ -1,39 +1,41 @@
-import { useTranslation } from 'react-i18next';
 import { TOURNAMENT_INFO } from '../../data/wc2026Static';
+import { Users, Trophy, MapPin, Calendar, DollarSign, Tv } from 'lucide-react';
 
 export function TournamentKPIs() {
-  const { t } = useTranslation();
   const stats = [
-    { label: t('kpi.teams'), value: String(TOURNAMENT_INFO.totalTeams), sub: t('kpi.teams_sub'), color: 'var(--green-live)' },
-    { label: t('kpi.matches'), value: String(TOURNAMENT_INFO.totalMatches), sub: t('kpi.matches_sub'), color: 'var(--gold-leader)' },
-    { label: t('kpi.venues'), value: String(TOURNAMENT_INFO.totalStadiums), sub: t('kpi.venues_sub'), color: 'var(--blue-ref)' },
-    { label: t('kpi.max_cap'), value: '87.5K', sub: t('kpi.max_cap_sub'), color: 'var(--red-loss)' },
-    { label: t('kpi.duration'), value: '39', sub: t('kpi.duration_sub'), color: 'var(--amber-draw)' },
-    { label: t('kpi.prize_fund'), value: '$1B', sub: t('kpi.prize_fund_sub'), color: 'var(--green-live)' },
+    { label: 'TEAMS', value: String(TOURNAMENT_INFO.totalTeams), sub: 'From 6 confederations', color: 'var(--wc-green)', Icon: Users },
+    { label: 'MATCHES', value: String(TOURNAMENT_INFO.totalMatches), sub: 'Across 3 countries', color: 'var(--wc-gold)', Icon: Trophy },
+    { label: 'VENUES', value: String(TOURNAMENT_INFO.totalStadiums), sub: 'Host cities', color: 'var(--wc-blue-ref)', Icon: MapPin },
+    { label: 'MAX CAPACITY', value: '87.5K', sub: 'Estadio Azteca', color: 'var(--wc-red)', Icon: Tv },
+    { label: 'DAYS', value: '39', sub: 'Of tournament play', color: 'var(--wc-gold)', Icon: Calendar },
+    { label: 'PRIZE FUND', value: '$1B', sub: 'Record prize pool', color: 'var(--wc-green)', Icon: DollarSign },
   ];
 
   return (
     <section id="tournament-kpis">
-      <div className="text-xs uppercase tracking-widest mb-4" style={{ color: 'var(--white-ghost)', letterSpacing: '0.1em' }}>
-        {t('kpi.overview')}
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <p className="text-xs uppercase tracking-[0.2em] mb-6 text-[var(--wc-text-muted)] font-semibold">
+        Tournament Overview
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-lg p-4 border text-center transition-all duration-200 hover:-translate-y-0.5"
-            style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}
+            className="rounded-xl p-5 border text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-[var(--wc-surface)] border-[var(--wc-border)] group"
           >
+            <stat.Icon
+              className="w-4 h-4 mx-auto mb-2 opacity-60 group-hover:opacity-100 transition-opacity"
+              style={{ color: stat.color }}
+            />
             <div
-              className="text-2xl font-extrabold tabular-nums"
+              className="text-3xl font-extrabold tabular-nums"
               style={{ fontFamily: 'var(--font-display)', color: stat.color }}
             >
               {stat.value}
             </div>
-            <div className="text-xs font-semibold uppercase mt-0.5" style={{ color: 'var(--white-primary)' }}>
+            <div className="text-[10px] font-bold uppercase mt-1 text-white tracking-wider">
               {stat.label}
             </div>
-            <div className="text-[10px] mt-0.5" style={{ color: 'var(--white-ghost)' }}>
+            <div className="text-[10px] mt-1 text-[var(--wc-text-muted)]">
               {stat.sub}
             </div>
           </div>

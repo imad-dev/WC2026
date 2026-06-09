@@ -1,63 +1,158 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-size: 16px;
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --wc-red:        #e8001d;   /* FIFA red */
+  --wc-green:      #00a651;   /* Pitch green */
+  --wc-gold:       #f5a623;   /* Trophy gold */
+  --wc-blue-ref:   #003087;   /* Referee blue */
+  --wc-dark:       #0a0e1a;   /* Deep navy black */
+  --wc-surface:    #111827;   /* Card surface */
+  --wc-surface-2:  #1a2235;   /* Elevated surface */
+  --wc-border:     rgba(255,255,255,0.08);
+  --wc-text:       #f0f4ff;
+  --wc-text-muted: #8a9bb5;
+  --wc-live:       #00ff87;   /* Live pulse green */
 
-  /* PRECISION BROADCAST Design Tokens */
-  --void: #060810;
-  --surface-1: #0C1020;
-  --surface-2: #121828;
-  --surface-3: #1A2235;
-  --surface-glass: rgba(18, 24, 40, 0.72);
-  --border: rgba(255, 255, 255, 0.06);
+  /* Map old variables to new ones for compatibility */
+  --void: var(--wc-dark);
+  --surface-1: var(--wc-surface);
+  --surface-2: var(--wc-surface-2);
+  --surface-3: #222b40;
+  --surface-glass: rgba(17, 24, 39, 0.72);
+  --border: var(--wc-border);
   --border-active: rgba(255, 255, 255, 0.14);
 
-  --green-live: #00E676;
-  --green-dim: #00A152;
-  --gold-leader: #FFB300;
+  --green-live: var(--wc-live);
+  --green-dim: var(--wc-green);
+  --gold-leader: var(--wc-gold);
   --gold-dim: #C68400;
-  --red-loss: #FF3D57;
+  --red-loss: var(--wc-red);
   --amber-draw: #FFB74D;
-  --blue-ref: #448AFF;
-  --white-primary: #F0F5FF;
-  --white-muted: #8892A6;
+  --blue-ref: var(--wc-blue-ref);
+  --white-primary: var(--wc-text);
+  --white-muted: var(--wc-text-muted);
   --white-ghost: #3D4759;
-  --morocco-red: #C1121F;
+  --morocco-red: var(--wc-red);
 
-  --background: var(--void);
-  --foreground: var(--white-primary);
-  --card: var(--surface-1);
-  --card-foreground: var(--white-primary);
-  --popover: var(--surface-2);
-  --popover-foreground: var(--white-primary);
-  --primary: var(--green-live);
-  --primary-foreground: var(--void);
-  --secondary: var(--gold-leader);
-  --secondary-foreground: var(--void);
+  --background: var(--wc-dark);
+  --foreground: var(--wc-text);
+  --card: var(--wc-surface);
+  --card-foreground: var(--wc-text);
+  --popover: var(--wc-surface-2);
+  --popover-foreground: var(--wc-text);
+  --primary: var(--wc-live);
+  --primary-foreground: var(--wc-dark);
+  --secondary: var(--wc-gold);
+  --secondary-foreground: var(--wc-dark);
   --muted: var(--surface-3);
-  --muted-foreground: var(--white-muted);
-  --accent: var(--green-live);
-  --accent-foreground: var(--void);
-  --destructive: var(--red-loss);
-  --destructive-foreground: var(--white-primary);
-  --input: var(--surface-1);
-  --input-background: var(--surface-1);
+  --muted-foreground: var(--wc-text-muted);
+  --accent: var(--wc-live);
+  --accent-foreground: var(--wc-dark);
+  --destructive: var(--wc-red);
+  --destructive-foreground: var(--wc-text);
+  --input: var(--wc-surface);
+  --input-background: var(--wc-surface);
   --switch-background: var(--surface-3);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: var(--green-live);
-  --chart-1: var(--green-live);
-  --chart-2: var(--gold-leader);
-  --chart-3: var(--blue-ref);
-  --chart-4: var(--red-loss);
+  --ring: var(--wc-live);
+  --chart-1: var(--wc-live);
+  --chart-2: var(--wc-gold);
+  --chart-3: var(--wc-blue-ref);
+  --chart-4: var(--wc-red);
   --chart-5: var(--amber-draw);
   --radius: 6px;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+.bg-mesh-stadium {
+  background: radial-gradient(circle at 50% 120%, var(--wc-green) 0%, transparent 50%), 
+              radial-gradient(circle at 0% 0%, var(--wc-blue-ref) 0%, transparent 60%), 
+              var(--wc-dark);
+}
+
+.particle {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(100svh) translateX(0) scale(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-20px) translateX(20px) scale(1.5); opacity: 0; }
+}
+
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.4s ease-out both;
+}
+
 .dark {
   /* Dark mode is default - no overrides needed */
+}
+
+/* === GLOBAL RESETS === */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  background: var(--wc-dark);
+  color: var(--wc-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Prevent horizontal scroll on body */
+  min-height: 100vh;
+}
+h1, h2, h3 { font-family: var(--font-display, 'Bebas Neue', sans-serif); letter-spacing: 0.02em; }
+.tabular { font-family: var(--font-mono); font-variant-numeric: tabular-nums lining-nums; }
+
+/* === SCROLLBAR UTILITIES === */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* === PREVENT TEXT OVERFLOW GLOBALLY === */
+h1, h2, h3, h4, h5, h6, p, span, a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* === IMAGE DEFAULTS === */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 @theme inline {
