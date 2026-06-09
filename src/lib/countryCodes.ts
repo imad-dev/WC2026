@@ -129,10 +129,13 @@ export const COUNTRY_CODES: Record<string, string> = {
   "Mozambique": "mz",
   "Angola": "ao",
   "Cape Verde": "cv",
+  "Cabo Verde": "cv",
   "Burkina Faso": "bf",
   "Guinea": "gn",
   "Togo": "tg",
   "Benin": "bj",
+  "Curaçao": "cw",
+  "Haiti": "ht",
 };
 
 export function getFlagCode(teamName: string): string {
