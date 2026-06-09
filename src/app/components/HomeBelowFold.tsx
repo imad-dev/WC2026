@@ -46,8 +46,8 @@ export function HomeBelowFold() {
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
 
-      {/* ─── SECTION 1: TODAY'S MATCHES ──────────────────────── */}
-      <section id="matches" className="scroll-mt-24">
+      {/* ─── SECTION 1: MATCHES ──────────────────────── */}
+      <section id="matches" className="scroll-mt-24 relative z-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--wc-green)] mb-2 font-semibold flex items-center gap-2">
@@ -58,23 +58,31 @@ export function HomeBelowFold() {
               className="text-2xl sm:text-3xl md:text-4xl text-white tracking-wider"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              TODAY'S MATCHES
+              {todayMatches.length > 0 ? "TODAY'S MATCHES" : "UPCOMING MATCHES"}
             </h2>
           </div>
           <Link
-            href="/schedule"
+            href="/groups"
             className="text-xs sm:text-sm font-bold text-[var(--wc-green)] hover:text-white transition-colors flex items-center gap-1 shrink-0"
           >
-            FULL SCHEDULE <ChevronRight className="w-4 h-4" />
+            ALL MATCHES <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6"
-        >
-          {todayMatches.map(match => (
-            <MatchCard key={match.id} match={match} />
-          ))}
-        </div>
+        {todayMatches.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+            {todayMatches.map(match => (
+              <MatchCard key={match.id} match={match} />
+            ))}
+          </div>
+        ) : (
+          <div className="w-full bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-8 flex flex-col items-center justify-center text-center">
+            <Calendar className="w-8 h-8 text-[var(--wc-text-muted)] mb-4 opacity-50" />
+            <h3 className="text-xl text-white font-bold mb-2">No Matches Today</h3>
+            <p className="text-[var(--wc-text-muted)] text-sm max-w-md">
+              The tournament begins on June 11, 2026. Stay tuned for the official schedule and live match updates!
+            </p>
+          </div>
+        )}
       </section>
 
       {/* ─── SECTION 2: GROUP STANDINGS SNAPSHOT ──────────────── */}
