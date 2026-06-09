@@ -75,6 +75,14 @@ const TEAMS = [
 
 async function seed() {
   console.log('Seeding all 48 Teams...');
+  
+  // First, delete any existing teams to prevent old mock data from lingering
+  const { error: delErr } = await supabase.from('wc2026_teams').delete().neq('id', 'dummy');
+  if (delErr) {
+    console.error('Error clearing old teams:', delErr);
+    return;
+  }
+  
   const { error: teamsErr } = await supabase.from('wc2026_teams').upsert(TEAMS);
   if (teamsErr) console.error('Error teams:', teamsErr);
   else console.log('48 Teams seeded successfully!');
