@@ -176,6 +176,21 @@ function GroupTable({ group }: { group: GroupData }) {
   );
 }
 
+const DRAW_ORDER = [
+  'Mexico', 'South Africa', 'South Korea', 'Czechia',
+  'Canada', 'Bosnia and Herzegovina', 'Qatar', 'Switzerland',
+  'Brazil', 'Morocco', 'Haiti', 'Scotland',
+  'United States', 'Paraguay', 'Australia', 'Türkiye',
+  'Germany', 'Curaçao', "Côte d'Ivoire", 'Ecuador',
+  'Netherlands', 'Japan', 'Sweden', 'Tunisia',
+  'Belgium', 'Egypt', 'Iran', 'New Zealand',
+  'Spain', 'Cabo Verde', 'Saudi Arabia', 'Uruguay',
+  'France', 'Senegal', 'Iraq', 'Norway',
+  'Argentina', 'Algeria', 'Austria', 'Jordan',
+  'Portugal', 'Congo DR', 'Uzbekistan', 'Colombia',
+  'England', 'Croatia', 'Ghana', 'Panama'
+];
+
 export function StandingsTable({ initialGroupedTeams }: { initialGroupedTeams?: Record<string, any[]> }) {
   const { matches, loading: matchesLoading } = useMatches();
   const { standings: liveStandings, loading: standingsLoading } = useWCStandings();
@@ -185,22 +200,38 @@ export function StandingsTable({ initialGroupedTeams }: { initialGroupedTeams?: 
   const localGroups = useMemo(() => {
     if (useLive) return [];
     if (initialGroupedTeams && Object.keys(initialGroupedTeams).length > 0) {
-      return Object.keys(initialGroupedTeams).sort().map(name => ({
-        name,
-        standings: initialGroupedTeams[name].map(team => ({
-          team: team.name,
-          played: 0,
-          won: 0,
-          drawn: 0,
-          lost: 0,
-          gf: 0,
-          ga: 0,
-          gd: 0,
-          pts: 0,
-        }))
-      }));
+      return Object.keys(initialGroupedTeams).sort().map(name => {
+        const sortedTeams = [...initialGroupedTeams[name]].sort((a, b) => {
+          return DRAW_ORDER.indexOf(a.name) - DRAW_ORDER.indexOf(b.name);
+        });
+        
+        return {
+          name,
+          standings: sortedTeams.map(team => ({
+            team: team.name,
+            played: 0,
+            won: 0,
+            drawn: 0,
+            lost: 0,
+            gf: 0,
+            ga: 0,
+            gd: 0,
+            pts: 0,
+          }))
+        };
+      });
     }
-    return calculateGroupStandings(matches);
+    return calculateGroupStandings(matches).map(group => {
+      return {
+        ...group,
+        standings: [...group.standings].sort((a, b) => {
+          if (b.pts !== a.pts) return b.pts - a.pts;
+          if (b.gd !== a.gd) return b.gd - a.gd;
+          if (b.gf !== a.gf) return b.gf - a.gf;
+          return DRAW_ORDER.indexOf(a.team) - DRAW_ORDER.indexOf(b.team);
+        })
+      };
+    });
   }, [matches, useLive, initialGroupedTeams]);
 
   const liveGroups: GroupData[] = useMemo(() => {
@@ -223,7 +254,12 @@ export function StandingsTable({ initialGroupedTeams }: { initialGroupedTeams?: 
     }
     return Object.keys(map).sort().map(name => ({
       name,
-      standings: map[name].sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf),
+      standings: map[name].sort((a, b) => 
+        b.pts - a.pts || 
+        b.gd - a.gd || 
+        b.gf - a.gf || 
+        (DRAW_ORDER.indexOf(a.team) - DRAW_ORDER.indexOf(b.team))
+      ),
     }));
   }, [liveStandings, useLive]);
 
