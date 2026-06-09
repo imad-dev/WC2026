@@ -1,5 +1,6 @@
 import { TOURNAMENT_INFO } from '../../data/wc2026Static';
 import { Users, Trophy, MapPin, Calendar, DollarSign, Tv } from 'lucide-react';
+import Link from 'next/link';
 
 export function TournamentKPIs() {
   const stats = [
