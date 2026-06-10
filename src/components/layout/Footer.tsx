@@ -54,6 +54,8 @@ export function Footer() {
               <li><Link href="/teams" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Qualified Teams</Link></li>
               <li><Link href="/venues" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Host Cities</Link></li>
               <li><Link href="/news" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Latest News</Link></li>
+              <li><Link href="/about" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
