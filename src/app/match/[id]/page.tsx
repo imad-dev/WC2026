@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { supabase } from '@/lib/supabaseClient';
+import { supabaseAdmin as supabase } from '@/lib/supabase';
 import MatchDetailClient from '@/components/match/MatchDetailClient';
 import { notFound } from 'next/navigation';
 
