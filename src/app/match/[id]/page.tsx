@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { supabase } from '@/lib/supabaseClient';
 import { MatchCard } from '@/components/ui/MatchCard';
+import { MatchTabs } from '@/components/ui/MatchTabs';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -152,85 +153,7 @@ export default async function MatchPage({ params }: { params: { id: string } }) 
           </div>
         </div>
 
-        {/* Lineups Section */}
-        <div className="mt-12 bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6 md:p-10">
-          <h3 className="text-2xl text-white uppercase tracking-wider mb-8 text-center" style={{ fontFamily: 'var(--font-display)' }}>
-            Expected Lineups
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 relative">
-            {/* Center divider on desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-[var(--wc-border)] -translate-x-1/2"></div>
-            
-            {/* Home Team */}
-            <div>
-              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[var(--wc-border)]">
-                <div className="w-10 h-10 rounded-full bg-[var(--wc-green)] flex items-center justify-center text-black font-bold font-mono">1</div>
-                <h4 className="text-xl font-bold text-white tracking-wide">{match.home_team}</h4>
-              </div>
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
-                  <span>GK</span>
-                  <span className="text-white">TBD Goalkeeper</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
-                  <span>DEF</span>
-                  <span className="text-white">TBD Defender 1</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
-                  <span>DEF</span>
-                  <span className="text-white">TBD Defender 2</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
-                  <span>MID</span>
-                  <span className="text-white">TBD Midfielder 1</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
-                  <span>FWD</span>
-                  <span className="text-[var(--wc-gold)]">★ Key Forward</span>
-                </div>
-              </div>
-              <button className="mt-6 text-xs font-bold tracking-widest uppercase text-[var(--wc-green)] hover:text-white transition-colors">
-                + View Full Squad
-              </button>
-            </div>
-
-            {/* Away Team */}
-            <div>
-              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[var(--wc-border)] md:flex-row-reverse">
-                <div className="w-10 h-10 rounded-full bg-[#4a90e2] flex items-center justify-center text-white font-bold font-mono">2</div>
-                <h4 className="text-xl font-bold text-white tracking-wide md:text-right">{match.away_team}</h4>
-              </div>
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
-                  <span>GK</span>
-                  <span className="text-white">TBD Goalkeeper</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
-                  <span>DEF</span>
-                  <span className="text-white">TBD Defender 1</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
-                  <span>DEF</span>
-                  <span className="text-white">TBD Defender 2</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
-                  <span>MID</span>
-                  <span className="text-white">TBD Midfielder 1</span>
-                </div>
-                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
-                  <span>FWD</span>
-                  <span className="text-[var(--wc-gold)]">★ Key Forward</span>
-                </div>
-              </div>
-              <div className="mt-6 flex justify-start md:justify-end">
-                <button className="text-xs font-bold tracking-widest uppercase text-[#4a90e2] hover:text-white transition-colors">
-                  + View Full Squad
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <MatchTabs matchId={match.id} homeTeam={match.home_team} awayTeam={match.away_team} />
 
       </div>
 
