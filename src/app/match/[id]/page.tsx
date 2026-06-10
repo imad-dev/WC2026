@@ -4,6 +4,8 @@ import { MatchCard } from '@/components/ui/MatchCard';
 import { MatchTabs } from '@/components/ui/MatchTabs';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { data: match } = await supabase
     .from('wc2026_matches')
