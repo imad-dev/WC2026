@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { useMatches } from '@/hooks/useSupabase';
 import type { WC2026Match } from '@/lib/supabaseClient';
@@ -19,6 +20,7 @@ function formatLocalDateHeader(dateStr: string): string {
 }
 
 export function MatchGrid({ onMatchClick }: { onMatchClick?: (match: WC2026Match) => void }) {
+  const router = useRouter();
   const { matches, loading } = useMatches();
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
 
@@ -132,7 +134,10 @@ export function MatchGrid({ onMatchClick }: { onMatchClick?: (match: WC2026Match
                       <MatchCard
                         key={match.id}
                         match={match}
-                        onClick={() => onMatchClick?.(match)}
+                        onClick={() => {
+                          if (onMatchClick) onMatchClick(match);
+                          else router.push(`/match/${match.id}`);
+                        }}
                       />
                     ))}
                   </div>

@@ -86,22 +86,149 @@ export default async function MatchPage({ params }: { params: { id: string } }) 
           <MatchCard match={match} />
         </div>
 
-        {/* Additional Match Info Placeholder */}
+        {/* Additional Match Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 md:mt-24">
-          <div className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6">
-            <h3 className="text-xl text-white uppercase tracking-wider mb-4" style={{ fontFamily: 'var(--font-display)' }}>Match Facts</h3>
-            <ul className="text-sm text-[var(--wc-text-muted)] space-y-3">
-              <li><strong>Referee:</strong> TBD</li>
-              <li><strong>Attendance:</strong> TBD</li>
-              <li><strong>Weather:</strong> TBD</li>
-            </ul>
-          </div>
-          <div className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6">
-            <h3 className="text-xl text-white uppercase tracking-wider mb-4" style={{ fontFamily: 'var(--font-display)' }}>Watch Live</h3>
-            <p className="text-sm text-[var(--wc-text-muted)] mb-4">Streams are available in your region via official broadcasters.</p>
-            <a href="/live" className="inline-block w-full py-3 text-center bg-[var(--wc-red)] hover:bg-[#ff1a35] text-white font-bold rounded tracking-widest uppercase transition-colors">
-              Go to Live Hub
+          
+          {/* Broadcasting Channels */}
+          <div className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--wc-red)] opacity-5 rounded-bl-full transition-transform group-hover:scale-110"></div>
+            <h3 className="text-xl text-white uppercase tracking-wider mb-6 flex items-center gap-3" style={{ fontFamily: 'var(--font-display)' }}>
+              <span className="w-2 h-2 rounded-full bg-[var(--wc-red)] animate-pulse"></span>
+              Broadcasters
+            </h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">USA</span>
+                <span className="text-white font-bold tracking-wide">FOX Sports, Telemundo</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">Canada</span>
+                <span className="text-white font-bold tracking-wide">TSN, RDS</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">UK</span>
+                <span className="text-white font-bold tracking-wide">BBC, ITV</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">Global</span>
+                <span className="text-white font-bold tracking-wide">FIFA+ App</span>
+              </div>
+            </div>
+            <a href="/live" className="mt-8 inline-block w-full py-3.5 text-center bg-[var(--wc-red)] hover:bg-[#ff1a35] text-white font-bold rounded tracking-widest uppercase transition-colors shadow-[0_4px_15px_rgba(232,0,29,0.3)]">
+              Watch Live Stream
             </a>
+          </div>
+
+          {/* Match Facts & Stats */}
+          <div className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--wc-green)] opacity-5 rounded-bl-full transition-transform group-hover:scale-110"></div>
+            <h3 className="text-xl text-white uppercase tracking-wider mb-6" style={{ fontFamily: 'var(--font-display)' }}>Match Facts</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">Referee</span>
+                <span className="text-white font-bold tracking-wide">TBA</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">Venue</span>
+                <span className="text-white font-bold tracking-wide text-right max-w-[200px] truncate">{match.venue}</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--wc-border)]">
+                <span className="text-[var(--wc-text-muted)] font-medium">Stage</span>
+                <span className="text-[var(--wc-gold)] font-bold tracking-wide uppercase">{match.group_name ? `Group ${match.group_name}` : 'Knockout'}</span>
+              </div>
+            </div>
+            
+            <h4 className="text-sm font-bold text-[var(--wc-text-muted)] uppercase tracking-widest mt-6 mb-4">Head to Head Win Probability</h4>
+            <div className="w-full flex h-3 rounded-full overflow-hidden bg-[var(--wc-surface-2)]">
+              <div className="bg-[var(--wc-green)] h-full" style={{ width: '45%' }}></div>
+              <div className="bg-[var(--wc-text-muted)] h-full opacity-30" style={{ width: '15%' }}></div>
+              <div className="bg-[#4a90e2] h-full" style={{ width: '40%' }}></div>
+            </div>
+            <div className="flex justify-between text-xs font-bold mt-2 text-[var(--wc-text-muted)]">
+              <span className="text-[var(--wc-green)]">45% {match.home_team}</span>
+              <span>15% Draw</span>
+              <span className="text-[#4a90e2]">40% {match.away_team}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Lineups Section */}
+        <div className="mt-12 bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-6 md:p-10">
+          <h3 className="text-2xl text-white uppercase tracking-wider mb-8 text-center" style={{ fontFamily: 'var(--font-display)' }}>
+            Expected Lineups
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 relative">
+            {/* Center divider on desktop */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-[var(--wc-border)] -translate-x-1/2"></div>
+            
+            {/* Home Team */}
+            <div>
+              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[var(--wc-border)]">
+                <div className="w-10 h-10 rounded-full bg-[var(--wc-green)] flex items-center justify-center text-black font-bold font-mono">1</div>
+                <h4 className="text-xl font-bold text-white tracking-wide">{match.home_team}</h4>
+              </div>
+              <div className="space-y-4 text-sm font-medium">
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
+                  <span>GK</span>
+                  <span className="text-white">TBD Goalkeeper</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
+                  <span>DEF</span>
+                  <span className="text-white">TBD Defender 1</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
+                  <span>DEF</span>
+                  <span className="text-white">TBD Defender 2</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
+                  <span>MID</span>
+                  <span className="text-white">TBD Midfielder 1</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)]">
+                  <span>FWD</span>
+                  <span className="text-[var(--wc-gold)]">★ Key Forward</span>
+                </div>
+              </div>
+              <button className="mt-6 text-xs font-bold tracking-widest uppercase text-[var(--wc-green)] hover:text-white transition-colors">
+                + View Full Squad
+              </button>
+            </div>
+
+            {/* Away Team */}
+            <div>
+              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[var(--wc-border)] md:flex-row-reverse">
+                <div className="w-10 h-10 rounded-full bg-[#4a90e2] flex items-center justify-center text-white font-bold font-mono">2</div>
+                <h4 className="text-xl font-bold text-white tracking-wide md:text-right">{match.away_team}</h4>
+              </div>
+              <div className="space-y-4 text-sm font-medium">
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
+                  <span>GK</span>
+                  <span className="text-white">TBD Goalkeeper</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
+                  <span>DEF</span>
+                  <span className="text-white">TBD Defender 1</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
+                  <span>DEF</span>
+                  <span className="text-white">TBD Defender 2</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
+                  <span>MID</span>
+                  <span className="text-white">TBD Midfielder 1</span>
+                </div>
+                <div className="flex justify-between items-center text-[var(--wc-text-muted)] md:flex-row-reverse">
+                  <span>FWD</span>
+                  <span className="text-[var(--wc-gold)]">★ Key Forward</span>
+                </div>
+              </div>
+              <div className="mt-6 flex justify-start md:justify-end">
+                <button className="text-xs font-bold tracking-widest uppercase text-[#4a90e2] hover:text-white transition-colors">
+                  + View Full Squad
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -110,7 +237,7 @@ export default async function MatchPage({ params }: { params: { id: string } }) 
       {/* Mobile Sticky CTA */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-[rgba(10,14,26,0.9)] backdrop-blur-md border-t border-[var(--wc-border)] z-50">
         <a href="/live" className="flex justify-center items-center py-4 bg-[var(--wc-red)] text-white font-bold rounded tracking-widest uppercase w-full shadow-[0_0_15px_rgba(232,0,29,0.5)]">
-          WATCH LIVE
+          WATCH LIVE STREAM
         </a>
       </div>
     </div>

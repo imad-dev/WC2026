@@ -90,7 +90,9 @@ export function Footer() {
           <p className="text-xs text-[var(--wc-text-muted)] font-mono">
             © {new Date().getFullYear()} WC2026.games — Not affiliated with FIFA.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <Link href="/about" className="text-xs text-[var(--wc-text-muted)] hover:text-white transition-colors">About Us</Link>
+            <Link href="/contact" className="text-xs text-[var(--wc-text-muted)] hover:text-white transition-colors">Contact Us</Link>
             <Link href="/privacy" className="text-xs text-[var(--wc-text-muted)] hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-xs text-[var(--wc-text-muted)] hover:text-white transition-colors">Terms of Service</Link>
           </div>
