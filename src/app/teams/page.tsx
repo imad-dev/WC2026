@@ -4,7 +4,7 @@ import TeamsClient from './TeamsClient';
 async function getTeams() {
   const { data, error } = await supabaseAdmin
     .from('wc2026_teams')
-    .select('id, name, country_code, kit_primary_color, kit_secondary_color, is_host_country, group_name, world_ranking, participations, flag_url')
+    .select('id, name, kit_primary_color, kit_secondary_color, is_host_country, group_letter, world_ranking, participations, flag_url')
     .order('name', { ascending: true });
 
   if (error) {

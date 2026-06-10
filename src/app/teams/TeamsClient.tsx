@@ -3,14 +3,14 @@
 import Link from 'next/link';
 
 export default function TeamsClient({ teams }: { teams: any[] }) {
-  // Hosts are Canada, Mexico, USA (or based on is_host_country if updated in DB)
-  // For fallback before DB is updated, use short_name match
-  const hosts = teams.filter((t) => t.is_host_country || ['CA', 'MX', 'US'].includes(t.country_code?.toUpperCase())).sort((a, b) => a.name.localeCompare(b.name));
-  const others = teams.filter((t) => !t.is_host_country && !['CA', 'MX', 'US'].includes(t.country_code?.toUpperCase())).sort((a, b) => a.name.localeCompare(b.name));
+  // Hosts are Canada, Mexico, USA
+  const hosts = teams.filter((t) => t.is_host_country).sort((a, b) => a.name.localeCompare(b.name));
+  const others = teams.filter((t) => !t.is_host_country).sort((a, b) => a.name.localeCompare(b.name));
 
   const TeamCard = ({ team, isHost }: { team: any, isHost: boolean }) => {
     const bgColor = team.kit_primary_color || '#1a2235';
-    const flagUrl = team.flag_url || `https://flagcdn.com/120x90/${team.country_code?.toLowerCase() || 'un'}.png`;
+    // Fallback if flag isn't in DB yet
+    const flagUrl = team.flag_url || `https://flagcdn.com/120x90/un.png`;
 
     return (
       <Link href={`/team/${team.id}`} className="block group">
@@ -41,8 +41,8 @@ export default function TeamsClient({ teams }: { teams: any[] }) {
         {/* Stats section below */}
         <div className="bg-white p-4 rounded-b text-[var(--wc-dark)] border border-gray-200 border-t-0 shadow-sm transition-transform duration-200 ease-out group-hover:scale-[1.02]">
           <div className="flex justify-between items-center py-1">
-            <span className="text-[13px] text-gray-500 font-medium">Stage</span>
-            <span className="text-[13px] font-bold">{team.group_name || 'Group Stage'}</span>
+            <span className="text-[13px] text-gray-500 font-medium">Group</span>
+            <span className="text-[13px] font-bold">{team.group_letter ? `Group ${team.group_letter}` : 'TBD'}</span>
           </div>
           <div className="flex justify-between items-center py-1">
             <span className="text-[13px] text-gray-500 font-medium">World Ranking</span>
