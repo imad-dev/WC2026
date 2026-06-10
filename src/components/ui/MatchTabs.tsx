@@ -126,13 +126,13 @@ export function MatchTabs({ matchId, homeTeam, awayTeam }: MatchTabsProps) {
                 <div 
                   key={player.id} 
                   className="absolute flex flex-col items-center justify-center transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer transition-transform hover:scale-110 hover:z-10"
-                  style={{ left: \`\${player.x}%\`, top: \`\${player.y}%\` }}
+                  style={{ left: `${player.x}%`, top: `${player.y}%` }}
                 >
-                  <div className={\`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm border-2 shadow-lg \${
+                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm border-2 shadow-lg ${
                     player.team === 'home' 
                       ? 'bg-white text-black border-[var(--wc-green)]' 
                       : 'bg-[#1a2b4c] text-white border-yellow-400'
-                  }\`}>
+                  }`}>
                     {player.number}
                   </div>
                   <div className="mt-1 bg-black/60 backdrop-blur-sm px-1.5 py-0.5 rounded text-[10px] md:text-xs text-white whitespace-nowrap opacity-90 font-medium">
