@@ -9,6 +9,7 @@ export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
   const [chatMessages, setChatMessages] = useState<{id: number, user: string, msg: string}[]>([]);
   const [chatInput, setChatInput] = useState('');
+  const [predictedTeam, setPredictedTeam] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll chat
@@ -40,23 +41,15 @@ export default function LiveHubPage() {
           <div className="px-2 sm:px-3 py-1 bg-[var(--wc-red)] text-white text-[10px] sm:text-xs font-bold rounded shrink-0">LIVE</div>
         </div>
 
-        {/* Fake Video Element */}
-        <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1508098682722-e99c643e7f0d?w=1280&q=80')] bg-cover bg-center opacity-80" />
-
-        {/* Custom Video Controls */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-black/90 to-transparent opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-           <div className="flex items-center gap-3 sm:gap-4">
-             <button onClick={() => setIsPlaying(!isPlaying)} className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0">
-               {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />}
-             </button>
-             {/* Timeline bar */}
-             <div className="flex-1 h-1 sm:h-1.5 bg-white/20 rounded-full cursor-pointer relative overflow-hidden">
-               <div className="absolute top-0 left-0 h-full bg-[var(--wc-red)] w-[75%]" />
-             </div>
-             <button className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0"><Volume2 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
-             <button className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0 hidden sm:block"><Maximize className="w-4 h-4 sm:w-5 sm:h-5" /></button>
-           </div>
-        </div>
+        {/* YouTube Video Element */}
+        <iframe
+          src="https://www.youtube.com/embed/2lJZPT6OljI?autoplay=1"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="w-full h-full"
+          style={{ border: 0 }}
+        ></iframe>
       </div>
 
       {/* RIGHT: Interactive Panels */}
@@ -112,16 +105,35 @@ export default function LiveHubPage() {
                 </div>
 
                 <div className="w-full flex gap-2 sm:gap-3">
-                  <button className="flex-1 py-2.5 sm:py-3 bg-[rgba(0,166,81,0.1)] border border-[var(--wc-green)] text-[var(--wc-green)] rounded font-bold text-xs sm:text-sm hover:bg-[var(--wc-green)] hover:text-black transition-colors">
+                  <button 
+                    onClick={() => setPredictedTeam('MEX')}
+                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-green)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'MEX' ? 'bg-[var(--wc-green)] text-black' : 'bg-[rgba(0,166,81,0.1)] text-[var(--wc-green)] hover:bg-[var(--wc-green)] hover:text-black'}`}
+                  >
                     MEX
                   </button>
-                  <button className="flex-1 py-2.5 sm:py-3 bg-[rgba(245,166,35,0.1)] border border-[var(--wc-gold)] text-[var(--wc-gold)] rounded font-bold text-xs sm:text-sm hover:bg-[var(--wc-gold)] hover:text-black transition-colors">
+                  <button 
+                    onClick={() => setPredictedTeam('DRAW')}
+                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-gold)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'DRAW' ? 'bg-[var(--wc-gold)] text-black' : 'bg-[rgba(245,166,35,0.1)] text-[var(--wc-gold)] hover:bg-[var(--wc-gold)] hover:text-black'}`}
+                  >
                     DRAW
                   </button>
-                  <button className="flex-1 py-2.5 sm:py-3 bg-[rgba(232,0,29,0.1)] border border-[var(--wc-red)] text-[var(--wc-red)] rounded font-bold text-xs sm:text-sm hover:bg-[var(--wc-red)] hover:text-black transition-colors">
+                  <button 
+                    onClick={() => setPredictedTeam('RSA')}
+                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-red)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'RSA' ? 'bg-[var(--wc-red)] text-black' : 'bg-[rgba(232,0,29,0.1)] text-[var(--wc-red)] hover:bg-[var(--wc-red)] hover:text-black'}`}
+                  >
                     RSA
                   </button>
                 </div>
+                
+                {predictedTeam && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-white text-xs mt-4 text-center bg-white/10 px-4 py-2 rounded-full"
+                  >
+                    You predicted: <span className="font-bold">{predictedTeam === 'DRAW' ? 'A DRAW' : predictedTeam + ' TO WIN'}</span>
+                  </motion.p>
+                )}
               </motion.div>
             )}
 
