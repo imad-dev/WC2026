@@ -3,16 +3,17 @@ import { supabaseAdmin as supabase } from '@/lib/supabase';
 import MatchDetailClient from '@/components/match/MatchDetailClient';
 import { notFound } from 'next/navigation';
 import { fetchWC2026Lineups, fetchWC2026Statistics, fetchWC2026Events, fetchWC2026Head2Head } from '@/services/api';
+import { createMatchSlug } from '@/lib/utils/slug';
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const { data: match } = await supabase
+  const { data: matches } = await supabase
     .from('wc2026_matches')
-    .select('*')
-    .eq('id', resolvedParams.id)
-    .single();
+    .select('*');
+    
+  const match = (matches || []).find(m => createMatchSlug(m.home_team, m.away_team) === resolvedParams.id);
 
   if (!match) return { title: 'Match | WC2026' };
   
@@ -36,13 +37,15 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   const resolvedParams = await params;
   
   // Fetch match, teams, and predictions
-  const [matchRes, teamsRes, predictionsRes] = await Promise.all([
-    supabase
-      .from('wc2026_matches')
-      .select('*')
-      .eq('id', resolvedParams.id)
-      .single(),
+  const { data: allMatches } = await supabase
+    .from('wc2026_matches')
+    .select('*');
+    
+  const matchData = (allMatches || []).find(m => createMatchSlug(m.home_team, m.away_team) === resolvedParams.id);
 
+  if (!matchData) notFound();
+
+  const [teamsRes, predictionsRes] = await Promise.all([
     supabase
       .from('wc2026_teams')
       .select('*'),
@@ -50,12 +53,12 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
     supabase
       .from('wc2026_predictions')
       .select('choice')
-      .eq('match_id', resolvedParams.id)
+      .eq('match_id', matchData.id)
   ]);
 
-  if (!matchRes.data) notFound();
 
-  let match = matchRes.data;
+
+  let match = matchData;
 
   // Match home_team and away_team with their team objects
   const allTeams = teamsRes.data || [];

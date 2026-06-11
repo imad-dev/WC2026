@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { supabase } from '@/lib/supabaseClient';
+import { createMatchSlug } from '@/lib/utils/slug';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://wc2026.games';
@@ -23,11 +24,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic match routes
   const { data: matches } = await supabase
     .from('wc2026_matches')
-    .select('id, updated_at')
+    .select('id, updated_at, home_team, away_team')
     .order('kickoff_utc', { ascending: true });
 
   const matchRoutes = (matches || []).map((match) => ({
-    url: `${baseUrl}/match/${match.id}`,
+    url: `${baseUrl}/match/${createMatchSlug(match.home_team, match.away_team)}`,
     lastModified: match.updated_at ? new Date(match.updated_at) : new Date(),
     changeFrequency: 'always' as const,
     priority: 0.9,

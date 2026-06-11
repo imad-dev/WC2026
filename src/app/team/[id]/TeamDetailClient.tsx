@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { createMatchSlug } from '@/lib/utils/slug';
 
 export default function TeamDetailClient({ team, players, fixtures }: { team: any, players: any[], fixtures: any[] }) {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -95,7 +96,7 @@ export default function TeamDetailClient({ team, players, fixtures }: { team: an
               {fixtures.map((match) => (
                 <Link 
                   key={match.id} 
-                  href={`/match/${match.id}`}
+                  href={`/match/${createMatchSlug(match.home_team?.name || '', match.away_team?.name || '')}`}
                   className="snap-start shrink-0 w-[280px] bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                 >
                   <div className="text-[12px] text-gray-500 font-medium mb-1 truncate">

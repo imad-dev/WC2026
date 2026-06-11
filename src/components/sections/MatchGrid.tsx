@@ -7,6 +7,7 @@ import { useMatches } from '@/hooks/useSupabase';
 import type { WC2026Match } from '@/lib/supabaseClient';
 import { MatchCard } from '@/components/ui/MatchCard';
 import { Calendar, Loader2 } from 'lucide-react';
+import { createMatchSlug } from '@/lib/utils/slug';
 
 type FilterTab = 'all' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'knockout';
 const GROUP_TABS: FilterTab[] = ['A','B','C','D','E','F','G','H','I','J','K','L'];
@@ -136,7 +137,7 @@ export function MatchGrid({ onMatchClick }: { onMatchClick?: (match: WC2026Match
                         match={match}
                         onClick={() => {
                           if (onMatchClick) onMatchClick(match);
-                          else router.push(`/match/${match.id}`);
+                          else router.push(`/match/${createMatchSlug(match.home_team, match.away_team)}`);
                         }}
                       />
                     ))}
