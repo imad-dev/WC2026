@@ -8,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
-  return <TermsOfService />;
+  return (
+    <>
+      <h1 className="sr-only">Terms of Service - WC2026.games</h1>
+      <TermsOfService />
+    </>
+  );
 }

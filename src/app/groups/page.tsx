@@ -47,6 +47,12 @@ export default async function GroupsPage() {
   
   return (
     <div className="w-full min-h-screen bg-[var(--wc-dark)]">
+      {/* SEO text (visually hidden or styled for crawlers) */}
+      <div className="sr-only">
+        <h1>FIFA World Cup 2026 Group Standings</h1>
+        <p>Live, real-time group standings for the 2026 FIFA World Cup in USA, Canada, and Mexico. Check points, goal difference, and which teams advance to the knockout stage from all 12 groups.</p>
+      </div>
+
       {/* 
         The live match sync countdown logic is maintained inside StandingsTable. 
         We pass the pre-fetched structured teams so it can use them for base rendering.

@@ -27,6 +27,12 @@ export default function LiveHubPage() {
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-[#030408] flex flex-col lg:flex-row overflow-hidden">
       
+      {/* SEO text */}
+      <div className="sr-only">
+        <h1>Live Matches - FIFA World Cup 2026</h1>
+        <p>Watch live match broadcasts, predict match outcomes, track the timeline of events, and chat with other fans worldwide during the FIFA World Cup 2026.</p>
+      </div>
+
       {/* LEFT: Video Player */}
       <div className="w-full lg:flex-1 h-[35vh] sm:h-[40vh] lg:h-[calc(100vh-64px)] relative bg-black flex flex-col group">
         

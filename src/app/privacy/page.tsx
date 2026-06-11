@@ -8,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  return <PrivacyPolicy />;
+  return (
+    <>
+      <h1 className="sr-only">Privacy Policy - WC2026.games</h1>
+      <PrivacyPolicy />
+    </>
+  );
 }

@@ -9,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function NewsRoutePage() {
-  return <NewsPage />;
+  return (
+    <>
+      <h1 className="sr-only">World Cup 2026 News and Updates</h1>
+      <NewsPage />
+    </>
+  );
 }

@@ -8,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutUs />;
+  return (
+    <>
+      <h1 className="sr-only">About WC2026.games</h1>
+      <AboutUs />
+    </>
+  );
 }

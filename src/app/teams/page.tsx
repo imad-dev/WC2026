@@ -23,5 +23,13 @@ export const metadata = {
 
 export default async function TeamsPage() {
   const teams = await getTeams();
-  return <TeamsClient teams={teams} />;
+  return (
+    <>
+      <div className="sr-only">
+        <h1>All 48 Teams - FIFA World Cup 2026</h1>
+        <p>Explore all 48 qualified teams competing in the 2026 FIFA World Cup. From host nations USA, Canada, and Mexico to global powerhouses and debutants. View squad lists, fixtures, world rankings, and team statistics.</p>
+      </div>
+      <TeamsClient teams={teams} />
+    </>
+  );
 }

@@ -6,7 +6,9 @@ import Link from 'next/link';
 const FALLBACK_IMG = 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&q=80';
 
 export function VenueCard({ venue, idx }: { venue: any; idx: number }) {
-  const [imgSrc, setImgSrc] = useState(venue.image_url || FALLBACK_IMG);
+  // Prevent rendering broken local paths by falling back early if the URL isn't an absolute http URL
+  const initialImg = venue.image_url?.startsWith('http') ? venue.image_url : FALLBACK_IMG;
+  const [imgSrc, setImgSrc] = useState(initialImg);
   // On mobile, all cards same height; on desktop, vary
   const heights = ['h-64 sm:h-72', 'h-64 sm:h-96', 'h-64 sm:h-80', 'h-64 sm:h-[22rem]'];
   const height = heights[idx % heights.length];

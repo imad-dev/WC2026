@@ -8,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactUs />;
+  return (
+    <>
+      <h1 className="sr-only">Contact WC2026.games</h1>
+      <ContactUs />
+    </>
+  );
 }

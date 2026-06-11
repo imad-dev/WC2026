@@ -156,9 +156,6 @@ export default function TeamDetailClient({ team, players, fixtures }: { team: an
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-3xl text-[var(--wc-text)] uppercase" style={{ fontFamily: 'var(--font-display)' }}>Squad</h2>
             <div className="flex items-center gap-4">
-              <Link href={`/teams/${team.id}/squad`} className="text-[var(--wc-green)] text-sm font-bold tracking-widest uppercase hover:underline hidden sm:block">
-                See All
-              </Link>
               <div className="flex gap-2">
                 <button onClick={() => scrollCarousel('left')} className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-white hover:bg-[var(--wc-green)] hover:text-black transition-colors">
                   <ChevronLeft className="w-5 h-5" />
