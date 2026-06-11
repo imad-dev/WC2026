@@ -6,8 +6,8 @@ type FilterStat = 'Performance' | 'Age' | 'Club' | 'Market Value' | 'Height' | '
 export default function LineupsTab({ match, lineups }: any) {
   const [activeFilter, setActiveFilter] = useState<FilterStat>('Performance');
 
-  const homeTeamId = match.home_team_id;
-  const awayTeamId = match.away_team_id;
+  const homeTeamId = match.home_team?.id || match.home_team_id;
+  const awayTeamId = match.away_team?.id || match.away_team_id;
 
   const homeLineup = lineups.filter((l: any) => l.team_id === homeTeamId && l.is_starting);
   const awayLineup = lineups.filter((l: any) => l.team_id === awayTeamId && l.is_starting);

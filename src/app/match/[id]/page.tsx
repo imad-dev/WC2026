@@ -4,6 +4,7 @@ import MatchDetailClient from '@/components/match/MatchDetailClient';
 import { notFound } from 'next/navigation';
 import { fetchWC2026Lineups, fetchWC2026Statistics, fetchWC2026Events, fetchWC2026Head2Head } from '@/services/api';
 import { createMatchSlug } from '@/lib/utils/slug';
+import { generatePredictedLineups, generateH2H } from '@/services/mockData';
 
 export const dynamic = 'force-dynamic';
 
@@ -72,6 +73,12 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
     away_team: awayTeamObj
   };
 
+  // Fetch squad players to use in mock lineups if API fails
+  const { data: squadPlayers } = await supabase
+    .from('wc2026_players')
+    .select('*')
+    .in('team_id', [homeTeamObj.id, awayTeamObj.id].filter(Boolean));
+
   // Process predictions
   const preds = predictionsRes.data || [];
   const total = preds.length;
@@ -104,14 +111,21 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
     fetchWC2026Head2Head(homeTeamObj.id || homeTeamObj.name, awayTeamObj.id || awayTeamObj.name).catch(() => null),
   ]);
 
+  // 2. Generate Realistic Mock Data if API is empty
+  const hasApiLineups = apiLineups?.data && apiLineups.data.length > 0;
+  const hasApiH2H = apiH2H?.data && apiH2H.data.length > 0;
+
+  const finalLineups = hasApiLineups ? apiLineups.data : generatePredictedLineups(homeTeamObj, awayTeamObj, squadPlayers || []);
+  const finalH2H = hasApiH2H ? apiH2H.data : generateH2H(homeTeamObj, awayTeamObj);
+
   // Return the client component with API data or fallback to empty arrays
   return (
     <MatchDetailClient
       match={match}
-      lineups={apiLineups?.data || []}
+      lineups={finalLineups}
       stats={apiStats?.data || []}
       events={apiEvents?.data || []}
-      h2h={apiH2H?.data || []}
+      h2h={finalH2H}
       predictions={predictionStats}
     />
   );

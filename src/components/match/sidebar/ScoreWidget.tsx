@@ -66,11 +66,11 @@ export default function ScoreWidget({ match, events }: any) {
       {events && events.length > 0 && (
         <div className="px-4 py-3 bg-[rgba(0,0,0,0.2)] border-t border-[var(--wc-border)] text-xs space-y-2 max-h-[120px] overflow-y-auto hide-scrollbar">
           {events.filter((e: any) => e.event_type === 'goal').map((e: any) => (
-            <div key={e.id} className={`flex items-center gap-2 ${e.team_id === match.home_team_id ? 'justify-start' : 'justify-end'}`}>
-              {e.team_id === match.home_team_id && <span className="text-[10px]">⚽</span>}
+            <div key={e.id} className={`flex items-center gap-2 ${e.team_id === (homeTeam.id || match.home_team_id) ? 'justify-start' : 'justify-end'}`}>
+              {e.team_id === (homeTeam.id || match.home_team_id) && <span className="text-[10px]">⚽</span>}
               <span className="font-medium text-white">{e.player?.short_name || 'Player'}</span>
               <span className="text-[var(--wc-text-muted)]">{e.minute}'</span>
-              {e.team_id === match.away_team_id && <span className="text-[10px]">⚽</span>}
+              {e.team_id === (awayTeam.id || match.away_team_id) && <span className="text-[10px]">⚽</span>}
             </div>
           ))}
         </div>

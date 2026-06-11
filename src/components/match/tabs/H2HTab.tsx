@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function H2HTab({ match, h2h }: any) {
   const [filter, setFilter] = useState<'all' | 'competition' | 'home'>('all');
 
-  const homeTeamId = match.home_team_id;
+  const homeTeamId = match.home_team?.id || match.home_team_id;
 
   const filteredH2H = h2h.filter((h: any) => {
     if (filter === 'all') return true;
