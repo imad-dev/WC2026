@@ -105,10 +105,10 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   // Note: External APIs often require internal API IDs. For now, we try to pass team names/TLAs or match IDs.
   // If the API doesn't support these IDs or the match hasn't happened, these will return gracefully empty.
   const [apiLineups, apiStats, apiEvents, apiH2H] = await Promise.all([
-    fetchWC2026Lineups(match.id).catch(() => null),
-    fetchWC2026Statistics(match.id).catch(() => null),
-    fetchWC2026Events(match.id).catch(() => null),
-    fetchWC2026Head2Head(homeTeamObj.id || homeTeamObj.name, awayTeamObj.id || awayTeamObj.name).catch(() => null),
+    fetchWC2026Lineups(homeTeamObj.name, awayTeamObj.name).catch(() => null),
+    fetchWC2026Statistics(homeTeamObj.name, awayTeamObj.name).catch(() => null),
+    fetchWC2026Events(homeTeamObj.name, awayTeamObj.name).catch(() => null),
+    fetchWC2026Head2Head(homeTeamObj.name, awayTeamObj.name).catch(() => null),
   ]);
 
   // 2. Generate Realistic Mock Data if API is empty

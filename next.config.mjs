@@ -16,6 +16,14 @@ const nextConfig = {
         source: '/api/wc2026/:path*',
         destination: 'https://api.worldcupapi.com/:path*',
       },
+      {
+        source: '/api/rapid/:path*',
+        destination: 'https://wc26-live-football-api.p.rapidapi.com/:path*',
+      },
+      {
+        source: '/api/apisports/:path*',
+        destination: 'https://v3.football.api-sports.io/:path*',
+      },
     ];
   },
 };

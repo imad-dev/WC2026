@@ -327,97 +327,144 @@ export async function fetchTodayMatches(): Promise<TodayMatch[]> {
 // Routed via /api/wc2026 Vite proxy → https://worldcupapi.com/api
 // ═══════════════════════════════════════════════════════════
 
-const WC2026_KEY = 'EAbv3XCF8wzJs5cc';
-const IS_SERVER = typeof window === 'undefined';
-const WC_BASE = IS_SERVER ? 'https://api.worldcupapi.com' : '/api/wc2026';
+const API_SPORTS_KEY = '65332b3cc3e76786fd5eeb132445a45f';
+const API_SPORTS_HOST = 'v3.football.api-sports.io';
+const API_SPORTS_BASE = IS_SERVER_ENV ? 'https://v3.football.api-sports.io' : '/api/apisports';
 
-async function wcFetch<T>(endpoint: string, params: Record<string, string> = {}, cacheDuration = 30000): Promise<T | null> {
-  const sp = new URLSearchParams({ key: WC2026_KEY, ...params });
-  const url = `${WC_BASE}/${endpoint}?${sp.toString()}`;
-  const cacheKey = `wc2026_${endpoint}_${sp.toString()}`;
-  return apiFetch<T>(url, cacheKey, cacheDuration);
+async function apiSportsFetch<T>(endpoint: string, cacheDuration = 30000): Promise<T | null> {
+  const url = `${API_SPORTS_BASE}/${endpoint}`;
+  const cacheKey = `apisports_wc2026_${endpoint}`;
+  const cached = apiCache.get(cacheKey);
+  if (cached) return cached as T;
+
+  if (!apiCache.canMakeRequest()) return null;
+  apiCache.recordRequest();
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'x-apisports-key': API_SPORTS_KEY,
+        Accept: 'application/json'
+      }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    apiCache.set(cacheKey, data, cacheDuration);
+    return data as T;
+  } catch (e: any) {
+    console.error(`❌ ${cacheKey}:`, e.message);
+    return null;
+  }
 }
 
-/** Live scores for all ongoing matches */
+// Map api-football fixture to our legacy worldcupapi match format
+function mapApiSportsMatch(m: any) {
+  return {
+    id: m.fixture.id,
+    match_id: m.fixture.id,
+    home_team: m.teams.home.name,
+    homeTeam: { name: m.teams.home.name, logo: m.teams.home.logo, id: m.teams.home.id },
+    away_team: m.teams.away.name,
+    awayTeam: { name: m.teams.away.name, logo: m.teams.away.logo, id: m.teams.away.id },
+    home_score: m.goals?.home ?? null,
+    away_score: m.goals?.away ?? null,
+    score: { home: m.goals?.home ?? null, away: m.goals?.away ?? null },
+    status: ['FT', 'AET', 'PEN'].includes(m.fixture.status.short) ? 'FINISHED' :
+            m.fixture.status.short === 'NS' ? 'SCHEDULED' : m.fixture.status.short,
+    minute: m.fixture.status.elapsed,
+    date: m.fixture.date.split('T')[0],
+    time: m.fixture.date.split('T')[1].substring(0, 5),
+    group: m.league.round,
+    venue: m.fixture.venue.name
+  };
+}
+
+/** Live scores for all ongoing matches using api-sports */
 export async function fetchWC2026LiveScores(lang?: string) {
-  return wcFetch<any>('livescores', lang ? { lang } : {}, 15000);
+  const data = await apiSportsFetch<any>('fixtures?live=all-1', 15000);
+  if (data?.response && Array.isArray(data.response)) {
+    const liveMatches = data.response.map(mapApiSportsMatch);
+    return { success: true, data: liveMatches };
+  }
+  return { success: false, data: [] };
 }
 
 /** All scheduled fixtures, optionally filtered */
 export async function fetchWC2026Fixtures(opts: { date?: string; group?: string; page?: string; team_id?: string; lang?: string } = {}) {
-  const params: Record<string, string> = {};
-  if (opts.date)    params.date    = opts.date;
-  if (opts.group)   params.group   = opts.group;
-  if (opts.page)    params.page    = opts.page;
-  if (opts.team_id) params.team_id = opts.team_id;
-  if (opts.lang)    params.lang    = opts.lang;
-  return wcFetch<any>('fixtures', params, 60000);
+  // Free tier API-Football prevents fetching season=2026 directly, so we fetch by date.
+  const dateToFetch = opts.date || new Date().toISOString().split('T')[0];
+  const data = await apiSportsFetch<any>(`fixtures?date=${dateToFetch}`, 60000);
+  
+  if (data?.response && Array.isArray(data.response)) {
+    // Filter for World Cup (league 1)
+    const wcMatches = data.response.filter((m: any) => m.league.id === 1);
+    return { success: true, data: wcMatches.map(mapApiSportsMatch) };
+  }
+  return { success: false, data: [] };
 }
 
-/** Match commentary */
-export async function fetchWC2026Commentary(match_id: string, opts: { from?: string; to?: string; lang?: string } = {}) {
-  const params: Record<string, string> = { match_id };
-  if (opts.from) params.from = opts.from;
-  if (opts.to)   params.to   = opts.to;
-  if (opts.lang) params.lang = opts.lang;
-  return wcFetch<any>('commentary', params, 20000);
+/** Utility to get team ID by name from API-Football */
+async function getTeamIdByName(name: string): Promise<number | null> {
+  const data = await apiSportsFetch<any>(`teams?name=${encodeURIComponent(name)}`, 86400000);
+  if (data?.response && data.response.length > 0) {
+    // Return first match
+    return data.response[0].team.id;
+  }
+  return null;
+}
+
+/** Utility to get fixture ID using head-to-head for the 2026 World Cup */
+async function getFixtureId(homeName: string, awayName: string): Promise<number | null> {
+  const homeId = await getTeamIdByName(homeName);
+  const awayId = await getTeamIdByName(awayName);
+  if (!homeId || !awayId) return null;
+
+  const data = await apiSportsFetch<any>(`fixtures/headtohead?h2h=${homeId}-${awayId}`, 86400000);
+  if (data?.response && Array.isArray(data.response)) {
+    // Find the match in 2026
+    const match2026 = data.response.find((m: any) => m.league.id === 1 && m.league.season === 2026);
+    return match2026 ? match2026.fixture.id : null;
+  }
+  return null;
 }
 
 /** Match events (goals, cards, subs) */
-export async function fetchWC2026Events(match_id: string, lang?: string) {
-  return wcFetch<any>('events', { match_id, ...(lang ? { lang } : {}) }, 20000);
+export async function fetchWC2026Events(homeName: string, awayName: string) {
+  const fixtureId = await getFixtureId(homeName, awayName);
+  if (!fixtureId) return { success: false, data: [] };
+  const data = await apiSportsFetch<any>(`fixtures/events?fixture=${fixtureId}`, 20000);
+  return { success: !!data?.response, data: data?.response || [] };
 }
 
 /** Match statistics */
-export async function fetchWC2026Statistics(match_id: string) {
-  return wcFetch<any>('statistics', { match_id }, 20000);
+export async function fetchWC2026Statistics(homeName: string, awayName: string) {
+  const fixtureId = await getFixtureId(homeName, awayName);
+  if (!fixtureId) return { success: false, data: [] };
+  const data = await apiSportsFetch<any>(`fixtures/statistics?fixture=${fixtureId}`, 20000);
+  return { success: !!data?.response, data: data?.response || [] };
 }
 
 /** Match lineups */
-export async function fetchWC2026Lineups(match_id: string, lang?: string) {
-  return wcFetch<any>('lineups', { match_id, ...(lang ? { lang } : {}) }, 30000);
-}
-
-/** Team squad */
-export async function fetchWC2026Squads(team_id: string, lang?: string) {
-  return wcFetch<any>('squads', { team_id, ...(lang ? { lang } : {}) }, 3600000);
-}
-
-/** Historical match data */
-export async function fetchWC2026History(opts: { date_from?: string; date_to?: string; page?: string; team_id?: string; lang?: string } = {}) {
-  const params: Record<string, string> = {};
-  if (opts.date_from) params.date_from = opts.date_from;
-  if (opts.date_to)   params.date_to   = opts.date_to;
-  if (opts.page)      params.page      = opts.page;
-  if (opts.team_id)   params.team_id   = opts.team_id;
-  if (opts.lang)      params.lang      = opts.lang;
-  return wcFetch<any>('history', params, 300000);
+export async function fetchWC2026Lineups(homeName: string, awayName: string) {
+  const fixtureId = await getFixtureId(homeName, awayName);
+  if (!fixtureId) return { success: false, data: [] };
+  const data = await apiSportsFetch<any>(`fixtures/lineups?fixture=${fixtureId}`, 30000);
+  return { success: !!data?.response, data: data?.response || [] };
 }
 
 /** Head-to-head between two teams */
-export async function fetchWC2026Head2Head(team1_id: string, team2_id: string, lang?: string) {
-  return wcFetch<any>('head2head', { team1_id, team2_id, ...(lang ? { lang } : {}) }, 3600000);
-}
-
-/** Live standings for a group */
-export async function fetchWC2026LiveStandings(group: string, lang?: string) {
-  return wcFetch<any>('livestandings', { group, ...(lang ? { lang } : {}) }, 30000);
+export async function fetchWC2026Head2Head(homeName: string, awayName: string) {
+  const homeId = await getTeamIdByName(homeName);
+  const awayId = await getTeamIdByName(awayName);
+  if (!homeId || !awayId) return { success: false, data: [] };
+  
+  const data = await apiSportsFetch<any>(`fixtures/headtohead?h2h=${homeId}-${awayId}`, 3600000);
+  return { success: !!data?.response, data: data?.response || [] };
 }
 
 /** Group standings */
 export async function fetchWC2026Standings(group: string, opts: { form?: string; lang?: string } = {}) {
-  const params: Record<string, string> = { group };
-  if (opts.form) params.form = opts.form;
-  if (opts.lang) params.lang = opts.lang;
-  return wcFetch<any>('standings', params, 60000);
-}
-
-/** Top goalscorers */
-export async function fetchWC2026GoalScorers(lang?: string) {
-  return wcFetch<any>('goalscorers', lang ? { lang } : {}, 300000);
-}
-
-/** Top disciplinary (cards) */
-export async function fetchWC2026Cards(lang?: string) {
-  return wcFetch<any>('cards', lang ? { lang } : {}, 300000);
+  // Not supported well by API-Sports free tier for 2026 currently, but we provide it for completeness
+  const data = await apiSportsFetch<any>(`standings?league=1&season=2026`, 60000);
+  return { success: !!data?.response, data: data?.response || [] };
 }
