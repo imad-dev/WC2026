@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { supabaseAdmin as supabase } from '@/lib/supabase';
 import MatchDetailClient from '@/components/match/MatchDetailClient';
 import { notFound } from 'next/navigation';
+import { fetchWC2026Lineups, fetchWC2026Statistics, fetchWC2026Events, fetchWC2026Head2Head } from '@/services/api';
 
 export const dynamic = 'force-dynamic';
 
@@ -90,14 +91,24 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
     total
   };
 
-  // Return the client component with gracefully loaded empty dependencies until full db schema is created
+  // 1. Fetch from worldcupapi.com using the new key
+  // Note: External APIs often require internal API IDs. For now, we try to pass team names/TLAs or match IDs.
+  // If the API doesn't support these IDs or the match hasn't happened, these will return gracefully empty.
+  const [apiLineups, apiStats, apiEvents, apiH2H] = await Promise.all([
+    fetchWC2026Lineups(match.id).catch(() => null),
+    fetchWC2026Statistics(match.id).catch(() => null),
+    fetchWC2026Events(match.id).catch(() => null),
+    fetchWC2026Head2Head(homeTeamObj.id || homeTeamObj.name, awayTeamObj.id || awayTeamObj.name).catch(() => null),
+  ]);
+
+  // Return the client component with API data or fallback to empty arrays
   return (
     <MatchDetailClient
       match={match}
-      lineups={[]}
-      stats={[]}
-      events={[]}
-      h2h={[]}
+      lineups={apiLineups?.data || []}
+      stats={apiStats?.data || []}
+      events={apiEvents?.data || []}
+      h2h={apiH2H?.data || []}
       predictions={predictionStats}
     />
   );

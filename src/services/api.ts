@@ -22,9 +22,10 @@ export const COMPETITIONS = {
 
 export type CompetitionCode = keyof typeof COMPETITIONS;
 
-// Use Vite proxy paths — configured in vite.config.ts
-const OFB_BASE = '/api/openfootball';
-const FD_BASE  = '/api/football-data';
+// Use absolute URLs for server-side fetching in Next.js, and proxy paths for client
+const IS_SERVER_ENV = typeof window === 'undefined';
+const OFB_BASE = IS_SERVER_ENV ? 'https://raw.githubusercontent.com/openfootball/football.json/master/2025-26' : '/api/openfootball';
+const FD_BASE  = IS_SERVER_ENV ? 'https://api.football-data.org/v4' : '/api/football-data';
 
 // ─── Generic fetch with cache ─────────────────────────────────────────────────
 async function apiFetch<T>(url: string, cacheKey: string, cacheDuration = 300000): Promise<T | null> {
@@ -326,8 +327,9 @@ export async function fetchTodayMatches(): Promise<TodayMatch[]> {
 // Routed via /api/wc2026 Vite proxy → https://worldcupapi.com/api
 // ═══════════════════════════════════════════════════════════
 
-const WC2026_KEY = 'RQ4KAz8bg2i7xraM';
-const WC_BASE = '/api/wc2026'; // proxied in vite.config.ts
+const WC2026_KEY = 'EAbv3XCF8wzJs5cc';
+const IS_SERVER = typeof window === 'undefined';
+const WC_BASE = IS_SERVER ? 'https://worldcupapi.com/api' : '/api/wc2026';
 
 async function wcFetch<T>(endpoint: string, params: Record<string, string> = {}, cacheDuration = 30000): Promise<T | null> {
   const sp = new URLSearchParams({ key: WC2026_KEY, ...params });
