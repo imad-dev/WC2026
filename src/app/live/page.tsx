@@ -41,15 +41,34 @@ export default function LiveHubPage() {
           <div className="px-2 sm:px-3 py-1 bg-[var(--wc-red)] text-white text-[10px] sm:text-xs font-bold rounded shrink-0">LIVE</div>
         </div>
 
-        {/* YouTube Video Element */}
-        <iframe
-          src="https://www.youtube.com/embed/2lJZPT6OljI?autoplay=1"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          className="w-full h-full"
-          style={{ border: 0 }}
-        ></iframe>
+        {/* Custom Placeholder Video Element */}
+        <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508098682722-e99c643e7f0d?w=1280&q=80')] bg-cover bg-center opacity-40 mix-blend-luminosity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030408] via-transparent to-transparent" />
+          
+          <div className="z-10 flex flex-col items-center justify-center text-center px-4">
+             <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4 backdrop-blur-md border border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+               <Play className="w-6 h-6 text-white ml-1" />
+             </div>
+             <h2 className="text-white text-xl sm:text-2xl font-bold tracking-wider uppercase mb-2" style={{ fontFamily: 'var(--font-display)' }}>Waiting for Broadcast Signal</h2>
+             <p className="text-[var(--wc-text-muted)] text-sm max-w-md">The live stream will begin automatically when the broadcaster provides the official feed.</p>
+          </div>
+        </div>
+
+        {/* Custom Video Controls */}
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-black/90 to-transparent opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+           <div className="flex items-center gap-3 sm:gap-4">
+             <button onClick={() => setIsPlaying(!isPlaying)} className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0">
+               {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />}
+             </button>
+             {/* Timeline bar */}
+             <div className="flex-1 h-1 sm:h-1.5 bg-white/20 rounded-full cursor-pointer relative overflow-hidden">
+               <div className="absolute top-0 left-0 h-full bg-[var(--wc-red)] w-[75%]" />
+             </div>
+             <button className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0"><Volume2 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
+             <button className="text-white hover:text-[var(--wc-green)] transition-colors shrink-0 hidden sm:block"><Maximize className="w-4 h-4 sm:w-5 sm:h-5" /></button>
+           </div>
+        </div>
       </div>
 
       {/* RIGHT: Interactive Panels */}
