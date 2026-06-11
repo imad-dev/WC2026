@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         source: '/api/wc2026/:path*',
-        destination: 'https://worldcupapi.com/api/:path*',
+        destination: 'https://api.worldcupapi.com/:path*',
       },
     ];
   },

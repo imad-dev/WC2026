@@ -329,7 +329,7 @@ export async function fetchTodayMatches(): Promise<TodayMatch[]> {
 
 const WC2026_KEY = 'EAbv3XCF8wzJs5cc';
 const IS_SERVER = typeof window === 'undefined';
-const WC_BASE = IS_SERVER ? 'https://worldcupapi.com/api' : '/api/wc2026';
+const WC_BASE = IS_SERVER ? 'https://api.worldcupapi.com' : '/api/wc2026';
 
 async function wcFetch<T>(endpoint: string, params: Record<string, string> = {}, cacheDuration = 30000): Promise<T | null> {
   const sp = new URLSearchParams({ key: WC2026_KEY, ...params });
