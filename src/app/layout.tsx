@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   title: 'WC2026 — FIFA World Cup 2026 Live | Free Stream & Scores',
   description:
     'Watch all 104 FIFA World Cup 2026 matches live. Free geo-routed streams, real-time scores, group standings, and full schedule. June 11 – July 19, 2026.',
+  verification: {
+    yandex: '423eb30a370535ff',
+  },
   metadataBase: new URL('https://wc2026.games'),
   alternates: { canonical: '/' },
   openGraph: {
