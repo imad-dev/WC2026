@@ -1,0 +1,5822 @@
+{
+  "info": {
+    "_postman_id": "7fbeff52-f0d7-4e5d-abf5-fd3387be8bce",
+    "name": "WorldCupAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2095816"
+  },
+  "item": [
+    {
+      "name": "Live Scores",
+      "item": [
+        {
+          "name": "Get Live Scores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livescores?key=EAbv3XCF8wzJs5cc",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livescores"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fixtures",
+      "item": [
+        {
+          "name": "Fixtures By Group",
+          "item": [
+            {
+              "name": "Group A Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=A",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "A"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group B Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=B",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "B"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group C Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=C",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "C"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group D Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=D",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "D"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group E Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=E",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "E"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group F Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=F",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "F"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group G Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=G",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "G"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group H Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=H",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "H"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group I Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=I",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "I"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group J Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=J",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "J"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group K Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=K",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "K"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group L Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&group=L",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "L"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Fixtures by Team",
+          "item": [
+            {
+              "name": "Mexico Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1450",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1450"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Canada Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1674",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1674"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "USA Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1849",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1849"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Australia Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1440",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1440"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Iran Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1436",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1436"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Jordan Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1790",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1790"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Qatar Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1427",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1427"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Saudi Arabia Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1432",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1432"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "South Korea Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1452",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1452"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Uzbekistan Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1776",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1776"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Algeria Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1528",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1528"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Cape Verde Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1608",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1608"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Egypt Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=215",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "215"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ghana Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=214",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "214"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ivory Coast Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1628",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1628"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Morocco Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1435",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1435"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Senegal Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1460",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1460"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "South Africa Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=2767",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2767"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Tunisia Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1455",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1455"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Argentina Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1443",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1443"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Brazil Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1448",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1448"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Colombia Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1457",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1457"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ecuador Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1847",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1847"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Paraguay Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=4040",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "4040"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Uruguay Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1434",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1434"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Zealand Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=5345",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "5345"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "England Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1456",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1456"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Curacao Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=2732",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2732"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Haiti Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=2777",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2777"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Panama Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1454",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1454"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Austria Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=2684",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2684"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Belgium Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1453",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1453"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Croatia Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=211",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "211"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "France Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1439",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1439"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Germany Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1449",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1449"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Netherlands Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1649",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1649"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Norway Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=2677",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2677"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Portugal Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1437",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1437"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Scotland Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1741",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1741"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Spain Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1438",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1438"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Switzerland Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=208",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "208"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Japan Fixtures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&team_id=1458",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "fixtures"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1458"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Get All Fixtures",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "fixtures"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fixtures For a Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/fixtures?key=EAbv3XCF8wzJs5cc&date=2026-06-11",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "fixtures"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-06-11"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Match Commentary",
+      "item": [
+        {
+          "name": "Match Commentary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/commentary?key=EAbv3XCF8wzJs5cc&match_id=335680",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "commentary"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Commentary Starting From A Second",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/commentary?key=EAbv3XCF8wzJs5cc&match_id=335680&from=1000",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "commentary"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                },
+                {
+                  "key": "from",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Commentary Ending At A Second",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/commentary?key=EAbv3XCF8wzJs5cc&match_id=335680&to=1000",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "commentary"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                },
+                {
+                  "key": "to",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Match Events",
+      "item": [
+        {
+          "name": "Match Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/events?key=EAbv3XCF8wzJs5cc&match_id=335680",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Match Statistics",
+      "item": [
+        {
+          "name": "Match Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/statistics?key=EAbv3XCF8wzJs5cc&match_id=335680",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "statistics"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Match Lineups",
+      "item": [
+        {
+          "name": "Match Lineups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/lineups?key=EAbv3XCF8wzJs5cc&match_id=335680",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "lineups"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "match_id",
+                  "value": "335680"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teams Squads",
+      "item": [
+        {
+          "name": "Algeria Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1528",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1528"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Argentina Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1443",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1443"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Austria Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=2684",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "2684"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Australia Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1440",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1440"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Belgium Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1453",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1453"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Brazil Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1448",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1448"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Canada Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1674",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1674"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cape Verde Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1608",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1608"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Colombia Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1457",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1457"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Croatia Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=211",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "211"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Curacao Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=2732",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "2732"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ecuador Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1847",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1847"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Egypt Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=215",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "215"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "England Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1456",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1456"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "France Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1439",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1439"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Germany Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1449",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1449"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ghana Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=214",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "214"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Haiti Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=2777",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "2777"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Iran Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1436",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1436"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ivory Coast Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1628",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1628"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Japan Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1458",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1458"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Jordan Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1790",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1790"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mexico Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1450",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1450"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Morocco Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1435",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1435"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Netherlands Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1649",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1649"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Zealand Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=5345",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "5345"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Norway Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=2677",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "2677"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Panama Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1454",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1454"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Paraguay Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=4040",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "4040"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Portugal Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1437",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1437"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Qatar Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1427",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1427"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Saudi Arabia Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1432",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1432"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Scotland Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1741",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1741"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Senegal Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1460",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1460"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Spain Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1438",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1438"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "South Africa Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=2767",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "2767"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "South Korea Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1452",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1452"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Switzerland Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=208",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "208"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tunisia Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1455",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1455"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Uruguay Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1434",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1434"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USA Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1849",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1849"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Uzbekistan Squad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/squads?key=EAbv3XCF8wzJs5cc&team_id=1776",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "squads"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team_id",
+                  "value": "1776"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "History Matches",
+      "item": [
+        {
+          "name": "Teams Matches History",
+          "item": [
+            {
+              "name": "Algeria Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1528",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1528"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Argentina Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1443",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1443"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Austria Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=2684",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2684"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Australia Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1440",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1440"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Belgium Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1453",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1453"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Brazil Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1448",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1448"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Canada Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1674",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1674"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Cape Verde Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1608",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1608"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Colombia Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1457",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1457"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Croatia Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=211",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "211"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Curacao Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=2732",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2732"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ecuador Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1847",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1847"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Egypt Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=215",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "215"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "England Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1456",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1456"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "France Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1439",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1439"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Germany Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1449",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1449"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ghana Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=214",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "214"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Haiti Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=2777",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2777"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Iran Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1436",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1436"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ivory Coast Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1628",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1628"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Japan Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1458",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1458"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Jordan Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1790",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1790"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Mexico Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1450",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1450"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Morocco Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1435",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1435"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Netherlands Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1649",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1649"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Zealand Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=5345",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "5345"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Norway Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=2677",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2677"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Panama Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1454",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1454"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Paraguay Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=4040",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "4040"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Portugal Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1437",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1437"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Qatar Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1427",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1427"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Saudi Arabia Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1432",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1432"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Scotland Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1741",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1741"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Senegal Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1460",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1460"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Spain Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1438",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1438"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "South Africa Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=2767",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "2767"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "South Korea Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1452",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1452"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Switzerland Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=208",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "208"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Tunisia Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1455",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1455"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Uruguay Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1434",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1434"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "USA Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1849",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1849"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Uzbekistan Matches History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&team_id=1776",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "1776"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Latest Finished Matches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "World Cup 2022 Matches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&date_from=2022-11-01&date_to=2022-12-31",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "date_from",
+                  "value": "2022-11-01"
+                },
+                {
+                  "key": "date_to",
+                  "value": "2022-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "World Cup 2018 Matches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/history?key=EAbv3XCF8wzJs5cc&date_from=2018-06-01&date_to=2018-08-31",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "date_from",
+                  "value": "2018-06-01"
+                },
+                {
+                  "key": "date_to",
+                  "value": "2018-08-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Head 2 Head",
+      "item": [
+        {
+          "name": "Head 2 Head (SWI - CRO)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=208&team2_id=211",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "208"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "211"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (BRA - ARG)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1448&team2_id=1443",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1448"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "1443"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (FRA - ENG)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1439&team2_id=1456",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1439"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "1456"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (KOR - JPN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1452&team2_id=1458",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1452"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "1458"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (MEX - USA)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1450&team2_id=1849",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1450"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "1849"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (CIV - SEN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1628&team2_id=1460",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1628"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "1460"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Head 2 Head (AUS - NZL)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/head2head?key=EAbv3XCF8wzJs5cc&team1_id=1440&team2_id=5345",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "head2head"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "team1_id",
+                  "value": "1440"
+                },
+                {
+                  "key": "team2_id",
+                  "value": "5345"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Live Standings",
+      "item": [
+        {
+          "name": "Group A Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=A",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "A"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group B Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=B",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "B"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group C Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=C",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "C"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group D Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=D",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "D"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group E Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=E",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "E"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group F Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=F",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "F"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group G Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=G",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "G"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group H Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=H",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "H"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group I Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=I",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "I"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group J Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=J",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "J"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group K Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=K",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "K"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Group L Live Standings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/livestandings?key=EAbv3XCF8wzJs5cc&group=L",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "livestandings"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                },
+                {
+                  "key": "group",
+                  "value": "L"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Standings",
+      "item": [
+        {
+          "name": "Basic Standings",
+          "item": [
+            {
+              "name": "Group A Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=A",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "A"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group B Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=B",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "B"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group C Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=C",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "C"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group D Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=D",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "D"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group E Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=E",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "E"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group F Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=F",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "F"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group G Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=G",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "G"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group H Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=H",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "H"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group I Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=I",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "I"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group J Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=J",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "J"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group K Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=K",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "K"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group L Standings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=L",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "L"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Standings With Form",
+          "item": [
+            {
+              "name": "Group A Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=A&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "A"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group B Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=B&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "B"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group C Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=C&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "C"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group D Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=D&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "D"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group E Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=E&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "E"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group F Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=F&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "F"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group G Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=G&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "G"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group H Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=H&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "H"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group I Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=I&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "I"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group J Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=J&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "J"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group K Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=K&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "K"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Group L Standings With Form",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "api.worldcupapi.com/standings?key=EAbv3XCF8wzJs5cc&group=L&form=1",
+                  "host": [
+                    "api",
+                    "worldcupapi",
+                    "com"
+                  ],
+                  "path": [
+                    "standings"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "EAbv3XCF8wzJs5cc"
+                    },
+                    {
+                      "key": "group",
+                      "value": "L"
+                    },
+                    {
+                      "key": "form",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Player Statistics",
+      "item": [
+        {
+          "name": "Top Goalscorers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/goalscorers?key=EAbv3XCF8wzJs5cc",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "goalscorers"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Top Red/Yellow Cards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "api.worldcupapi.com/cards?key=EAbv3XCF8wzJs5cc",
+              "host": [
+                "api",
+                "worldcupapi",
+                "com"
+              ],
+              "path": [
+                "cards"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "EAbv3XCF8wzJs5cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

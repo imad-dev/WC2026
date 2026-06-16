@@ -131,6 +131,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1999755644541481"
           crossOrigin="anonymous"
         />
+        {/* Popunder Script */}
+        <script type="text/javascript" src="https://pl29770201.effectivecpmnetwork.com/5a/71/87/5a71872f0b95ba2ae33f1ce0e281902b.js"></script>
       </head>
       <body style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }} suppressHydrationWarning>
         <NavBar />
@@ -155,6 +157,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Script>
           </>
         )}
+        {/* Social Bar Script */}
+        <script type="text/javascript" src="https://pl29770203.effectivecpmnetwork.com/34/94/04/349404a6f693ba2d8907d7b787e9513e.js"></script>
       </body>
     </html>
   );
