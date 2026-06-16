@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
+import { supabase, WC2026Match } from '@/lib/supabaseClient';
 
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
@@ -10,6 +11,77 @@ export default function LiveHubPage() {
   const [chatInput, setChatInput] = useState('');
   const [predictedTeam, setPredictedTeam] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Live match state
+  const [liveMatch, setLiveMatch] = useState<WC2026Match | null>(null);
+  
+  // Predictions state
+  const [predictionStats, setPredictionStats] = useState({ team_a_pct: 0, draw_pct: 0, team_b_pct: 0, total_votes: 0 });
+
+  const fetchPredictions = async (matchId: number) => {
+    const { data } = await supabase.rpc('get_prediction_percentages', { p_match_id: matchId });
+    if (data && data.length > 0) {
+      setPredictionStats({
+        team_a_pct: Number(data[0].team_a_pct) || 0,
+        draw_pct: Number(data[0].draw_pct) || 0,
+        team_b_pct: Number(data[0].team_b_pct) || 0,
+        total_votes: Number(data[0].total_votes) || 0
+      });
+    }
+  };
+
+  useEffect(() => {
+    // 1. Fetch initial live match
+    const fetchLiveMatch = async () => {
+      const { data, error } = await supabase
+        .from('wc2026_matches')
+        .select('*')
+        .eq('status', 'live')
+        .limit(1)
+        .maybeSingle();
+      
+      if (data) {
+        setLiveMatch(data);
+        fetchPredictions(data.id);
+      }
+    };
+    fetchLiveMatch();
+
+    // 2. Subscribe to realtime updates for matches
+    const matchesChannel = supabase.channel('live-matches')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'wc2026_matches', filter: "status=eq.live" },
+        (payload) => {
+          if (payload.new && (payload.new as any).status === 'live') {
+            setLiveMatch(payload.new as WC2026Match);
+          }
+        }
+      )
+      .subscribe();
+
+    // 3. Subscribe to predictions
+    const predictionsChannel = supabase.channel('live-predictions')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'wc2026_predictions' },
+        () => {
+          if (liveMatch) {
+            fetchPredictions(liveMatch.id);
+          } else {
+             // In case liveMatch isn't set in closure, we just re-fetch the match query or rely on useEffect deps.
+             // Best to just re-fetch live match predictions
+             fetchLiveMatch();
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(matchesChannel);
+      supabase.removeChannel(predictionsChannel);
+    };
+  }, []);
 
   // Auto-scroll chat
   useEffect(() => {
@@ -21,6 +93,21 @@ export default function LiveHubPage() {
     if (!chatInput.trim()) return;
     setChatMessages(prev => [...prev.slice(-19), { id: Date.now(), user: 'You', msg: chatInput }]);
     setChatInput('');
+  };
+
+  const submitPrediction = async (choice: 'team_a' | 'draw' | 'team_b', teamLabel: string) => {
+    if (!liveMatch || predictedTeam) return;
+    
+    setPredictedTeam(teamLabel);
+    
+    // Generate an anonymous user UUID (or load from localStorage in a real app)
+    const randomUserId = crypto.randomUUID();
+    
+    await supabase.from('wc2026_predictions').insert({
+      match_id: liveMatch.id,
+      choice: choice,
+      user_id: randomUserId
+    });
   };
 
   return (
@@ -43,7 +130,8 @@ export default function LiveHubPage() {
           <div className="flex items-center gap-2 sm:gap-3 bg-[rgba(10,14,26,0.6)] backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[rgba(255,255,255,0.1)] max-w-[calc(100%-60px)]">
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[var(--wc-red)] animate-pulse shadow-[0_0_8px_var(--wc-red)] shrink-0" />
             <span className="text-xs sm:text-sm font-bold tracking-wider sm:tracking-widest text-white uppercase truncate" style={{ fontFamily: 'var(--font-display)' }}>
-              LIVE · MEX 1-0 RSA · 67'
+              LIVE · {liveMatch ? `${liveMatch.home_team.substring(0,3).toUpperCase()} ${liveMatch.home_score}-${liveMatch.away_score} ${liveMatch.away_team.substring(0,3).toUpperCase()}` : 'LOADING...'} 
+              {liveMatch?.kickoff_utc && ` · ${Math.max(0, Math.floor((Date.now() - new Date(liveMatch.kickoff_utc).getTime()) / 60000))}'`}
             </span>
           </div>
           <div className="px-2 sm:px-3 py-1 bg-[var(--wc-red)] text-white text-[10px] sm:text-xs font-bold rounded shrink-0">LIVE</div>
@@ -106,33 +194,39 @@ export default function LiveHubPage() {
                 {/* Radial Gauge */}
                 <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full flex items-center justify-center mb-6 sm:mb-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]" 
                   style={{ 
-                    background: `conic-gradient(var(--wc-green) 0% 62%, var(--wc-gold) 62% 74%, var(--wc-red) 74% 100%)` 
+                    background: `conic-gradient(var(--wc-green) 0% ${predictionStats.team_a_pct}%, var(--wc-gold) ${predictionStats.team_a_pct}% ${predictionStats.team_a_pct + predictionStats.draw_pct}%, var(--wc-red) ${predictionStats.team_a_pct + predictionStats.draw_pct}% 100%)` 
                   }}
                 >
                   <div className="absolute inset-2 rounded-full bg-[var(--wc-surface)] flex flex-col items-center justify-center text-center">
-                    <span className="text-3xl sm:text-4xl text-white mb-1 tabular font-bold" style={{ fontFamily: 'var(--font-mono)' }}>62%</span>
-                    <span className="text-[9px] sm:text-[10px] text-[var(--wc-green)] font-bold tracking-widest uppercase">Mexico</span>
+                    <span className="text-3xl sm:text-4xl text-white mb-1 tabular font-bold" style={{ fontFamily: 'var(--font-mono)' }}>
+                      {Math.max(predictionStats.team_a_pct, predictionStats.draw_pct, predictionStats.team_b_pct).toFixed(0)}%
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] text-[var(--wc-green)] font-bold tracking-widest uppercase">
+                      {predictionStats.team_a_pct > predictionStats.team_b_pct && predictionStats.team_a_pct > predictionStats.draw_pct ? liveMatch?.home_team :
+                       predictionStats.team_b_pct > predictionStats.team_a_pct && predictionStats.team_b_pct > predictionStats.draw_pct ? liveMatch?.away_team :
+                       predictionStats.draw_pct > Math.max(predictionStats.team_a_pct, predictionStats.team_b_pct) ? 'Draw' : 'Tie'}
+                    </span>
                   </div>
                 </div>
 
                 <div className="w-full flex gap-2 sm:gap-3">
                   <button 
-                    onClick={() => setPredictedTeam('MEX')}
-                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-green)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'MEX' ? 'bg-[var(--wc-green)] text-black' : 'bg-[rgba(0,166,81,0.1)] text-[var(--wc-green)] hover:bg-[var(--wc-green)] hover:text-black'}`}
+                    onClick={() => submitPrediction('team_a', liveMatch?.home_team?.substring(0,3).toUpperCase() || 'HOME')}
+                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-green)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === liveMatch?.home_team?.substring(0,3).toUpperCase() ? 'bg-[var(--wc-green)] text-black' : 'bg-[rgba(0,166,81,0.1)] text-[var(--wc-green)] hover:bg-[var(--wc-green)] hover:text-black'}`}
                   >
-                    MEX
+                    {liveMatch?.home_team?.substring(0,3).toUpperCase() || 'HOME'}
                   </button>
                   <button 
-                    onClick={() => setPredictedTeam('DRAW')}
+                    onClick={() => submitPrediction('draw', 'DRAW')}
                     className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-gold)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'DRAW' ? 'bg-[var(--wc-gold)] text-black' : 'bg-[rgba(245,166,35,0.1)] text-[var(--wc-gold)] hover:bg-[var(--wc-gold)] hover:text-black'}`}
                   >
                     DRAW
                   </button>
                   <button 
-                    onClick={() => setPredictedTeam('RSA')}
-                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-red)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === 'RSA' ? 'bg-[var(--wc-red)] text-black' : 'bg-[rgba(232,0,29,0.1)] text-[var(--wc-red)] hover:bg-[var(--wc-red)] hover:text-black'}`}
+                    onClick={() => submitPrediction('team_b', liveMatch?.away_team?.substring(0,3).toUpperCase() || 'AWAY')}
+                    className={`flex-1 py-2.5 sm:py-3 border border-[var(--wc-red)] rounded font-bold text-xs sm:text-sm transition-colors ${predictedTeam === liveMatch?.away_team?.substring(0,3).toUpperCase() ? 'bg-[var(--wc-red)] text-black' : 'bg-[rgba(232,0,29,0.1)] text-[var(--wc-red)] hover:bg-[var(--wc-red)] hover:text-black'}`}
                   >
-                    RSA
+                    {liveMatch?.away_team?.substring(0,3).toUpperCase() || 'AWAY'}
                   </button>
                 </div>
                 
