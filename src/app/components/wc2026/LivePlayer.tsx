@@ -25,21 +25,8 @@ export function LivePlayer({ nextMatch }: LivePlayerProps) {
 
   // Determine the embed URL
   const getEmbedUrl = useCallback(() => {
-    if (!streamConfig) return '';
-
-    // If beIN video ID is set and region is MENA, use direct embed
-    if (beinVideoId && streamConfig.region === 'MENA') {
-      return `https://www.youtube.com/embed/${beinVideoId}?autoplay=1&mute=1&rel=0`;
-    }
-
-    // Extract channel ID from live_stream URL
-    const channelMatch = streamConfig.embedUrl.match(/channel=([^&]+)/);
-    if (channelMatch) {
-      return `https://www.youtube.com/embed/live_stream?channel=${channelMatch[1]}&autoplay=1&mute=1&rel=0`;
-    }
-
-    return streamConfig.embedUrl;
-  }, [streamConfig, beinVideoId]);
+    return 'https://pr.onlineworldcup2026.com/albaplayer/sports-1/';
+  }, []);
 
   // Check if any match is currently live
   useEffect(() => {
