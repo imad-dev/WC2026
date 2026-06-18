@@ -25,7 +25,7 @@ export function LivePlayer({ nextMatch }: LivePlayerProps) {
 
   // Determine the embed URL
   const getEmbedUrl = useCallback(() => {
-    return 'https://pr.onlineworldcup2026.com/albaplayer/sports-1/';
+    return 'https://por.onlineworldcup2026.com/albaplayer/sports-1/';
   }, []);
 
   // Check if any match is currently live
@@ -155,8 +155,9 @@ export function LivePlayer({ nextMatch }: LivePlayerProps) {
             key={lastRefresh}
             src={embedUrl}
             className="absolute inset-0 w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            frameBorder="0"
+            scrolling="yes"
             title="FIFA World Cup 2026 Live Stream"
             style={{ border: 'none' }}
           />
