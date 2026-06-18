@@ -15,6 +15,9 @@ export default function LiveHubPage() {
   // Live match state
   const [liveMatch, setLiveMatch] = useState<WC2026Match | null>(null);
   
+  // Ad state
+  const [adClicked, setAdClicked] = useState(false);
+  
   // Predictions state
   const [predictionStats, setPredictionStats] = useState({ team_a_pct: 0, draw_pct: 0, team_b_pct: 0, total_votes: 0 });
 
@@ -139,6 +142,20 @@ export default function LiveHubPage() {
 
         {/* Live Broadcast Iframe */}
         <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center">
+          {!adClicked && (
+            <a 
+              href="https://www.effectivecpmnetwork.com/steh40ys?key=c3817b02a6ce5ba1e04b14695f562abc"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setAdClicked(true)}
+              className="absolute inset-0 w-full h-full z-30 flex flex-col items-center justify-center cursor-pointer group bg-black/40 hover:bg-black/20 transition-colors"
+            >
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[var(--wc-red)]/80 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--wc-red)] group-hover:scale-110 transition-all shadow-[0_0_30px_rgba(232,0,29,0.5)]">
+                <div className="w-0 h-0 border-t-[12px] sm:border-t-[15px] border-t-transparent border-l-[20px] sm:border-l-[25px] border-l-white border-b-[12px] sm:border-b-[15px] border-b-transparent ml-2"></div>
+              </div>
+              <span className="mt-4 text-white font-bold tracking-widest text-sm sm:text-base uppercase drop-shadow-lg">Click to Play</span>
+            </a>
+          )}
           <iframe 
             allowFullScreen={true} 
             frameBorder="0" 
