@@ -1,28 +1,144 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, User } from 'lucide-react';
-import { createMatchSlug } from '@/lib/utils/slug';
+import { ChevronLeft, ChevronRight, User, Trophy, Calendar, MapPin, Shield } from 'lucide-react';
 
-export default function TeamDetailClient({ team, players, fixtures }: { team: any, players: any[], fixtures: any[] }) {
-  const carouselRef = useRef<HTMLDivElement>(null);
+const POS_LABEL: Record<string, string> = {
+  GK: 'Goalkeeper',
+  DF: 'Defender',
+  MF: 'Midfielder',
+  FW: 'Forward',
+};
+const POS_COLOR: Record<string, string> = {
+  GK: '#f59e0b',
+  DF: '#3b82f6',
+  MF: '#10b981',
+  FW: '#ef4444',
+};
+const POS_ORDER = ['GK', 'DF', 'MF', 'FW'];
 
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    if (!carouselRef.current) return;
-    const scrollAmount = (220 + 12) * 4; // card width + gap * 4 cards
-    carouselRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
-    });
-  };
+function PlayerCard({ player, teamColor, flagUrl }: { player: any; teamColor: string; flagUrl: string }) {
+  const posColor = POS_COLOR[player.position] || '#888';
+  return (
+    <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 group">
+      {/* Colored top bar */}
+      <div className="h-1" style={{ backgroundColor: posColor }} />
+      {/* Photo area */}
+      <div className="relative h-[160px] bg-gradient-to-b from-[rgba(255,255,255,0.03)] to-[rgba(0,0,0,0.2)] flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{ background: `radial-gradient(circle at 50% 100%, ${teamColor}, transparent 70%)` }}
+        />
+        {player.photo_url ? (
+          <img src={player.photo_url} alt={player.name} className="h-full w-auto object-contain relative z-10 transition-transform duration-300 group-hover:scale-105" />
+        ) : (
+          <User className="w-20 h-20 text-[rgba(255,255,255,0.15)] relative z-10" />
+        )}
+        {/* Jersey number badge */}
+        <div 
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-black shadow-lg"
+          style={{ backgroundColor: teamColor || '#333' }}
+        >
+          {player.number}
+        </div>
+        {/* Flag */}
+        <img src={flagUrl} alt="" className="absolute top-3 left-3 w-7 h-5 object-cover rounded-[2px] shadow-sm" />
+      </div>
+      <div className="p-3">
+        <h3 className="text-[13px] font-bold text-white uppercase truncate leading-tight">{player.name}</h3>
+        <span 
+          className="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+          style={{ color: posColor, backgroundColor: `${posColor}20` }}
+        >
+          {POS_LABEL[player.position] || player.position}
+        </span>
+      </div>
+    </div>
+  );
+}
 
+function MatchCard({ match, teamName }: { match: any; teamName: string }) {
+  const isHome = match.home_team === teamName;
+  const opponent = isHome ? match.away_team : match.home_team;
+  const myScore = isHome ? match.home_score : match.away_score;
+  const oppScore = isHome ? match.away_score : match.home_score;
+  const isFinished = match.status === 'finished';
+  const date = match.kickoff_utc ? new Date(match.kickoff_utc) : null;
+
+  let resultLabel = '';
+  let resultColor = '';
+  if (isFinished && myScore !== null && oppScore !== null) {
+    if (myScore > oppScore) { resultLabel = 'W'; resultColor = '#10b981'; }
+    else if (myScore < oppScore) { resultLabel = 'L'; resultColor = '#ef4444'; }
+    else { resultLabel = 'D'; resultColor = '#f59e0b'; }
+  }
+
+  return (
+    <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-4 min-w-[240px] snap-start">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10px] font-bold text-[var(--wc-text-muted)] uppercase tracking-wider">
+          Group {match.group_name}
+        </span>
+        {resultLabel && (
+          <span className="text-[11px] font-black px-2 py-0.5 rounded" style={{ color: resultColor, backgroundColor: `${resultColor}20` }}>
+            {resultLabel}
+          </span>
+        )}
+      </div>
+      <div className="text-center mb-3">
+        <div className="text-[13px] text-[var(--wc-text-muted)] mb-1">{isHome ? '🏠 Home' : '✈️ Away'}</div>
+        <div className="font-bold text-white text-base truncate">{teamName}</div>
+        {isFinished && myScore !== null ? (
+          <div className="text-3xl font-black text-white my-1">{myScore} – {oppScore}</div>
+        ) : (
+          <div className="text-2xl font-black text-[var(--wc-text-muted)] my-1">vs</div>
+        )}
+        <div className="font-bold text-white text-base truncate">{opponent}</div>
+      </div>
+      {date && (
+        <div className="flex items-center gap-1 text-[11px] text-[var(--wc-text-muted)] mt-2">
+          <Calendar className="w-3 h-3" />
+          {date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} · {date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+        </div>
+      )}
+      {match.venue && (
+        <div className="flex items-center gap-1 text-[10px] text-[var(--wc-text-muted)] mt-1 truncate">
+          <MapPin className="w-3 h-3 shrink-0" />
+          <span className="truncate">{match.venue.split(',')[0]}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function TeamDetailClient({ team, players, fixtures }: { team: any; players: any[]; fixtures: any[] }) {
+  const [activePos, setActivePos] = useState<string>('ALL');
+  
   const bgColor = team.kit_primary_color || '#1a2235';
-  const flagUrl = team.flag_url || `https://flagcdn.com/120x90/${team.country_code?.toLowerCase() || 'un'}.png`;
+  const flagUrl = team.flag_url || `https://flagcdn.com/w80/un.png`;
+
+  // Group players by position
+  const playersByPos = POS_ORDER.reduce((acc, pos) => {
+    acc[pos] = players.filter(p => p.position === pos).sort((a, b) => a.number - b.number);
+    return acc;
+  }, {} as Record<string, any[]>);
+
+  const filteredPlayers = activePos === 'ALL' ? players.sort((a, b) => a.number - b.number) : playersByPos[activePos] || [];
+
+  const record = { w: 0, d: 0, l: 0 };
+  fixtures.filter(m => m.status === 'finished').forEach(m => {
+    const isHome = m.home_team === team.name;
+    const ms = isHome ? m.home_score : m.away_score;
+    const os = isHome ? m.away_score : m.home_score;
+    if (ms > os) record.w++;
+    else if (ms < os) record.l++;
+    else record.d++;
+  });
 
   return (
     <div className="w-full min-h-screen bg-[var(--wc-surface)]">
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb */}
       <div className="bg-[var(--wc-dark)] border-b border-[var(--wc-border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-[var(--wc-text-muted)]">
@@ -36,228 +152,139 @@ export default function TeamDetailClient({ team, players, fixtures }: { team: an
         </div>
       </div>
 
-      {/* SECTION A — HERO BANNER */}
-      <section 
-        className="w-full relative h-[280px] overflow-hidden"
-        style={{ backgroundColor: bgColor }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between py-10 md:py-0">
-          
-          {/* Left Side */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <img src={flagUrl} alt={`${team.name} flag`} className="w-16 h-12 rounded-[2px] shadow-md object-cover" />
-              {team.is_host_country && (
-                <span className="px-3 py-1 bg-black/30 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full">
-                  Host Country
-                </span>
-              )}
-            </div>
-            <div>
-              <h1 className="text-[56px] md:text-[72px] text-white leading-none uppercase drop-shadow-md" style={{ fontFamily: 'var(--font-display)' }}>
-                {team.name}
-              </h1>
-              <p className="text-white/80 font-medium tracking-wide">
-                {team.confederation_full || team.confederation || 'FIFA'}
-              </p>
-            </div>
-          </div>
+      {/* HERO BANNER */}
+      <section className="w-full relative overflow-hidden" style={{ backgroundColor: bgColor }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+        {/* Background flag watermark */}
+        <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 overflow-hidden pointer-events-none">
+          <img src={flagUrl} alt="" className="w-full h-full object-cover object-left" />
+        </div>
 
-          {/* Right Side (Pills) */}
-          <div className="hidden md:flex gap-4">
-            <div className="bg-white rounded p-4 shadow-xl min-w-[140px] text-center">
-              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Group Stage</div>
-              <div className="text-xl font-black text-[#000]">{team.group_name || 'TBA'}</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            {/* Left */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <img src={flagUrl} alt={`${team.name} flag`} className="w-20 h-14 rounded object-cover shadow-xl border-2 border-white/20" />
+                {team.is_host_country && (
+                  <span className="px-3 py-1 bg-black/40 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full border border-white/20">
+                    🏆 Host Nation
+                  </span>
+                )}
+              </div>
+              <div>
+                <h1 className="text-[56px] md:text-[80px] text-white leading-none uppercase font-black drop-shadow-xl" style={{ fontFamily: 'var(--font-display)' }}>
+                  {team.name}
+                </h1>
+                <p className="text-white/70 font-medium tracking-wide mt-1">
+                  {team.confederation_full || team.confederation} · Group {team.group_letter}
+                </p>
+              </div>
             </div>
-            <div className="bg-white rounded p-4 shadow-xl min-w-[140px] text-center">
-              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">FIFA Ranking</div>
-              <div className="text-xl font-black text-[#000]">#{team.world_ranking || '-'}</div>
-            </div>
-            <div className="bg-white rounded p-4 shadow-xl min-w-[140px] text-center">
-              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Appearances</div>
-              <div className="text-xl font-black text-[#000]">{team.participations || '-'}</div>
+
+            {/* Right — stat pills */}
+            <div className="flex gap-3 flex-wrap">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 shadow-xl min-w-[120px] text-center">
+                <div className="text-[10px] font-bold text-white/60 uppercase tracking-wider mb-1">FIFA Rank</div>
+                <div className="text-2xl font-black text-white">#{team.world_ranking || '-'}</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 shadow-xl min-w-[120px] text-center">
+                <div className="text-[10px] font-bold text-white/60 uppercase tracking-wider mb-1">Appearances</div>
+                <div className="text-2xl font-black text-white">{team.participations ?? '-'}</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 shadow-xl min-w-[120px] text-center">
+                <div className="text-[10px] font-bold text-white/60 uppercase tracking-wider mb-1">Squad Size</div>
+                <div className="text-2xl font-black text-white">{players.length}</div>
+              </div>
+              {record.w + record.d + record.l > 0 && (
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 shadow-xl min-w-[120px] text-center">
+                  <div className="text-[10px] font-bold text-white/60 uppercase tracking-wider mb-1">WC2026 Record</div>
+                  <div className="text-base font-black text-white">{record.w}W {record.d}D {record.l}L</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 flex flex-col gap-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col gap-16">
 
-        {/* SECTION B — FIXTURES */}
-        <section>
-          <h2 className="text-3xl text-[var(--wc-text)] mb-6 uppercase" style={{ fontFamily: 'var(--font-display)' }}>Fixtures</h2>
-          {fixtures.length === 0 ? (
-            <div className="p-8 bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl text-center text-[var(--wc-text-muted)]">
-              No fixtures scheduled yet.
-            </div>
-          ) : (
+        {/* FIXTURES */}
+        {fixtures.length > 0 && (
+          <section>
+            <h2 className="text-3xl text-[var(--wc-text)] mb-6 uppercase font-black" style={{ fontFamily: 'var(--font-display)' }}>
+              Fixtures & Results
+            </h2>
             <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide">
-              {fixtures.map((match) => (
-                <Link 
-                  key={match.id} 
-                  href={`/match/${createMatchSlug(match.home_team?.name || '', match.away_team?.name || '')}`}
-                  className="snap-start shrink-0 w-[280px] bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                >
-                  <div className="text-[12px] text-gray-500 font-medium mb-1 truncate">
-                    FIFA World Cup 2026™
-                  </div>
-                  <div className="flex justify-between items-center text-[12px] text-gray-500 mb-4">
-                    <span className="truncate">{match.round || 'Group Stage'} · {match.venue?.name || 'TBA'}</span>
-                    <span className="shrink-0 ml-2">{match.kickoff_utc ? new Date(match.kickoff_utc).toLocaleDateString() : 'TBA'}</span>
-                  </div>
-
-                  <div className="flex flex-col gap-2 mb-4">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <img 
-                          src={`https://flagcdn.com/24x18/${match.home_team?.country_code?.toLowerCase() || 'un'}.png`} 
-                          alt="Home Flag" 
-                          className="w-6 h-4 rounded-[1px] object-cover" 
-                        />
-                        <span className="font-bold text-[#000] truncate max-w-[120px]">{match.home_team?.name || 'TBA'}</span>
-                      </div>
-                      {match.status === 'finished' && match.home_score !== null ? (
-                        <span className="text-xl font-bold text-[#000]">{match.home_score}</span>
-                      ) : null}
-                    </div>
-
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <img 
-                          src={`https://flagcdn.com/24x18/${match.away_team?.country_code?.toLowerCase() || 'un'}.png`} 
-                          alt="Away Flag" 
-                          className="w-6 h-4 rounded-[1px] object-cover" 
-                        />
-                        <span className="font-bold text-[#000] truncate max-w-[120px]">{match.away_team?.name || 'TBA'}</span>
-                      </div>
-                      {match.status === 'finished' && match.away_score !== null ? (
-                        <span className="text-xl font-bold text-[#000]">{match.away_score}</span>
-                      ) : match.status !== 'finished' && match.kickoff_utc ? (
-                        <span className="text-lg font-bold text-[#000]">
-                          {new Date(match.kickoff_utc).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-600 text-[10px] font-bold uppercase rounded">FOX</span>
-                    <span className="px-2 py-1 bg-gray-100 text-gray-600 text-[10px] font-bold uppercase rounded">Telemundo</span>
-                  </div>
-                </Link>
+              {fixtures.map(match => (
+                <MatchCard key={match.id} match={match} teamName={team.name} />
               ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
 
-        {/* SECTION C — SQUAD */}
+        {/* SQUAD */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl text-[var(--wc-text)] uppercase" style={{ fontFamily: 'var(--font-display)' }}>Squad</h2>
-            <div className="flex items-center gap-4">
-              <div className="flex gap-2">
-                <button onClick={() => scrollCarousel('left')} className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-white hover:bg-[var(--wc-green)] hover:text-black transition-colors">
-                  <ChevronLeft className="w-5 h-5" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <h2 className="text-3xl text-[var(--wc-text)] uppercase font-black" style={{ fontFamily: 'var(--font-display)' }}>
+              Official Squad <span className="text-[var(--wc-text-muted)] text-xl font-normal">({players.length} players)</span>
+            </h2>
+            {/* Position filter tabs */}
+            <div className="flex gap-2 flex-wrap">
+              {['ALL', ...POS_ORDER].map(pos => (
+                <button
+                  key={pos}
+                  onClick={() => setActivePos(pos)}
+                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full border transition-all ${
+                    activePos === pos
+                      ? 'text-black border-transparent'
+                      : 'text-[var(--wc-text-muted)] border-[var(--wc-border)] hover:text-white'
+                  }`}
+                  style={activePos === pos ? { backgroundColor: pos === 'ALL' ? bgColor || '#00a651' : POS_COLOR[pos], borderColor: 'transparent' } : {}}
+                >
+                  {pos === 'ALL' ? `All (${players.length})` : `${pos} (${(playersByPos[pos] || []).length})`}
                 </button>
-                <button onClick={() => scrollCarousel('right')} className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-white hover:bg-[var(--wc-green)] hover:text-black transition-colors">
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+              ))}
             </div>
           </div>
 
-          {players.length === 0 ? (
-            <div className="p-8 bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl text-center text-[var(--wc-text-muted)]">
-              Squad list has not been announced yet.
+          {filteredPlayers.length === 0 ? (
+            <div className="p-12 bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-2xl text-center">
+              <Shield className="w-12 h-12 text-[var(--wc-text-muted)] mx-auto mb-3 opacity-40" />
+              <p className="text-[var(--wc-text-muted)]">No players in this category.</p>
             </div>
           ) : (
-            <div 
-              ref={carouselRef}
-              className="flex overflow-x-auto gap-3 pb-8 snap-x snap-mandatory scrollbar-hide"
-            >
-              {players.map((player) => (
-                <Link 
-                  key={player.id} 
-                  href={`/player/${player.id}`}
-                  className="snap-start shrink-0 w-[220px] bg-white border border-gray-100 rounded-[12px] hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 group"
-                >
-                  <div className="relative h-[240px] bg-[#f5f5f5] rounded-t-[12px] p-4 flex flex-col justify-end overflow-hidden">
-                    <img 
-                      src={flagUrl} 
-                      alt="flag" 
-                      className="absolute top-4 left-4 w-6 h-[18px] object-cover rounded-[2px] shadow-sm z-10" 
-                    />
-                    
-                    {player.photo_url ? (
-                      <img 
-                        src={player.photo_url} 
-                        alt={player.name} 
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-auto object-contain max-h-[95%] transition-transform duration-300 group-hover:scale-105" 
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <User className="w-32 h-32 text-[#cccccc]" />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="p-4 bg-white rounded-b-[12px]">
-                    <h3 className="text-[13px] font-bold text-[#000] uppercase truncate mb-1">
-                      {player.name}
-                    </h3>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">{player.position || 'N/A'}</span>
-                      {player.number && (
-                        <span className="text-[11px] font-bold text-[var(--wc-green)] bg-[var(--wc-dark)] px-1.5 py-0.5 rounded">#{player.number}</span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+              {filteredPlayers.map(player => (
+                <PlayerCard key={player.id} player={player} teamColor={bgColor} flagUrl={flagUrl} />
               ))}
             </div>
           )}
         </section>
 
-        {/* SECTION D — TEAM INFO */}
+        {/* ABOUT + STATS */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <h2 className="text-3xl text-[var(--wc-text)] uppercase" style={{ fontFamily: 'var(--font-display)' }}>About</h2>
+            <h2 className="text-3xl text-[var(--wc-text)] uppercase font-black" style={{ fontFamily: 'var(--font-display)' }}>About</h2>
             <p className="text-[var(--wc-text-muted)] leading-relaxed text-lg">
-              {team.bio_short || `${team.name} is a competing nation in the 2026 FIFA World Cup representing ${team.confederation}. They are preparing to showcase their talent on the global stage across USA, Canada, and Mexico.`}
+              {team.bio_short || `${team.name} is competing in the 2026 FIFA World Cup, representing ${team.confederation}. They are showcasing their talent on the global stage across USA, Canada, and Mexico.`}
             </p>
-            
-            <div className="mt-4 p-4 border border-[var(--wc-border)] rounded-xl flex items-center gap-4 bg-[var(--wc-surface-2)] max-w-sm">
-              <div className="w-16 h-16 rounded-full bg-[var(--wc-dark)] border border-[var(--wc-border)] flex items-center justify-center overflow-hidden shrink-0">
-                <User className="w-8 h-8 text-[var(--wc-text-muted)]" />
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">{team.coach_name || 'TBA'}</div>
-                <div className="text-[var(--wc-text-muted)] text-sm">Head Coach</div>
-              </div>
-            </div>
           </div>
 
           <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-6 flex flex-col justify-center">
-              <span className="text-xs text-[var(--wc-text-muted)] font-bold tracking-widest uppercase mb-1">FIFA Ranking</span>
-              <span className="text-3xl text-white font-black" style={{ fontFamily: 'var(--font-mono)' }}>#{team.world_ranking || '-'}</span>
-            </div>
-            <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-6 flex flex-col justify-center">
-              <span className="text-xs text-[var(--wc-text-muted)] font-bold tracking-widest uppercase mb-1">Founded</span>
-              <span className="text-3xl text-white font-black" style={{ fontFamily: 'var(--font-mono)' }}>{team.founded_year || 'N/A'}</span>
-            </div>
-            <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-6 flex flex-col justify-center">
-              <span className="text-xs text-[var(--wc-text-muted)] font-bold tracking-widest uppercase mb-1">Confederation</span>
-              <span className="text-xl text-white font-bold">{team.confederation || '-'}</span>
-            </div>
-            <div className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-6 flex flex-col justify-center">
-              <span className="text-xs text-[var(--wc-text-muted)] font-bold tracking-widest uppercase mb-1">Appearances</span>
-              <span className="text-3xl text-white font-black" style={{ fontFamily: 'var(--font-mono)' }}>{team.participations || '-'}</span>
-            </div>
+            {[
+              { label: 'FIFA Ranking', value: team.world_ranking ? `#${team.world_ranking}` : 'N/A' },
+              { label: 'WC Appearances', value: team.participations ?? 'N/A' },
+              { label: 'Confederation', value: team.confederation || 'N/A' },
+              { label: 'Group', value: team.group_letter ? `Group ${team.group_letter}` : 'N/A' },
+            ].map(stat => (
+              <div key={stat.label} className="bg-[var(--wc-surface-2)] border border-[var(--wc-border)] rounded-xl p-5 flex flex-col justify-center">
+                <span className="text-[10px] text-[var(--wc-text-muted)] font-bold tracking-widest uppercase mb-1">{stat.label}</span>
+                <span className="text-2xl text-white font-black">{stat.value}</span>
+              </div>
+            ))}
           </div>
-          
         </section>
 
       </div>
