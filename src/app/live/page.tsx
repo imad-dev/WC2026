@@ -128,18 +128,6 @@ export default function LiveHubPage() {
       {/* LEFT: Video Player */}
       <div className="w-full lg:flex-1 h-[35vh] sm:h-[40vh] lg:h-[calc(100vh-64px)] relative bg-black flex flex-col group">
         
-        {/* Live Header Overlay */}
-        <div className="absolute top-0 left-0 right-0 p-3 sm:p-4 z-20 flex justify-between items-start bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
-          <div className="flex items-center gap-2 sm:gap-3 bg-[rgba(10,14,26,0.6)] backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[rgba(255,255,255,0.1)] max-w-[calc(100%-60px)] pointer-events-auto">
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[var(--wc-red)] animate-pulse shadow-[0_0_8px_var(--wc-red)] shrink-0" />
-            <span className="text-xs sm:text-sm font-bold tracking-wider sm:tracking-widest text-white uppercase truncate" style={{ fontFamily: 'var(--font-display)' }}>
-              LIVE · {liveMatch ? `${liveMatch.home_team.substring(0,3).toUpperCase()} ${liveMatch.home_score}-${liveMatch.away_score} ${liveMatch.away_team.substring(0,3).toUpperCase()}` : 'LOADING...'} 
-              {liveMatch?.kickoff_utc && ` · ${Math.max(0, Math.floor((Date.now() - new Date(liveMatch.kickoff_utc).getTime()) / 60000))}'`}
-            </span>
-          </div>
-          <div className="px-2 sm:px-3 py-1 bg-[var(--wc-red)] text-white text-[10px] sm:text-xs font-bold rounded shrink-0 pointer-events-auto">LIVE</div>
-        </div>
-
         {/* Live Broadcast Iframe */}
         <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center">
           {!adClicked && (
