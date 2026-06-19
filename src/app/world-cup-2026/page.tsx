@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import WorldCup2026Hub from '../_legacy-pages/WorldCup2026Hub';
 
 export const metadata: Metadata = {
-  title: 'Live Hub — FIFA World Cup 2026 | WC2026.games',
+  title: 'FIFA World Cup 2026 Live Streaming Hub | WC2026.games',
   description:
-    'Watch FIFA World Cup 2026 matches live. Geo-routed free streams, real-time scores, and full match replays.',
+    'The ultimate fifa world cup 2026 live streaming hub. Get your wc 2026 stream, real-time scores, and full match replays here.',
   alternates: { canonical: '/world-cup-2026' },
 };
 

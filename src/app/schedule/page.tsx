@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { MatchGrid } from '@/components/sections/MatchGrid';
 
 export const metadata: Metadata = {
-  title: 'WC2026 Match Schedule | All 104 Games Live',
-  description: 'View the complete schedule for the FIFA World Cup 2026. Filter by groups, dates, and venues across USA, Canada, and Mexico.',
+  title: 'WC Match Schedule | Live Streaming WC 2026',
+  description: 'View the complete schedule for every wc match. Find your fifa world cup 2026 live stream free here. Filter by groups, dates, and venues.',
   alternates: { canonical: '/schedule' },
 };
 
@@ -13,7 +13,7 @@ export default function SchedulePage() {
       {/* SEO text */}
       <div className="sr-only">
         <h1>FIFA World Cup 2026 Match Schedule</h1>
-        <p>Complete match schedule for the 2026 FIFA World Cup. View all 104 matches, group stage to the final, across host cities in USA, Canada, and Mexico. Check kick-off times and results.</p>
+        <p>Complete schedule for every wc match of the 2026 FIFA World Cup. View all 104 matches, prepare for live streaming wc 2026, and find your fifa world cup 2026 live stream free link.</p>
       </div>
 
       {/* Schedule Page Monetization Section */}

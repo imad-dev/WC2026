@@ -121,8 +121,8 @@ export default function LiveHubPage() {
       
       {/* SEO text */}
       <div className="sr-only">
-        <h1>Live Matches - FIFA World Cup 2026</h1>
-        <p>Watch live match broadcasts, predict match outcomes, track the timeline of events, and chat with other fans worldwide during the FIFA World Cup 2026.</p>
+        <h1>Live Matches - FIFA World Cup 2026 Live Streaming</h1>
+        <p>Watch fifa world cup 2026 live streaming full hd free broadcasts, track every wc match, and chat with other fans worldwide during the live fifa world cup 2026 tournament. Don't miss a single parche wc 2026 moment!</p>
       </div>
 
       {/* LEFT: Video Player */}
@@ -372,6 +372,16 @@ export default function LiveHubPage() {
             <h3 className="text-xl font-bold text-[var(--wc-gold)] mb-3">شارك برأيك في الدردشة الحية</h3>
             <p className="text-sm text-gray-400">
               لا تفوتوا فرصة التفاعل مع المشجعين من كافة أنحاء العالم. استخدموا قسم "الدردشة" (Chat) أعلى الصفحة لمشاركة توقعاتكم للنتائج، ومتابعة الخط الزمني (Timeline) للأهداف والبطاقات أولاً بأول. تجربة كأس العالم 2026 تكتمل بمشاركتكم!
+            </p>
+          </div>
+          
+          <div className="mt-8 text-sm text-gray-500" dir="ltr">
+            <h3 className="font-bold text-gray-400 mb-2">Watch Live Streaming WC 2026</h3>
+            <p>
+              Looking for a reliable wc 2026 stream? You are in the right place for fifa world cup 2026 live streaming. 
+              We offer every wc match in crystal clear quality. Enjoy fifa world cup 2026 live streaming full hd free, 
+              ensuring you catch all the action of the live fifa world cup 2026. Whether it's a group stage parche wc 2026 
+              or the grand finale, our fifa wc free streaming hub has you covered.
             </p>
           </div>
         </div>

@@ -17,8 +17,8 @@ async function getTeams() {
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'All 48 Teams — FIFA World Cup 2026 | wc2026.games',
-  description: 'All 48 qualified teams for the 2026 FIFA World Cup in USA, Canada and Mexico. Group draw, squad lists, fixtures and statistics.',
+  title: 'All 48 Teams | Live FIFA World Cup 2026 | wc2026.games',
+  description: 'All 48 qualified teams for the 2026 FIFA World Cup. Get ready for live streaming wc 2026. View squad lists, fixtures, and statistics.',
 };
 
 export default async function TeamsPage() {
@@ -26,8 +26,8 @@ export default async function TeamsPage() {
   return (
     <>
       <div className="sr-only">
-        <h1>All 48 Teams - FIFA World Cup 2026</h1>
-        <p>Explore all 48 qualified teams competing in the 2026 FIFA World Cup. From host nations USA, Canada, and Mexico to global powerhouses and debutants. View squad lists, fixtures, world rankings, and team statistics.</p>
+        <h1>All 48 Teams - Live FIFA World Cup 2026</h1>
+        <p>Explore all 48 qualified teams competing in the 2026 FIFA World Cup. Find out when your favorite team plays their next wc match and prepare for live streaming wc 2026.</p>
       </div>
       <TeamsClient teams={teams} />
     </>
