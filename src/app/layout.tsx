@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     description: 'All 104 matches live. FIFA world cup 2026 live streaming full hd free, real-time scores, standings.',
     images: ['/og-image.png'],
   },
+  icons: {
+    icon: [
+      { url: 'https://wc2026.games/favicon.png', type: 'image/png' },
+    ],
+  },
   robots: 'index, follow',
   other: { 'theme-color': '#0a0e1a' },
 };
