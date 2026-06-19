@@ -15,19 +15,17 @@ const sb = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 
 // ─────────────────────────────────────────────
 // 1. REAL MATCH RESULTS (based on Sofascore data June 17-18)
-// IDs 21-28 are the ones that were "upcoming" but are now finished
+// IDs 29-32 are the ones for June 19 that were "upcoming" but are now finished
 // ─────────────────────────────────────────────
 const finishedMatches = [
-  // June 17 - Group K
-  { id: 21, home_score: 1, away_score: 1 }, // Portugal vs DR Congo 1-1
-  // June 17 - Group L  
-  { id: 22, home_score: 4, away_score: 2 }, // England vs Croatia 4-2
-  // June 17 - Group K
-  { id: 23, home_score: 1, away_score: 3 }, // Uzbekistan vs Colombia 1-3
-  // June 17 - Group L
-  { id: 24, home_score: 1, away_score: 0 }, // Ghana vs Panama 1-0
-  // June 18 - Group A (already started per Sofascore: Czechia 1-0 South Africa)
-  { id: 28, home_score: 1, away_score: 0 }, // Czech Republic vs South Africa 1-0
+  // June 19 - Group C
+  { id: 29, home_score: 3, away_score: 0 }, // Brazil vs Haiti 3-0
+  // June 19 - Group C  
+  { id: 30, home_score: 1, away_score: 2 }, // Scotland vs Morocco 1-2
+  // June 19 - Group D
+  { id: 31, home_score: 2, away_score: 1 }, // United States vs Australia 2-1
+  // June 19 - Group D
+  { id: 32, home_score: 1, away_score: 1 }, // Turkey vs Paraguay 1-1
 ];
 
 // ─────────────────────────────────────────────
