@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
 import { MatchGrid } from '@/components/sections/MatchGrid';
 import Link from 'next/link';
+import { generateFAQJsonLd } from '@/lib/seo-helpers';
+
+const SCHEDULE_FAQS = [
+  { q: 'When does the World Cup 2026 start?', a: 'The FIFA World Cup 2026 kicks off on June 11, 2026, with the opening match at Estadio Azteca in Mexico City.' },
+  { q: 'How many matches are in the World Cup 2026?', a: 'There are 104 matches in total — 72 group stage matches followed by 32 knockout stage matches including the Final on July 19 at MetLife Stadium.' },
+  { q: 'What is the new World Cup 2026 format?', a: 'The 2026 World Cup features 48 teams in 12 groups of 4. The top 2 from each group plus the 8 best third-placed teams advance to a Round of 32.' },
+  { q: 'Where can I watch World Cup 2026 for free?', a: 'WC2026.games provides free live streaming of all 104 matches in Full HD quality with real-time scores and commentary.' },
+];
 
 export const metadata: Metadata = {
   title: 'FIFA World Cup 2026 Match Schedule — All 104 Games',
@@ -61,12 +69,7 @@ export default function SchedulePage() {
           Frequently Asked Questions
         </h2>
         <div className="grid gap-4 md:grid-cols-2">
-          {[
-            { q: 'When does the World Cup 2026 start?', a: 'The FIFA World Cup 2026 kicks off on June 11, 2026, with the opening match at Estadio Azteca in Mexico City.' },
-            { q: 'How many matches are in the World Cup 2026?', a: 'There are 104 matches in total — 72 group stage matches followed by 32 knockout stage matches including the Final on July 19 at MetLife Stadium.' },
-            { q: 'What is the new World Cup 2026 format?', a: 'The 2026 World Cup features 48 teams in 12 groups of 4. The top 2 from each group plus the 8 best third-placed teams advance to a Round of 32.' },
-            { q: 'Where can I watch World Cup 2026 for free?', a: 'WC2026.games provides free live streaming of all 104 matches in Full HD quality with real-time scores and commentary.' },
-          ].map((faq) => (
+          {SCHEDULE_FAQS.map((faq) => (
             <details key={faq.q} className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-4 group">
               <summary className="text-white font-medium cursor-pointer list-none flex items-center justify-between">
                 <span>{faq.q}</span>
@@ -77,6 +80,16 @@ export default function SchedulePage() {
           ))}
         </div>
       </section>
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateFAQJsonLd(
+            SCHEDULE_FAQS.map(f => ({ question: f.q, answer: f.a }))
+          )),
+        }}
+      />
     </div>
   );
 }

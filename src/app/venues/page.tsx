@@ -3,6 +3,14 @@ import { unstable_cache } from 'next/cache';
 import { supabaseAdmin } from '@/lib/supabase';
 import { VenueCard } from '@/components/ui/VenueCard';
 import Link from 'next/link';
+import { generateFAQJsonLd } from '@/lib/seo-helpers';
+
+const VENUE_FAQS = [
+  { q: 'Where is the World Cup 2026 Final?', a: 'The Final will be held at MetLife Stadium in East Rutherford, New Jersey, on July 19, 2026. The stadium has a capacity of 82,500.' },
+  { q: 'Which stadium hosts the opening match?', a: 'The opening match takes place at Estadio Azteca in Mexico City on June 11, 2026 — one of the most iconic football stadiums in the world with 87,523 capacity.' },
+  { q: 'How many countries host World Cup 2026?', a: 'Three countries — the United States (11 venues), Mexico (3 venues), and Canada (2 venues) — co-host the tournament.' },
+  { q: 'What is the largest World Cup 2026 venue?', a: 'Estadio Azteca in Mexico City is the largest venue at 87,523 capacity, followed by MetLife Stadium at 82,500.' },
+];
 
 export const metadata: Metadata = {
   title: 'World Cup 2026 Venues & Stadium Guide — 16 Host Cities',
@@ -76,12 +84,7 @@ export default async function VenuesPage() {
             Venue FAQ
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
-            {[
-              { q: 'Where is the World Cup 2026 Final?', a: 'The Final will be held at MetLife Stadium in East Rutherford, New Jersey, on July 19, 2026. The stadium has a capacity of 82,500.' },
-              { q: 'Which stadium hosts the opening match?', a: 'The opening match takes place at Estadio Azteca in Mexico City on June 11, 2026 — one of the most iconic football stadiums in the world with 87,523 capacity.' },
-              { q: 'How many countries host World Cup 2026?', a: 'Three countries — the United States (11 venues), Mexico (3 venues), and Canada (2 venues) — co-host the tournament.' },
-              { q: 'What is the largest World Cup 2026 venue?', a: 'Estadio Azteca in Mexico City is the largest venue at 87,523 capacity, followed by MetLife Stadium at 82,500.' },
-            ].map((faq) => (
+            {VENUE_FAQS.map((faq) => (
               <details key={faq.q} className="bg-[var(--wc-surface)] border border-[var(--wc-border)] rounded-xl p-4 group">
                 <summary className="text-white font-medium cursor-pointer list-none flex items-center justify-between">
                   <span>{faq.q}</span>
@@ -94,6 +97,16 @@ export default async function VenuesPage() {
         </section>
 
       </div>
+      
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateFAQJsonLd(
+            VENUE_FAQS.map(f => ({ question: f.q, answer: f.a }))
+          )),
+        }}
+      />
     </div>
   );
 }

@@ -7,7 +7,27 @@ import { MatchSchedule } from '../components/wc2026/MatchSchedule';
 import { GroupStandings } from '../components/wc2026/GroupStandings';
 import { HeroCountdown } from '../components/wc2026/HeroCountdown';
 import type { WC2026Match } from '../../lib/supabaseClient';
-import { ArrowLeft, Tv, Calendar, BarChart3, Trophy } from 'lucide-react';
+import { ArrowLeft, Tv, Calendar, BarChart3, Trophy, Info, HelpCircle } from 'lucide-react';
+import { generateFAQJsonLd } from '../../lib/seo-helpers';
+
+const FAQS = [
+  {
+    question: "When does the 2026 FIFA World Cup start?",
+    answer: "The 2026 FIFA World Cup is scheduled to start on June 11, 2026, and will conclude with the final on July 19, 2026."
+  },
+  {
+    question: "Where is the 2026 World Cup being hosted?",
+    answer: "The 2026 tournament will be jointly hosted by three North American countries: the United States, Canada, and Mexico. This is the first time the World Cup will be hosted by three nations."
+  },
+  {
+    question: "How many teams will play in the 2026 World Cup?",
+    answer: "For the first time in history, the 2026 World Cup will feature 48 teams, an expansion from the traditional 32-team format used since 1998."
+  },
+  {
+    question: "What is the new format for the 2026 World Cup?",
+    answer: "The 48 teams will be divided into 12 groups of 4. The top two teams from each group, along with the 8 best third-placed teams, will advance to a new Round of 32 knockout stage."
+  }
+];
 
 type HubTab = 'live' | 'schedule' | 'standings';
 
@@ -88,19 +108,21 @@ export default function WorldCup2026Hub() {
 
             <div className="flex items-center gap-2">
               <Trophy className="w-4 h-4" style={{ color: 'var(--gold-leader)' }} />
-              <span className="font-bold text-sm" style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--white-primary)',
-                letterSpacing: '-0.01em',
-              }}>
-                FIFA WORLD CUP
-              </span>
-              <span className="text-sm font-bold" style={{
-                color: 'var(--green-live)',
-                fontFamily: 'var(--font-display)',
-              }}>
-                2026
-              </span>
+              <h1 className="flex items-center gap-2 m-0">
+                <span className="font-bold text-sm" style={{
+                  fontFamily: 'var(--font-display)',
+                  color: 'var(--white-primary)',
+                  letterSpacing: '-0.01em',
+                }}>
+                  FIFA WORLD CUP
+                </span>
+                <span className="text-sm font-bold" style={{
+                  color: 'var(--green-live)',
+                  fontFamily: 'var(--font-display)',
+                }}>
+                  2026
+                </span>
+              </h1>
             </div>
           </div>
 
@@ -227,6 +249,76 @@ export default function WorldCup2026Hub() {
         {activeTab === 'standings' && (
           <GroupStandings />
         )}
+
+        {/* ── Ultimate Guide SEO Section ── */}
+        <section className="mt-20 pt-12 border-t" style={{ borderColor: 'var(--border)' }}>
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--white-primary)', fontFamily: 'var(--font-display)' }}>
+                <Info className="w-6 h-6" style={{ color: 'var(--green-live)' }} />
+                Ultimate Guide: 2026 Tournament Structure
+              </h2>
+              <p className="mb-6 leading-relaxed text-sm md:text-base" style={{ color: 'var(--white-ghost)' }}>
+                The 2026 FIFA World Cup represents the largest expansion in the tournament's history, scaling from 32 to 48 national teams. 
+                Hosted across 16 cities in the USA, Canada, and Mexico, this global event introduces a modernized format designed to maximize excitement and competitive balance.
+              </p>
+              
+              <div className="overflow-x-auto rounded-xl border" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}>
+                <table className="w-full text-left text-sm whitespace-nowrap">
+                  <thead style={{ background: 'var(--surface-2)' }}>
+                    <tr>
+                      <th className="px-4 py-3 font-semibold" style={{ color: 'var(--white-primary)' }}>Feature</th>
+                      <th className="px-4 py-3 font-semibold" style={{ color: 'var(--white-primary)' }}>2026 Format</th>
+                      <th className="px-4 py-3 font-semibold" style={{ color: 'var(--white-ghost)' }}>Previous Format (2022)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y" style={{ borderColor: 'var(--border)' }}>
+                    <tr>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--white-primary)' }}>Total Teams</td>
+                      <td className="px-4 py-3 font-bold" style={{ color: 'var(--green-live)' }}>48 Teams</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-ghost)' }}>32 Teams</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--white-primary)' }}>Total Matches</td>
+                      <td className="px-4 py-3 font-bold" style={{ color: 'var(--green-live)' }}>104 Matches</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-ghost)' }}>64 Matches</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--white-primary)' }}>Group Stage</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-primary)' }}>12 groups of 4 teams</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-ghost)' }}>8 groups of 4 teams</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--white-primary)' }}>Knockout Stage</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-primary)' }}>Starts at Round of 32</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-ghost)' }}>Starts at Round of 16</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--white-primary)' }}>Host Nations</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-primary)' }}>USA, Canada, Mexico (16 Cities)</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--white-ghost)' }}>Qatar (5 Cities)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--white-primary)', fontFamily: 'var(--font-display)' }}>
+                <HelpCircle className="w-6 h-6" style={{ color: 'var(--gold-leader)' }} />
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-4">
+                {FAQS.map((faq, index) => (
+                  <article key={index} className="p-5 rounded-xl border transition-colors hover:border-[var(--green-live)]" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}>
+                    <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--white-primary)' }}>{faq.question}</h3>
+                    <p className="leading-relaxed text-sm md:text-base" style={{ color: 'var(--white-ghost)' }}>{faq.answer}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* ── JSON-LD Structured Data ── */}
@@ -270,6 +362,13 @@ export default function WorldCup2026Hub() {
               availability: 'https://schema.org/InStock',
             },
           }),
+        }}
+      />
+      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateFAQJsonLd(FAQS)),
         }}
       />
 
