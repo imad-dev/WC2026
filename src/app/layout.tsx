@@ -12,42 +12,48 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
 const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
-  title: 'WC2026 — FIFA World Cup 2026 Live Streaming | Full HD Free',
+  title: {
+    default: 'FIFA World Cup 2026 Live — Free HD Streams, Scores & Schedule | WC2026.games',
+    template: '%s | WC2026.games',
+  },
   description:
-    'Watch all 104 FIFA World Cup 2026 matches live. Get your wc 2026 stream here with fifa wc free streaming, real-time scores, and standings.',
+    'Watch all 104 FIFA World Cup 2026 matches live in Full HD for free. Real-time scores, group standings, match schedule, team squads, and venue guides across USA, Canada, and Mexico.',
   verification: {
     yandex: '423eb30a370535ff',
   },
   metadataBase: new URL('https://wc2026.games'),
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/live' },
   openGraph: {
-    title: 'Watch FIFA World Cup 2026 Live Streaming Full HD Free',
+    title: 'FIFA World Cup 2026 Live — Free HD Streams & Scores',
     description:
-      'Live streaming world cup 2026 matches. Free stream, real-time scores, and group standings for all 48 teams.',
+      'Live streaming all 104 World Cup 2026 matches for free. Real-time scores, group standings, and full tournament coverage for all 48 teams.',
     type: 'website',
-    url: 'https://wc2026.games/',
+    url: 'https://wc2026.games/live',
     siteName: 'WC2026.games',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'FIFA World Cup 2026 — Live streaming world cup 2026, free streams',
+        alt: 'FIFA World Cup 2026 — Live Streams, Scores, Schedule & Standings',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Live Streaming WC 2026 | WC2026.games',
-    description: 'All 104 matches live. FIFA world cup 2026 live streaming full hd free, real-time scores, standings.',
+    title: 'FIFA World Cup 2026 Live — Free HD Streams | WC2026.games',
+    description: 'Watch all 104 matches live. Real-time scores, standings, and full tournament coverage.',
     images: ['/og-image.png'],
   },
   icons: {
     icon: [
-      { url: 'https://wc2026.games/favicon.png', type: 'image/png' },
+      { url: '/favicon.png', type: 'image/png' },
     ],
   },
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+  },
   other: { 'theme-color': '#0a0e1a' },
 };
 
@@ -58,10 +64,10 @@ const jsonLdWebSite = {
   name: 'WC2026.games',
   url: 'https://wc2026.games',
   description:
-    'Watch FIFA World Cup 2026 live streaming. Get your wc 2026 stream and fifa wc free streaming here. Real-time scores and live streaming world cup 2026.',
+    'FIFA World Cup 2026 live streaming hub — free HD streams, real-time scores, match schedule, group standings, and team profiles for all 48 teams.',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://wc2026.games/?q={search_term_string}',
+    target: 'https://wc2026.games/schedule?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };
@@ -71,7 +77,7 @@ const jsonLdSportsEvent = {
   '@type': 'SportsEvent',
   name: 'FIFA World Cup 2026',
   description:
-    'The 23rd FIFA World Cup, the first with 48 teams, hosted across USA, Canada, and Mexico with 104 matches in 16 venues.',
+    'The 23rd FIFA World Cup — the first with 48 teams — hosted across 16 venues in USA, Canada, and Mexico with 104 matches.',
   startDate: '2026-06-11',
   endDate: '2026-07-19',
   eventStatus: 'https://schema.org/EventScheduled',
@@ -93,7 +99,7 @@ const jsonLdSportsEvent = {
   ],
   offers: {
     '@type': 'Offer',
-    url: 'https://wc2026.games',
+    url: 'https://wc2026.games/live',
     price: '0',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
@@ -106,7 +112,8 @@ const jsonLdOrganization = {
   name: 'WC2026.games',
   url: 'https://wc2026.games',
   description:
-    'FIFA World Cup 2026 live streaming hub — free streams, wc 2026 stream, scores, schedules, and standings.',
+    'FIFA World Cup 2026 live streaming hub — free HD streams, real-time scores, match schedule, and group standings.',
+  logo: 'https://wc2026.games/favicon.png',
   sameAs: [],
 };
 
@@ -114,32 +121,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${bebasNeue.variable} ${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
       <head>
-        <Script
-          id="jsonld-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
-        />
-        <Script
-          id="jsonld-sportsevent"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSportsEvent) }}
-        />
-        <Script
-          id="jsonld-organization"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
-        />
         {/* Google AdSense */}
         <Script
           id="adsense"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1999755644541481"
           crossOrigin="anonymous"
+          strategy="lazyOnload"
         />
         {/* Popunder Script */}
-        <script type="text/javascript" src="https://pl29770201.effectivecpmnetwork.com/5a/71/87/5a71872f0b95ba2ae33f1ce0e281902b.js"></script>
+        <Script
+          id="popunder"
+          src="https://pl29770201.effectivecpmnetwork.com/5a/71/87/5a71872f0b95ba2ae33f1ce0e281902b.js"
+          strategy="lazyOnload"
+        />
       </head>
       <body style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }} suppressHydrationWarning>
+        {/* JSON-LD Structured Data */}
+        <Script
+          id="jsonld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="jsonld-sportsevent"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSportsEvent) }}
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="jsonld-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+          strategy="beforeInteractive"
+        />
+
         <NavBar />
         <PageWrapper>
           {children}
@@ -159,7 +176,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
         {/* Social Bar Script */}
-        <script type="text/javascript" src="https://pl29770203.effectivecpmnetwork.com/34/94/04/349404a6f693ba2d8907d7b787e9513e.js"></script>
+        <Script
+          id="social-bar"
+          src="https://pl29770203.effectivecpmnetwork.com/34/94/04/349404a6f693ba2d8907d7b787e9513e.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

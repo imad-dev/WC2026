@@ -2,10 +2,15 @@ import type { Metadata } from 'next';
 import WorldCup2026Hub from '../_legacy-pages/WorldCup2026Hub';
 
 export const metadata: Metadata = {
-  title: 'FIFA World Cup 2026 Live Streaming Hub | WC2026.games',
+  title: 'FIFA World Cup 2026 — Live Hub, Scores & Standings',
   description:
-    'The ultimate fifa world cup 2026 live streaming hub. Get your wc 2026 stream, real-time scores, and full match replays here.',
+    'Your all-in-one hub for the 2026 FIFA World Cup. Watch live streams, track real-time scores and group standings, browse match schedules, and get full replays for all 104 games.',
   alternates: { canonical: '/world-cup-2026' },
+  openGraph: {
+    title: 'FIFA World Cup 2026 — Live Hub, Scores & Standings',
+    description: 'Live streaming, real-time scores, and full match coverage for all 104 World Cup 2026 games.',
+    url: 'https://wc2026.games/world-cup-2026',
+  },
 };
 
 export default function WorldCup2026Page() {

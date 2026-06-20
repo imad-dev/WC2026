@@ -1,5 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enforce consistent URL format
+  trailingSlash: false,
+
+  // Enable compression
+  compress: true,
+
+  // Redirect duplicate /teams/[id] → /team/[id]
+  async redirects() {
+    return [
+      {
+        source: '/teams/:id((?!$).*)',
+        destination: '/team/:id',
+        permanent: true,
+      },
+    ];
+  },
+
   // Replicate Vite dev-server proxy behavior via Next.js rewrites
   async rewrites() {
     return [

@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { fetchWC2026Lineups, fetchWC2026Statistics, fetchWC2026Events, fetchWC2026Head2Head } from '@/services/api';
 import { createMatchSlug } from '@/lib/utils/slug';
 import { generatePredictedLineups, generateH2H } from '@/services/mockData';
+import { generateMatchJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-helpers';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,21 +17,23 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     
   const match = (matches || []).find(m => createMatchSlug(m.home_team, m.away_team) === resolvedParams.id);
 
-  if (!match) return { title: 'Match | WC2026' };
+  if (!match) return { title: 'Match Not Found' };
   
   const homeName = match.home_team;
   const awayName = match.away_team;
-  
-  const title = `${homeName} vs ${awayName} — WC2026 Live`;
-  const descGroup = match.group_name || 'Group Stage';
-  const descDate = match.kickoff_utc ? new Date(match.kickoff_utc).toLocaleDateString() : 'TBA';
+  const descGroup = match.group_name ? `Group ${match.group_name}` : 'Knockout Stage';
+  const descDate = match.kickoff_utc ? new Date(match.kickoff_utc).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'TBA';
   
   return {
-    title,
-    description: `${descGroup} · ${descDate} · Live score, lineups, H2H and predictions`,
+    title: `${homeName} vs ${awayName} — ${descGroup} | World Cup 2026`,
+    description: `${homeName} vs ${awayName} — ${descGroup} on ${descDate}. Live score, predicted lineups, head-to-head record, and fan predictions at the 2026 FIFA World Cup.`,
+    alternates: { canonical: `/match/${resolvedParams.id}` },
     openGraph: {
-      images: [`/api/og?match=${resolvedParams.id}`]
-    }
+      title: `${homeName} vs ${awayName} — FIFA World Cup 2026`,
+      description: `${descGroup} · ${descDate} · Live score, lineups, H2H stats, and predictions.`,
+      url: `https://wc2026.games/match/${resolvedParams.id}`,
+      images: [`/api/og?match=${resolvedParams.id}`],
+    },
   };
 }
 
@@ -119,14 +122,42 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   const finalH2H = hasApiH2H ? apiH2H.data : generateH2H(homeTeamObj, awayTeamObj);
 
   // Return the client component with API data or fallback to empty arrays
+  // Structured data
+  const matchJsonLd = generateMatchJsonLd({
+    home_team: homeTeamObj.name || matchData.home_team,
+    away_team: awayTeamObj.name || matchData.away_team,
+    kickoff_utc: matchData.kickoff_utc,
+    venue: matchData.venue,
+    group_name: matchData.group_name,
+    status: matchData.status,
+    home_score: matchData.home_score,
+    away_score: matchData.away_score,
+    slug: resolvedParams.id,
+  });
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', url: '/live' },
+    { name: 'Schedule', url: '/schedule' },
+    { name: `${homeTeamObj.name || matchData.home_team} vs ${awayTeamObj.name || matchData.away_team}`, url: `/match/${resolvedParams.id}` },
+  ]);
+
   return (
-    <MatchDetailClient
-      match={match}
-      lineups={finalLineups}
-      stats={apiStats?.data || []}
-      events={apiEvents?.data || []}
-      h2h={finalH2H}
-      predictions={predictionStats}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(matchJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <MatchDetailClient
+        match={match}
+        lineups={finalLineups}
+        stats={apiStats?.data || []}
+        events={apiEvents?.data || []}
+        h2h={finalH2H}
+        predictions={predictionStats}
+      />
+    </>
   );
 }

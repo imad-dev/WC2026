@@ -119,10 +119,17 @@ export default function LiveHubPage() {
       {/* Live App Container */}
       <div className="w-full flex flex-col lg:flex-row lg:h-[calc(100vh-64px)] border-b border-[var(--wc-border)]">
       
-      {/* SEO text */}
-      <div className="sr-only">
-        <h1>Live Matches - FIFA World Cup 2026 Live Streaming</h1>
-        <p>Watch fifa world cup 2026 live streaming full hd free broadcasts, track every wc match, and chat with other fans worldwide during the live fifa world cup 2026 tournament. Don't miss a single parche wc 2026 moment!</p>
+      {/* Page H1 — compact visible heading */}
+      <div className="w-full bg-[var(--wc-dark)] border-b border-[var(--wc-border)] px-4 py-3">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <h1 className="text-lg sm:text-xl text-white uppercase tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
+            Live — FIFA World Cup 2026
+          </h1>
+          <span className="text-[10px] font-bold text-[var(--wc-green)] tracking-widest uppercase flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[var(--wc-green)] animate-pulse" />
+            ON AIR
+          </span>
+        </div>
       </div>
 
       {/* LEFT: Video Player */}
@@ -337,9 +344,9 @@ export default function LiveHubPage() {
 
       {/* SEO Article Section (Arabic) */}
       <article className="max-w-4xl mx-auto px-4 py-12 text-white w-full" dir="rtl">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
           بث مباشر وتغطية حية لمباريات 19 و 20 يونيو في كأس العالم 2026: قمة مغربية مرتقبة ومواجهات عالمية نارية
-        </h1>
+        </h2>
         
         <div className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
           <p>
@@ -386,6 +393,28 @@ export default function LiveHubPage() {
           </div>
         </div>
       </article>
+
+      {/* Internal Links Section */}
+      <nav className="max-w-4xl mx-auto px-4 pb-12" aria-label="Related pages">
+        <h2 className="text-xl text-white uppercase mb-4" style={{ fontFamily: 'var(--font-display)' }}>Explore More</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { href: '/schedule', label: 'Match Schedule', icon: '📅' },
+            { href: '/groups', label: 'Group Standings', icon: '📊' },
+            { href: '/teams', label: 'All 48 Teams', icon: '🏳️' },
+            { href: '/venues', label: 'Stadiums & Venues', icon: '🏟️' },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="flex items-center gap-2 p-3 rounded-lg bg-[var(--wc-surface)] border border-[var(--wc-border)] text-white text-sm font-medium hover:border-[var(--wc-green)] transition-colors"
+            >
+              <span>{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
 
     </div>
   );

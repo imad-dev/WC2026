@@ -33,22 +33,22 @@ export function Footer() {
               The ultimate live hub for the 2026 FIFA World Cup. 104 matches, 48 teams, 16 venues across USA, Canada, and Mexico.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
+              <a href="#" aria-label="Follow us on Twitter" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
+              <a href="#" aria-label="Follow us on Instagram" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
+              <a href="#" aria-label="Subscribe on YouTube" className="w-10 h-10 rounded-full bg-[var(--wc-surface-2)] flex items-center justify-center text-[var(--wc-text-muted)] hover:text-white hover:bg-[var(--wc-green)] transition-all">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="flex flex-col gap-6">
+          <nav className="flex flex-col gap-6" aria-label="Footer navigation">
             <h4 className="text-white font-bold tracking-widest uppercase text-sm" style={{ fontFamily: 'var(--font-display)' }}>Tournament Hub</h4>
             <ul className="flex flex-col gap-3">
+              <li><Link href="/live" className="text-sm text-[var(--wc-green)] hover:text-white transition-colors font-semibold">Watch Live</Link></li>
               <li><Link href="/schedule" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Match Schedule</Link></li>
               <li><Link href="/groups" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Group Standings</Link></li>
               <li><Link href="/teams" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Qualified Teams</Link></li>
@@ -57,7 +57,7 @@ export function Footer() {
               <li><Link href="/about" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="text-sm text-[var(--wc-text-muted)] hover:text-[var(--wc-green)] transition-colors">Contact Us</Link></li>
             </ul>
-          </div>
+          </nav>
 
           {/* Column 3: Newsletter */}
           <div className="flex flex-col gap-6">
