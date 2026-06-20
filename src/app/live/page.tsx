@@ -156,7 +156,7 @@ export default function LiveHubPage() {
             frameBorder="0" 
             height="100%" 
             scrolling="yes" 
-            src="https://por.onlineworldcup2026.com/albaplayer/sports-1/" 
+            src="https://mor.onlineworldcup2026.com/albaplayer/sports-1/" 
             width="100%"
             className="absolute inset-0 w-full h-full z-10"
           ></iframe>

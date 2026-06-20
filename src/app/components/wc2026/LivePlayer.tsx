@@ -25,8 +25,11 @@ export function LivePlayer({ nextMatch }: LivePlayerProps) {
 
   // Determine the embed URL
   const getEmbedUrl = useCallback(() => {
-    return 'https://por.onlineworldcup2026.com/albaplayer/sports-1/';
-  }, []);
+    if (nextMatch?.youtube_video_id) {
+      return `https://www.youtube.com/embed/${nextMatch.youtube_video_id}?autoplay=1&mute=0`;
+    }
+    return '';
+  }, [nextMatch]);
 
   // Check if any match is currently live
   useEffect(() => {
