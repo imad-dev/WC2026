@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { NavBar } from './components/NavBar';
 import { PageWrapper } from '../components/layout/PageWrapper';
 import { Footer } from '../components/layout/Footer';
+import { AdScripts } from './components/AdScripts';
 import '../styles/index.css';
 import { Bebas_Neue, Inter, Roboto_Mono } from 'next/font/google';
 
@@ -121,20 +122,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${bebasNeue.variable} ${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Google AdSense */}
-        <Script
-          id="adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1999755644541481"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
-        {/* Popunder Script */}
-        <Script
-          id="popunder"
-          src="https://pl29770201.effectivecpmnetwork.com/5a/71/87/5a71872f0b95ba2ae33f1ce0e281902b.js"
-          strategy="lazyOnload"
-        />
       </head>
       <body style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }} suppressHydrationWarning>
         {/* JSON-LD Structured Data */}
@@ -175,12 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-F0FWMJXBPS');
           `}
         </Script>
-        {/* Social Bar Script */}
-        <Script
-          id="social-bar"
-          src="https://pl29770203.effectivecpmnetwork.com/34/94/04/349404a6f693ba2d8907d7b787e9513e.js"
-          strategy="lazyOnload"
-        />
+        <AdScripts />
       </body>
     </html>
   );
