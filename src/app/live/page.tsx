@@ -130,10 +130,10 @@ export default function LiveHubPage() {
       </div>
 
       {/* Live App Container */}
-      <div className="w-full flex flex-col lg:flex-row lg:h-[calc(100vh-64px-53px)] border-b border-[var(--wc-border)]">
+      <div className="w-full flex flex-col lg:flex-row min-h-[500px] lg:h-[calc(100vh-117px)] border-b border-[var(--wc-border)]">
 
       {/* LEFT: Video Player */}
-      <div className="w-full lg:flex-1 h-[35vh] sm:h-[40vh] lg:h-[calc(100vh-64px)] relative bg-black flex flex-col group">
+      <div className="w-full lg:flex-1 h-[40vh] sm:h-[45vh] lg:h-full relative bg-black flex flex-col group">
         
         {/* Live Broadcast Iframe */}
         <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center">
@@ -164,7 +164,7 @@ export default function LiveHubPage() {
       </div>
 
       {/* RIGHT: Interactive Panels */}
-      <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 h-[calc(65vh-64px)] sm:h-[calc(60vh-64px)] lg:h-[calc(100vh-64px)] bg-[var(--wc-surface)] border-l border-[var(--wc-border)] flex flex-col overflow-hidden">
+      <div className="w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 h-[calc(60vh-64px)] sm:h-[calc(55vh-64px)] lg:h-full bg-[var(--wc-surface)] border-l border-[var(--wc-border)] flex flex-col overflow-hidden">
         
         {/* Tabs */}
         <div className="flex border-b border-[var(--wc-border)] bg-[var(--wc-dark)] shrink-0">
@@ -342,47 +342,85 @@ export default function LiveHubPage() {
       </div>
       </div> {/* End of Live App Container */}
 
-      {/* SEO Article Section (Arabic) */}
-      <article className="max-w-4xl mx-auto px-4 py-12 text-white w-full" dir="rtl">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-          بث مباشر وتغطية حية لمباريات 19 و 20 يونيو في كأس العالم 2026: قمة مغربية مرتقبة ومواجهات عالمية نارية
-        </h2>
-        
-        <div className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
-          <p>
-            مرحباً بكم في التغطية الحية والحصرية لمباريات <strong>كأس العالم FIFA 2026</strong>. 
-            تتجه أنظار عشاق كرة القدم حول العالم يومي 19 و 20 يونيو 2026 نحو مواجهات حاسمة ومثيرة، 
-            حيث تشهد البطولة استمرار المشاركة العربية بمواجهة قوية لأسود الأطلس المنتخب المغربي أمام اسكتلندا، 
-            إلى جانب ظهور منتخبات عالمية كبرى مثل البرازيل، ألمانيا، وهولندا. 
-            تابعوا معنا البث المباشر وأدق التفاصيل لحظة بلحظة عبر منصتنا.
-          </p>
+      {/* SEO Article Section (Bilingual) */}
+      <article className="max-w-6xl mx-auto px-4 py-12 text-white w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          
+          {/* Arabic Section */}
+          <div dir="rtl" className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              بث مباشر وتغطية حية لمباريات 20 و 21 يونيو في كأس العالم 2026: قمة مغربية مرتقبة ومواجهات عالمية نارية
+            </h2>
+            <p>
+              مرحباً بكم في التغطية الحية والحصرية لمباريات <strong>كأس العالم FIFA 2026</strong>. 
+              تتجه أنظار عشاق كرة القدم حول العالم يومي 20 و 21 يونيو 2026 نحو مواجهات حاسمة ومثيرة، 
+              حيث تشهد البطولة استمرار المشاركة العربية بمواجهة قوية لأسود الأطلس المنتخب المغربي أمام اسكتلندا، 
+              إلى جانب ظهور منتخبات عالمية كبرى مثل البرازيل، ألمانيا، وهولندا. 
+              تابعوا معنا البث المباشر وأدق التفاصيل لحظة بلحظة عبر منصتنا.
+            </p>
 
-          <h2 className="text-2xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
-            موعد مباراة اسكتلندا ضد المغرب (المجموعة الثالثة - 19 يونيو)
-          </h2>
-          <p>
-            تتجه الأنظار لمتابعة <strong>أسود الأطلس</strong> في مواجهة قوية أمام <strong>المنتخب الاسكتلندي</strong>. 
-            يسعى المنتخب المغربي لمواصلة تقديم مستوياته الرائعة وتأكيد طموحاته الكبيرة في هذه البطولة 
-            بحصد نقاط المباراة كاملة، بينما سيعتمد المنتخب الاسكتلندي على الاندفاع البدني والتنظيم التكتيكي لمحاولة إيقاف خطورة النجوم المغاربة.
-          </p>
+            <h3 className="text-xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
+              موعد مباراة اسكتلندا ضد المغرب (المجموعة الثالثة - 20 يونيو)
+            </h3>
+            <p>
+              تتجه الأنظار لمتابعة <strong>أسود الأطلس</strong> في مواجهة قوية أمام <strong>المنتخب الاسكتلندي</strong>. 
+              يسعى المنتخب المغربي لمواصلة تقديم مستوياته الرائعة وتأكيد طموحاته الكبيرة في هذه البطولة 
+              بحصد نقاط المباراة كاملة، بينما سيعتمد المنتخب الاسكتلندي على الاندفاع البدني والتنظيم التكتيكي لمحاولة إيقاف خطورة النجوم المغاربة.
+            </p>
 
-          <h2 className="text-2xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
-            قمم 20 يونيو: البرازيل، ألمانيا، وهولندا في اختبارات مثيرة
-          </h2>
-          <p>
-            تستمر المتعة في اليوم التالي بمواجهات من العيار الثقيل، حيث يبدأ <strong>المنتخب البرازيلي</strong> مسيرته بمواجهة هايتي. 
-            وفي مواجهات أخرى مرتقبة، يلتقي المنتخب الألماني مع أفيال كوت ديفوار، بينما نكون على موعد مع قمة أوروبية خالصة تجمع المنتخب الهولندي العريق بنظيره السويدي العنيد. 
-            يوم مليء بالإثارة الكروية التي لا تفوت!
-          </p>
+            <h3 className="text-xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
+              قمم 21 يونيو: البرازيل، ألمانيا، وهولندا في اختبارات مثيرة
+            </h3>
+            <p>
+              تستمر المتعة في اليوم التالي بمواجهات من العيار الثقيل، حيث يبدأ <strong>المنتخب البرازيلي</strong> مسيرته بمواجهة هايتي. 
+              وفي مواجهات أخرى مرتقبة، يلتقي المنتخب الألماني مع أفيال كوت ديفوار، بينما نكون على موعد مع قمة أوروبية خالصة تجمع المنتخب الهولندي العريق بنظيره السويدي العنيد. 
+              يوم مليء بالإثارة الكروية التي لا تفوت!
+            </p>
+          </div>
 
-          <div className="bg-[var(--wc-surface-2)] p-6 rounded-xl mt-8 border border-[var(--wc-border)]">
-            <h3 className="text-xl font-bold text-[var(--wc-gold)] mb-3">شارك برأيك في الدردشة الحية</h3>
+          {/* English Section */}
+          <div dir="ltr" className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Live Coverage for June 20 & 21 Matches in the 2026 World Cup: Highly Anticipated Moroccan Clash & Global Encounters
+            </h2>
+            <p>
+              Welcome to the live and exclusive coverage of the <strong>FIFA World Cup 2026</strong> matches. 
+              Football fans worldwide are turning their attention to June 20 and 21, 2026, for decisive and thrilling encounters. 
+              The tournament continues its strong Arab presence with a highly anticipated match for the Atlas Lions, the Moroccan National Team, against Scotland, 
+              alongside appearances by major global teams such as Brazil, Germany, and the Netherlands. 
+              Follow our live broadcast and minute-by-minute details on our platform.
+            </p>
+
+            <h3 className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-[var(--wc-red)] pl-4">
+              Scotland vs Morocco (Group C - June 20)
+            </h3>
+            <p>
+              All eyes are on the <strong>Atlas Lions</strong> as they face a tough challenge against the <strong>Scottish National Team</strong>. 
+              The Moroccan squad seeks to continue their brilliant performances and confirm their high ambitions in this tournament 
+              by securing full points. Meanwhile, Scotland will rely on physical intensity and tactical organization to stop the dangerous Moroccan stars.
+            </p>
+
+            <h3 className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-[var(--wc-red)] pl-4">
+              June 21 Clashes: Brazil, Germany, and the Netherlands in Exciting Tests
+            </h3>
+            <p>
+              The excitement continues the following day with heavyweight matchups, as the <strong>Brazilian National Team</strong> kicks off its journey against Haiti. 
+              In other highly anticipated games, the German National Team meets the Ivorian Elephants, while we look forward to an all-European clash 
+              between the historic Dutch team and the stubborn Swedish squad. A day full of unmissable football excitement!
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-[var(--wc-surface-2)] p-6 rounded-xl mt-12 border border-[var(--wc-border)] text-center">
+            <h3 className="text-xl font-bold text-[var(--wc-gold)] mb-3">Join the Live Chat / شارك برأيك في الدردشة الحية</h3>
             <p className="text-sm text-gray-400">
-              لا تفوتوا فرصة التفاعل مع المشجعين من كافة أنحاء العالم. استخدموا قسم "الدردشة" (Chat) أعلى الصفحة لمشاركة توقعاتكم للنتائج، ومتابعة الخط الزمني (Timeline) للأهداف والبطاقات أولاً بأول. تجربة كأس العالم 2026 تكتمل بمشاركتكم!
+              Don't miss the chance to interact with fans from all over the world. Use the "Chat" section at the top of the page to share your match predictions, and follow the Timeline for real-time goals and cards updates. / 
+              لا تفوتوا فرصة التفاعل مع المشجعين من كافة أنحاء العالم. استخدموا قسم "الدردشة" أعلى الصفحة لمشاركة توقعاتكم للنتائج، ومتابعة الخط الزمني للأهداف والبطاقات أولاً بأول.
             </p>
           </div>
           
-          <div className="mt-8 text-sm text-gray-500" dir="ltr">
+          <div className="mt-8 text-sm text-gray-500 text-center" dir="ltr">
             <h3 className="font-bold text-gray-400 mb-2">Watch Live Streaming WC 2026</h3>
             <p>
               Looking for a reliable wc 2026 stream? You are in the right place for fifa world cup 2026 live streaming. 
