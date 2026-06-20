@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
 import { supabase, WC2026Match } from '@/lib/supabaseClient';
+import { useGeo } from '@/hooks/useSupabase';
 
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
@@ -11,6 +12,8 @@ export default function LiveHubPage() {
   const [chatInput, setChatInput] = useState('');
   const [predictedTeam, setPredictedTeam] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const { country } = useGeo();
+  const showAds = country !== 'ES';
 
   // Live match state
   const [liveMatch, setLiveMatch] = useState<WC2026Match | null>(null);
@@ -137,7 +140,7 @@ export default function LiveHubPage() {
         
         {/* Live Broadcast Iframe */}
         <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center">
-          {!adClicked && (
+          {(!adClicked && showAds) && (
             <a 
               href="https://www.effectivecpmnetwork.com/steh40ys?key=c3817b02a6ce5ba1e04b14695f562abc"
               target="_blank"
@@ -253,20 +256,24 @@ export default function LiveHubPage() {
                 )}
 
                 {/* Smartlink Ad Button */}
-                <a 
-                  href="https://www.effectivecpmnetwork.com/steh40ys?key=c3817b02a6ce5ba1e04b14695f562abc" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full mt-6 py-3 bg-gradient-to-r from-[var(--wc-gold)] to-yellow-600 text-black font-bold text-sm sm:text-base rounded-lg text-center shadow-[0_0_15px_rgba(245,166,35,0.4)] hover:scale-105 transition-transform uppercase tracking-widest flex items-center justify-center gap-2"
-                >
-                  <span className="text-lg">🎁</span> Claim Your World Cup Bonus
-                </a>
+                {showAds && (
+                  <a 
+                    href="https://www.effectivecpmnetwork.com/steh40ys?key=c3817b02a6ce5ba1e04b14695f562abc" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full mt-6 py-3 bg-gradient-to-r from-[var(--wc-gold)] to-yellow-600 text-black font-bold text-sm sm:text-base rounded-lg text-center shadow-[0_0_15px_rgba(245,166,35,0.4)] hover:scale-105 transition-transform uppercase tracking-widest flex items-center justify-center gap-2"
+                  >
+                    <span className="text-lg">🎁</span> Claim Your World Cup Bonus
+                  </a>
+                )}
 
                 {/* Native Banner Ad */}
-                <div className="w-full mt-6 min-h-[100px] flex items-center justify-center bg-black/20 rounded-lg overflow-hidden">
-                  <script async={true} data-cfasync="false" src="https://pl29770202.effectivecpmnetwork.com/3ffa407b9e421b28184453613f9fdd5c/invoke.js"></script>
-                  <div id="container-3ffa407b9e421b28184453613f9fdd5c"></div>
-                </div>
+                {showAds && (
+                  <div className="w-full mt-6 min-h-[100px] flex items-center justify-center bg-black/20 rounded-lg overflow-hidden">
+                    <script async={true} data-cfasync="false" src="https://pl29770202.effectivecpmnetwork.com/3ffa407b9e421b28184453613f9fdd5c/invoke.js"></script>
+                    <div id="container-3ffa407b9e421b28184453613f9fdd5c"></div>
+                  </div>
+                )}
               </motion.div>
             )}
 
