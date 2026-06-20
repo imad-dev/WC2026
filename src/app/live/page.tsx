@@ -116,11 +116,8 @@ export default function LiveHubPage() {
   return (
     <div className="w-full bg-[#030408] flex flex-col min-h-screen">
       
-      {/* Live App Container */}
-      <div className="w-full flex flex-col lg:flex-row lg:h-[calc(100vh-64px)] border-b border-[var(--wc-border)]">
-      
       {/* Page H1 — compact visible heading */}
-      <div className="w-full bg-[var(--wc-dark)] border-b border-[var(--wc-border)] px-4 py-3">
+      <div className="w-full bg-[var(--wc-dark)] border-b border-[var(--wc-border)] px-4 py-3 shrink-0">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <h1 className="text-lg sm:text-xl text-white uppercase tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
             Live — FIFA World Cup 2026
@@ -131,6 +128,9 @@ export default function LiveHubPage() {
           </span>
         </div>
       </div>
+
+      {/* Live App Container */}
+      <div className="w-full flex flex-col lg:flex-row lg:h-[calc(100vh-64px-53px)] border-b border-[var(--wc-border)]">
 
       {/* LEFT: Video Player */}
       <div className="w-full lg:flex-1 h-[35vh] sm:h-[40vh] lg:h-[calc(100vh-64px)] relative bg-black flex flex-col group">
