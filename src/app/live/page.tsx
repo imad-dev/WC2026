@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
 import { supabase, WC2026Match } from '@/lib/supabaseClient';
 import { useGeo } from '@/hooks/useSupabase';
+import { LivePlayer } from '@/app/components/LivePlayer';
 
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
@@ -154,15 +155,9 @@ export default function LiveHubPage() {
               <span className="mt-4 text-white font-bold tracking-widest text-sm sm:text-base uppercase drop-shadow-lg">Click to Play</span>
             </a>
           )}
-          <iframe 
-            allowFullScreen={true} 
-            frameBorder="0" 
-            height="100%" 
-            scrolling="yes" 
-            src="https://ksaes.onlineworldcup2026.net/albaplayer/sports-1/" 
-            width="100%"
-            className="absolute inset-0 w-full h-full z-10"
-          ></iframe>
+          <div className="absolute inset-0 w-full h-full z-10">
+            <LivePlayer streamUrl="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" />
+          </div>
         </div>
       </div>
 
