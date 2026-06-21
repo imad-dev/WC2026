@@ -7,6 +7,13 @@ import { supabase, WC2026Match } from '@/lib/supabaseClient';
 import { useGeo } from '@/hooks/useSupabase';
 import { LivePlayer } from '@/app/components/LivePlayer';
 
+const CHANNELS = [
+  { id: 'bein1', name: 'beIN SPORTS MAX 1 HD', url: 'http://kytv.xyz:80/7828533997/5977388349/3226600.m3u8' },
+  { id: 'bein3', name: 'beIN SPORTS MAX 3 HD', url: 'http://kytv.xyz:80/7828533997/5977388349/3226602.m3u8' },
+  { id: 'bein5', name: 'beIN SPORTS MAX 5 HD EN', url: 'http://kytv.xyz:80/7828533997/5977388349/3226604.m3u8' },
+  { id: 'bein6', name: 'beIN SPORTS MAX 6 HD FR', url: 'http://kytv.xyz:80/7828533997/5977388349/3226605.m3u8' },
+];
+
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
   const [chatMessages, setChatMessages] = useState<{id: number, user: string, msg: string}[]>([]);
@@ -19,6 +26,9 @@ export default function LiveHubPage() {
   // Live match state
   const [liveMatch, setLiveMatch] = useState<WC2026Match | null>(null);
   
+  // Stream state
+  const [currentChannel, setCurrentChannel] = useState(CHANNELS[0].url);
+
   // Ad state
   const [adClicked, setAdClicked] = useState(false);
   
@@ -156,8 +166,21 @@ export default function LiveHubPage() {
             </a>
           )}
           <div className="absolute inset-0 w-full h-full z-10">
-            <LivePlayer streamUrl="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" />
+            <LivePlayer streamUrl={currentChannel} />
           </div>
+        </div>
+
+        {/* Channel Selector */}
+        <div className="w-full bg-[var(--wc-dark)] p-3 border-t border-[var(--wc-border)] flex gap-2 overflow-x-auto shrink-0 z-20 relative">
+          {CHANNELS.map(ch => (
+             <button 
+                key={ch.id} 
+                onClick={() => setCurrentChannel(ch.url)}
+                className={`px-4 py-2 whitespace-nowrap text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded transition-colors ${currentChannel === ch.url ? 'bg-[var(--wc-green)] text-black' : 'bg-[var(--wc-surface)] text-white hover:bg-[var(--wc-surface-2)] border border-[var(--wc-border)]'}`}
+             >
+                {ch.name}
+             </button>
+          ))}
         </div>
       </div>
 
