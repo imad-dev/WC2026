@@ -12,7 +12,7 @@ export default function LiveHubPage() {
   const [chatInput, setChatInput] = useState('');
   const [predictedTeam, setPredictedTeam] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const { country } = useGeo();
+  const country = useGeo();
   const showAds = country !== 'ES';
 
   // Live match state
@@ -159,7 +159,7 @@ export default function LiveHubPage() {
             frameBorder="0" 
             height="100%" 
             scrolling="yes" 
-            src="https://mor.onlineworldcup2026.com/albaplayer/sports-1/" 
+            src="https://ksaes.onlineworldcup2026.net/albaplayer/sports-1/" 
             width="100%"
             className="absolute inset-0 w-full h-full z-10"
           ></iframe>
