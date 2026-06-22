@@ -155,7 +155,7 @@ export default function LiveHubPage() {
             </a>
           )}
           <div className="absolute inset-0 w-full h-full z-10">
-            <iframe allowFullScreen={true} frameBorder="0" height="600px" scrolling="1" src="https://mesi.onlineworldcup2026.com/albaplayer/sports-1/" width="100%"></iframe>
+            <iframe allowFullScreen={true} frameBorder="0" height="100%" scrolling="1" src="https://mesi.onlineworldcup2026.com/albaplayer/sports-1/" width="100%"></iframe>
           </div>
         </div>
       </div>
