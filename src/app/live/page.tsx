@@ -362,60 +362,54 @@ export default function LiveHubPage() {
           {/* Arabic Section */}
           <div dir="rtl" className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              بث مباشر وتغطية حية لمباريات 20 و 21 يونيو في كأس العالم 2026: قمم أوروبية خالصة ومواجهات حاسمة
+              بث مباشر وتغطية حية لمباريات 23 و 24 و 25 يونيو في كأس العالم 2026: قمم كروية ومواجهات حاسمة
             </h2>
             <p>
               مرحباً بكم في التغطية الحية والحصرية لمباريات <strong>كأس العالم FIFA 2026</strong>. 
-              تتجه أنظار عشاق كرة القدم حول العالم يومي 20 و 21 يونيو 2026 نحو مواجهات حاسمة ومثيرة، 
-              حيث نشهد قمة أوروبية خالصة تجمع بين الطواحين الهولندية والمنتخب السويدي، واختباراً قوياً للمنتخب الألماني أمام كوت ديفوار. 
-              كما يحمل اليوم التالي مواجهات نارية لمنتخبات مثل إسبانيا، بلجيكا، أوروغواي والمنتخب السعودي.
+              تتجه أنظار عشاق كرة القدم حول العالم أيام 23 و 24 و 25 يونيو 2026 نحو مواجهات حاسمة ومثيرة، 
+              حيث نشهد مباريات نارية تحسم مصير العديد من المنتخبات في دور المجموعات. يبرز ظهور المنتخب المغربي أمام هايتي، بالإضافة إلى مباريات من العيار الثقيل للبرازيل ضد اسكتلندا، وإنجلترا ضد غانا، وألمانيا ضد الإكوادور. 
               تابعوا معنا البث المباشر وأدق التفاصيل لحظة بلحظة عبر منصتنا.
             </p>
 
             <h3 className="text-xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
-              مباريات اليوم (20 يونيو): هولندا ضد السويد وألمانيا ضد كوت ديفوار
+              مباريات 23 يونيو: إنجلترا تواجه غانا والبرتغال تظهر من جديد
             </h3>
             <p>
-              تستمر المتعة بمواجهات من العيار الثقيل هذا اليوم، حيث يلتقي <strong>المنتخب الهولندي</strong> بنظيره <strong>السويدي</strong> في قمة المجموعة السادسة عند الساعة 18:00. وفي الساعة 21:00، يسعى <strong>المنتخب الألماني</strong> لتحقيق انتصار مهم عندما يواجه أفيال <strong>كوت ديفوار</strong> في مواجهة قوية لحساب المجموعة الخامسة.
+              تستمر الإثارة بمواجهات قوية، حيث يلتقي المنتخب البرتغالي بنظيره الأوزبكي، وتخوض <strong>إنجلترا</strong> اختباراً صعباً أمام <strong>غانا</strong>. كما تتواجه بنما مع كرواتيا، وكولومبيا ضد الكونغو الديمقراطية لضمان التأهل المبكر.
             </p>
 
             <h3 className="text-xl font-bold text-white mt-8 mb-4 border-r-4 border-[var(--wc-red)] pr-4">
-              مباريات الغد (21 يونيو): إسبانيا تواجه السعودية وظهور بلجيكا وأوروغواي
+              مباريات 24 و 25 يونيو: أسود الأطلس ومواجهات البرازيل وألمانيا
             </h3>
             <p>
-              يحمل يوم غد جدولاً مزدحماً بالمباريات الحاسمة. تبدأ الإثارة بمواجهة الإكوادور ضد كوراساو (01:00) وتونس ضد اليابان (05:00). 
-              وتتجه الأنظار العربية نحو <strong>المنتخب السعودي</strong> الذي يواجه تحدياً صعباً أمام <strong>الماتادور الإسباني</strong> (17:00). 
-              كما يلتقي <strong>المنتخب البلجيكي</strong> بنظيره الإيراني (20:00)، وتُختتم الليلة بلقاء <strong>أوروغواي</strong> القوي أمام الرأس الأخضر (23:00). يوم مليء بالإثارة الكروية التي لا تفوت!
+              يحمل يوم 24 يونيو جدولاً مزدحماً بالمباريات الحاسمة أبرزها ظهور <strong>المنتخب المغربي</strong> أمام هايتي، والسيليساو <strong>البرازيلي</strong> في مواجهة اسكتلندا. وفي 25 يونيو تتجه الأنظار نحو <strong>تونس</strong> في لقاء قوي ضد هولندا، و<strong>ألمانيا</strong> أمام الإكوادور، ومواجهة مرتقبة بين الولايات المتحدة وتركيا. يوم مليء بالإثارة الكروية التي لا تفوت!
             </p>
           </div>
 
           {/* English Section */}
           <div dir="ltr" className="space-y-6 text-gray-300 leading-relaxed text-lg font-sans">
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-[var(--wc-green)] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              Live Coverage for June 20 & 21 Matches in the 2026 World Cup: All-European Clashes & Decisive Encounters
+              Live Coverage for June 23-25 Matches in the 2026 World Cup: Crucial Encounters and Heavyweight Clashes
             </h2>
             <p>
               Welcome to the live and exclusive coverage of the <strong>FIFA World Cup 2026</strong> matches. 
-              Football fans worldwide are turning their attention to June 20 and 21, 2026, for decisive and thrilling encounters. 
-              Today features a massive all-European clash between the Netherlands and Sweden, as well as a strong test for Germany against Ivory Coast. 
-              Tomorrow brings a packed schedule featuring powerhouses like Spain, Belgium, Uruguay, and an exciting challenge for Saudi Arabia.
-              Follow our live broadcast and minute-by-minute details on our platform.
+              Football fans worldwide are turning their attention to June 23, 24, and 25 for decisive and thrilling fixtures that will determine the fate of many top teams in the group stage. 
+              These days feature a highly anticipated match for Morocco against Haiti, along with heavyweight clashes including Brazil vs Scotland, England vs Ghana, and Germany vs Ecuador. 
+              Follow our live broadcast and minute-by-minute updates on our platform.
             </p>
 
             <h3 className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-[var(--wc-red)] pl-4">
-              Today's Matches (June 20): Netherlands vs Sweden & Germany vs Ivory Coast
+              June 23 Matches: England takes on Ghana & Portugal Returns
             </h3>
             <p>
-              The excitement continues today with heavyweight matchups, as the <strong>Netherlands</strong> takes on <strong>Sweden</strong> in a crucial Group F clash at 18:00. Later at 21:00, the <strong>German National Team</strong> seeks an important victory against the Elephants of <strong>Ivory Coast</strong> in a strong Group E encounter.
+              The excitement continues with heavyweight matchups as Portugal faces Uzbekistan, and <strong>England</strong> faces a tough test against <strong>Ghana</strong>. Meanwhile, Panama plays Croatia and Colombia meets DR Congo as teams fight to secure early qualification.
             </p>
 
             <h3 className="text-xl font-bold text-white mt-8 mb-4 border-l-4 border-[var(--wc-red)] pl-4">
-              Tomorrow's Clashes (June 21): Spain vs Saudi Arabia, Belgium, and Uruguay
+              June 24 & 25 Clashes: Morocco, Brazil, and Germany in Action
             </h3>
             <p>
-              Tomorrow brings a packed schedule of decisive games. The action starts early with Ecuador vs Curaçao (01:00) and Tunisia vs Japan (05:00). 
-              All eyes will then turn to <strong>Saudi Arabia</strong> as they face a tough challenge against <strong>Spain</strong> (17:00). 
-              Additionally, <strong>Belgium</strong> meets Iran (20:00), and the night concludes with a strong <strong>Uruguay</strong> taking on Cabo Verde (23:00). A day full of unmissable football excitement!
+              June 24 brings a packed schedule highlighted by <strong>Morocco</strong> facing Haiti and <strong>Brazil</strong> taking on Scotland. On June 25, all eyes will be on <strong>Tunisia</strong> as they face the Netherlands, <strong>Germany</strong> against Ecuador, and an exciting showdown between the United States and Turkey. A festival of unmissable football excitement!
             </p>
           </div>
         </div>
