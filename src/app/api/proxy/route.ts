@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get('url');
   if (!url) return new NextResponse('Missing url', { status: 400 });
@@ -20,8 +22,11 @@ export async function GET(req: NextRequest) {
       return new NextResponse(`Failed to fetch: ${response.statusText}`, { status: response.status });
     }
 
-    // If it's a media segment (e.g. .ts), pipe it back
-    if (url.endsWith('.ts')) {
+    // Check if it's a playlist or a segment based on the URL extension in the query params.
+    // The main URL ends with .m3u8, but media segments usually do not.
+    const isPlaylist = url.split('?')[0].endsWith('.m3u8');
+
+    if (!isPlaylist) {
       // Return the media stream directly
       return new NextResponse(response.body, {
         headers: {

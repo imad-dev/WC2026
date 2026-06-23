@@ -5,14 +5,13 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
 import { supabase, WC2026Match } from '@/lib/supabaseClient';
 import { useGeo } from '@/hooks/useSupabase';
-import { LivePlayer } from '@/app/components/LivePlayer';
 
 const CHANNELS = [
-  { id: 'bein-max-1-ar', name: 'beIN SPORTS MAX 1 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226606.m3u8' },
-  { id: 'bein-max-2-ar', name: 'beIN SPORTS MAX 2 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226607.m3u8' },
-  { id: 'bein-max-3-ar', name: 'beIN SPORTS MAX 3 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226608.m3u8' },
-  { id: 'bein-max-5-en', name: 'beIN SPORTS MAX 5 (English)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226610.m3u8' },
-  { id: 'bein-max-6-fr', name: 'beIN SPORTS MAX 6 (French)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226611.m3u8' },
+  { id: 'bein-max-1-ar', name: 'beIN SPORTS MAX 1 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-1/' },
+  { id: 'bein-max-2-ar', name: 'beIN SPORTS MAX 2 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-2/' },
+  { id: 'bein-max-3-ar', name: 'beIN SPORTS MAX 3 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-3/' },
+  { id: 'bein-max-5-en', name: 'beIN SPORTS MAX 5 (English)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-5/' },
+  { id: 'bein-max-6-fr', name: 'beIN SPORTS MAX 6 (French)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-6/' },
 ];
 
 export default function LiveHubPage() {
@@ -184,8 +183,16 @@ export default function LiveHubPage() {
               <span className="mt-4 text-white font-bold tracking-widest text-sm sm:text-base uppercase drop-shadow-lg">Click to Play</span>
             </a>
           )}
-          <div className="absolute inset-0 w-full h-full z-10">
-            <LivePlayer streamUrl={activeChannelUrl} />
+          <div className="absolute inset-0 w-full h-full z-10 pointer-events-auto">
+            <iframe
+              src={activeChannelUrl}
+              allowFullScreen
+              frameBorder="0"
+              height="100%"
+              scrolling="no"
+              width="100%"
+              className="w-full h-full pointer-events-auto"
+            ></iframe>
           </div>
         </div>
       </div>
