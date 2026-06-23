@@ -29,6 +29,17 @@ export function LivePlayer({ streamUrl }: LivePlayerProps) {
           capLevelToPlayerSize: true,
           autoStartLoad: true,
           startLevel: -1,
+          maxBufferLength: 30,
+          maxMaxBufferLength: 60,
+          manifestLoadingTimeOut: 10000,
+          manifestLoadingMaxRetry: 5,
+          manifestLoadingRetryDelay: 1000,
+          levelLoadingTimeOut: 10000,
+          levelLoadingMaxRetry: 5,
+          levelLoadingRetryDelay: 1000,
+          fragLoadingTimeOut: 10000,
+          fragLoadingMaxRetry: 6,
+          fragLoadingRetryDelay: 1000,
         });
         hlsRef.current = hls;
 
@@ -38,6 +49,10 @@ export function LivePlayer({ streamUrl }: LivePlayerProps) {
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           // Play automatically but muted to avoid browser auto-play restrictions
           video.play().catch((e) => console.log('Autoplay prevented:', e));
+        });
+
+        hls.on(Hls.Events.FRAG_LOADED, () => {
+          setError(null);
         });
 
         hls.on(Hls.Events.ERROR, (event, data) => {
