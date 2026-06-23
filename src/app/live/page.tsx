@@ -8,11 +8,11 @@ import { useGeo } from '@/hooks/useSupabase';
 import { LivePlayer } from '@/app/components/LivePlayer';
 
 const CHANNELS = [
-  { id: 'bein-max-1-ar', name: 'beIN SPORTS MAX 1 (Arabic)', url: 'https://stream.wc2026.games/m3u8?url=http://kytv.xyz:80/2859982527/2765762428/3226606.m3u8' },
-  { id: 'bein-max-2-ar', name: 'beIN SPORTS MAX 2 (Arabic)', url: 'https://stream.wc2026.games/m3u8?url=http://kytv.xyz:80/2859982527/2765762428/3226607.m3u8' },
-  { id: 'bein-max-3-ar', name: 'beIN SPORTS MAX 3 (Arabic)', url: 'https://stream.wc2026.games/m3u8?url=http://kytv.xyz:80/2859982527/2765762428/3226608.m3u8' },
-  { id: 'bein-max-5-en', name: 'beIN SPORTS MAX 5 (English)', url: 'https://stream.wc2026.games/m3u8?url=http://kytv.xyz:80/2859982527/2765762428/3226610.m3u8' },
-  { id: 'bein-max-6-fr', name: 'beIN SPORTS MAX 6 (French)', url: 'https://stream.wc2026.games/m3u8?url=http://kytv.xyz:80/2859982527/2765762428/3226611.m3u8' },
+  { id: 'bein-max-1-ar', name: 'beIN SPORTS MAX 1 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226606.m3u8' },
+  { id: 'bein-max-2-ar', name: 'beIN SPORTS MAX 2 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226607.m3u8' },
+  { id: 'bein-max-3-ar', name: 'beIN SPORTS MAX 3 (Arabic)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226608.m3u8' },
+  { id: 'bein-max-5-en', name: 'beIN SPORTS MAX 5 (English)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226610.m3u8' },
+  { id: 'bein-max-6-fr', name: 'beIN SPORTS MAX 6 (French)', url: '/api/proxy?url=http://kytv.xyz:80/2859982527/2765762428/3226611.m3u8' },
 ];
 
 export default function LiveHubPage() {
