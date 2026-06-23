@@ -6,13 +6,6 @@ import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
 import { supabase, WC2026Match } from '@/lib/supabaseClient';
 import { useGeo } from '@/hooks/useSupabase';
 
-const CHANNELS = [
-  { id: 'bein-max-1-ar', name: 'beIN SPORTS MAX 1 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-1/' },
-  { id: 'bein-max-2-ar', name: 'beIN SPORTS MAX 2 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-2/' },
-  { id: 'bein-max-3-ar', name: 'beIN SPORTS MAX 3 (Arabic)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-3/' },
-  { id: 'bein-max-5-en', name: 'beIN SPORTS MAX 5 (English)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-5/' },
-  { id: 'bein-max-6-fr', name: 'beIN SPORTS MAX 6 (French)', url: 'https://mesi.onlineworldcup2026.com/albaplayer/sports-6/' },
-];
 
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
@@ -23,7 +16,7 @@ export default function LiveHubPage() {
   const country = useGeo();
   const showAds = country !== 'ES';
   
-  const [activeChannelUrl, setActiveChannelUrl] = useState(CHANNELS[0].url);
+  const activeChannelUrl = 'https://mesi.onlineworldcup2026.com/albaplayer/sports-1/';
 
   // Live match state
   const [liveMatch, setLiveMatch] = useState<WC2026Match | null>(null);
@@ -148,24 +141,6 @@ export default function LiveHubPage() {
       {/* LEFT: Video Player */}
       <div className="w-full lg:flex-1 h-[40vh] sm:h-[45vh] lg:h-full min-h-[300px] relative bg-black flex flex-col group">
         
-        {/* Channel Selector Bar */}
-        <div className="w-full bg-[var(--wc-dark)] border-b border-[var(--wc-border)] px-4 py-2 flex items-center justify-between shrink-0 z-40 relative">
-          <span className="text-white text-xs sm:text-sm font-bold flex items-center gap-2 tracking-widest">
-            <div className="w-2 h-2 rounded-full bg-[var(--wc-red)] animate-pulse"></div>
-            SELECT CHANNEL
-          </span>
-          <select
-            value={activeChannelUrl}
-            onChange={(e) => setActiveChannelUrl(e.target.value)}
-            className="bg-black/60 text-white border border-[var(--wc-border)] rounded px-3 py-1.5 text-xs sm:text-sm focus:outline-none focus:border-[var(--wc-green)] transition-colors cursor-pointer appearance-none outline-none"
-          >
-            {CHANNELS.map(ch => (
-              <option key={ch.id} value={ch.url} className="bg-[#030408] text-white">
-                {ch.name}
-              </option>
-            ))}
-          </select>
-        </div>
 
         {/* Live Broadcast Iframe */}
         <div className="w-full flex-1 relative overflow-hidden bg-black flex items-center justify-center">
