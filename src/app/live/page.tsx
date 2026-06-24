@@ -2,10 +2,28 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageSquare, Clock, BarChart2, Send } from 'lucide-react';
+import { MessageSquare, Clock, BarChart2, Send, ChevronDown } from 'lucide-react';
 import { supabase, WC2026Match } from '@/lib/supabaseClient';
 import { useGeo } from '@/hooks/useSupabase';
 
+const liveFaqs = [
+  {
+    q: "How to watch the FIFA World Cup 2026 live streaming? / كيف يمكنني مشاهدة البث المباشر لكأس العالم 2026؟",
+    a: "You can watch all 104 matches of the FIFA World Cup 2026 live streaming for free on WC2026.games. Our platform offers Full HD quality streams with real-time score updates, live chat, and match predictions. / يمكنك مشاهدة جميع مباريات كأس العالم 2026 الـ 104 بث مباشر مجاناً على موقع WC2026.games. توفر منصتنا بثاً بجودة عالية HD مع تحديثات فورية للنتائج، دردشة حية، وتوقعات للمباريات."
+  },
+  {
+    q: "Where can I find free live streams of the FIFA World Cup 2026? / أين يمكنني العثور على بث مباشر مجاني لكأس العالم 2026؟",
+    a: "WC2026.games provides free, high-performance live streams of all FIFA World Cup 2026 matches. You don't need a paid subscription or account — simply visit our live hub, choose the match on air, and start streaming immediately. / يوفر موقع WC2026.games بثاً مباشراً مجانياً وعالي الأداء لجميع مباريات كأس العالم 2026. لا تحتاج إلى اشتراك مدفوع أو حساب — ما عليك سوى زيارة مركزنا المباشر واختيار المباراة الجارية وبدء البث على الفور."
+  },
+  {
+    q: "What matches of the 2026 FIFA World Cup are happening today? / ما هي مباريات كأس العالم 2026 التي تقام اليوم؟",
+    a: "You can check the daily schedule and find out what match is happening today directly in our Match Schedule section. The matches list, kickoff times in your local timezone, and streaming links are updated in real-time. / يمكنك الاطلاع على الجدول اليومي ومعرفة المباريات التي تقام اليوم مباشرة في قسم جدول المباريات لدينا. يتم تحديث قائمة المباريات وأوقات انطلاقها بتوقيتك المحلي وروابط البث مباشرة أولاً بأول."
+  },
+  {
+    q: "Can I stream the World Cup 2026 live on mobile devices? / هل يمكنني مشاهدة بث كأس العالم 2026 على الهواتف المحمولة؟",
+    a: "Yes! Our platform is optimized for mobile-first fans. You can watch live streams, track real-time scores, use the interactive match predictor, and chat with other fans on any smartphone or tablet. / نعم! منصتنا مهيأة بالكامل للهواتف الذكية. يمكنك مشاهدة البث المباشر، ومتابعة النتائج اللحظية، واستخدام متوقع المباريات التفاعلي، والدردشة مع المشجعين الآخرين من أي هاتف أو جهاز لوحي."
+  }
+];
 
 export default function LiveHubPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'timeline' | 'predict'>('predict');
@@ -26,6 +44,13 @@ export default function LiveHubPage() {
   
   // Predictions state
   const [predictionStats, setPredictionStats] = useState({ team_a_pct: 0, draw_pct: 0, team_b_pct: 0, total_votes: 0 });
+
+  // FAQ state
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   const fetchPredictions = async (matchId: number) => {
     const { data } = await supabase.rpc('get_prediction_percentages', { p_match_id: matchId });
@@ -423,14 +448,70 @@ export default function LiveHubPage() {
             </p>
           </div>
           
-          <div className="mt-8 text-sm text-gray-500 text-center" dir="ltr">
-            <h3 className="font-bold text-gray-400 mb-2">Watch Live Streaming WC 2026</h3>
-            <p>
-              Looking for a reliable wc 2026 stream? You are in the right place for fifa world cup 2026 live streaming. 
-              We offer every wc match in crystal clear quality. Enjoy fifa world cup 2026 live streaming full hd free, 
-              ensuring you catch all the action of the live fifa world cup 2026. Whether it's a group stage parche wc 2026 
-              or the grand finale, our fifa wc free streaming hub has you covered.
-            </p>
+          {/* FAQ Section */}
+          <div className="mt-16 max-w-4xl mx-auto space-y-4">
+            <h3 className="text-xl sm:text-2xl text-white uppercase text-center mb-8 flex items-center justify-center gap-2" style={{ fontFamily: 'var(--font-display)' }}>
+              <span>Frequently Asked Questions</span>
+              <span className="text-[var(--wc-text-muted)]">/</span>
+              <span className="text-[var(--wc-gold)]">الأسئلة الشائعة</span>
+            </h3>
+            <div className="space-y-3">
+              {liveFaqs.map((faq, index) => {
+                const isOpen = openFaq === index;
+                return (
+                  <div 
+                    key={index} 
+                    className="border border-[var(--wc-border)] rounded-xl overflow-hidden bg-[var(--wc-surface)] transition-all duration-300 hover:border-[var(--wc-green)]"
+                  >
+                    <button
+                      onClick={() => toggleFaq(index)}
+                      className="w-full flex items-center justify-between p-4 sm:p-5 text-left text-white font-semibold transition-colors hover:bg-white/5"
+                    >
+                      <span className="text-sm sm:text-base pr-4 leading-relaxed">{faq.q}</span>
+                      <ChevronDown 
+                        className={`w-5 h-5 text-[var(--wc-text-muted)] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-[var(--wc-green)]' : ''}`} 
+                      />
+                    </button>
+                    <div 
+                      className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[300px] border-t border-[var(--wc-border)] bg-[var(--wc-surface-2)]/40' : 'max-h-0'}`}
+                    >
+                      <p className="p-4 sm:p-5 text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">
+                        {faq.a}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Optimized Bilingual SEO Section */}
+          <div className="mt-16 border-t border-[var(--wc-border)] pt-12 text-center max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left text-sm text-gray-400">
+              
+              {/* English SEO Copy */}
+              <div dir="ltr" className="space-y-4">
+                <h4 className="font-bold text-white text-base">Watch Live Streaming FIFA World Cup 2026 Free</h4>
+                <p className="leading-relaxed">
+                  Welcome to the ultimate online hub for the <strong>live FIFA World Cup 2026</strong>. If you want to watch the <strong>FIFA World Cup 2026 live streaming</strong> in Full HD without paying for expensive cable subscriptions, you are in the right place. We provide zero-buffering, high-performance <strong>free WC streams</strong> for all 104 matches.
+                </p>
+                <p className="leading-relaxed">
+                  Whether you need a reliable <strong>WC 2026 stream</strong>, want to follow the <strong>world cup 2026 live streaming</strong>, or check <strong>what WC match is happening today</strong>, our portal has you covered. Stream every match from the opening kickoff in Mexico to the final match in the United States. Stay tuned for <strong>2026 FIFA World Cup live</strong> action, predictions, and real-time scores on our <strong>FIFA WC free streaming</strong> hub.
+                </p>
+              </div>
+
+              {/* Arabic SEO Copy */}
+              <div dir="rtl" className="space-y-4 text-right">
+                <h4 className="font-bold text-white text-base">البث المباشر لكأس العالم 2026 مجاناً</h4>
+                <p className="leading-relaxed">
+                  مرحباً بكم في المنصة الرائدة لمتابعة <strong>بث مباشر كأس العالم FIFA 2026</strong>. إذا كنت تبحث عن طريقة لمشاهدة <strong>البث المباشر لكأس العالم 2026</strong> بجودة عالية Full HD وبدون تقطيع، فأنت في المكان الصحيح. نوفر لك <strong>بث مباشر مباريات كأس العالم 2026</strong> لجميع مباريات البطولة البالغ عددها 104 مباراة.
+                </p>
+                <p className="leading-relaxed">
+                  سواء كنت تبحث عن رابط <strong>بث مباريات كأس العالم 2026</strong>، أو تريد متابعة <strong>جدول مباريات اليوم في المونديال</strong>، فإن موقعنا يقدم تغطية كاملة ومجانية بالكامل. استمتع بمتابعة <strong>كأس العالم 2026 مباشر</strong> من مباراة الافتتاح وحتى النهائي الكبير. تابع <strong>نتائج مباريات كأس العالم 2026</strong> أولاً بأول، وتفاعل مع المشجعين في الدردشة الحية لمشاهدة <strong>بث مباشر مونديال 2026</strong>.
+                </p>
+              </div>
+
+            </div>
           </div>
         </div>
       </article>
