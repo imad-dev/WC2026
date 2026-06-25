@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { useMatches } from '../../hooks/useSupabase';
 import type { WC2026Match } from '../../lib/supabaseClient';
-import { MatchCard } from '@/components/ui/MatchCard';
+import { MatchCard } from '../ui/MatchCard';
 import { Calendar, Loader2 } from 'lucide-react';
 import { createMatchSlug } from '../../lib/utils/slug';
 
