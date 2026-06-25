@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { MatchGrid } from '.../components/sections/MatchGrid';
+import { MatchGrid } from '../../components/sections/MatchGrid';
 import { ScheduleAds } from '../components/ScheduleAds';
 import Link from 'next/link';
 import { generateFAQJsonLd } from '../../lib/seo-helpers';

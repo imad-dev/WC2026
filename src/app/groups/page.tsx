@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 import { supabaseAdmin } from '../../lib/supabase';
-import { StandingsTable } from '.../components/ui/StandingsTable';
+import { StandingsTable } from '../../components/ui/StandingsTable';
 import Link from 'next/link';
 
 export const metadata: Metadata = {

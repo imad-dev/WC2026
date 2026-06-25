@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMatches, useWCStandings } from '../../hooks/useSupabase';
-import { MatchCard } from '.../components/ui/MatchCard';
+import { MatchCard } from '../../components/ui/MatchCard';
 import { ChevronRight, Trophy, Calendar, Newspaper } from 'lucide-react';
 
 const NEWS_IMAGES = [
