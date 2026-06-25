@@ -1,7 +1,7 @@
 'use client';
 
 import Script from 'next/script';
-import { useGeo } from '@/hooks/useSupabase';
+import { useGeo } from '../../hooks/useSupabase';
 
 export function AdScripts() {
   const country = useGeo();

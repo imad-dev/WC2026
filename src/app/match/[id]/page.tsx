@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
-import { supabaseAdmin as supabase } from '@/lib/supabase';
+import { supabaseAdmin as supabase } from '../../../lib/supabase';
 import MatchDetailClient from '@/components/match/MatchDetailClient';
 import { notFound } from 'next/navigation';
 import { fetchWC2026Lineups, fetchWC2026Statistics, fetchWC2026Events, fetchWC2026Head2Head } from '@/services/api';
-import { createMatchSlug } from '@/lib/utils/slug';
+import { createMatchSlug } from '../../../lib/utils/slug';
 import { generatePredictedLineups, generateH2H } from '@/services/mockData';
-import { generateMatchJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo-helpers';
+import { generateMatchJsonLd, generateBreadcrumbJsonLd } from '../../../lib/seo-helpers';
 
 export const dynamic = 'force-dynamic';
 

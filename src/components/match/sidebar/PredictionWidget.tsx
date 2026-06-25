@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Trophy } from 'lucide-react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../../lib/supabaseClient';
 
 export default function PredictionWidget({ matchId, homeTeam, awayTeam, initialPredictions, onPredict }: any) {
   const [loading, setLoading] = useState(false);

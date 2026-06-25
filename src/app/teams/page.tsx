@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAdmin } from '../../lib/supabase';
 import TeamsClient from './TeamsClient';
 
 export const metadata: Metadata = {

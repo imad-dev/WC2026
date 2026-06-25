@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getPlayerPhoto } from '@/lib/utils/playerPhoto';
+import { getPlayerPhoto } from '../../../lib/utils/playerPhoto';
 
 type FilterStat = 'Performance' | 'Age' | 'Club' | 'Market Value' | 'Height' | 'Fantasy';
 

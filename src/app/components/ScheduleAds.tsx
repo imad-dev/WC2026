@@ -1,6 +1,6 @@
 'use client';
 
-import { useGeo } from '@/hooks/useSupabase';
+import { useGeo } from '../../hooks/useSupabase';
 
 export function ScheduleAds() {
   const country = useGeo();

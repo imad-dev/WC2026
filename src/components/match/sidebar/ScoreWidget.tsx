@@ -1,4 +1,4 @@
-import { getPlayerPhoto } from '@/lib/utils/playerPhoto';
+import { getPlayerPhoto } from '../../../lib/utils/playerPhoto';
 
 export default function ScoreWidget({ match, events }: any) {
   const isLive = match.status === 'live';

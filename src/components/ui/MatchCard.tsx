@@ -1,5 +1,5 @@
-import type { WC2026Match } from '@/lib/supabaseClient';
-import { getFlagCode } from '@/lib/countryCodes';
+import type { WC2026Match } from '../../lib/supabaseClient';
+import { getFlagCode } from '../../lib/countryCodes';
 import { PredictionWidget } from '@/app/components/wc2026/PredictionWidget';
 
 function formatLocalTime(dateStr: string): string {

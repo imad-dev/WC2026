@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { MatchGrid } from '@/components/sections/MatchGrid';
 import { ScheduleAds } from '@/app/components/ScheduleAds';
 import Link from 'next/link';
-import { generateFAQJsonLd } from '@/lib/seo-helpers';
+import { generateFAQJsonLd } from '../../lib/seo-helpers';
 
 const SCHEDULE_FAQS = [
   { q: 'When does the World Cup 2026 start?', a: 'The FIFA World Cup 2026 kicks off on June 11, 2026, with the opening match at Estadio Azteca in Mexico City.' },

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient';
 import { Activity, Calendar, RefreshCw } from 'lucide-react';
 import { fetchWC2026LiveScores, fetchWC2026Fixtures } from '../../services/api';
 import { WC2026_FIXTURES } from '../../data/wc2026Static';

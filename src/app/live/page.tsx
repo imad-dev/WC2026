@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Clock, BarChart2, Send, ChevronDown } from 'lucide-react';
-import { supabase, WC2026Match } from '@/lib/supabaseClient';
-import { useGeo } from '@/hooks/useSupabase';
+import { supabase, WC2026Match } from '../../lib/supabaseClient';
+import { useGeo } from '../../hooks/useSupabase';
 
 const liveFaqs = [
   {

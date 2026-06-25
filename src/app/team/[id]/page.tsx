@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import { supabaseAdmin as supabase } from '@/lib/supabase';
+import { supabaseAdmin as supabase } from '../../../lib/supabase';
 import TeamDetailClient from './TeamDetailClient';
 import { notFound } from 'next/navigation';
-import { generateBreadcrumbJsonLd, generateTeamJsonLd } from '@/lib/seo-helpers';
+import { generateBreadcrumbJsonLd, generateTeamJsonLd } from '../../../lib/seo-helpers';
 
 export const dynamic = 'force-dynamic';
 

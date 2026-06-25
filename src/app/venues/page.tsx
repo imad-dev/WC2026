@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
-import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAdmin } from '../../lib/supabase';
 import { VenueCard } from '@/components/ui/VenueCard';
 import Link from 'next/link';
-import { generateFAQJsonLd } from '@/lib/seo-helpers';
+import { generateFAQJsonLd } from '../../lib/seo-helpers';
 
 const VENUE_FAQS = [
   { q: 'Where is the World Cup 2026 Final?', a: 'The Final will be held at MetLife Stadium in East Rutherford, New Jersey, on July 19, 2026. The stadium has a capacity of 82,500.' },

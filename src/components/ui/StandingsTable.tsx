@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useMatches, useWCStandings } from '@/hooks/useSupabase';
-import type { WC2026Match } from '@/lib/supabaseClient';
-import { getFlagCode } from '@/lib/countryCodes';
+import { useMatches, useWCStandings } from '../../hooks/useSupabase';
+import type { WC2026Match } from '../../lib/supabaseClient';
+import { getFlagCode } from '../../lib/countryCodes';
 import { ChevronDown, Loader2 } from 'lucide-react';
 
 

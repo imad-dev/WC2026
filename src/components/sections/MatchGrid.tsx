@@ -3,11 +3,11 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { useMatches } from '@/hooks/useSupabase';
-import type { WC2026Match } from '@/lib/supabaseClient';
+import { useMatches } from '../../hooks/useSupabase';
+import type { WC2026Match } from '../../lib/supabaseClient';
 import { MatchCard } from '@/components/ui/MatchCard';
 import { Calendar, Loader2 } from 'lucide-react';
-import { createMatchSlug } from '@/lib/utils/slug';
+import { createMatchSlug } from '../../lib/utils/slug';
 
 type FilterTab = 'all' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'knockout';
 const GROUP_TABS: FilterTab[] = ['A','B','C','D','E','F','G','H','I','J','K','L'];

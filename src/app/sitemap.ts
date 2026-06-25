@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
-import { supabaseAdmin } from '@/lib/supabase';
-import { createMatchSlug } from '@/lib/utils/slug';
+import { supabaseAdmin } from '../lib/supabase';
+import { createMatchSlug } from '../lib/utils/slug';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://wc2026.games';
